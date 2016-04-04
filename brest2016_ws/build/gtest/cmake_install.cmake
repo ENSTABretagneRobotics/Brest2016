@@ -2,7 +2,7 @@
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "/home/brest2016/Desktop/Brest 2016/brest-git/Brest2016/brest2016_ws/install")
+  SET(CMAKE_INSTALL_PREFIX "/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/install")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

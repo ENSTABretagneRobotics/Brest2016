@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "sensors")
+set(sensors_MAINTAINER "brest2016 <brest2016@todo.todo>")
+set(sensors_DEPRECATED "")
+set(sensors_VERSION "0.0.0")
+set(sensors_BUILD_DEPENDS "rospy")
+set(sensors_RUN_DEPENDS "rospy")
+set(sensors_BUILDTOOL_DEPENDS "catkin")

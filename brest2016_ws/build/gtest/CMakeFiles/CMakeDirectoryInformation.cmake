@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 SET(CMAKE_RELATIVE_PATH_TOP_SOURCE "/usr/src/gtest")
-SET(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/brest2016/Desktop/Brest 2016/brest-git/Brest2016/brest2016_ws/build")
+SET(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/build")
 
 # Force unix paths in dependencies.
 SET(CMAKE_FORCE_UNIX_PATHS 1)
