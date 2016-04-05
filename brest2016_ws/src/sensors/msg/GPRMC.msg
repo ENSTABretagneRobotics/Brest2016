@@ -1,0 +1,13 @@
+string type
+float64 heure
+string etat
+float64 latitude
+string indiLatitude
+float64 longitude
+string indiLongitude
+float32 vitesse
+float32 route
+int32 date
+int32 declinMagnetic
+string sensDeclinMagnetique
+string checksum
