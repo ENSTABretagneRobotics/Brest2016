@@ -1,2 +1,0 @@
-sensors
--DCATKIN_DEVEL_PREFIX=/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/devel -DCMAKE_INSTALL_PREFIX=/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/install -G Unix Makefiles
