@@ -8,3 +8,4 @@ Projet de bateau autonome pour [Brest 2016](https://www.brest2016.fr/)
 
 - [ROS indigo](http://wiki.ros.org/indigo/Installation/Ubuntu)
 - [Rosserial](http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup)
+- [libais](https://pypi.python.org/pypi/libais): `pip install libais`
