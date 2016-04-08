@@ -1,31 +1,40 @@
 #!/usr/bin/env  python
-import rospy
 import serial
+import rospy
+import ais.stream
+import ais
 from sensors.msg import AISVDM
 
 
 rospy.init_node('AISVDM_publisher')
 
 pub = rospy.Publisher('AISVDM', AISVDM)
-rate = rospy.rate(2)
+rate = rospy.Rate(2)
+ser = serial.Serial("/dev/ttyACM0")
 
-ser = serial.Serial("/dev/ttyUSB1")
+# with open("/dev/ttyACM0") as f:
+#     for msg in ais.stream.decode(f):
+#         print msg
 
 while not rospy.is_shutdown():
 
     data = ser.readline()
     data = data.split(',')
+    if (data[0] == '!AIVDM' and data[1] == 1):
 
-    msg = AISVDM()
-    msg.heure = data[0]
-    msg.numMMSI = data[1]
-    msg.latitude = data[2]
-    msg.longitude = data[3]
-    msg.vitesse = data[4]
-    msg.cap = data[5]
-    msg.vitesseFond = data[6]
-    msg.vitesseRot = data[7]
-    msg.statut = data[8]
+        data = ais.decode(data[5])
 
-    pub.publish(msg)
+        msg = AISVDM()
+        msg.heure = data['utc_hour']
+        msg.minute = data['utc_minut']
+        msg.numMMSI = data['mmsi']
+        msg.latitude = data['x']
+        msg.longitude = data['y']
+        msg.vitesse = data['sog']
+        msg.cap = data['cog']
+        msg.vitesseRot = data['rot']
+        msg.statut = data['special_manoeuvre']
+
+        print data
+        pub.publish(msg)
     rate.sleep()

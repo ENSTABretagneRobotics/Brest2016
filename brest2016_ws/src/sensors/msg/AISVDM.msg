@@ -1,9 +1,9 @@
 int32 heure
+int32 minute
 int32 numMMSI
 float32 latitude
 float32 longitude
 float32 vitesse
 float32 cap
-float32 vitesseFond
 float32 vitesseRot
 float32 statut
