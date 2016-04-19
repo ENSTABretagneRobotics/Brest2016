@@ -15,4 +15,4 @@ Projet de bateau autonome pour [Brest 2016](https://www.brest2016.fr/)
 - [Lecteur de trames NMEA](https://github.com/ros-drivers/nmea_navsat_driver/tree/indigo-devel):
 	- Extraire le dossier dans catkin_ws/src
 	- Puis lancer python setup.py build
-                      python setup.py install
+	-          et python setup.py install  
