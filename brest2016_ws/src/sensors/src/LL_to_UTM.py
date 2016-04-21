@@ -48,17 +48,19 @@ _ellipsoid = [
     [23, "WGS-84", 6378137, 0.00669438]  # a checker
 ]
 
-# Reference ellipsoids derived from Peter H. Dana's website- 
+# Reference ellipsoids derived from Peter H. Dana's website-
 # http://www.utexas.edu/depts/grg/gcraft/notes/datum/elist.html
 # Department of Geography, University of Texas at Austin
 # Internet: pdana@mail.utexas.edu
 # 3/22/95
 
 # Source
-# Defense Mapping Agency. 1987b. DMA Technical Report: Supplement to Department of Defense World Geodetic System
+# Defense Mapping Agency. 1987b.
+# DMA Technical Report:
+# Supplement to Department of Defense World Geodetic System
 # 1984 Technical Report. Part I and II. Washington, DC: Defense Mapping Agency
 
-# def LLtoUTM(int ReferenceEllipsoid, const double Lat, const double Long, 
+# def LLtoUTM(int ReferenceEllipsoid, const double Lat, const double Long,
 #            double &UTMNorthing, double &UTMEasting, char* UTMZone)
 
 def LLtoUTM(ReferenceEllipsoid, Lat, Long):
@@ -211,9 +213,9 @@ def UTMtoLL(ReferenceEllipsoid, northing, easting, zone):
     Long = LongOrigin + Long * _rad2deg
     return (Lat, Long)
 
+
 def callback(msg):
-    [zone, latUTM, longUTM] = LLtoUTM(23,msg.latitude,msg.longitude)
-    
+    [zone, latUTM, longUTM] = LLtoUTM(23, msg.latitude, msg.longitude)
     print zone
     print latUTM
     print longUTM
@@ -233,7 +235,7 @@ def callback(msg):
 
 rospy.init_node('Local_publisher')
 
-sub = rospy.Subscriber('fix2', NavSatFix, callback)
+sub = rospy.Subscriber('gps', NavSatFix, callback)
 pub = rospy.Publisher('PositionUTM', PoseStamped)
 
 rospy.spin()

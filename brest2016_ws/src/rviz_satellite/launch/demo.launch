@@ -3,4 +3,6 @@
         name="broadcaster_fixed" />
 
   <node pkg="rviz" type="rviz" name="RViz"/>
+  <node pkg="rqt_gui" type="rqt_gui" name="RQT"/>
+  <node pkg="sensors" type="LL_to_UTM.py" name="LL_convertor"/>
 </launch>
