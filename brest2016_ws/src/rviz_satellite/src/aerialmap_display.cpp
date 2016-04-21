@@ -163,7 +163,9 @@ void AerialMapDisplay::onInitialize() {
   frame_property_->setFrameManager(context_->getFrameManager());
 }
 
-void AerialMapDisplay::onEnable() { subscribe(); }
+void AerialMapDisplay::onEnable() { 
+  subscribe();
+}
 
 void AerialMapDisplay::onDisable() {
   unsubscribe();
