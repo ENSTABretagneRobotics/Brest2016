@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"
+        name="broadcaster_fixed" />
+
+  <node pkg="rviz" type="rviz" name="RViz"/>
+</launch>
