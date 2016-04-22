@@ -43,7 +43,9 @@ import libnmea_navsat_driver.parser
 
 class RosNMEADriver(object):
     def __init__(self):
-        self.fix_pub = rospy.Publisher('fix', NavSatFix, queue_size=1)
+        # self.fix_pub = rospy.Publisher('fix', NavSatFix, queue_size=1)
+        self.fix_pub = rospy.Publisher('gps', NavSatFix, queue_size=1)
+
         self.vel_pub = rospy.Publisher('vel', TwistStamped, queue_size=1)
         self.time_ref_pub = rospy.Publisher('time_reference', TimeReference, queue_size=1)
 

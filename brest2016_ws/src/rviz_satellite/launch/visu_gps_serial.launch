@@ -7,5 +7,9 @@
   <node pkg="rqt_gui" type="rqt_gui" name="RQT"/>
   <node pkg="sensors" type="LL_to_local.py" name="LatLong_to_local"/>
 
-  <node pkg="nmea_navsat_driver" type="nmea_serial_driver" name="GPS_reader"/>
+  <node pkg="nmea_navsat_driver" type="nmea_serial_driver" name="GPS_reader">
+  	<param name="baud" value="4800" />
+  	<param name="port" value="/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0" />
+
+  </node>
 </launch>

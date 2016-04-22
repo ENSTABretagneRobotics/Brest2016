@@ -8,14 +8,14 @@ from sensor_msgs.msg import NavSatFix
 
 
 def create_csv_file():
-    f = open('gps.csv', 'w')
+    f = open('gps_002.csv', 'w')
     f.write('type,latitude,longitude,alt\n')
     f.close()
 
 
 def callback(msg):
     print type(msg.latitude), type(msg.longitude)
-    with open('gps.csv', 'a') as f:
+    with open('gps_002.csv', 'a') as f:
         f.write('T,')
         f.write(str(msg.latitude))
         f.write(',')

@@ -223,8 +223,8 @@ def callback(msg):
     pos = PoseStamped()
     pos.header.frame_id = 'world'
     pos.header.stamp = rospy.Time.now()
-    pos.pose.position.x = latUTM
-    pos.pose.position.y = longUTM
+    pos.pose.position.x = latUTM-5363781
+    pos.pose.position.y = longUTM-390909
     pos.pose.position.z = msg.altitude
     pos.pose.orientation.x = 0
     pos.pose.orientation.y = 0
