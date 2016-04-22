@@ -1,3 +1,4 @@
+<!-- Launch file for the sprint 3 demo: allows to teleop the robot with keys -->
 <launch>
 	<node name="key_publisher" pkg="teleop" type="key_publisher.py" output="screen"/>
 	<node name="keys_to_twist" pkg="teleop" type="keys_to_twist.py" output="screen"/>

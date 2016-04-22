@@ -41,7 +41,7 @@ def callback(msg):
 
 rospy.init_node('Local_publisher')
 
-sub = rospy.Subscriber('fix', NavSatFix, callback)
-pub = rospy.Publisher('gps/local_pose', PoseStamped)
+sub = rospy.Subscriber('gps', NavSatFix, callback)
+pub = rospy.Publisher('gps/local_pose', PoseStamped, queue_size=1)
 
 rospy.spin()
