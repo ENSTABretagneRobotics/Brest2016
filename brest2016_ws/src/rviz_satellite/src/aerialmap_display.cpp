@@ -36,6 +36,7 @@
 #include "rviz/display_context.h"
 
 #include "aerialmap_display.h"
+#include <math.h>
 
 #define FRAME_CONVENTION_XYZ_ENU (0)  //  X -> East, Y -> North
 #define FRAME_CONVENTION_XYZ_NED (1)  //  X -> North, Y -> East
@@ -150,6 +151,23 @@ AerialMapDisplay::AerialMapDisplay()
   frame_convention_property_->addOptionStd("XYZ -> NWU",
                                            FRAME_CONVENTION_XYZ_NWU);
 
+  // Group properties for lat/long coords of map's corners
+  coord_origin_property_ = new VectorProperty( "Origin", Ogre::Vector3::ZERO,
+                                         "Allows you to set the lat/long coordinates of the origin point of the map. In degres",
+                                         this, SLOT( updateMapCoordinates() ));
+  coord_bottom_left_property_ = new VectorProperty( "Bottom Left", Ogre::Vector3::ZERO,
+                                         "Allows you to set the lat/long coordinates of the bottom left corner. In degres",
+                                         this, SLOT( updateMapCoordinates() ));
+  coord_bottom_right_property_ = new VectorProperty( "Bottom Right", Ogre::Vector3::ZERO,
+                                         "Allows you to set the lat/long coordinates of the bottom right corner. In degres",
+                                         this, SLOT( updateMapCoordinates() ));
+  coord_top_left_property_ = new VectorProperty( "Top Left", Ogre::Vector3::ZERO,
+                                         "Allows you to set the lat/long coordinates of the top left corner. In degres",
+                                         this, SLOT( updateMapCoordinates() ));
+  coord_top_right_property_ = new VectorProperty( "Top Right", Ogre::Vector3::ZERO,
+                                         "Allows you to set the lat/long coordinates of the top right corner. In degres",
+                                         this, SLOT( updateMapCoordinates() ));
+
   //  updating one triggers reload
   updateBlocks();
 }
@@ -250,6 +268,12 @@ void AerialMapDisplay::updateTopic() {
   unsubscribe();
   clear();
   subscribe();
+}
+
+void AerialMapDisplay::updateMapCoordinates() {
+  ROS_INFO_STREAM("Map coordinates changed ");
+  loadImagery();
+  transformAerialMap();
 }
 
 void AerialMapDisplay::clear() {
@@ -369,8 +393,8 @@ void AerialMapDisplay::assembleScene() {
     // const double origin_x = -loader_->originOffsetX() * tile_w;    // default one
     // const double origin_y = -(1 - loader_->originOffsetY()) * tile_h;
 
-    // const double origin_x = -780; // -780
-    // const double origin_y = -210; // -210
+    // const double origin_x = coord_origin_property_->getVector().x; // -780
+    // const double origin_y = coord_origin_property_->getVector().y; // -210
 
     // determine location of this tile, flipping y in the process
     // const double x = (tile.x() - loader_->centerTileX()) * tile_w + origin_x;
@@ -435,32 +459,40 @@ void AerialMapDisplay::assembleScene() {
       obj->begin(material->getName(), Ogre::RenderOperation::OT_TRIANGLE_LIST);
 
       //  bottom left
-      obj->position(-757.013, -280.767, 0.0f);
+      double botLeftX, botLeftY;
+      llToLocal(coord_bottom_left_property_->getVector().x, coord_bottom_left_property_->getVector().y, botLeftY, botLeftX);
+      obj->position(botLeftX, botLeftY, 0.0f);
       obj->textureCoord(0.0f, 0.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       // top right
-      obj->position(141.748, 808.387, 0.0f);
+      double topRightX, topRightY;
+      llToLocal(coord_top_right_property_->getVector().x, coord_top_right_property_->getVector().y, topRightY, topRightX);
+      obj->position(topRightX, topRightY, 0.0f);
       obj->textureCoord(1.0f, 1.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       // top left
-      obj->position(-853.530, 717.874, 0.0f);
+      double topLeftX, topLeftY;
+      llToLocal(coord_top_left_property_->getVector().x, coord_top_left_property_->getVector().y, topLeftY, topLeftX);
+      obj->position(topLeftX, topLeftY, 0.0f);
       obj->textureCoord(0.0f, 1.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       //  bottom left
-      obj->position(-757.013, -280.767, 0.0f);
+      obj->position(botLeftX, botLeftY, 0.0f);
       obj->textureCoord(0.0f, 0.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       // bottom right
-      obj->position(233.932, -186.282, 0.0f);
+      double botRightX, botRightY;
+      llToLocal(coord_bottom_right_property_->getVector().x, coord_bottom_right_property_->getVector().y, botRightY, botRightX);
+      obj->position(botRightX, botRightY, 0.0f);
       obj->textureCoord(1.0f, 0.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       // top right
-      obj->position(141.748, 808.387, 0.0f);
+      obj->position(topRightX, topRightY, 0.0f);
       obj->textureCoord(1.0f, 1.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
@@ -577,6 +609,13 @@ void AerialMapDisplay::transformAerialMap() {
 }
 
 void AerialMapDisplay::fixedFrameChanged() { transformAerialMap(); }
+
+void AerialMapDisplay::llToLocal(double lat, double lon, double &x, double &y) {
+  const int R = 6371000;
+  x = R * (lat - coord_origin_property_->getVector().x) * M_PI / 180;
+  y = R * cos(lat * M_PI / 180) * ((lon - coord_origin_property_->getVector().y)*M_PI/180);
+  ROS_INFO_STREAM("lltolocal Used: " << coord_origin_property_->getVector().y);
+}
 
 void AerialMapDisplay::reset() {
   Display::reset();

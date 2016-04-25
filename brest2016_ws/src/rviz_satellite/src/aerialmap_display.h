@@ -45,6 +45,7 @@ class RosTopicProperty;
 class StringProperty;
 class TfFrameProperty;
 class EnumProperty;
+class VectorProperty;
 
 /**
  * @class AerialMapDisplay
@@ -72,6 +73,7 @@ protected Q_SLOTS:
   void updateZoom();
   void updateBlocks();
   void updateFrameConvention();
+  void updateMapCoordinates();
 
   //  slots for TileLoader messages
   void initiatedRequest(QNetworkRequest request);
@@ -99,6 +101,8 @@ protected:
 
   void transformAerialMap();
 
+  void llToLocal(double, double, double&, double&);
+
   unsigned int map_id_;
   unsigned int scene_id_;
 
@@ -123,6 +127,14 @@ protected:
   FloatProperty *alpha_property_;
   Property *draw_under_property_;
   EnumProperty * frame_convention_property_;
+  // Lat long properties under a group display
+  VectorProperty *coord_origin_property_;
+  VectorProperty *coord_bottom_left_property_;
+  VectorProperty *coord_bottom_right_property_;
+  VectorProperty *coord_top_left_property_;
+  VectorProperty *coord_top_right_property_;
+  // Origin values
+  float origin_x, origin_y;
 
   float alpha_;
   bool draw_under_;
