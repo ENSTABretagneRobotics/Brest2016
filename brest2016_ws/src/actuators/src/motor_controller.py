@@ -25,6 +25,6 @@ def set_param_motor():
 servo = maestro.Controller(0)    # faire attention au port
 set_param_motor()
 
-sub = rospy.Subscriber('cmd_vel', Twist, set_cmd)
+sub = rospy.Subscriber('cmd_vel/ramped', Twist, set_cmd)
 
 rospy.spin()
