@@ -7,8 +7,8 @@ from sensor_msgs.msg import NavSatFix
 from geometry_msgs.msg import PoseStamped
 from math import pi, cos
 
-LAT0 = 48.41773
-LON0 = -4.47439
+LAT0 = 48.417753
+LON0 = -4.474413
 R = 6371000
 
 

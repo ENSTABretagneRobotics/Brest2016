@@ -354,13 +354,13 @@ void AerialMapDisplay::assembleScene() {
   for (const TileLoader::MapTile &tile : loader_->tiles()) {
     // NOTE(gareth): We invert the y-axis so that positive y corresponds
     // to north. We are in XYZ->ENU convention here.
-    const int w = tile.image().width();
-    const int h = tile.image().height();
+    // const int w = tile.image().width();
+    // const int h = tile.image().height();
     
     // const double tile_w = w * loader_->resolution();   // default calculation for tiles imported from OSM
     // const double tile_h = h * loader_->resolution();
-    const double tile_w = w * 0.2;    // for us the resolution is of 0.2m/px, image.size = 5000x5000
-    const double tile_h = h * 0.2;
+    // const double tile_w = w * 0.2;    // for us the resolution is of 0.2m/px, image.size = 5000x5000
+    // const double tile_h = h * 0.2;
 
     // Shift back such that (0, 0) corresponds to the exact latitude and
     // longitude the tile loader requested.
@@ -368,12 +368,14 @@ void AerialMapDisplay::assembleScene() {
 
     // const double origin_x = -loader_->originOffsetX() * tile_w;    // default one
     // const double origin_y = -(1 - loader_->originOffsetY()) * tile_h;
-    const double origin_x = -780;
-    const double origin_y = -210;
+
+    // const double origin_x = -780; // -780
+    // const double origin_y = -210; // -210
 
     // determine location of this tile, flipping y in the process
-    const double x = (tile.x() - loader_->centerTileX()) * tile_w + origin_x;
-    const double y = -(tile.y() - loader_->centerTileY()) * tile_h + origin_y;
+    // const double x = (tile.x() - loader_->centerTileX()) * tile_w + origin_x;
+    // const double y = -(tile.y() - loader_->centerTileY()) * tile_h + origin_y;
+
     //  don't re-use any ids
     const std::string name_suffix =
         std::to_string(tile.x()) + "_" + std::to_string(tile.y()) + "_" +
@@ -433,32 +435,32 @@ void AerialMapDisplay::assembleScene() {
       obj->begin(material->getName(), Ogre::RenderOperation::OT_TRIANGLE_LIST);
 
       //  bottom left
-      obj->position(origin_x, origin_y, 0.0f);
+      obj->position(-757.013, -280.767, 0.0f);
       obj->textureCoord(0.0f, 0.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       // top right
-      obj->position(origin_x + tile_w, origin_y + tile_h, 0.0f);
+      obj->position(141.748, 808.387, 0.0f);
       obj->textureCoord(1.0f, 1.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       // top left
-      obj->position(origin_x, origin_y + tile_h, 0.0f);
+      obj->position(-853.530, 717.874, 0.0f);
       obj->textureCoord(0.0f, 1.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       //  bottom left
-      obj->position(origin_x, origin_y, 0.0f);
+      obj->position(-757.013, -280.767, 0.0f);
       obj->textureCoord(0.0f, 0.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       // bottom right
-      obj->position(origin_x + tile_w, origin_y, 0.0f);
+      obj->position(233.932, -186.282, 0.0f);
       obj->textureCoord(1.0f, 0.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
       // top right
-      obj->position(origin_x + tile_w, origin_y + tile_h, 0.0f);
+      obj->position(141.748, 808.387, 0.0f);
       obj->textureCoord(1.0f, 1.0f);
       obj->normal(0.0f, 0.0f, 1.0f);
 
