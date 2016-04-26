@@ -56,8 +56,6 @@ def cmd_received(msg):
     global g_last_twist, g_target_twist, g_vel_scales
     print msg
     g_target_twist = msg
-    # g_last_twist.linear.x = vels[1] * g_vel_scales[1]
-    # g_last_twist.angular.z = vels[0] * g_vel_scales[0]
 
 
 def fetch_param(name, default):
@@ -72,14 +70,20 @@ def fetch_param(name, default):
 if __name__ == '__main__':
     rospy.init_node('keys_to_twist')
     g_last_twist_send_time = rospy.Time.now()
-    g_twist_pub = rospy.Publisher('cmd_vel/ramped', Twist, queue_size=1)
+
+    g_twist_pub = rospy.Publisher('cmd_vel_ramped', Twist, queue_size=1)
     rospy.Subscriber('cmd_vel', Twist, cmd_received)
+
     g_target_twist = Twist()
+    g_target_twist.linear.x = 6000
+    g_target_twist.angular.z = 6000
     g_last_twist = Twist()
+    g_last_twist.linear.x = 6000
+    g_last_twist.angular.z = 6000
     g_vel_scales[0] = fetch_param('~angular_scale', 0.1)
     g_vel_scales[1] = fetch_param('~linear_scale', 0.1)
-    g_vel_ramps[0] = fetch_param('~angular_accel', 1.0)
-    g_vel_ramps[1] = fetch_param('~linear_accel', 1.0)
+    g_vel_ramps[0] = fetch_param('~angular_accel', 750.0)
+    g_vel_ramps[1] = fetch_param('~linear_accel', 750.0)
 
     rate = rospy.Rate(20)
     while not rospy.is_shutdown():

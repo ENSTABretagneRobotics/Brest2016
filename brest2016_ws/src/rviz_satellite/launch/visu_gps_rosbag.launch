@@ -5,5 +5,5 @@
 
   <node pkg="rviz" type="rviz" name="RViz"/>
   <node pkg="rqt_gui" type="rqt_gui" name="RQT"/>
-  <node pkg="sensors" type="LL_to_local.py" name="LatLong_to_local"/>
+  <node pkg="utilities" type="LL_to_local.py" name="LatLong_to_local"/>
 </launch>
