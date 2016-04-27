@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
-from math import sin
+from math import sin, cos
 from std_msgs.msg import Float64
 import tf
 from geometry_msgs.msg import PoseStamped, Twist
@@ -38,15 +38,21 @@ cmd_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
 
 cap_desire = 0
 cap = 0
-vitesse_desire = 7000
 K = 750
 rate = rospy.Rate(5)
 
 while not rospy.is_shutdown():
     error = cap_desire - cap
     cmd = Twist()
-    cmd.linear.x = vitesse_desire
-    print cap, error, 6000 + sin(error) * K
-    cmd.angular.z = 6000 + sin(error) * K
+    if cos(error) >= 0:
+        cmd.linear.x = 8000
+        cmd.angular.z = 6000 + K * sin(error)
+    else:
+        cmd.linear.x = 6000
+        if sin(error) >= 0:
+            cmd.angular.z = 4000
+        else:
+            cmd.angular.z = 8000
+    print cap, cap_desire, error, "::", cmd.linear.x, cmd.angular.z
     cmd_pub.publish(cmd)
     rate.sleep()

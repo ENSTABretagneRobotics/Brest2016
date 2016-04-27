@@ -1,7 +1,7 @@
 <!-- Mission de suivi de waypoints -->
 <launch>
 	<node name="motors" pkg="actuators" type="motor_controller.py"/>
-	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ ramp.py"/>
+	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py"/>
 	<node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"
         name="broadcaster_fixed" />
 	<node name="heading_controller" pkg="process" type="heading_controller.py"/>
