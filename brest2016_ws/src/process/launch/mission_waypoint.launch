@@ -6,6 +6,7 @@
         name="broadcaster_fixed" />
 	<node name="heading_controller" pkg="process" type="heading_controller.py"/>
 	<node name="waypoint_controller" pkg="process" type="waypoint_controller.py"/>
+	<node name="waypoint_manager" pkg="process" type="waypoint_manager.py"/>
 	<node name="local_pose_convertor" pkg="utilities" type="LL_to_local.py"/>
 	<node name="gps_driver" pkg="nmea_navsat_driver" type="nmea_serial_driver">
 		<param name="port" value="/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0"/>

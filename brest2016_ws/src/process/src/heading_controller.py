@@ -38,14 +38,14 @@ cmd_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
 
 cap_desire = 0
 cap = 0
-K = 750
+K = 500
 rate = rospy.Rate(5)
 
 while not rospy.is_shutdown():
     error = cap_desire - cap
     cmd = Twist()
     if cos(error) >= 0:
-        cmd.linear.x = 8000
+        cmd.linear.x = 7500
         cmd.angular.z = 6000 + K * sin(error)
     else:
         cmd.linear.x = 6000
