@@ -6,16 +6,25 @@ from time import sleep
 
 
 def translate(x, y, a, b):
+    """
+    Deplace le point (x,y) dans le repere d'origine (a,b)
+    """
     return [x - a, y - b]
 
 
 def rotate(x, y, theta):
+    """
+    Fait pivoter le point (x,y) autour du point d'origine du repere
+    """
     rot = np.array([[np.cos(theta), -np.sin(theta)],
                     [np.sin(theta), np.cos(theta)]])
     return np.dot(rot, [x, y])
 
 
 def normalize(vect):
+    """
+    Retourne le vecteur normalise
+    """
     return vect / norm(vect)
 
 
@@ -42,31 +51,6 @@ def dist_droite(x, y, xa, ya, xb, yb):
     e = det([ab / norm(ab), am])
     return e
 
-
-# def ligne_attractive(x, y, a=0, b=0, theta=0, s=1):
-#     x, y = translate(x, y, a, b)
-#     if theta == 0:
-#         vect = np.array([0, 10 * np.arctan(-y / 50)])
-#         return s * vect
-#     else:
-#         xr, yr = rotate(x, y, -theta)
-#         u, v = [0, 10 * np.arctan(-yr / 50)]
-#         u, v = rotate(u, v, theta)
-#         vect = np.array([u, v])
-#         return s * vect
-
-
-# def lax(x, y, a=0, b=0, theta=0):
-#     return ligne_attractive(x, y, a, b, theta)[0]
-
-
-# def lay(x, y, a=0, b=0, theta=0):
-#     return ligne_attractive(x, y, a, b, theta)[1]
-
-
-# vect_lax = np.vectorize(lax)
-# vect_lay = np.vectorize(lay)
-
 #########################################################
 # FONCTIONS DE BAS NIVEAU COURBE
 #########################################################
@@ -84,7 +68,8 @@ def gaussienne(x, L, D):
 
 def dir_point(x, y, a, b):
     """ Retourne un (champ de) vecteur pointant vers le point (a,b)
-        Ce vecteur est norme
+        Ce (champ de) vecteur est norme
+        Vecteur en (x,y) dirige vers (a,b)
     """
     x, y = translate(x, y, a, b)
     norm = np.sqrt(x**2 + y**2)
@@ -101,9 +86,9 @@ def dir_tournant(x, y, a=0, b=0):
     return vect
 
 
-def dir_segment(x, y, xa, ya, xb, yb):
-    """ Genere des vecteurs oriente vers un segment d'extremites
-    [(xa, ya), (xb, yb)]
+def dir_segment_perpendiculaire(x, y, xa, ya, xb, yb):
+    """ Retourne le vecteur situe en (x,y) dirige perpendiculairement
+    a un segment d'extremites A(xa, ya), B(xb, yb)
     """
     N = normalize([yb - ya, xa - xb])
     BM = np.array([y - yb, x - xb])
@@ -120,18 +105,22 @@ def dir_segment(x, y, xa, ya, xb, yb):
         return np.array([0, 0])
 
 
-def dir_segment_m(x, y, xa, ya, xb, yb):
+def dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb):
+    """
+    Fonction similaire qui s'applique a un meshgrid
+    """
     U = x.copy()
     V = y.copy()
     for row in range(len(x)):
         for col in range(len(x[0])):
-            res = dir_segment(x[row][col], y[row][col], xa, ya, xb, yb)
+            res = dir_segment_perpendiculaire(
+                x[row][col], y[row][col], xa, ya, xb, yb)
             U[row][col] = res[0]
             V[row][col] = res[1]
     return U, V
 
 
-def dir_seg_courant(x, y, xa, ya, xb, yb):
+def dir_segment_parallele(x, y, xa, ya, xb, yb):
     """ Genere des vecteurs paralleles segment d'extremites
     [(xa, ya), (xb, yb)]
     """
@@ -148,12 +137,13 @@ def dir_seg_courant(x, y, xa, ya, xb, yb):
         return np.array([0, 0])
 
 
-def dir_seg_courant_m(x, y, xa, ya, xb, yb):
+def dir_segment_parallele_m(x, y, xa, ya, xb, yb):
     U = x.copy()
     V = y.copy()
     for row in range(len(x)):
         for col in range(len(x[0])):
-            res = dir_seg_courant(x[row][col], y[row][col], xa, ya, xb, yb)
+            res = dir_segment_parallele(
+                x[row][col], y[row][col], xa, ya, xb, yb)
             U[row][col] = res[0]
             V[row][col] = res[1]
     return U, V
@@ -164,16 +154,16 @@ def dir_seg_courant_m(x, y, xa, ya, xb, yb):
 #########################################################
 
 
-def force0(s=1):
+def profil0(s=1):
     """
     Renvoie un scalaire constant
     """
     return s
 
-force0_m = np.vectorize(force0)
+profil0_m = np.vectorize(profil0)
 
 
-def force1(x, y, a, b, s=1):
+def profil1(x, y, a, b, s=1):
     """ Renvoit un scalaire inversement proportionnel a la dist au point (x,y)
         :s definit la repulsion/attraction
         (A appliquer a la fonction @point)
@@ -184,10 +174,10 @@ def force1(x, y, a, b, s=1):
     else:
         return s / dist_point(x, y)
 
-force1_m = np.vectorize(force1)
+profil1_m = np.vectorize(profil1)
 
 
-def force2(x, y, a, b, r, s):
+def profil2(x, y, a, b, r, s):
     """ Definit le potentiel d'un cercle centre en a,b
         (A appliquer a la fonction @point)
         :r definit le rayon du cercle
@@ -198,45 +188,45 @@ def force2(x, y, a, b, r, s):
     # f = np.exp(-(dist_point(x, y)**2 * np.log(2)) / r**2) - 0.5
     return s * f
 
-force2_m = np.vectorize(force2)
+profil2_m = np.vectorize(profil2)
 
 
-def force3(x, y, a, b, r, s):
+def profil3(x, y, a, b, r, s):
     """ Definit une gaussienne centree en r autour du point a,b et de largeur 1
     """
     x, y = translate(x, y, a, b)
     bosse = gaussienne(dist_point(x, y), 1, r)
     return s * bosse
 
-force3_m = np.vectorize(force3)
+profil3_m = np.vectorize(profil3)
 
 
-def force4(x, y, a, b, r, s):
+def profil4(x, y, a, b, r, s):
     """ Definit une gaussienne centree au point a,b de largeur r
     """
     x, y = translate(x, y, a, b)
     f = gaussienne(dist_point(x, y), r, 0)
     return s * f
 
-force4_m = np.vectorize(force4)
+profil4_m = np.vectorize(profil4)
 
 
-def force5(x, y, xa, ya, xb, yb, r, s):
+def profil5(x, y, xa, ya, xb, yb, r, s):
     d = dist_droite(x, y, xa, ya, xb, yb)
     f = gaussienne(d, r, 0)
     return s * f
 
-force5_m = np.vectorize(force5)
+profil5_m = np.vectorize(profil5)
 
 
-def force6(x, y, xa, ya, xb, yb, r, s):
+def profil6(x, y, xa, ya, xb, yb, r, s, l=10):
     d = dist_droite(x, y, xa, ya, xb, yb)
     f = 1 - gaussienne(d, r, 0)
-    if abs(d) > 10:
+    if abs(d) > l:
         f = 0 * f
     return s * f
 
-force6_m = np.vectorize(force6)
+profil6_m = np.vectorize(profil6)
 
 #########################################################
 # FONCTIONS DE HAUT NIVEAU - GENERATION DE CHAMP
@@ -249,71 +239,120 @@ def champ_constant(x, y, a, b, s):
     return s * normalize([u, v])
 
 
-def point_attractif(x, y, a, b, s=1):
-    return dir_point(x, y, a, b) * force1_m(x, y, a, b, s)
+def point_courte_portee(x, y, a, b, s=1, r=2):
+    """
+    Genere un champ autour d'un point(a,b) de rayon r
+    : attractif __ s > 0
+    : repulstif __ s < 0
 
-
-def point_attractif2(x, y, a, b, s=1):
-    return dir_point(x, y, a, b) * force4_m(x, y, a, b, 2, s)
+    """
+    return dir_point(x, y, a, b) * profil4_m(x, y, a, b, r=r, s=s)
 
 
 def cercle_attractif(x, y, a, b, r, s=1):
-    return dir_point(x, y, a, b) * force2_m(x, y, a, b, r, s)
+    return dir_point(x, y, a, b) * profil2_m(x, y, a, b, r, s)
 
 
 def champ_tournant1(x, y, a, b, r, s=1):
-    return dir_tournant(x, y, a, b) * force2_m(x, y, a, b, r, s)
+    """
+    Genere un champ tournant partout et nul sur un cercle centre
+    en a,b et de rayon r
+    """
+    return dir_tournant(x, y, a, b) * profil2_m(x, y, a, b, r, s)
 
 
 def champ_tournant2(x, y, a, b, r, s=1):
-    return dir_tournant(x, y, a, b) * force3_m(x, y, a, b, r, s)
+    """
+    Genere un champ tournant uniquement sur
+    un cercle centre en a,b et de rayon r (nul ailleurs)
+    """
+    return dir_tournant(x, y, a, b) * profil3_m(x, y, a, b, r, s)
 
 
-def champ_segment_short(x, y, xa, ya, xb, yb, s=1):
-    dirc = dir_segment_m(x, y, xa, ya, xb, yb)
-    f = force5_m(x, y, xa, ya, xb, yb, 1, s)
+def champ_segment_courte_portee_perpendiculaire(x, y, xa, ya, xb, yb, s=1, r=1):
+    """
+    Genere un champ perpendiculaire a un segment [A,B]
+    Les normes suivent une gaussienne centree sur ce segment et de largeur r
+    """
+    dirc = dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb)
+    f = profil5_m(x, y, xa, ya, xb, yb, r, s)
     return dirc * f
 
 
-def champ_segment_long(x, y, xa, ya, xb, yb, s=1):
-    dirc = dir_segment_m(x, y, xa, ya, xb, yb)
-    f = force6_m(x, y, xa, ya, xb, yb, 1, s)
+def champ_segment_longue_portee_perpendiculaire(x, y, xa, ya, xb, yb, s=1, l=10):
+    """
+    Genere un champ perpendiculaire a un segment [A,B]
+    Les normes suivent une (1-gaussienne) centree sur ce segment
+    """
+    dirc = dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb)
+    f = profil6_m(x, y, xa, ya, xb, yb, 1, s, l)
     return dirc * f
 
 
-def champ_dir_courant(x, y, xa, ya, xb, yb, s=1):
-    dirc = dir_seg_courant_m(x, y, xa, ya, xb, yb)
-    f = force5_m(x, y, xa, ya, xb, yb, 5, s)
+def champ_segment_courte_portee_parallele(x, y, xa, ya, xb, yb, s=1):
+    """
+    Genere un champ perpendiculaire a un segment [A,B]
+    Les normes suivent une gaussienne centree sur ce segment
+    """
+    dirc = dir_segment_parallele_m(x, y, xa, ya, xb, yb)
+    f = profil5_m(x, y, xa, ya, xb, yb, 5, s)
     return dirc * f
 
 
-def champ_segment2P(x, y, xa, ya, xb, yb, s=1):
-    seg = champ_segment_short(x, y, xa, ya, xb, yb, s)
-    Pa = point_attractif2(x, y, xa, ya, -s / 1.)
-    Pb = point_attractif2(x, y, xb, yb, -s / 1.)
-    return Pa + seg + Pb
+#########################################################
+# FONCTION D'OBJECTIFS                                  #
+#########################################################
 
 
-def waypoint(x, y, a, b, s=1):
+def waypoint(x, y, a, b, s=-1):
+    """
+    Defini un champ attire par un waypoint en a,b
+    """
     return s * dir_point(x, y, a, b)
 
 
-def champ_ligne_courant(x, y, xa, ya, xb, yb, s=1):
-    seg_attr = champ_segment_long(x, y, xa, ya, xb, yb, s=1)
-    seg_cour = champ_dir_courant(x, y, xa, ya, xb, yb, s=1)
+def limite(x, y, xa, ya, xb, yb, s=1, r=1):
+    """
+    Definit une limite repulsive
+    """
+    seg = champ_segment_courte_portee_perpendiculaire(
+        x, y, xa, ya, xb, yb, s, r=r)
+    Pa = point_courte_portee(x, y, xa, ya, -s / 1., r=r)
+    Pb = point_courte_portee(x, y, xb, yb, -s / 1., r=r)
+    return Pa + seg + Pb
+
+
+def ligne(x, y, xa, ya, xb, yb, s=1, l=10):
+    """
+    Definit une ligne attractive et orientee de A vers B
+    """
+    seg_attr = champ_segment_longue_portee_perpendiculaire(
+        x, y, xa, ya, xb, yb, s=1, l=l)
+    seg_cour = champ_segment_courte_portee_parallele(x, y, xa, ya, xb, yb, s=1)
     return seg_cour + seg_attr
 
 
+def patrouille_circulaire(x, y, a, b, r, s=1):
+    """
+    Genere un cercle attractif tournant autour de a,b et de rayon r
+    """
+    Uc, Vc = cercle_attractif(x, y, a, b, r=r, s=s)
+    Ut, Vt = champ_tournant2(x, y, a, b, r=r, s=-s)
+    return [Uc + Ut, Vc + Vt]
 #########################################################
 # MAIN                                                   *****************
 #########################################################
 
 
 def champ_carre(X, Y, L):
-    Us1, Vs1 = champ_segment_short(X, Y, -L, -L, -L, L, -1)
-    Us2, Vs2 = champ_segment_short(X, Y, -L, L, L, L, -1)
-    Us3, Vs3 = champ_segment_short(X, Y, L, L, L, -L, -1)
-    Us4, Vs4 = champ_segment_short(X, Y, L, -L, -L, -L, -1)
+    Us1, Vs1 = champ_segment_courte_portee_perpendiculaire(
+        X, Y, -L, -L, -L, L, -1)
+    Us2, Vs2 = champ_segment_courte_portee_perpendiculaire(
+        X, Y, -L, L, L, L, -1)
+    Us3, Vs3 = champ_segment_courte_portee_perpendiculaire(
+        X, Y, L, L, L, -L, -1)
+    Us4, Vs4 = champ_segment_courte_portee_perpendiculaire(
+        X, Y, L, -L, -L, -L, -1)
     Utot = Us1 + Us2 + Us3 + Us4
     Vtot = Vs1 + Vs2 + Vs3 + Vs4
     return Utot, Vtot
@@ -321,10 +360,10 @@ def champ_carre(X, Y, L):
 
 
 def champ_carre_2P(X, Y, L, s=-1):
-    Us1, Vs1 = champ_segment2P(X, Y, -L, -L, -L, L, s)
-    Us2, Vs2 = champ_segment2P(X, Y, -L, L, L, L, s)
-    Us3, Vs3 = champ_segment2P(X, Y, L, L, L, -L, s)
-    Us4, Vs4 = champ_segment2P(X, Y, L, -L, -L, -L, s)
+    Us1, Vs1 = limite(X, Y, -L, -L, -L, L, s)
+    Us2, Vs2 = limite(X, Y, -L, L, L, L, s)
+    Us3, Vs3 = limite(X, Y, L, L, L, -L, s)
+    Us4, Vs4 = limite(X, Y, L, -L, -L, -L, s)
     Utot = Us1 + Us2 + Us3 + Us4
     Vtot = Vs1 + Vs2 + Vs3 + Vs4
     return Utot, Vtot
@@ -332,10 +371,10 @@ def champ_carre_2P(X, Y, L, s=-1):
 
 
 def points(X, Y, s=1):
-    Up1, Vp1 = point_attractif2(X, Y, 10, 10, s)
-    Up2, Vp2 = point_attractif2(X, Y, -10, -10, s)
-    Up3, Vp3 = point_attractif2(X, Y, 10, -10, s)
-    Up4, Vp4 = point_attractif2(X, Y, -10, 10, s)
+    Up1, Vp1 = point_courte_portee(X, Y, 10, 10, s)
+    Up2, Vp2 = point_courte_portee(X, Y, -10, -10, s)
+    Up3, Vp3 = point_courte_portee(X, Y, 10, -10, s)
+    Up4, Vp4 = point_courte_portee(X, Y, -10, 10, s)
     Utot = Up1 + Up2 + Up3 + Up4
     Vtot = Vp1 + Vp2 + Vp3 + Vp4
     return Utot, Vtot
@@ -385,9 +424,9 @@ def main2():
 
     U, V = champ_constant(X, Y, 7, 2, 0.5)
     # print champ_constant(x, y, 7, 2, 0.5)
-    Up, Vp = point_attractif2(X, Y, a, b, s=1)
+    Up, Vp = point_courte_portee(X, Y, a, b, s=1)
     Up2, Vp2 = points(X, Y, 2)
-    # print point_attractif2(x, y, a, b, s=1)
+    # print point_courte_portee(x, y, a, b, s=1)
     Uc, Vc = cercle_attractif(X, Y, a, b, r=5, s=1)
     # print cercle_attractif(x, y, a, b, r=5, s=1)
     Ut, Vt = champ_tournant2(X, Y, a, b, r=5, s=-1)
@@ -395,17 +434,17 @@ def main2():
     Uw, Vw = waypoint(X, Y, a, b, s=-1)
 
     # print "dir segment"
-    # Us, Vs = champ_segment_short(X, Y, xa, ya, xb, yb, 1)
+    # Us, Vs = champ_segment_courte_portee_perpendiculaire(X, Y, xa, ya, xb, yb, 1)
     Ucar, Vcar = champ_carre(X, Y, 20)
     # for x in xrange(-5, 5):
     #     for y in xrange(-5, 5):
-    #         print x, y, dir_segment(x, y, 1, 1, 4, 4)
-    # print dir_segment(0, 0, 1, 1, 4, 4)
-    # print dir_segment(-1, 4, 1, 1, 4, 4)
-    # print dir_segment(-1, 1, 1, 1, 4, 4)
-    # print dir_segment(1, 2, 1, 1, 4, 4)
-    # print dir_segment(3, 1, 1, 1, 4, 4)
-    # print dir_segment(2, -2, 1, 1, 4, 4)
+    #         print x, y, dir_segment_perpendiculaire(x, y, 1, 1, 4, 4)
+    # print dir_segment_perpendiculaire(0, 0, 1, 1, 4, 4)
+    # print dir_segment_perpendiculaire(-1, 4, 1, 1, 4, 4)
+    # print dir_segment_perpendiculaire(-1, 1, 1, 1, 4, 4)
+    # print dir_segment_perpendiculaire(1, 2, 1, 1, 4, 4)
+    # print dir_segment_perpendiculaire(3, 1, 1, 1, 4, 4)
+    # print dir_segment_perpendiculaire(2, -2, 1, 1, 4, 4)
     # print Us, Vs
 
     # Somme des champs
@@ -464,7 +503,7 @@ def main3():
     # xa, ya, xb, yb = 0, 0, -10, -10   # ligne horizontale
     # xa, ya, xb, yb = 0, 0, 0, -10   # ligne horizontale
     # xa, ya, xb, yb = 0, 0, 10, -10   # ligne horizontale
-    U, V = champ_segment2P(X, Y, xa, ya, xb, yb, s=1)
+    U, V = limite(X, Y, xa, ya, xb, yb, s=1)
     Ucar, Vcar = champ_carre_2P(X, Y, 10, s=-4)
     Uc, Vc = cercle_attractif(X, Y, xa, ya, r=5, s=1)
     Utot, Vtot = Ucar + Uc, Vcar + Vc
@@ -475,16 +514,16 @@ def main3():
 
 def champ_carre_tournant(X, Y):
     xa, ya, xb, yb = 0, 0, 10, 0
-    U1, V1 = champ_ligne_courant(X, Y, xa, ya, xb, yb, s=5)
+    U1, V1 = ligne(X, Y, xa, ya, xb, yb, s=5)
     Uc1, Vc1 = waypoint(X, Y, xb, yb, s=-1)
     xa, ya, xb, yb = 10, 0, 10, 10
-    U2, V2 = champ_ligne_courant(X, Y, xa, ya, xb, yb, s=5)
+    U2, V2 = ligne(X, Y, xa, ya, xb, yb, s=5)
     Uc2, Vc2 = waypoint(X, Y, xb, yb, s=-1)
     xa, ya, xb, yb = 10, 10, 0, 10
-    U3, V3 = champ_ligne_courant(X, Y, xa, ya, xb, yb, s=5)
+    U3, V3 = ligne(X, Y, xa, ya, xb, yb, s=5)
     Uc3, Vc3 = waypoint(X, Y, xb, yb, s=-1)
     xa, ya, xb, yb = 0, 10, 0, 0
-    U4, V4 = champ_ligne_courant(X, Y, xa, ya, xb, yb, s=5)
+    U4, V4 = ligne(X, Y, xa, ya, xb, yb, s=5)
     Uc4, Vc4 = waypoint(X, Y, xb, yb, s=-1)
     Utot = U1 + U2 + U3 + U4
     Vtot = V1 + V2 + V3 + V4
@@ -499,8 +538,52 @@ def main4():
     plt.show()
 
 
+def main5():
+    X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+    # xa, ya, xb, yb = 0, 0, 5, 5
+    # U0, V0 = champ_constant(X, Y, 0, 1, s=1)
+    a, b = 3, 5
+    Uc, Vc = cercle_attractif(X, Y, a, b, r=5, s=1)
+    Ut, Vt = champ_tournant2(X, Y, a, b, r=5, s=-1)
+
+    plt.figure(1)
+    plt.quiver(X, Y, Uc, Vc)
+    plt.axis('equal')
+
+    plt.figure(2)
+    plt.quiver(X, Y, Ut, Vt)
+    plt.axis('equal')
+
+    plt.figure(3)
+    plt.quiver(X, Y, Ut + Uc, Vt + Vc)
+    plt.axis('equal')
+    plt.show()
+
+
+def test_objectifs():
+    X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+    U0, V0 = patrouille_circulaire(X, Y, -10, -10, 5)
+    U1, V1 = waypoint(X, Y, -10, 10)
+    U2, V2 = limite(X, Y, -7, 0, 6, 4, s=-4, r=3)
+    U3, V3 = ligne(X, Y, -10, 10, -10, -10, l=30)
+
+    for i, k in enumerate([(U0, V0), (U1, V1), (U2, V2), (U3, V3)]):
+        plt.figure(i)
+        plt.quiver(X, Y, k[0], k[1])
+        plt.axis('equal')
+
+    U = 1 * U0 + 1 * U1 + 0 * U2 + 1 * U3
+    V = 1 * V0 + 1 * V1 + 0 * V2 + 1 * V3
+    plt.figure('total')
+    plt.quiver(X, Y, U, V)
+    plt.axis('equal')
+    plt.show()
+
+
 if __name__ == '__main__':
     # main()
     # main2()
-    main3()
-    main4()
+    # main3()
+    # main4()
+    # main5()
+    test_objectifs()
