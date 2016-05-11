@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import champs_numpy as cn
 import numpy as np
 import matplotlib.pyplot as plt
+# from process.msg import BehaviorInfo
 
 
 class Behavior(object):
@@ -20,44 +22,50 @@ class Behavior(object):
             self.is_simple = False
 
     def generate_behavior_from_info(self, info):
-        self.type = info.type
-        self.behavior_id = info.behavior_id
+        self.name = info.name
+        self.ID = info.ID
         self.r = info.r
         self.s = info.s
-        if self.type in ['ligne', 'limite']:
+        if self.name in ['ligne', 'limite']:
             self.xa = info.xa
             self.ya = info.ya
             self.xb = info.xb
             self.yb = info.yb
             self.params = (self.xa, self.ya, self.xb, self.yb, self.s, self.r)
-        elif self.type == 'waypoint':
+        elif self.name == 'waypoint':
             self.x = info.xa
             self.y = info.ya
             self.params = (self.x, self.y, self.s)
-        elif self.type == 'patrol_circle':
+        elif self.name == 'patrol_circle':
             self.x = info.xa
             self.y = info.ya
             self.params = (self.x, self.y, self.r, self.s)
 
         # self.behavior_function = lambda x: x
-        self.behavior_function = type(self).corr[self.type]
+        self.behavior_function = type(self).corr[self.name]
 
-    def behavior_point(self, x, y):
+    def cmd_point(self, x, y):
         return self.behavior_function(x, y, *self.params)
 
     def __add__(self, other):
         summed_behavior = Behavior()
-        summed_behavior.type = ','.join([self.type, other.type])
-        summed_behavior.behavior_id = ','.join([self.behavior_id, other.behavior_id])
-        summed_behavior.behavior_point = lambda x, y: self.behavior_point(
-            x, y) + other.behavior_point(x, y)
+        summed_behavior.name = ','.join([self.name, other.name])
+        summed_behavior.ID = ','.join([self.ID, other.ID])
+        summed_behavior.cmd_point = lambda x, y: self.cmd_point(
+            x, y) + other.cmd_point(x, y)
         return summed_behavior
+
+    def __eq__(self, other):
+        return self.ID == other.ID
 
 
 class Behavior_info():
-    def __init__(self, type, behavior_id, xa, ya, xb, yb, r, s):
-        self.type = type
-        self.behavior_id = behavior_id
+    """
+    A behaviorInfo class to simulate a fake message
+    """
+    def __init__(self, name, ID, xa, ya, xb, yb, r, s):
+        self.name = name
+        self.ID = ID
         self.xa = xa
         self.ya = ya
         self.xb = xb
@@ -65,6 +73,42 @@ class Behavior_info():
         self.r = r
         self.s = s
 
+
+class BehaviorManager():
+    """Cette classe contient les outils pour créer,
+     mettre à jour et publier les listes d'obstacles
+     et d'objectifs, ainsi que les champs de vecteurs
+     associés """
+
+    def __init__(self):
+        self.behavior_list = []
+        self.champ_total = None
+
+    def add_behavior(self, new_behavior):
+        if not self.behavior_in_list(new_behavior):
+            if self.champ_total is None:
+                self.champ_total = new_behavior
+            else:
+                self.champ_total += new_behavior
+            self.behavior_list.append(new_behavior)
+
+    def behavior_in_list(self, behavior):
+        for b in self.behavior_list:
+            if behavior.ID == b.ID:
+                return True
+        return False
+
+    def check_list(self):
+        for behavior in self.behavior_list:
+            pass
+
+    def sumFields(self):
+        for field in self.field_list:
+            pass
+        # vectorfield = somme de tous
+
+    def createField(behavior):
+        pass
 
 if __name__ == '__main__':
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
