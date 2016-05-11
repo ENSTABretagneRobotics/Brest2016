@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import champs_numpy as cn
 import numpy as np
 import matplotlib.pyplot as plt
@@ -42,16 +43,19 @@ class Behavior(object):
         # self.behavior_function = lambda x: x
         self.behavior_function = type(self).corr[self.name]
 
-    def behavior_point(self, x, y):
+    def cmd_point(self, x, y):
         return self.behavior_function(x, y, *self.params)
 
     def __add__(self, other):
         summed_behavior = Behavior()
         summed_behavior.name = ','.join([self.name, other.name])
         summed_behavior.ID = ','.join([self.ID, other.ID])
-        summed_behavior.behavior_point = lambda x, y: self.behavior_point(
-            x, y) + other.behavior_point(x, y)
+        summed_behavior.cmd_point = lambda x, y: self.cmd_point(
+            x, y) + other.cmd_point(x, y)
         return summed_behavior
+
+    def __eq__(self, other):
+        return self.ID == other.ID
 
 
 class Behavior_info():
@@ -65,6 +69,39 @@ class Behavior_info():
         self.r = r
         self.s = s
 
+
+class BehaviorManager():
+    """Cette classe contient les outils pour créer,
+     mettre à jour et publier les listes d'obstacles
+     et d'objectifs, ainsi que les champs de vecteurs
+     associés """
+
+    def __init__(self):
+        self.behavior_list = []
+        self.champ_total = Behavior()
+
+    def add_behavior(self, new_behavior):
+        if not self.behavior_in_list(new_behavior):
+            self.behavior_list.append(new_behavior)
+            self.champ_total += new_behavior
+
+    def behavior_in_list(self, behavior):
+        for b in self.behavior_list:
+            if behavior.ID == b.ID:
+                return True
+        return False
+
+    def check_list(self):
+        for behavior in self.behavior_list:
+            pass
+
+    def sumFields(self):
+        for field in self.field_list:
+            pass
+        # vectorfield = somme de tous
+
+    def createField(behavior):
+        pass
 
 if __name__ == '__main__':
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]

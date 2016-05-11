@@ -35,5 +35,5 @@ while not rospy.is_shutdown():
     bm.sumFields()
     # publication du champs de vecteurs
     pub.publish(bm.vectorField)
-    # pause 
+    # pause
     rate.sleep()

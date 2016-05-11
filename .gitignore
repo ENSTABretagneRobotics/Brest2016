@@ -1,2 +1,3 @@
 brest2016_ws/build/
 brest2016_ws/devel/
+*.pyc
