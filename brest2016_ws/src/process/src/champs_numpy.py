@@ -25,6 +25,8 @@ def normalize(vect):
     """
     Retourne le vecteur normalise
     """
+    # if norm(vect) == 0:
+    #     return vect
     return vect / norm(vect)
 
 
@@ -306,7 +308,10 @@ def champ_nul(x, y):
     """
     Retourne un champ nul
     """
-    return champ_constant(x, y, 0, 0, 1)
+    if type(x) in [float, int]:
+        return champ_constant(x, y, 0, 0, 1)
+    elif type(x) is np.ndarray:
+        return [np.zeros(x.shape), np.zeros(y.shape)]
 
 
 def waypoint(x, y, a, b, s=-1):
@@ -341,9 +346,9 @@ def patrouille_circulaire(x, y, a, b, r, s=1):
     """
     Genere un cercle attractif tournant autour de a,b et de rayon r
     """
-    Uc, Vc = cercle_attractif(x, y, a, b, r=r, s=s)
-    Ut, Vt = champ_tournant2(x, y, a, b, r=r, s=-s)
-    return [Uc + Ut, Vc + Vt]
+    CA = cercle_attractif(x, y, a, b, r=r, s=s)
+    CT = champ_tournant2(x, y, a, b, r=r, s=-s)
+    return CA + CT
 #########################################################
 # MAIN                                                   *****************
 #########################################################
@@ -585,10 +590,17 @@ def test_objectifs():
     plt.show()
 
 
+def test_points():
+    X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+    U, V = champ_nul(1.82, -1.81)
+    print U, V
+
+
 if __name__ == '__main__':
     # main()
     # main2()
     # main3()
     # main4()
     # main5()
-    test_objectifs()
+    # test_objectifs()
+    test_points()

@@ -2,7 +2,6 @@
 import champs_numpy as cn
 import numpy as np
 import matplotlib.pyplot as plt
-# from process.msg import BehaviorInfo
 
 
 class Behavior(object):
@@ -11,7 +10,8 @@ class Behavior(object):
     corr = {'patrol_circle': cn.patrouille_circulaire,
             'ligne': cn.ligne,
             'limite': cn.limite,
-            'waypoint': cn.waypoint}
+            'waypoint': cn.waypoint,
+            'nul': cn.champ_nul}
 
     def __init__(self, behavior_info=None):
         self.info = behavior_info
@@ -19,53 +19,62 @@ class Behavior(object):
             self.generate_behavior_from_info(self.info)
             self.is_simple = True
         else:
+            self.generate_behavior_from_scratch()
             self.is_simple = False
 
     def generate_behavior_from_info(self, info):
-        self.name = info.name
-        self.ID = info.ID
+        self.type = info.type
+        self.behavior_id = info.behavior_id
         self.r = info.r
         self.s = info.s
-        if self.name in ['ligne', 'limite']:
+        if self.type in ['ligne', 'limite']:
             self.xa = info.xa
             self.ya = info.ya
             self.xb = info.xb
             self.yb = info.yb
             self.params = (self.xa, self.ya, self.xb, self.yb, self.s, self.r)
-        elif self.name == 'waypoint':
+        elif self.type == 'waypoint':
             self.x = info.xa
             self.y = info.ya
             self.params = (self.x, self.y, self.s)
-        elif self.name == 'patrol_circle':
+        elif self.type == 'patrol_circle':
             self.x = info.xa
             self.y = info.ya
             self.params = (self.x, self.y, self.r, self.s)
 
         # self.behavior_function = lambda x: x
-        self.behavior_function = type(self).corr[self.name]
+        self.behavior_function = type(self).corr[self.type]
+
+    def generate_behavior_from_scratch(self):
+        self.type = 'C#'
+        self.behavior_id = "C"
+        self.r = 0
+        self.s = 0
+        self.xa, self.ya = 0, 0
+        self.xb, self.yb = 0, 0
+        self.x, self.y = 0, 0
+        self.params = ()
+        self.behavior_function = type(self).corr['nul']
 
     def cmd_point(self, x, y):
         return self.behavior_function(x, y, *self.params)
 
     def __add__(self, other):
         summed_behavior = Behavior()
-        summed_behavior.name = ','.join([self.name, other.name])
-        summed_behavior.ID = ','.join([self.ID, other.ID])
+        summed_behavior.type = ','.join([self.type, other.type])
+        summed_behavior.behavior_id = ','.join([self.behavior_id, other.behavior_id])
         summed_behavior.cmd_point = lambda x, y: self.cmd_point(
             x, y) + other.cmd_point(x, y)
         return summed_behavior
 
     def __eq__(self, other):
-        return self.ID == other.ID
+        return self.behavior_id == other.behavior_id
 
 
 class Behavior_info():
-    """
-    A behaviorInfo class to simulate a fake message
-    """
-    def __init__(self, name, ID, xa, ya, xb, yb, r, s):
-        self.name = name
-        self.ID = ID
+    def __init__(self, type, behavior_id, xa, ya, xb, yb, r, s):
+        self.type = type
+        self.behavior_id = behavior_id
         self.xa = xa
         self.ya = ya
         self.xb = xb
@@ -82,55 +91,80 @@ class BehaviorManager():
 
     def __init__(self):
         self.behavior_list = []
-        self.champ_total = None
+        self.champ_total = Behavior()
 
     def add_behavior(self, new_behavior):
         if not self.behavior_in_list(new_behavior):
-            if self.champ_total is None:
-                self.champ_total = new_behavior
-            else:
-                self.champ_total += new_behavior
             self.behavior_list.append(new_behavior)
+            self.champ_total += new_behavior
 
     def behavior_in_list(self, behavior):
         for b in self.behavior_list:
-            if behavior.ID == b.ID:
+            if behavior.behavior_id == b.behavior_id:
                 return True
         return False
 
-    def check_list(self):
-        for behavior in self.behavior_list:
-            pass
 
-    def sumFields(self):
-        for field in self.field_list:
-            pass
-        # vectorfield = somme de tous
-
-    def createField(behavior):
-        pass
-
-if __name__ == '__main__':
+def main_behavior():
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
 
-    # Behavior 1
+    # Behavior 0
+    info0 = Behavior_info('nu', '000', -5, 5, 0, 0, 0, -1)
+    b0 = Behavior()
+    U0, V0 = b0.cmd_point(X, Y)
+    plt.figure(0)
+    plt.quiver(X, Y, U0, V0)
+
+    # Behavior 1 - waypoint
     info1 = Behavior_info('waypoint', '001', -5, 5, 0, 0, 0, -1)
     b1 = Behavior(info1)
-    U1, V1 = b1.behavior_point(X, Y)
+    U1, V1 = b1.cmd_point(X, Y)
     plt.figure(1)
     plt.quiver(X, Y, U1, V1)
 
-    # Behavior 2
+    # Behavior 2 - limite
     info2 = Behavior_info('limite', '002', 0, 0, 3, 3, 1, -3)
     b2 = Behavior(info2)
-    U2, V2 = b2.behavior_point(X, Y)
+    U2, V2 = b2.cmd_point(X, Y)
     plt.figure(2)
     plt.quiver(X, Y, U2, V2)
 
+    # Behavior 3 - patrol_circle
+    info3 = Behavior_info('patrol_circle', '003', 0, 0, 3, 3, 1, 1)
+    b3 = Behavior(info3)
+    U3, V3 = b3.cmd_point(X, Y)
+    plt.figure(3)
+    plt.quiver(X, Y, U3, V3)
+
     # Behavior Total
-    b = b1 + b2
-    U, V = b.behavior_point(X, Y)
+    b = b0 + b1 + b2 + b3
+    U, V = b.cmd_point(X, Y)
     plt.figure('Total')
     plt.quiver(X, Y, U, V)
 
     plt.show()
+
+
+def main_manager():
+    X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+    manager = BehaviorManager()
+
+    # # Behavior 2 - limite
+    # info2 = Behavior_info('limite', '002', 0, 0, 3, 3, 1, -3)
+    # b2 = Behavior(info2)
+    # # Behavior 3 - patrol_circle
+    # info3 = Behavior_info('patrol_circle', '003', 0, 0, 3, 3, 1, 1)
+    # b3 = Behavior(info3)
+
+    # manager.add_behavior(b3)
+    # manager.add_behavior(b2)
+
+    res = manager.champ_total.cmd_point(X, Y)
+
+    U, V = res[0], res[1]
+    plt.quiver(X, Y, U, V)
+    plt.show()
+
+if __name__ == '__main__':
+    # main_behavior()
+    main_manager()
