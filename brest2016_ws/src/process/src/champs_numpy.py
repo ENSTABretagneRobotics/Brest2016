@@ -302,6 +302,11 @@ def champ_segment_courte_portee_parallele(x, y, xa, ya, xb, yb, s=1):
 #########################################################
 # FONCTION D'OBJECTIFS                                  #
 #########################################################
+def champ_nul(x, y):
+    """
+    Retourne un champ nul
+    """
+    return champ_constant(x, y, 0, 0, 1)
 
 
 def waypoint(x, y, a, b, s=-1):

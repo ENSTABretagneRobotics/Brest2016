@@ -10,7 +10,8 @@ class Behavior(object):
     corr = {'patrol_circle': cn.patrouille_circulaire,
             'ligne': cn.ligne,
             'limite': cn.limite,
-            'waypoint': cn.waypoint}
+            'waypoint': cn.waypoint,
+            'nul': cn.champ_nul}
 
     def __init__(self, behavior_info=None):
         self.info = behavior_info
@@ -18,6 +19,7 @@ class Behavior(object):
             self.generate_behavior_from_info(self.info)
             self.is_simple = True
         else:
+            self.generate_behavior_from_scratch()
             self.is_simple = False
 
     def generate_behavior_from_info(self, info):
@@ -42,6 +44,17 @@ class Behavior(object):
 
         # self.behavior_function = lambda x: x
         self.behavior_function = type(self).corr[self.name]
+
+    def generate_behavior_from_scratch(self):
+        self.name = 'C#'
+        self.ID = "C"
+        self.r = 0
+        self.s = 0
+        self.xa, self.ya = 0, 0
+        self.xb, self.yb = 0, 0
+        self.x, self.y = 0, 0
+        self.params = ()
+        self.behavior_function = type(self).corr['nul']
 
     def cmd_point(self, x, y):
         return self.behavior_function(x, y, *self.params)

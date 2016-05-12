@@ -7,7 +7,7 @@ from Behavior import Behavior, BehaviorManager
 
 def add_behavior(request):
     global listB
-    print request.info.typep
+    print request.info.type
     behavior_manager.add_behavior(Behavior(request.info))
     print 'nombres de behavior recu:', len(behavior_manager.behavior_list)
     return behaviorResponse('oui')
