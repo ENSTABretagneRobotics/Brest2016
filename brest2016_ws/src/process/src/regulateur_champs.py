@@ -46,7 +46,7 @@ cmd_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
 
 cap_cible = 0
 cap = 0
-vHigh = 7500  # 8000 max
+vHigh = 6500  # 8000 max
 vLow = 6500  # 6000 = vitesse nulle
 K = 1500 * (2. / np.pi)
 rate = rospy.Rate(5)

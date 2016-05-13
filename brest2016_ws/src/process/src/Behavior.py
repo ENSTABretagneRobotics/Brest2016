@@ -3,6 +3,10 @@ import champs_numpy as cn
 import numpy as np
 import matplotlib.pyplot as plt
 
+##########################################################################
+# Behavior
+##########################################################################
+
 
 class Behavior(object):
     """A behavior generates a vector field it can be added to others"""
@@ -62,13 +66,18 @@ class Behavior(object):
     def __add__(self, other):
         summed_behavior = Behavior()
         summed_behavior.type = ','.join([self.type, other.type])
-        summed_behavior.behavior_id = ','.join([self.behavior_id, other.behavior_id])
+        summed_behavior.behavior_id = ','.join(
+            [self.behavior_id, other.behavior_id])
         summed_behavior.cmd_point = lambda x, y: self.cmd_point(
             x, y) + other.cmd_point(x, y)
         return summed_behavior
 
     def __eq__(self, other):
         return self.behavior_id == other.behavior_id
+
+##########################################################################
+# Behavior INFO
+##########################################################################
 
 
 class Behavior_info():
@@ -81,6 +90,10 @@ class Behavior_info():
         self.yb = yb
         self.r = r
         self.s = s
+
+##########################################################################
+# Behavior MANAGER
+##########################################################################
 
 
 class BehaviorManager():
@@ -104,7 +117,15 @@ class BehaviorManager():
                 return True
         return False
 
+    def remove_behavior(self, new_behavior):
+        for b in self.behavior_list:
+            if new_behavior.behavior_id == b.behavior_id:
+                self.behavior_list.remove(b)
 
+
+##########################################################################
+# TESTs
+##########################################################################
 def main_behavior():
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
 
@@ -116,14 +137,14 @@ def main_behavior():
     plt.quiver(X, Y, U0, V0)
 
     # Behavior 1 - waypoint
-    info1 = Behavior_info('waypoint', '001', -5, 5, 0, 0, 0, -1)
+    info1 = Behavior_info('waypoint', '001', 5, 5, 0, 0, 0, -1)
     b1 = Behavior(info1)
     U1, V1 = b1.cmd_point(X, Y)
     plt.figure(1)
     plt.quiver(X, Y, U1, V1)
 
     # Behavior 2 - limite
-    info2 = Behavior_info('limite', '002', 0, 0, 3, 3, 1, -3)
+    info2 = Behavior_info('limite', '002', 0, 0, 3, 0, 1, -3)
     b2 = Behavior(info2)
     U2, V2 = b2.cmd_point(X, Y)
     plt.figure(2)
@@ -137,7 +158,7 @@ def main_behavior():
     plt.quiver(X, Y, U3, V3)
 
     # Behavior Total
-    b = b0 + b1 + b2 + b3
+    b = b1 + b2
     U, V = b.cmd_point(X, Y)
     plt.figure('Total')
     plt.quiver(X, Y, U, V)
@@ -149,22 +170,23 @@ def main_manager():
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
     manager = BehaviorManager()
 
-    # # Behavior 2 - limite
-    # info2 = Behavior_info('limite', '002', 0, 0, 3, 3, 1, -3)
-    # b2 = Behavior(info2)
-    # # Behavior 3 - patrol_circle
-    # info3 = Behavior_info('patrol_circle', '003', 0, 0, 3, 3, 1, 1)
-    # b3 = Behavior(info3)
+    # Behavior 2 - limite
+    info2 = Behavior_info('limite', '002', 0, 0, 3, 3, 1, -3)
+    b2 = Behavior(info2)
+    # Behavior 3 - patrol_circle
+    info3 = Behavior_info('patrol_circle', '003', 0, 0, 3, 3, 1, 1)
+    b3 = Behavior(info3)
 
-    # manager.add_behavior(b3)
-    # manager.add_behavior(b2)
+    manager.add_behavior(b3)
+    manager.add_behavior(b2)
 
     res = manager.champ_total.cmd_point(X, Y)
+    manager.champ_total.cmd_point(0, 0)
 
     U, V = res[0], res[1]
     plt.quiver(X, Y, U, V)
     plt.show()
 
 if __name__ == '__main__':
-    # main_behavior()
-    main_manager()
+    main_behavior()
+    # main_manager()

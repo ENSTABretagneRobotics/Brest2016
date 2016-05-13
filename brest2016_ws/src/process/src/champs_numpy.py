@@ -276,7 +276,10 @@ def champ_segment_courte_portee_perpendiculaire(x, y, xa, ya, xb, yb, s=1, r=1):
     Genere un champ perpendiculaire a un segment [A,B]
     Les normes suivent une gaussienne centree sur ce segment et de largeur r
     """
-    dirc = dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb)
+    if type(x) in [int, float]:
+        dirc = dir_segment_perpendiculaire(x, y, xa, ya, xb, yb)
+    elif type(x) is np.ndarray:
+        dirc = dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb)
     f = profil5_m(x, y, xa, ya, xb, yb, r, s)
     return dirc * f
 
@@ -286,7 +289,10 @@ def champ_segment_longue_portee_perpendiculaire(x, y, xa, ya, xb, yb, s=1, l=10)
     Genere un champ perpendiculaire a un segment [A,B]
     Les normes suivent une (1-gaussienne) centree sur ce segment
     """
-    dirc = dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb)
+    if type(x) in [int, float]:
+        dirc = dir_segment_perpendiculaire(x, y, xa, ya, xb, yb)
+    elif type(x) is np.ndarray:
+        dirc = dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb)
     f = profil6_m(x, y, xa, ya, xb, yb, 1, s, l)
     return dirc * f
 
@@ -296,7 +302,10 @@ def champ_segment_courte_portee_parallele(x, y, xa, ya, xb, yb, s=1):
     Genere un champ perpendiculaire a un segment [A,B]
     Les normes suivent une gaussienne centree sur ce segment
     """
-    dirc = dir_segment_parallele_m(x, y, xa, ya, xb, yb)
+    if type(x) in [int, float]:
+        dirc = dir_segment_parallele(x, y, xa, ya, xb, yb)
+    elif type(x) is np.ndarray:
+        dirc = dir_segment_parallele_m(x, y, xa, ya, xb, yb)
     f = profil5_m(x, y, xa, ya, xb, yb, 5, s)
     return dirc * f
 
@@ -309,7 +318,7 @@ def champ_nul(x, y):
     Retourne un champ nul
     """
     if type(x) in [float, int]:
-        return champ_constant(x, y, 0, 0, 1)
+        return [0, 0]
     elif type(x) is np.ndarray:
         return [np.zeros(x.shape), np.zeros(y.shape)]
 
@@ -592,8 +601,28 @@ def test_objectifs():
 
 def test_points():
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
-    U, V = champ_nul(1.82, -1.81)
-    print U, V
+    x0, y0 = 0, 0
+    x, y = 1.67, 200
+    # Meshgrid
+    U0, V0 = champ_nul(X, Y)
+    U1, V1 = waypoint(X, Y, 1, 2)
+    U2, V2 = limite(X, Y, 1, 1, 3, -2)
+    U3, V3 = ligne(X, Y, 1, 1, -3, 4)
+    U4, V4 = patrouille_circulaire(X, Y, 3, 3, 1)
+    # Points
+    print 'Points non nuls --------'
+    print champ_nul(x, y)
+    print waypoint(x, y, 1, 2)
+    print limite(x, y, 1, 1, 3, -2)
+    print ligne(x, y, 1, 1, -3, 4)
+    print patrouille_circulaire(x, y, 3, 3, 1)
+    # Points nuls
+    print 'Points nuls --------'
+    print champ_nul(x0, y0)
+    print waypoint(x0, y0, 1, 2)
+    print limite(x0, y0, 1, 1, 3, -2)
+    print ligne(x0, y0, 1, 1, -3, 4)
+    print patrouille_circulaire(x0, y0, 3, 3, 1)
 
 
 if __name__ == '__main__':

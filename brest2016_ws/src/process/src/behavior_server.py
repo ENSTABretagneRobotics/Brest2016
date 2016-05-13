@@ -9,7 +9,7 @@ import numpy as np
 
 def add_behavior(request):
     global listB
-    print request.info.type
+    print request.info.type, request.info.behavior_id
     behavior_manager.add_behavior(Behavior(request.info))
     print 'nombres de behavior recu:', len(behavior_manager.behavior_list)
     return behaviorResponse('oui')
@@ -32,13 +32,13 @@ rospy.init_node('service_server')
 service = rospy.Service('behavior_manager', behavior, add_behavior)
 # Subscriber et publisher
 pos_sub = rospy.Subscriber('gps/local_pose', PoseStamped, update_pos)
-pub = rospy.Publisher('field_cmd', Vector3, queue_size=1)
+pub = rospy.Publisher('robot/vecteur_cible', Vector3, queue_size=1)
 
 rate = rospy.Rate(10)
 
 # Affichage du champ de vecteur
 plt.ion()
-X, Y = np.mgrid[-200:200:40j, -200:200:40j]
+X, Y = np.mgrid[-20:200:60j, -20:200:60j]
 
 while not rospy.is_shutdown():
     v = Vector3()
