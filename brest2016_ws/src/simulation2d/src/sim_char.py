@@ -29,9 +29,16 @@ def fdot(x, u):
 def update_cmd(msg):
     global u, x
     vect = np.array([msg.x, msg.y])
-    u[1] = norm(vect)
-    thetabar = np.arctan2(msg.y, msg.y)
-    u[2] = 10 * np.arctan(np.tan(0.5 * (thetabar - x[2])))
+    u[1] = 15 * norm(vect)
+    thetabar = np.arctan2(msg.y, msg.x)
+    if u[1] == 0:
+        u[0] = 0
+    else:
+        u[0] = 10 * np.arctan(np.tan(0.5 * (thetabar - x[2])))
+    # print 'thetabar', thetabar, 'u0', u[0]
+    # print x[2], vect, thetabar
+    print 'command:', thetabar, x[2], u
+    # print u
 
 
 def publish_pose(x):
@@ -51,25 +58,29 @@ def publish_pose(x):
     pos_pub.publish(pos)
 
 # Initialisation du noeud
-rospy.init_node('service_server')
+rospy.init_node('sim_char')
 # Subscriber et publisher
 cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
 pos_pub = rospy.Publisher('gps/local_pose', PoseStamped, queue_size=1)
 
-rate = rospy.Rate(10)
+rate = rospy.Rate(3)
 plt.ion()
-x = np.array([-20, -10, 4])
+x = np.array([40, 40, 4])
 dt = 0.1
-u = [0, 1]
+u = [0, 0]
 
 while not rospy.is_shutdown():
-    plt.cla()
+    # plt.cla()
     x = x + fdot(x, u) * dt
-    draw_tank(x)
-    plt.axis([-30, 30, -30, 30])
-    plt.draw()
+    # draw_tank(x)
+    # plt.axis([-30, 30, -30, 30])
+    # plt.draw()
     publish_pose(x)
-
+    print '-' * 10
+    print 'u:', u
+    print 'x', x
+    print
+    rate.sleep()
 
 # if __name__ == '__main__':
 #     for t in np.arange(1, 30, dt):
