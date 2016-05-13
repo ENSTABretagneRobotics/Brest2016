@@ -1,0 +1,7 @@
+<!-- Demo simple pour la simulation d'un robot char qui recoit des commandes
+ d'un champ de vecteur  -->
+ <launch>
+ 	<node name="sim_char" pkg="simulation2d" type="sim_char.py"/>
+ 	<node name="behavior_server" pkg="process" type="behavior_server.py"/>
+ 	<node name="gui_behavior_adder" pkg="process" type="gui_behavior_adder.py"/>
+ </launch>

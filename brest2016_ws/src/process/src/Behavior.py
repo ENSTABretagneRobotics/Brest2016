@@ -138,14 +138,14 @@ def main_behavior():
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
 
     # Behavior 0
-    info0 = Behavior_info('nu', '000', -5, 5, 0, 0, 0, -1)
+    info0 = Behavior_info('nu', '000', 0, 0, 0, 0, 0, -1)
     b0 = Behavior()
     U0, V0 = b0.cmd_point(X, Y)
     plt.figure(0)
     plt.quiver(X, Y, U0, V0)
 
     # Behavior 1 - waypoint
-    info1 = Behavior_info('waypoint', '001', 5, 5, 0, 0, 0, -1)
+    info1 = Behavior_info('waypoint', '001', 0, 0, 0, 0, 0, -1)
     b1 = Behavior(info1)
     U1, V1 = b1.cmd_point(X, Y)
     plt.figure(1)
