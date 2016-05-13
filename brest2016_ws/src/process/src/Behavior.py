@@ -110,12 +110,20 @@ class BehaviorManager():
         if not self.behavior_in_list(new_behavior):
             self.behavior_list.append(new_behavior)
             self.champ_total += new_behavior
+        else:
+            self.behavior_list.remove(new_behavior)
+            self.recalc_champ_total()
 
     def behavior_in_list(self, behavior):
         for b in self.behavior_list:
             if behavior.behavior_id == b.behavior_id:
                 return True
         return False
+
+    def recalc_champ_total(self):
+        self.champ_total = Behavior()
+        for c in self.behavior_list:
+            self.champ_total += c
 
     def remove_behavior(self, new_behavior):
         for b in self.behavior_list:
