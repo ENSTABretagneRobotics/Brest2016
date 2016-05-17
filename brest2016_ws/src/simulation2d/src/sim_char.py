@@ -29,12 +29,12 @@ def fdot(x, u):
 def update_cmd(msg):
     global u, x
     vect = np.array([msg.x, msg.y])
-    u[1] = 15 * norm(vect)
+    u[1] = norm(vect)
     thetabar = np.arctan2(msg.y, msg.x)
     if u[1] == 0:
         u[0] = 0
     else:
-        u[0] = 10 * np.arctan(np.tan(0.5 * (thetabar - x[2])))
+        u[0] = 3 * np.arctan(np.tan(0.5 * (thetabar - x[2])))
     # print 'thetabar', thetabar, 'u0', u[0]
     # print x[2], vect, thetabar
     print 'command:', thetabar, x[2], u
@@ -63,7 +63,7 @@ rospy.init_node('sim_char')
 cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
 pos_pub = rospy.Publisher('gps/local_pose', PoseStamped, queue_size=1)
 
-rate = rospy.Rate(3)
+rate = rospy.Rate(10)
 plt.ion()
 x = np.array([40, 40, 4])
 dt = 0.1

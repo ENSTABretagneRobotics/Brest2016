@@ -64,6 +64,13 @@ def gaussienne(x, L, D):
     return np.exp(-((x - D) * np.sqrt(np.log(2)) / L)**2)
 
 
+def dirac(x, L, D):
+    if abs(x - D) > L:
+        return 0
+    else:
+        return 1
+
+
 #########################################################
 # FONCTIONS DE BAS NIVEAU DIRECTIONNELS
 #########################################################
@@ -88,6 +95,40 @@ def dir_tournant(x, y, a=0, b=0):
     return vect
 
 
+# def dir_segment_perpendiculaire(x, y, xa, ya, xb, yb):
+#     """ Retourne le vecteur situe en (x,y) dirige perpendiculairement
+#     a un segment d'extremites A(xa, ya), B(xb, yb)
+#     """
+#     N = normalize([yb - ya, xa - xb])
+#     BM = np.array([y - yb, x - xb])
+#     BA = np.array([ya - yb, xa - xb])
+#     AB = -BA
+#     AM = np.array([y - ya, x - xa])
+#     cosa = np.dot(BM, BA)   # cos(alpha)
+#     cosb = np.dot(AB, AM)
+#     sa = np.cross(BM, BA)
+#     # sb = np.cross(AM, AB)
+#     if cosa > 0 and cosb > 0:   # interieur
+#         return -N if sa > 0 else N
+#     else:
+#         return np.array([0, 0])
+
+
+# def dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb):
+#     """
+#     Fonction similaire qui s'applique a un meshgrid
+#     """
+#     U = x.copy()
+#     V = y.copy()
+#     for row in range(len(x)):
+#         for col in range(len(x[0])):
+#             res = dir_segment_perpendiculaire(
+#                 x[row][col], y[row][col], xa, ya, xb, yb)
+#             U[row][col] = res[0]
+#             V[row][col] = res[1]
+#     return U, V
+
+
 def dir_segment_perpendiculaire(x, y, xa, ya, xb, yb):
     """ Retourne le vecteur situe en (x,y) dirige perpendiculairement
     a un segment d'extremites A(xa, ya), B(xb, yb)
@@ -104,7 +145,10 @@ def dir_segment_perpendiculaire(x, y, xa, ya, xb, yb):
     if cosa > 0 and cosb > 0:   # interieur
         return -N if sa > 0 else N
     else:
-        return np.array([0, 0])
+        if cosb < 0:
+            return - dir_point(x, y, xa, ya)
+        elif cosa < 0:
+            return - dir_point(x, y, xb, yb)
 
 
 def dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb):
@@ -197,7 +241,7 @@ def profil3(x, y, a, b, r, s):
     """ Definit une gaussienne centree en r autour du point a,b et de largeur 1
     """
     x, y = translate(x, y, a, b)
-    bosse = gaussienne(dist_point(x, y), 1, r)
+    bosse = gaussienne(dist_point(x, y), 2, r)
     return s * bosse
 
 profil3_m = np.vectorize(profil3)
@@ -229,6 +273,34 @@ def profil6(x, y, xa, ya, xb, yb, r, s, l=10):
     return s * f
 
 profil6_m = np.vectorize(profil6)
+
+
+def profil7(x, y, xa, ya, xb, yb, r, s, l=10):
+    d = dist_droite(x, y, xa, ya, xb, yb)
+    da = dist_point(x, y, xa, ya)
+    db = dist_point(x, y, xb, yb)
+    f = gaussienne(d, r, 0)
+    fa = gaussienne(da, r, 0)
+    fb = gaussienne(db, r, 0)
+    # f = dirac(d, r, 0)
+    # fa = dirac(da, r, 0)
+    # fb = dirac(db, r, 0)
+    BM = np.array([y - yb, x - xb])
+    BA = np.array([ya - yb, xa - xb])
+    AB = -BA
+    AM = np.array([y - ya, x - xa])
+    cosa = np.dot(BM, BA)   # cos(alpha)
+    cosb = np.dot(AB, AM)
+    # sb = np.cross(AM, AB)
+    if cosa > 0 and cosb > 0:   # interieur
+        return s * f
+    else:
+        if cosb < 0:
+            return s * fa
+        elif cosa < 0:
+            return s * fb
+
+profil7_m = np.vectorize(profil7)
 
 #########################################################
 # FONCTIONS DE HAUT NIVEAU - GENERATION DE CHAMP
@@ -280,7 +352,7 @@ def champ_segment_courte_portee_perpendiculaire(x, y, xa, ya, xb, yb, s=1, r=1):
         dirc = dir_segment_perpendiculaire(x, y, xa, ya, xb, yb)
     elif type(x) is np.ndarray:
         dirc = dir_segment_perpendiculaire_m(x, y, xa, ya, xb, yb)
-    f = profil5_m(x, y, xa, ya, xb, yb, r, s)
+    f = profil7_m(x, y, xa, ya, xb, yb, r, s)
     return dirc * f
 
 
@@ -338,7 +410,38 @@ def limite(x, y, xa, ya, xb, yb, s=1, r=1):
         x, y, xa, ya, xb, yb, s, r=r)
     Pa = point_courte_portee(x, y, xa, ya, -s / 1., r=r)
     Pb = point_courte_portee(x, y, xb, yb, -s / 1., r=r)
-    return Pa + seg + Pb
+    return 0 * Pa + seg + 0 * Pb
+
+
+# def limite(x, y, xa, ya, xb, yb, s=1, r=1):
+#     """
+#     Definit une limite repulsive(s=-1) ou attractive(s=1) de largeur r
+#     """
+#     N = normalize([yb - ya, xa - xb])
+#     BM = np.array([y - yb, x - xb])
+#     BA = np.array([ya - yb, xa - xb])
+#     AB = -BA
+#     AM = np.array([y - ya, x - xa])
+#     cosa = np.dot(BM, BA)   # cos(alpha)
+#     cosb = np.dot(AB, AM)
+#     sa = np.cross(BM, BA)
+#     # sb = np.cross(AM, AB)
+#     if cosa > 0 and cosb > 0:   # interieur
+#         d = dist_droite(x, y, xa, ya, xb, yb)
+#         if d > r:
+#             return np.array([0, 0])
+#         return -s * N if sa > 0 else s * N
+#     else:
+#         if cosb < 0:
+#             da = dist_point(x, y, xa, ya)
+#             if da > r:
+#                 return np.array([0, 0])
+#             return -s * dir_point(x, y, xa, ya)
+#         elif cosa < 0:
+#             db = dist_point(x, y, xa, ya)
+#             if db > r:
+#                 return np.array([0, 0])
+#             return -s * dir_point(x, y, xb, yb)
 
 
 def ligne(x, y, xa, ya, xb, yb, s=1, l=10):
@@ -631,5 +734,5 @@ if __name__ == '__main__':
     # main3()
     # main4()
     # main5()
-    # test_objectifs()
-    test_points()
+    test_objectifs()
+    # test_points()

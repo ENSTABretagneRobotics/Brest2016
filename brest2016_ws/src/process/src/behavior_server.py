@@ -52,13 +52,18 @@ service = rospy.Service('behavior_manager', behavior, add_behavior)
 pos_sub = rospy.Subscriber('gps/local_pose', PoseStamped, update_pos)
 pub = rospy.Publisher('robot/vecteur_cible', Vector3, queue_size=1)
 
-rate = rospy.Rate(5)
+rate = rospy.Rate(10)
 
 # Affichage du champ de vecteur
 plt.ion()
+cx, cy = 0, 0
 
 while not rospy.is_shutdown():
-    X, Y = np.mgrid[x - 50:x + 50:40j, y - 50:y + 50:40j]
+    if abs(cx - x) > 30:
+        cx = x
+    if abs(cy - y) > 30:
+        cy = y
+    X, Y = np.mgrid[cx - 50:cx + 50:40j, cy - 50:cy + 50:40j]
     v = Vector3()
     v.x, v.y = behavior_manager.champ_total.cmd_point(x, y)
     U, V = behavior_manager.champ_total.cmd_point(X, Y)
