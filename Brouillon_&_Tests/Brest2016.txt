@@ -1,0 +1,30 @@
+Encore 95% des fonds non explorés. Demain des robots sous-marins autonomes pour amplifier la connaissance et surveiller les fonds marins ?
+
+
+1. Attraits de la robotique autonome
+
+Un robot est un outil qui permet d'effectuer des missions complexes dans un milieu hostile pour l'Homme, ou des tâches laborieuses et répétées comme surveiller une zone. Cela se traduit par exemple par des missions d'exploration, de sauvetage ou des relevés de données en mer (salinité, température ...).
+
+Les océans représentent plus de 70% de la surface de la Terre. Leur exploration est une étape importante dans la compréhension de notre planète. L'immensité de la surface océanique rend cette tâche longue et laborieuse.
+Grâce à des véhicules autonomes tels que des bateaux ou des sous-marins, il devient possible de cartographier les fonds marins en tous points (y compris les plus dangereux), avec précision et de manière systématique.
+Contrairement aux satellites, les robots ne sont pas très sensibles aux conditions météos et leurs relevés sont plus précis du fait de leur proximité et de la qualité des capteurs utilisés.
+Ces cartes pourront servir de repères pour les autres travaux de recherche maritimes, on pourra ensuite par exemple suivre l'évolution de la faune et de la flore.
+Les robots communiquent entre eux, ils reconnaissent des objets et peuvent les manipuler, ils sont capables de créer une carte de ce qui les entours et peuvent être équipés de capteurs en tous genres, ils sont donc des outils fiables et incontournables de l'exploration sous-marine et de la surveillance maritime.
+> visuel ?
+
+2. Le prototype ENSTA'Brest2016 comment ça marche ?
+
+Le but du prototype ENSTA'Brest2016 est d'effectuer des missions de type exploration de surface / surveillance de zone dans une zone définie et avec un fort trafic maritime. Pour que ces missions se déroulent en toute sécurité, il est essentiel que le robot voit les autres véhicules et qu'il soit capable de les éviter. 
+
+Pour voir ce qui l'entoure et pour pouvoir se repérer, le robot a été équipé de divers capteurs: il possède un GPS et une centrale inertielle pour savoir où il se trouve ainsi qu'une caméra, un laser et un récepteur AIS pour connaître la position et la trajectoire des autres véhicules. 
+Toutes les informations recueillies par ces capteurs sont transmises à un ordinateur embarqué, le cerveau du bateau, qui calcule la trajectoire à adopter pour mener à bien sa mission sans frapper d'obstacles. Une foi la trajectoire calculé, l'ordinateur embarqué envoie une commande aux actionneurs, une turbine et un gouvernail, pour contrôler sa vitesse et son cap.
+Le robot communique également des données à un ordinateur à quai, on peut ainsi voir en direct ce que perçoit le robot et comment il prend ses décisions, cela permet de repérer la cause des pannes et d'améliorer son comportement lors des missions.
+Pour plus de sécurité, le robot est aussi suivit en permanence par un pilote équipé d'une télécommande qui peut à tout moment conduire le bateau à la place de l'ordinateur embarqué.
+
+> visuel ?
+
+3. Toute une famille de robots autonomes, des plus solitaires aux meutes
+
+L'utilisation des robots est en constante évolution, les techniques et le matériel utilisé s'améliorent tous les jours: aujourd'hui on sait utiliser des robots travaillant en meute pour explorer les fonds marins, on peut les utiliser pour des missions de reconnaissance, ou même de sauvetage!
+à développer
+> visuel meute de robots sous-marins ?
