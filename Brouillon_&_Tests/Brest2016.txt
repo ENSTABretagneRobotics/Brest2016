@@ -1,4 +1,4 @@
-Encore 95% des fonds non explorés. Demain des robots sous-marins autonomes pour amplifier la connaissance et surveiller les fonds marins ?
+Aujourd'hui, encore 95% des fonds marins restent non explorés. Demain des robots sous-marins autonomes pour amplifier la connaissance et surveiller les fonds marins ?
 
 
 1. Attraits de la robotique autonome
@@ -26,5 +26,8 @@ Pour plus de sécurité, le robot est aussi suivit en permanence par un pilote �
 3. Toute une famille de robots autonomes, des plus solitaires aux meutes
 
 L'utilisation des robots est en constante évolution, les techniques et le matériel utilisé s'améliorent tous les jours: aujourd'hui on sait utiliser des robots travaillant en meute pour explorer les fonds marins, on peut les utiliser pour des missions de reconnaissance, ou même de sauvetage!
-à développer
+
+Chaque mission est unique et possède des exigences particulières, c'est pourquoi il existe autant de robots différents. Des robots sous-marins aux robots bateaux en passant par des drones aériens, qu'ils travaillent seuls ou en groupe, les robots sont là pour répondre au mieux aux exigences de la recherche. 
+Un robot seul est plus facile à utiliser, mais combiner plusieurs engins de même type permet par exemple d'établir plus rapidement une carte de fonds marins, de couvrir de plus grande zones et d'effectuer des relevés plus précis. On peut également combiner des robots de différents types afin d'effectuer des actions complémentaires. Par exemple, on peut imaginer la collaboration de robots aériens rapides et de robots bateaux . Les premiers sont capables de couvrir rapidement de grandes zones en mer pour repérer des naufragés, les bateaux autonomes vont alors secourir les personnes qui en ont besoin grâce aux positions GPS transmises par les drones.
+
 > visuel meute de robots sous-marins ?
