@@ -12,7 +12,7 @@ Ces cartes pourront servir de repères pour les autres travaux de recherche mari
 Les robots communiquent entre eux, ils reconnaissent des objets et peuvent les manipuler, ils sont capables de créer une carte de ce qui les entours et peuvent être équipés de capteurs en tous genres, ils sont donc des outils fiables et incontournables de l'exploration sous-marine et de la surveillance maritime.
 > visuel ?
 
-2. Le prototype ENSTA'Brest2016 comment ça marche ?
+2. Le prototype ENSTA'Brest2016, comment ça marche ?
 
 Le but du prototype ENSTA'Brest2016 est d'effectuer des missions de type exploration de surface / surveillance de zone dans une zone définie et avec un fort trafic maritime. Pour que ces missions se déroulent en toute sécurité, il est essentiel que le robot voit les autres véhicules et qu'il soit capable de les éviter. 
 
