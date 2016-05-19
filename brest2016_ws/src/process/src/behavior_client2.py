@@ -9,7 +9,7 @@ behavior_sender = rospy.ServiceProxy('behavior_manager', behavior)
 
 # Behavior a envoyer
 info0 = BehaviorInfo(behavior_id='000', type='waypoint',
-                     xa=36, ya=80, xb=0, yb=0, s=-1, r=10)
+                     xa=152, ya=82, xb=0, yb=0, s=-1, r=10)
 
 # Confirmation de la reception du behavior
 rate = rospy.Rate(1)

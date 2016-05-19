@@ -24,27 +24,22 @@ def onclick(event):
     if event.button == 1:
         grid[round(event.ydata), round(event.xdata)] += 1
     elif event.button == 3:
-        grid[round(event.ydata), round(event.xdata)] -= 1
+        grid[round(event.ydata), round(event.xdata)] = reduce_to_zero(
+            grid[round(event.ydata), round(event.xdata)])
+        # if grid[round(event.ydata), round(event.xdata)] > 0:
+        #     grid[round(event.ydata), round(event.xdata)] -= 1
     # grid[event.ydata, event.xdata] %= 2
-    im.set_data(grid)
-    # im.set_array(grid)
-    im.set_clim(np.amin(grid), np.amax(grid))
-    # fig_can.draw()
-    info_max['text'] = 'Max: %d' % np.amax(grid)
-    info_min['text'] = 'Min: %d' % np.amin(grid)
+    update_infos()
+    fen.after(5000, lambda: low(
+        round(event.ydata), round(event.xdata)))
     # print('button=%d, x=%d, y=%d, xdata=%f, ydata=%f' %
     #       (event.button, event.x, event.y, event.xdata, event.ydata))
-    # print('button=%d, x=%d, y=%d, xdata=%f, ydata=%f' %
-    #       (event.button, event.x, event.y, round(event.xdata), round(event.ydata)))
-    update_vector_field()
 
 
 def reset():
     global grid
     grid = np.zeros((SIZE, SIZE))
-    im.set_data(grid)
-    im.set_clim(np.amin(grid), np.amax(grid))
-    update_vector_field()
+    update_infos()
     fig.canvas.draw()
 
 
@@ -58,6 +53,36 @@ def update_interpolation():
         im.set_interpolation('none')
     update_vector_field()
     fig_can.draw()
+
+
+def test():
+    global grid
+    grid = reduce_to_zero_m(grid)
+    update_infos()
+    fig_can.draw()
+
+
+def reduce_to_zero(x):
+    if x > 0:
+        x -= 1
+    return x
+
+reduce_to_zero_m = np.vectorize(reduce_to_zero)
+
+
+def low(l, c):
+    global grid
+    grid[l, c] = reduce_to_zero(grid[l, c])
+    update_infos()
+    fig_can.draw()
+
+
+def update_infos():
+    im.set_data(grid)
+    info_max['text'] = 'Max: %d' % np.amax(grid)
+    info_min['text'] = 'Min: %d' % np.amin(grid)
+    im.set_clim(np.amin(grid), np.amax(grid))
+    update_vector_field()
 
 
 # window
@@ -93,5 +118,8 @@ check_interpolation.grid(row=2, column=1)
 # Button
 reset_button = Button(fen, text='Reset', command=reset)
 reset_button.grid(row=3, column=0)
+
+test_button = Button(fen, text='Reduce', command=test)
+test_button.grid(row=3, column=1)
 
 fen.mainloop()
