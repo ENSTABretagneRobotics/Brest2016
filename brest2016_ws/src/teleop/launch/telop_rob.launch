@@ -3,4 +3,5 @@
 	<node name="key_publisher" pkg="teleop" type="key_publisher.py" output="screen"/>
 	<node name="keys_to_twist" pkg="teleop" type="keys_to_twist.py" output="screen"/>
 	<node name="motors" pkg="actuators" type="motor_controller.py" output="screen"/>
+	<node name="ramp" pkg="actuators" type="cmd_to_ramp.py" output="screen"/>
 </launch>

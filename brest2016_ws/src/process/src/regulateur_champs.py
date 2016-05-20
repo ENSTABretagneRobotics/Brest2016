@@ -20,13 +20,7 @@ def update_cap(msg):
 def update_cible(msg):
     global cap_cible, vitesse_cible
     # print msg, type(msg)
-    if msg.x == 0:
-        if msg.y >= 0:
-            cap_cible = np.pi / 2
-        else:
-            cap_cible = -np.pi / 2
-    else:
-        cap_cible = np.arctan2(msg.y, msg.x)
+    cap_cible = np.arctan2(msg.y, msg.x)
 
     vitesse_cible = np.sqrt(msg.x**2 + msg.y**2)
 
@@ -45,9 +39,10 @@ sub_consigne = rospy.Subscriber("robot/vecteur_cible", Vector3, update_cible)
 cmd_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
 
 cap_cible = 0
+vitesse_cible = 6000
 cap = 0
-vHigh = 6500  # 8000 max
-vLow = 6500  # 6000 = vitesse nulle
+vHigh = 8000  # 8000 max
+vLow = 7000  # 6000 = vitesse nulle
 K = 1500 * (2. / np.pi)
 rate = rospy.Rate(5)
 
@@ -61,6 +56,9 @@ while not rospy.is_shutdown():
     else:
         print 'cos < 0'
         cmd.linear.x = vLow
+    if vitesse_cible == 0:
+        cmd.linear.x = 6000
+        cmd.angular.z = 6000
 
     print cap, cap_cible, error, cos(error), "::", cmd.linear.x, cmd.angular.z
     cmd_pub.publish(cmd)
