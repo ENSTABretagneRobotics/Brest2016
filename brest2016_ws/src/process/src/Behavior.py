@@ -139,7 +139,7 @@ def main_behavior():
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
 
     # Behavior 0
-    # info0 = Behavior_info('nu', '000', 0, 0, 0, 0, 0, -1)
+    info0 = Behavior_info('nu', '000', 0, 0, 0, 0, 0, -1)
     b0 = Behavior()
     U0, V0 = b0.cmd_point(X, Y)
     plt.figure(0)
