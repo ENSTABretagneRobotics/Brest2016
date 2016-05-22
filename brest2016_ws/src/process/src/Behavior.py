@@ -15,7 +15,8 @@ class Behavior(object):
             'ligne': cn.ligne,
             'limite': cn.limite,
             'waypoint': cn.waypoint,
-            'nul': cn.champ_nul}
+            'nul': cn.champ_nul,
+            'obst_point': cn.obstacle_point}
 
     def __init__(self, behavior_info=None):
         self.info = behavior_info
@@ -41,7 +42,7 @@ class Behavior(object):
             self.x = info.xa
             self.y = info.ya
             self.params = (self.x, self.y, self.s)
-        elif self.type == 'patrol_circle':
+        elif self.type in ['patrol_circle', 'obst_point']:
             self.x = info.xa
             self.y = info.ya
             self.params = (self.x, self.y, self.r, self.s)

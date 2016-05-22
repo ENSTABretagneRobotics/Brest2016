@@ -402,6 +402,13 @@ def waypoint(x, y, a, b, s=-1):
     return s * dir_point(x, y, a, b)
 
 
+def obstacle_point(x, y, a, b, s=2, r=2):
+    """
+    Defini un champ repulsif pour un point representant un obstacle
+    """
+    return point_courte_portee(x, y, a, b, s=s, r=r)
+
+
 def limite(x, y, xa, ya, xb, yb, s=1, r=1):
     """
     Definit une limite repulsive
@@ -688,14 +695,15 @@ def test_objectifs():
     U1, V1 = waypoint(X, Y, -10, 10)
     U2, V2 = limite(X, Y, -7, 0, 6, 4, s=-4, r=3)
     U3, V3 = ligne(X, Y, -10, 10, -10, -10, l=30)
+    U4, V4 = obstacle_point(X, Y, 0, 0, s=5, r=2)
 
-    for i, k in enumerate([(U0, V0), (U1, V1), (U2, V2), (U3, V3)]):
+    for i, k in enumerate([(U0, V0), (U1, V1), (U2, V2), (U3, V3), (U4, V4)]):
         plt.figure(i)
         plt.quiver(X, Y, k[0], k[1])
         plt.axis('equal')
 
-    U = 1 * U0 + 1 * U1 + 0 * U2 + 1 * U3
-    V = 1 * V0 + 1 * V1 + 0 * V2 + 1 * V3
+    U = 0 * U0 + 1 * U1 + 0 * U2 + 0 * U3 + 1 * U4
+    V = 0 * V0 + 1 * V1 + 0 * V2 + 0 * V3 + 1 * V4
     plt.figure('total')
     plt.quiver(X, Y, U, V)
     plt.axis('equal')

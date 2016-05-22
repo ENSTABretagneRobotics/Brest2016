@@ -5,6 +5,13 @@ from process.msg import BehaviorInfo
 from process.srv import behavior
 
 
+# Redefinition of class Behavior Info
+def behavior2string(self):
+    return '{} ({})'.format(self.behavior_id, self.type)
+
+BehaviorInfo.toString = behavior2string
+
+
 def default_widget_state():
     for child in parameter_frame.winfo_children():
         if child.winfo_class() != 'Label':
@@ -23,14 +30,14 @@ def configure_widgets(type_champ):
     xa_entry.configure(state='normal')
     ya_entry.configure(state='normal')
     validate_button.configure(state='normal')
-    if type_champ == 'waypoint':
+    if type_champ in 'waypoint':
         s_entry.configure(state='normal')
     elif type_champ == 'ligne':
         xb_entry.configure(state='normal')
         yb_entry.configure(state='normal')
         r_entry.configure(state='normal')
         s_entry.configure(state='normal')
-    elif type_champ == 'patrol_circle':
+    elif type_champ in ['patrol_circle', 'obst_point']:
         r_entry.configure(state='normal')
         s_entry.configure(state='normal')
     elif type_champ == 'limite':
@@ -48,9 +55,41 @@ def getInfos():
 
 
 def send_field(event=None):
+    # send behavior
     info = getInfos()
     confirmation = behavior_sender(info)
+    # Increment the ID
+    prev = int(id_value.get())
+    nexT = '{:0>3}'.format(prev + 1)
+    id_value.set(nexT)
+    # Add the sent behavior to the history list
+    print info.toString()
+    history_list.insert(END, info.toString())
     print confirmation
+
+
+def remove_all(event=None):
+    for el in history_list.get(0, END):
+        b = BehaviorInfo(behavior_id=el.split(
+            ' ')[0], type=el.split(' ')[1][1:-1])
+        confirmation = behavior_sender(b)
+        print 'Removing', el
+        print confirmation
+    history_list.delete(0, END)
+    print '-' * 10
+    print 'Removed all !'
+
+
+def remove_selected(event=None):
+    if len(history_list.curselection()) != 0:
+        for el in [history_list.get(k) for k in history_list.curselection()]:
+            b = BehaviorInfo(behavior_id=el.split(
+                ' ')[0], type=el.split(' ')[1][1:-1])
+            confirmation = behavior_sender(b)
+            print 'Removing', el,
+            print confirmation
+        history_list.delete(*history_list.curselection())
+
 
 # *******************************************
 # Fenetre
@@ -72,6 +111,9 @@ patrol_radio_button = Radiobutton(
     variable=type_choice, value='patrol_circle')
 limite_radio_button = Radiobutton(
     type_frame, text='Limite', variable=type_choice, value='limite')
+obstacle_point_radio_button = Radiobutton(
+    type_frame, text='Obstacle point',
+    variable=type_choice, value='obst_point')
 
 # *******************************************
 # Section parametres du champ
@@ -109,6 +151,20 @@ s_entry = Spinbox(parameter_frame, from_=-1, to=1,
 s_entry.delete(0, "end")
 s_entry.insert(0, -1)
 
+# *******************************************
+# Section parametres du champ
+history_frame = Frame(fen, borderwidth=2)
+history_frame_title_label = Label(history_frame, text='History')
+# List des behaviors envoyes
+history_list = Listbox(history_frame, selectmode=MULTIPLE)
+# Button de suppression des behaviors envoyes
+history_delete_selected_button = Button(
+    history_frame, text='Remove', command=remove_selected)
+history_delete_all_button = Button(
+    history_frame, text='Clear', command=remove_all)
+
+
+# *******************************************
 # Button de validation
 validate_button = Button(fen, text='Envoyer', command=send_field)
 
@@ -116,14 +172,16 @@ validate_button = Button(fen, text='Envoyer', command=send_field)
 # *******************************************
 # Packing and griding
 
-type_frame.pack()
+type_frame.grid(row=1, column=1)
 type_title_label.grid(row=1, column=1)
 waypoint_radio_button.grid(row=2, column=1)
 ligne_radio_button.grid(row=2, column=2)
 patrol_radio_button.grid(row=2, column=3)
 limite_radio_button.grid(row=2, column=4)
+obstacle_point_radio_button.grid(row=3, column=1)
 
-parameter_frame.pack()
+
+parameter_frame.grid(row=2, column=1)
 parameter_title_label.grid(row=1, column=1)
 id_label.grid(row=2, column=1)
 id_entry.grid(row=2, column=2)
@@ -140,7 +198,13 @@ r_entry.grid(row=5, column=2)
 s_label.grid(row=5, column=3)
 s_entry.grid(row=5, column=4)
 
-validate_button.pack()
+validate_button.grid(row=3, column=1)
+
+history_frame.grid(row=1, column=2, rowspan=3)
+history_frame_title_label.grid(row=1, column=1, columnspan=2)
+history_list.grid(row=2, column=1, columnspan=2)
+history_delete_all_button.grid(row=3, column=1)
+history_delete_selected_button.grid(row=3, column=2)
 
 default_widget_state()
 

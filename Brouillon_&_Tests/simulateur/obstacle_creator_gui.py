@@ -1,6 +1,8 @@
 #!usr/bin/env python
 from Tkinter import *
 import numpy as np
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from cv2 import filter2D
