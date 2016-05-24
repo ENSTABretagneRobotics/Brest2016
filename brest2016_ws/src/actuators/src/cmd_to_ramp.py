@@ -4,14 +4,6 @@ import math
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 
-key_mapping = {
-    'w': [0, 1],  # avant
-    'a': [1, 0],  # gauche
-    's': [0, 0],    # stop
-    'd': [-1, 0],  # droite
-    'x': [0, -1]  # arriere
-}
-
 g_twist_pub = None
 g_target_twist = None
 g_last_twist = None
@@ -68,7 +60,7 @@ def fetch_param(name, default):
 
 
 if __name__ == '__main__':
-    rospy.init_node('keys_to_twist')
+    rospy.init_node('cmd_to_ramp')
     g_last_twist_send_time = rospy.Time.now()
 
     g_twist_pub = rospy.Publisher('cmd_vel_ramped', Twist, queue_size=1)
