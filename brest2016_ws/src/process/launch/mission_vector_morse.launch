@@ -1,6 +1,7 @@
 <!-- Mission de suivi de waypoints -->
 <launch>
 	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py">
+		<param name="linear_twist" value="0"/>
 		<remap from="cmd_vel_ramped" to="robot/motion"/>
 	</node>
 	<node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"

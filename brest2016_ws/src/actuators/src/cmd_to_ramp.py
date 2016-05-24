@@ -67,11 +67,11 @@ if __name__ == '__main__':
     rospy.Subscriber('cmd_vel', Twist, cmd_received)
 
     g_target_twist = Twist()
-    g_target_twist.linear.x = 6000
-    g_target_twist.angular.z = 6000
+    g_target_twist.linear.x = fetch_param('~linear_twist', 6000)
+    g_target_twist.angular.z = fetch_param('~angular_twist', 6000)
     g_last_twist = Twist()
-    g_last_twist.linear.x = 6000
-    g_last_twist.angular.z = 6000
+    g_last_twist.linear.x = g_target_twist.linear.x
+    g_last_twist.angular.z = g_target_twist.angular.z
     g_vel_scales[0] = fetch_param('~angular_scale', 0.1)
     g_vel_scales[1] = fetch_param('~linear_scale', 0.1)
     g_vel_ramps[0] = fetch_param('~angular_accel', 750.0)
