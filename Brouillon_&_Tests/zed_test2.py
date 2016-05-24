@@ -3,17 +3,21 @@ import numpy as np
 
 # Load test images
 # TEST_IMAGES is a list of paths to test images
-input_l, input_r = [cv2.imread(image, cv2.CV_LOAD_IMAGE_GRAYSCALE)
+TEST_IMAGES = ['chessboards/zed_picR_cal1.jpg', 'chessboards/zed_picL_cal1.jpg']
+input_l, input_r = [cv2.imread(image, cv2.IMREAD_GRAYSCALE)
                     for image in TEST_IMAGES]
 image_size = input_l.shape[:2]
 
 # Retrieve chessboard corners
 # CHESSBOARD_ROWS and CHESSBOARD_COLUMNS are the number of inside rows and
 # columns in the chessboard used for calibration
+CHESSBOARD_ROWS = 6
+CHESSBOARD_COLUMNS = 9
 pattern_size = CHESSBOARD_ROWS, CHESSBOARD_COLUMNS
 object_points = np.zeros((np.prod(pattern_size), 3), np.float32)
 object_points[:, :2] = np.indices(pattern_size).T.reshape(-1, 2)
 # SQUARE_SIZE is the size of the chessboard squares in cm
+SQUARE_SIZE = 2.5
 object_points *= SQUARE_SIZE
 image_points = {}
 ret, corners_l = cv2.findChessboardCorners(input_l, pattern_size, True)
@@ -40,7 +44,8 @@ flags = (cv2.CALIB_FIX_ASPECT_RATIO + cv2.CALIB_ZERO_TANGENT_DIST +
  dist_coefs["right"], rot_mat, trans_vec, e_mat,
  f_mat) = cv2.stereoCalibrate(object_points,
                               image_points["left"], image_points["right"],
-                              image_size, criteria=criteria, flags=flags)
+                              image_size, criteria=criteria, flags=flags, distCoeffs1=dist_coefs)
+
 (rect_trans["left"], rect_trans["right"],
  proj_mats["left"], proj_mats["right"],
  disp_to_depth_mat, valid_boxes["left"],
@@ -68,6 +73,7 @@ rectified_r = cv2.remap(input_r, undistortion_maps["right"],
                         cv2.INTER_NEAREST)
 cv2.imshow("left", rectified_l)
 cv2.imshow("right", rectified_r)
-block_matcher = cv2.StereoBM(cv2.STEREO_BM_BASIC_PRESET, 0, 5)
+block_matcher = cv2.StereoBM(0, 5)
+# block_matcher = cv2.StereoBM(cv2.STEREO_BM_BASIC_PRESET, 0, 5)
 disp = block_matcher.compute(rectified_l, rectified_r, disptype=cv2.CV_32F)
 cv2.imshow("disparity", disp)
