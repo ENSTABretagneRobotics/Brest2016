@@ -127,23 +127,23 @@ id_entry = Entry(parameter_frame, textvariable=id_value, width=10)
 
 xa_label = Label(parameter_frame, text='xa')
 xa_entry = Spinbox(parameter_frame, from_=-999, to=999,
-                   increment=0.1, format='%.2f')
+                   increment=1, format='%.2f')
 
 ya_label = Label(parameter_frame, text='ya')
 ya_entry = Spinbox(parameter_frame, from_=-999, to=999,
-                   increment=0.1, format='%.2f')
+                   increment=1, format='%.2f')
 
 xb_label = Label(parameter_frame, text='xb')
 xb_entry = Spinbox(parameter_frame, from_=-999, to=999,
-                   increment=0.1, format='%.2f')
+                   increment=1, format='%.2f')
 
 yb_label = Label(parameter_frame, text='yb')
 yb_entry = Spinbox(parameter_frame, from_=-999, to=999,
-                   increment=0.1, format='%.2f')
+                   increment=1, format='%.2f')
 
 r_label = Label(parameter_frame, text='r')
 r_entry = Spinbox(parameter_frame, from_=1, to=50,
-                  increment=0.1, format='%.2f')
+                  increment=1, format='%.2f')
 
 s_label = Label(parameter_frame, text='s')
 s_entry = Spinbox(parameter_frame, from_=-1, to=1,
