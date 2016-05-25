@@ -10,6 +10,10 @@
 	<node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"
         name="broadcaster_fixed" />
 	<node name="regulateur_champs" pkg="process" type="regulateur_champs.py">
+		<param name="speed_zero" value="0"/>
+		<param name="vHigh" value="3"/>
+		<param name="vLow" value="0"/>
+		<param name="K" value="1"/>
 		<remap from="gps/local_pose" to="robot/pose"/>
 	</node>
 
