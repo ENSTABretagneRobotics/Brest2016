@@ -177,7 +177,7 @@ def dir_segment_parallele(x, y, xa, ya, xb, yb):
     AM = np.array([y - ya, x - xa])
     cosa = np.dot(BM, BA)   # cos(alpha)
     cosb = np.dot(AB, AM)
-    if cosa > 0 and cosb > 0:
+    if cosa >= 0 and cosb >= 0:
         return N
     else:
         return np.array([0, 0])
@@ -292,7 +292,7 @@ def profil7(x, y, xa, ya, xb, yb, r, s, l=10):
     cosa = np.dot(BM, BA)   # cos(alpha)
     cosb = np.dot(AB, AM)
     # sb = np.cross(AM, AB)
-    if cosa > 0 and cosb > 0:   # interieur
+    if cosa >= 0 and cosb >= 0:   # interieur
         return s * f
     else:
         if cosb < 0:
@@ -343,7 +343,7 @@ def champ_tournant2(x, y, a, b, r, s=1):
     return dir_tournant(x, y, a, b) * profil3_m(x, y, a, b, r, s)
 
 
-def champ_segment_courte_portee_perpendiculaire(x, y, xa, ya, xb, yb, s=1, r=1):
+def champ_segment_courte_portee_perpendiculaire(x, y, xa, ya, xb, yb, s=1, r=1, dirc=None):
     """
     Genere un champ perpendiculaire a un segment [A,B]
     Les normes suivent une gaussienne centree sur ce segment et de largeur r
@@ -702,8 +702,8 @@ def test_objectifs():
         plt.quiver(X, Y, k[0], k[1])
         plt.axis('equal')
 
-    U = 0 * U0 + 1 * U1 + 0 * U2 + 0 * U3 + 1 * U4
-    V = 0 * V0 + 1 * V1 + 0 * V2 + 0 * V3 + 1 * V4
+    U = 0 * U0 + 1 * U1 + 1 * U2 + 0 * U3 + 1 * U4
+    V = 0 * V0 + 1 * V1 + 1 * V2 + 0 * V3 + 1 * V4
     plt.figure('total')
     plt.quiver(X, Y, U, V)
     plt.axis('equal')
@@ -731,10 +731,29 @@ def test_points():
     print 'Points nuls --------'
     print champ_nul(x0, y0)
     print waypoint(x0, y0, 1, 2)
-    print limite(x0, y0, 1, 1, 3, -2)
+    print limite(x0, y0, 1, 1, 3, -2, s=2, r=1)
     print ligne(x0, y0, 1, 1, -3, 4)
     print patrouille_circulaire(x0, y0, 3, 3, 1)
 
+
+def onclick_calc(event=None):
+    # print event.xdata, event.ydata
+    # x = event.xdata
+    x = float(event.xdata)
+    y = float(event.ydata)
+    print limite(x, y, 0, 0, 10, 0, s=-4, r=2)
+
+
+def test_parameter():
+    X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+    U, V = limite(X, Y, 0, 0, 10, 0, s=-4, r=2)
+
+    # print ligne(1, 1, 0, 0, 10, 0, s=-1, r=1)
+    fig = plt.figure('total')
+    fig.canvas.mpl_connect('button_press_event', onclick_calc)
+    plt.quiver(X, Y, U, V)
+    plt.axis('equal')
+    plt.show()
 
 if __name__ == '__main__':
     # main()
@@ -742,5 +761,6 @@ if __name__ == '__main__':
     # main3()
     # main4()
     # main5()
-    test_objectifs()
+    # test_objectifs()
     # test_points()
+    test_parameter()
