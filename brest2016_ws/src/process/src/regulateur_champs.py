@@ -24,6 +24,15 @@ def update_cible(msg):
 
     vitesse_cible = np.sqrt(msg.x**2 + msg.y**2)
 
+
+def fetch_param(name, default):
+    if rospy.has_param(name):
+        return rospy.get_param(name)
+    else:
+        print 'parameter [%s] not defined.' % name
+        print 'Defaulting to %.3f' % default
+        return default
+
 rospy.init_node('regulateur')
 
 # Subscribes to gps position to calculate the heading
@@ -39,17 +48,18 @@ sub_consigne = rospy.Subscriber("robot/vecteur_cible", Vector3, update_cible)
 cmd_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
 
 cap_cible = 0
-vitesse_cible = 6000
+vitesse_cible = fetch_param('~speed_zero', 6000)
+speed_zero = fetch_param('~speed_zero', 6000)
 cap = 0
-vHigh = 8000  # 8000 max
-vLow = 7000  # 6000 = vitesse nulle
-K = 1500 * (2. / np.pi)
+vHigh = fetch_param('~vHigh', 8000)  # 8000 max
+vLow = fetch_param('~vLow', 7000)  # 6000 = vitesse nulle
+K = fetch_param('~K', 1500) * (2. / np.pi)
 rate = rospy.Rate(5)
 
 while not rospy.is_shutdown():
     error = cap_cible - cap
     cmd = Twist()
-    cmd.angular.z = 6000 + K * np.arctan(np.tan((error / 2.)))
+    cmd.angular.z = speed_zero + K * np.arctan(np.tan((error / 2.)))
     if cos(error) >= 0:
         print 'cos > 0'
         cmd.linear.x = vHigh
@@ -57,8 +67,8 @@ while not rospy.is_shutdown():
         print 'cos < 0'
         cmd.linear.x = vLow
     if vitesse_cible == 0:
-        cmd.linear.x = 6000
-        cmd.angular.z = 6000
+        cmd.linear.x = speed_zero
+        cmd.angular.z = speed_zero
 
     print cap, cap_cible, error, cos(error), "::", cmd.linear.x, cmd.angular.z
     cmd_pub.publish(cmd)
