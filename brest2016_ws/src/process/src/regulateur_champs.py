@@ -66,7 +66,7 @@ while not rospy.is_shutdown():
     else:
         print 'cos < 0'
         cmd.linear.x = vLow
-    if vitesse_cible == 0:
+    if vitesse_cible <= 0.1:
         cmd.linear.x = speed_zero
         cmd.angular.z = speed_zero
 
