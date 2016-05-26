@@ -83,9 +83,9 @@ plt.ion()
 cx, cy = 0, 0
 
 while not rospy.is_shutdown():
-    if abs(cx - x) > 30:
+    if abs(cx - x) > 10:
         cx = x
-    if abs(cy - y) > 30:
+    if abs(cy - y) > 10:
         cy = y
     X, Y = np.mgrid[cx - 50:cx + 50:40j, cy - 50:cy + 50:40j]
     v = Vector3()
