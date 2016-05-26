@@ -13,7 +13,7 @@
 		<param name="speed_zero" value="0"/>
 		<param name="vHigh" value="3"/>
 		<param name="vLow" value="0"/>
-		<param name="K" value="4"/>
+		<param name="K" value="-4"/>
 		<remap from="gps/local_pose" to="robot/pose"/>
 	</node>
 

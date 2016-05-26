@@ -9,7 +9,7 @@ behavior_sender = rospy.ServiceProxy('behavior_manager', behavior)
 
 # Behavior a envoyer
 info = BehaviorInfo(behavior_id='001', type='ligne',
-                    xa=39, ya=29, xb=35, yb=128, s=-1, r=100)
+                    xa=-60, ya=-60, xb=60, yb=60, s=-1, r=100)
 
 # Confirmation de la reception du behavior
 confirmation = behavior_sender(info)

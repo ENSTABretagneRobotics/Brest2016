@@ -1,0 +1,30 @@
+<!-- Mission de suivi de waypoints -->
+<launch>
+	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py">
+		<param name="linear_twist" value="0"/>
+		<param name="angular_twist" value="0"/>
+		<param name="angular_accel" value="10"/> 
+		<param name="linear_accel" value="10"/>
+		<remap from="cmd_vel_ramped" to="boat/actuator"/>
+	</node>
+
+	<node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"
+        name="broadcaster_fixed" />
+
+	<node name="regulateur_champs" pkg="process" type="regulateur_champs.py">
+		<param name="speed_zero" value="0"/>
+		<param name="vHigh" value="4"/>
+		<param name="vLow" value="1"/>
+		<param name="K" value="-20"/>
+		<param name="robot_type" value="thomas_boat"/>
+		<param name="prout" value="0.5"/>
+		<remap from="gps/local_pose" to="boat/gps/pose"/>
+	</node>
+
+	<node name="behavior_server" pkg="process" type="behavior_server.py">
+		<param name="robot_type" value="thomas_boat"/>
+		<remap from="gps/local_pose" to="boat/gps/pose"/>
+	</node>
+
+	<node name="gui_behavior_adder" pkg="process" type="gui_behavior_adder.py"/>
+</launch>

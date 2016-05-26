@@ -1,7 +1,8 @@
 #!/usr/bin/env  python
 import rospy
 from process.srv import behavior, behaviorResponse
-from geometry_msgs.msg import Vector3, PoseStamped
+from geometry_msgs.msg import Vector3, PoseStamped, PointStamped
+from std_msgs.msg import Float32MultiArray
 from Behavior import Behavior, BehaviorManager
 import matplotlib.pyplot as plt
 import numpy as np
@@ -29,15 +30,32 @@ def add_behavior(request):
 
 
 def update_pos(msg):
-    global x, y, cap
-    x = msg.pose.position.x
-    y = msg.pose.position.y
-    quaternion = (msg.pose.orientation.x,
-                  msg.pose.orientation.y,
-                  msg.pose.orientation.z,
-                  msg.pose.orientation.w)
-    cap = tf.transformations.euler_from_quaternion(quaternion)[2]
+    global x, y, cap, robot_type
+    if robot_type == 'normal':
+        x = msg.pose.position.x
+        y = msg.pose.position.y
+        quaternion = (msg.pose.orientation.x,
+                      msg.pose.orientation.y,
+                      msg.pose.orientation.z,
+                      msg.pose.orientation.w)
+        cap = tf.transformations.euler_from_quaternion(quaternion)[2]
+    elif robot_type == 'thomas_boat':
+        x = msg.point.x
+        y = msg.point.y
 
+
+def update_cap(msg):
+    global cap
+    cap = msg.data[0]
+
+
+def fetch_param(name, default):
+    if rospy.has_param(name):
+        return rospy.get_param(name)
+    else:
+        print 'parameter [%s] not defined.' % name
+        print 'Defaulting to %.3f' % default
+        return default
 
 # Variables
 listB = []
@@ -48,8 +66,14 @@ behavior_manager = BehaviorManager()
 rospy.init_node('service_server')
 # Initialisation du Serveur
 service = rospy.Service('behavior_manager', behavior, add_behavior)
+# Recuperation du type de robot
+robot_type = fetch_param('~robot_type', 'normal')
 # Subscriber et publisher
-pos_sub = rospy.Subscriber('gps/local_pose', PoseStamped, update_pos)
+if robot_type == 'normal':
+    pos_sub = rospy.Subscriber('gps/local_pose', PoseStamped, update_pos)
+elif robot_type == 'thomas_boat':
+    pos_sub = rospy.Subscriber('boat/gps/pose', PointStamped, update_pos)
+    sub_cap = rospy.Subscriber("boat/compas", Float32MultiArray, update_cap)
 pub = rospy.Publisher('robot/vecteur_cible', Vector3, queue_size=1)
 
 rate = rospy.Rate(10)
