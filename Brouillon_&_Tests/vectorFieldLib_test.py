@@ -50,12 +50,12 @@ class TestBasicFunctions(unittest.TestCase):
         self.assertEqual(vfl.zone_segment(10, 0, 0, 0, 20, 0), 'IN_L')
 
     def test_securities(self):
-        vfl.profil_point_security_M(0, 0, 10, 10, 3, 5, security='HIGH',
-                                    slowing_R=0.5, slowing_K=10)
-        vfl.profil_point_security_M(0, 0, 10, 10, 3, 5, security='MEDIUM',
-                                    slowing_R=0.5, slowing_K=10)
-        vfl.profil_point_security_M(0, 0, 10, 10, 3, 5, security='LOW',
-                                    slowing_R=0.5, slowing_K=10)
+        vfl.profil_security_M(0, 0, 10, 10, 3, 5, security='HIGH',
+                              slowing_R=0.5, slowing_K=10)
+        vfl.profil_security_M(0, 0, 10, 10, 3, 5, security='MEDIUM',
+                              slowing_R=0.5, slowing_K=10)
+        vfl.profil_security_M(0, 0, 10, 10, 3, 5, security='LOW',
+                              slowing_R=0.5, slowing_K=10)
 
 
 class ObjectivesTestPlot():
@@ -75,10 +75,17 @@ class ObjectivesTestPlot():
         plt.show()
         # todo: le champ tournant n'est pas de norme constante
 
-    def dir_limite(self):
-        plt.figure('dir_limite')
+    def test_dir_segment(self):
+        plt.figure('test_dir_segment')
         X, Y = np.mgrid[-20:20:40j, -20:20:40j]
-        U, V = vfl.dir_limite(X, Y, -5, 0, 10, 0)
+        U, V = vfl.dir_segment(X, Y, -5, 0, 10, 0)
+        plt.quiver(X, Y, U, V)
+        plt.show()
+
+    def test_dir_segment_extrimity(self):
+        plt.figure('test_dir_segment_extrimity')
+        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+        U, V = vfl.dir_segment_extremity(X, Y, -5, 0, 10, 0)
         plt.quiver(X, Y, U, V)
         plt.show()
 
@@ -98,6 +105,14 @@ class ObjectivesTestPlot():
             X, Y, 0, 0, xb=50, yb=0, K=0.2, R=20, security='MEDIUM',
             slowing_R=5, slowing_K=3)
         plt.quiver(X, Y, U, V, scale=5)
+        plt.show()
+
+    def test_ligne(self):
+        plt.figure('LIGNE ATTRACTIVE')
+        X, Y = np.mgrid[-100:100:40j, -100:100:40j]
+        U, V = vfl.ligne(
+            X, Y, 0, 0, xb=50, yb=0, K=0.2, R=20)
+        plt.quiver(X, Y, U, V, scale=2)
         plt.show()
 
     def test_champ_constant(self):
@@ -168,15 +183,17 @@ class ObjectivesTestPlot():
 if __name__ == '__main__':
     # plots
     plot_test = ObjectivesTestPlot()
-    plot_test.test_parameter()
-    plot_test.dir_limite()
-    plot_test.test_limite()
-    plot_test.test_waypoint_medium_limite()
+    # plot_test.test_parameter()
+    # plot_test.test_dir_segment()
+    # plot_test.test_dir_segment_extrimity()
+    # plot_test.test_limite()
+    # plot_test.test_ligne()
+    # plot_test.test_waypoint_medium_limite()
 
     # run all ObjectivesTestPlot methods
     # print dir(plot_test)
-    # for name, method in ObjectivesTestPlot.__dict__.iteritems():
-    #     if callable(method) and name not in ['onclick_calc', 'test_parameter']:
-    #         method(None)
+    for name, method in ObjectivesTestPlot.__dict__.iteritems():
+        if callable(method) and name not in ['onclick_calc', 'test_parameter']:
+            method(None)
     # unittest
     unittest.main()
