@@ -13,7 +13,7 @@ info0 = BehaviorInfo(behavior_id='000', type='waypoint',
 info1 = BehaviorInfo(behavior_id='001', type='limite',
                      xa=-30, ya=2.5, xb=30, yb=2.5, s=-2, r=10)
 info2 = BehaviorInfo(behavior_id='002', type='limite',
-                     xa=30, ya=2.5, xb=30, yb=-57.5, s=-0, r=10)
+                     xa=30, ya=2.5, xb=30, yb=-57.5, s=-2, r=10)
 
 # Confirmation de la reception du behavior
 rate = rospy.Rate(1)

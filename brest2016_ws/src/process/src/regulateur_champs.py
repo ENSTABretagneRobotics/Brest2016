@@ -39,7 +39,7 @@ def fetch_param(name, default):
         return rospy.get_param(name)
     else:
         print 'parameter [%s] not defined.' % name
-        print 'Defaulting to %.3f' % default
+        print 'Defaulting to' , default
         return default
 
 rospy.init_node('regulateur')
