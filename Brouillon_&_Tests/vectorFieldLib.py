@@ -255,22 +255,18 @@ def profil_security(x, y, xa, ya, xb=0, yb=0, K=1, R=1,
 profil_security_M = np.vectorize(profil_security)
 
 
-def profil1(x, y, xa, ya, xb, yb, R, K):
-    d = dist_droite(x, y, xa, ya, xb, yb)
-    f = gaussienne(d, R, 0)
+def profil_cercle(x, y, a, b, R, K):
+    """ Definit le potentiel d'un cercle centre en a,b
+        (A appliquer a la fonction @point)
+        :R definit le rayon du cercle
+        :s definit la repulsion/attraction
+    """
+    x, y = translate(x, y, a, b)
+    f = gaussienne(dist_point(x, y), R, 0) - 0.5
+    # f = np.exp(-(dist_point(x, y)**2 * np.log(2)) / R**2) - 0.5
     return K * f
 
-profil1_m = np.vectorize(profil1)
-
-
-def profil2(x, y, xa, ya, xb, yb, R, K, L=10):
-    d = dist_droite(x, y, xa, ya, xb, yb)
-    f = 1 - gaussienne(d, R, 0)
-    if abs(d) > L:
-        f = 0 * f
-    return K * f
-
-profil2_m = np.vectorize(profil2)
+profil_cercle_m = np.vectorize(profil_cercle)
 #########################################################
 # FONCTION D'OBJECTIFS
 #########################################################
@@ -318,12 +314,36 @@ def limite(x, y, xa, ya, xb, yb, K=1, R=1,
     return profil_seg * (dir_seg + dir_ext)
 
 
-def ligne(x, y, xa, ya, xb, yb, K=1, R=1):
+def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
     """
     Defini un champ d'une ligne attractive
     """
-    profil_tang = profil1_m(x, y, xa, ya, xb, yb, R, K)
-    profil_norm = profil2_m(x, y, xa, ya, xb, yb, R, K, L=50)
+    # profil tangentiel
+    d = np.vectorize(dist_droite)(x, y, xa, ya, xb, yb)
+    f = gaussienne(d, R, 0)
+    profil_tang = K * f
+    # profil normal
+    f = 1 - f
+    if abs(d) > effect_range:
+        f = 0 * f
+    profil_norm = K * f
+    # Directions
     dir_tang = dir_segment(x, y, xa, ya, xb, yb, seg_type='tangent')
     dir_norm = dir_segment(x, y, xa, ya, xb, yb, seg_type='normal')
     return profil_tang * dir_tang + profil_norm * dir_norm
+
+
+def patrouille_circulaire(x, y, a, b, K, R):
+    """
+    Genere un cercle attractif tournant autour de a,b et de rayon r
+    """
+    # profil 2
+    # x, y = translate(x, y, a, b)
+    d = np.vectorize(dist_point)(x, y, a, b)
+    f = gaussienne(d, R, 0) - 0.5
+    # profil 3
+    bosse = gaussienne(d, 2, R)
+
+    CA = -dir_point(x, y, a, b) * K * f
+    CT = dir_tournant(x, y, a, b) * K * bosse
+    return CA + CT

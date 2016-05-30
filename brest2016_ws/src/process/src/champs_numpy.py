@@ -146,7 +146,7 @@ def dir_segment_perpendiculaire(x, y, xa, ya, xb, yb):
         return -N if sa > 0 else N
     # warning: l'objectif etait d'avoir des limites segment sans point
     # car les points introduisaient des effets de bords non desirable
-    # Probleme c'est que maintenant la ligne attractive est affectee 
+    # Probleme c'est que maintenant la ligne attractive est affectee
     # egalement
     else:
         if cosb < 0:

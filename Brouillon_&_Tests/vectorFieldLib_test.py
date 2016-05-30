@@ -129,6 +129,13 @@ class ObjectivesTestPlot():
         plt.quiver(X, Y, U, V)
         plt.show()
 
+    def test_patrouille_circulaire(self):
+        plt.figure('waypoint (0,5)')
+        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+        U, V = vfl.patrouille_circulaire(X, Y, 0, 5, K=2, R=5)
+        plt.quiver(X, Y, U, V)
+        plt.show()
+
     def test_waypoint_medium_obstacle(self):
         " Champ compose d'un waypoint et d'un obstacle MEDIUM"
         plt.figure('Waypoint(0,5), MEDIUM Obstacle(0,0,K=2,R=5)')
@@ -189,11 +196,12 @@ if __name__ == '__main__':
     # plot_test.test_limite()
     # plot_test.test_ligne()
     # plot_test.test_waypoint_medium_limite()
+    plot_test.test_patrouille_circulaire()
 
     # run all ObjectivesTestPlot methods
     # print dir(plot_test)
-    for name, method in ObjectivesTestPlot.__dict__.iteritems():
-        if callable(method) and name not in ['onclick_calc', 'test_parameter']:
-            method(None)
+    # for name, method in ObjectivesTestPlot.__dict__.iteritems():
+    #     if callable(method) and name not in ['onclick_calc', 'test_parameter']:
+    #         method(None)
     # unittest
     unittest.main()
