@@ -27,22 +27,6 @@ class TestBasicFunctions(unittest.TestCase):
     def test_dist_droite(self):
         self.assertAlmostEqual(vfl.dist_droite(5, 0, 0, -10, 0, 10), -5)
 
-    def test_dir_point(self):
-        plt.figure('dir_point (5,5)')
-        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
-        U, V = vfl.dir_point(X, Y, 5, 5)
-        plt.quiver(X, Y, U, V)
-        plt.show()
-        # plt.draw()
-
-    def test_dir_tournant(self):
-        plt.figure('dir_tournant (-5,-5)')
-        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
-        U, V = vfl.dir_tournant(X, Y, -5, -5)
-        plt.quiver(X, Y, U, V)
-        plt.show()
-        # todo: le champ tournant n'est pas de norme constante
-
     def test_dirac(self):
         pass
 
@@ -65,6 +49,57 @@ class TestBasicFunctions(unittest.TestCase):
         # Sur segment
         self.assertEqual(vfl.zone_segment(10, 0, 0, 0, 20, 0), 'IN_L')
 
+    def test_securities(self):
+        vfl.profil_point_security_M(0, 0, 10, 10, 3, 5, security='HIGH',
+                                    slowing_R=0.5, slowing_K=10)
+        vfl.profil_point_security_M(0, 0, 10, 10, 3, 5, security='MEDIUM',
+                                    slowing_R=0.5, slowing_K=10)
+        vfl.profil_point_security_M(0, 0, 10, 10, 3, 5, security='LOW',
+                                    slowing_R=0.5, slowing_K=10)
+
+
+class ObjectivesTestPlot():
+    def test_dir_point(self):
+        plt.figure('dir_point (5,5)')
+        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+        U, V = vfl.dir_point(X, Y, 5, 5)
+        plt.quiver(X, Y, U, V)
+        plt.show()
+        # plt.draw()
+
+    def test_dir_tournant(self):
+        plt.figure('dir_tournant (-5,-5)')
+        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+        U, V = vfl.dir_tournant(X, Y, -5, -5)
+        plt.quiver(X, Y, U, V)
+        plt.show()
+        # todo: le champ tournant n'est pas de norme constante
+
+    def dir_limite(self):
+        plt.figure('dir_limite')
+        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+        U, V = vfl.dir_limite(X, Y, -5, 0, 10, 0)
+        plt.quiver(X, Y, U, V)
+        plt.show()
+
+    def test_obstacle_point(self):
+        plt.figure('obstacle (0,0), K=3, R=3, security=MEDIUM')
+        X, Y = np.mgrid[-100:100:40j, -100:100:40j]
+        U, V = vfl.obstacle_point(
+            X, Y, 0, 0, K=0.2, R=20, security='MEDIUM',
+            slowing_R=1, slowing_K=3)
+        plt.quiver(X, Y, U, V, scale=2)
+        plt.show()
+
+    def test_limite(self):
+        plt.figure('limite security=MEDIUM')
+        X, Y = np.mgrid[-100:100:40j, -100:100:40j]
+        U, V = vfl.limite(
+            X, Y, 0, 0, xb=50, yb=0, K=0.2, R=20, security='MEDIUM',
+            slowing_R=5, slowing_K=3)
+        plt.quiver(X, Y, U, V, scale=5)
+        plt.show()
+
     def test_champ_constant(self):
         plt.figure('champ constant (-5,-5)')
         X, Y = np.mgrid[-20:20:40j, -20:20:40j]
@@ -79,44 +114,69 @@ class TestBasicFunctions(unittest.TestCase):
         plt.quiver(X, Y, U, V)
         plt.show()
 
-    def test_obstacle_point(self):
-        plt.figure('obstacle (0,0), K=3, R=3, security=MEDIUM')
-        X, Y = np.mgrid[-100:100:40j, -100:100:40j]
-        U, V = vfl.obstacle_point(
-            X, Y, 0, 0, K=0.2, R=20, security='MEDIUM',
-            slowing_R=1, slowing_K=3)
-        plt.quiver(X, Y, U, V, scale=2)
-        plt.show()
-
-    def test_champ_compose(self):
+    def test_waypoint_medium_obstacle(self):
         " Champ compose d'un waypoint et d'un obstacle MEDIUM"
-        plt.figure('Waypoint(0,5), Obstacle(0,0,K=3,R=3)')
+        plt.figure('Waypoint(0,5), MEDIUM Obstacle(0,0,K=2,R=5)')
         X, Y = np.mgrid[-10:10:40j, -10:10:40j]
         Uo, Vo = vfl.obstacle_point(
-            X, Y, 0, 0, K=3, R=3,
-            security='HIGH', slowing_R=5, slowing_K=5)
-        print Uo, Vo
+            X, Y, 0, 0, K=2, R=5, security='MEDIUM',
+            slowing_R=1, slowing_K=2)
         Uw, Vw = vfl.waypoint(X, Y, 0, 5)
         U, V = Uo + Uw, Vo + Vw
         plt.quiver(X, Y, U, V)
         plt.axis('equal')
         plt.show()
 
+    def test_waypoint_medium_limite(self):
+        " Champ compose d'un waypoint et d'un obstacle MEDIUM"
+        plt.figure('Waypoint(0,5), MEDIUM Obstacle(0,0,K=2,R=5)')
+        X, Y = np.mgrid[-100:100:40j, -100:100:40j]
+        Uo, Vo = vfl.limite(
+            X, Y, 0, 0, xb=50, yb=0, K=2, R=20, security='MEDIUM',
+            slowing_R=3, slowing_K=5)
+        Uw, Vw = vfl.waypoint(X, Y, 0, 50)
+        U, V = Uo + Uw, Vo + Vw
+        plt.quiver(X, Y, U, V)
+        plt.axis('equal')
+        plt.show()
 
-def onclick_calc(event=None):
-    x = float(event.xdata)
-    y = float(event.ydata)
-    print vfl.zone_segment(x, y, 0, 0, 10, 0)
+    def test_waypoint_high_obstacle(self):
+        " Champ compose d'un waypoint et d'un obstacle HIGH"
+        plt.figure('Waypoint(0,5), HIGH Obstacle(0,0,K=2,R=5)')
+        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+        Uo, Vo = vfl.obstacle_point(
+            X, Y, 0, 0, K=2, R=5, security='HIGH')
+        Uw, Vw = vfl.waypoint(X, Y, 0, 5)
+        U, V = Uo + Uw, Vo + Vw
+        plt.quiver(X, Y, U, V)
+        plt.axis('equal')
+        plt.show()
 
+    def onclick_calc(self, event=None):
+        x = float(event.xdata)
+        y = float(event.ydata)
+        print vfl.zone_segment(x, y, 0, 0, 10, 0)
 
-def test_parameter():
-    # print ligne(1, 1, 0, 0, 10, 0, s=-1, r=1)
-    fig = plt.figure('total')
-    plt.plot([0, 10], [0, 0])
-    fig.canvas.mpl_connect('button_press_event', onclick_calc)
-    plt.axis([-20, 20, -20, 20])
-    plt.show()
+    def test_parameter(self):
+        # print ligne(1, 1, 0, 0, 10, 0, s=-1, r=1)
+        fig = plt.figure('total')
+        plt.plot([0, 10], [0, 0])
+        fig.canvas.mpl_connect('button_press_event', self.onclick_calc)
+        plt.axis([-20, 20, -20, 20])
+        plt.show()
 
 if __name__ == '__main__':
+    # plots
+    plot_test = ObjectivesTestPlot()
+    plot_test.test_parameter()
+    plot_test.dir_limite()
+    plot_test.test_limite()
+    plot_test.test_waypoint_medium_limite()
+
+    # run all ObjectivesTestPlot methods
+    # print dir(plot_test)
+    # for name, method in ObjectivesTestPlot.__dict__.iteritems():
+    #     if callable(method) and name not in ['onclick_calc', 'test_parameter']:
+    #         method(None)
+    # unittest
     unittest.main()
-    # test_parameter()

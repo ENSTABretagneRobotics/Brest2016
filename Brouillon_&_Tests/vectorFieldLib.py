@@ -125,13 +125,40 @@ def zone_segment(x, y, xa, ya, xb, yb):
         elif cosa < 0:
             return 'EX_L'
 
+zone_segment_M = np.vectorize(zone_segment)
+
+
+def dir_limite(x, y, xa, ya, xb, yb):
+    """
+    Retourne un champ dirige vers un segment:
+    EX_R : dir_point xb, yb
+    EX_L : dir_point xa, ya
+    IN_R : vecteur normal
+    IN_L : vecteur normal oppose
+    """
+    N = normalize([yb - ya, xa - xb])
+    zoneX = zone_segment_M(x, y, xa, ya, xb, yb)
+    zoneY = zoneX.copy()
+    zone_cor = {'IN_R': N,
+                'EX_R': [0, 0],
+                'IN_L': -N,
+                'EX_L': [0, 0]}
+    for k, v in zone_cor.items():
+        z = zoneX == k
+        zoneX[z] = v[0]
+        zoneY[z] = v[1]
+    zoneX = zoneX.astype(float)
+    zoneY = zoneY.astype(float)
+    return zoneX, zoneY
+
 #########################################################
 # FONCTION PROFILS de HAUT NIVEAU
 #########################################################
 
 
-def profil_point_security(x, y, a, b, K=1, R=1,
-                          security='HIGH', slowing_R=0.5, slowing_K=5):
+def profil_point_security(x, y, xa, ya, xb=0, yb=0, K=1, R=1,
+                          security='HIGH', slowing_R=0.5, slowing_K=5,
+                          p_type='point'):
     """
     Cree un profil d'evitement d'obstacle ponctuel avec 3 niveaux de securites
     + SECURITY == HIGH:
@@ -147,15 +174,27 @@ def profil_point_security(x, y, a, b, K=1, R=1,
         - Definit une gaussienne autour du point(a,b)
         # Rq: moins sur
     """
-    x, y = translate(x, y, a, b)
+    # x, y = translate(x, y, xa, ya)
+    # fonction a utiliser pour une droite ou un segment
+    f_dict = {'point': [dist_point, (x, y, xa, ya)],
+              'limite': [dist_droite, (x, y, xa, ya, xb, yb)]}
+    dist_f = f_dict[p_type][0]
+    dist_param = f_dict[p_type][1]
     slowing_f = 0
-    if security is 'HIGH':
-        f = dirac(dist_point(x, y), R, 0, K)
-    elif security is 'MEDIUM':
-        slowing_f = dirac(dist_point(x, y), slowing_R, R, slowing_K)
-        f = gaussienne(dist_point(x, y), R, 0)
-    elif security is 'LOW':
-        f = gaussienne(dist_point(x, y), R, 0)
+    if security == 'HIGH':
+        # print 'high security has been chosen'
+        # f = dirac(dist_point(x, y), R, 0, K)
+        f = dirac(abs(dist_f(*dist_param)), R, 0, K)
+    elif security == 'MEDIUM':
+        # print 'medium security has been chosen'
+        # slowing_f = dirac(dist_point(x, y), slowing_R, R, slowing_K)
+        slowing_f = dirac(abs(dist_f(*dist_param)), slowing_R, R, slowing_K)
+        # f = gaussienne(dist_point(x, y), R, 0)
+        f = gaussienne(abs(dist_f(*dist_param)), R, 0)
+    elif security == 'LOW':
+        # print 'low security has been chosen'
+        # f = gaussienne(dist_point(x, y), R, 0)
+        f = gaussienne(abs(dist_f(*dist_param)), R, 0)
     else:
         print security
         print 'WARNING: NO SECURITY HAS BEEN SET FOR THIS PROFILE'
@@ -191,10 +230,20 @@ def obstacle_point(x, y, a, b, K=1, R=1,
     """
     Defini un champ repulsif autour d'une zone en a, b
     """
-    if security is 'HIGH':
-        profil = profil_point_security_M(x, y, a, b, K, R, security=security)
-    elif security is 'MEDIUM':
-        profil = profil_point_security_M(
-            x, y, a, b, K, R, slowing_R=slowing_R, slowing_K=slowing_K)
+    profil = profil_point_security_M(x, y, a, b, K=K, R=R, security=security,
+                                     slowing_R=slowing_R, slowing_K=slowing_K)
     direction = -dir_point(x, y, a, b)
+    return profil * direction
+
+
+def limite(x, y, xa, ya, xb, yb, K=1, R=1,
+           security='HIGH', slowing_R=0.5, slowing_K=5):
+    """
+    Defini un champ repulsif autour d'un segment [A, B]
+    """
+    profil = profil_point_security_M(x, y, xa, ya, xb=xb, yb=yb, K=K, R=R,
+                                     security=security,
+                                     slowing_R=slowing_R, slowing_K=slowing_K,
+                                     p_type='limite')
+    direction = dir_limite(x, y, xa, ya, xb, yb)
     return profil * direction
