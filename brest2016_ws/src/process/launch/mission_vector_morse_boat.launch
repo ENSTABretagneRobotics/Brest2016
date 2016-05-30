@@ -11,13 +11,14 @@
 	<node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"
         name="broadcaster_fixed" />
 
-	<node name="regulateur_champs" pkg="process" type="regulateur_champs.py">
+	<node name="regulateur_champs3" pkg="process" type="regulateur_champs3.py">
 		<param name="speed_zero" value="0"/>
 		<param name="vHigh" value="4"/>
 		<param name="vLow" value="1"/>
 		<param name="K" value="-20"/>
 		<param name="robot_type" value="thomas_boat"/>
 		<param name="prout" value="0.5"/>
+		<param name="reverse" value="0.5"/>
 		<remap from="gps/local_pose" to="boat/gps/pose"/>
 	</node>
 
