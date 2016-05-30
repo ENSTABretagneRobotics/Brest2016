@@ -255,18 +255,6 @@ def profil_security(x, y, xa, ya, xb=0, yb=0, K=1, R=1,
 profil_security_M = np.vectorize(profil_security)
 
 
-def profil_cercle(x, y, a, b, R, K):
-    """ Definit le potentiel d'un cercle centre en a,b
-        (A appliquer a la fonction @point)
-        :R definit le rayon du cercle
-        :s definit la repulsion/attraction
-    """
-    x, y = translate(x, y, a, b)
-    f = gaussienne(dist_point(x, y), R, 0) - 0.5
-    # f = np.exp(-(dist_point(x, y)**2 * np.log(2)) / R**2) - 0.5
-    return K * f
-
-profil_cercle_m = np.vectorize(profil_cercle)
 #########################################################
 # FONCTION D'OBJECTIFS
 #########################################################
