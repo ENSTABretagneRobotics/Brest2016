@@ -142,8 +142,12 @@ def dir_segment_perpendiculaire(x, y, xa, ya, xb, yb):
     cosb = np.dot(AB, AM)
     sa = np.cross(BM, BA)
     # sb = np.cross(AM, AB)
-    if cosa > 0 and cosb > 0:   # interieur
+    if cosa >= 0 and cosb >= 0:   # interieur
         return -N if sa > 0 else N
+    # warning: l'objectif etait d'avoir des limites segment sans point
+    # car les points introduisaient des effets de bords non desirable
+    # Probleme c'est que maintenant la ligne attractive est affectee 
+    # egalement
     else:
         if cosb < 0:
             return - dir_point(x, y, xa, ya)
@@ -713,7 +717,7 @@ def test_objectifs():
 def test_points():
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
     x0, y0 = 0, 0
-    x, y = 1.67, 200
+    x, y = -20, -20
     # Meshgrid
     U0, V0 = champ_nul(X, Y)
     U1, V1 = waypoint(X, Y, 1, 2)
@@ -732,7 +736,7 @@ def test_points():
     print champ_nul(x0, y0)
     print waypoint(x0, y0, 1, 2)
     print limite(x0, y0, 1, 1, 3, -2, s=2, r=1)
-    print ligne(x0, y0, 1, 1, -3, 4)
+    print ligne(x0, y0, -20, 0, -20, 0)
     print patrouille_circulaire(x0, y0, 3, 3, 1)
 
 
@@ -755,6 +759,33 @@ def test_parameter():
     plt.axis('equal')
     plt.show()
 
+
+def test_champ_mission_wrsc_collision():
+    X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+    # x0, y0 = 0, 0
+    # x1, y1 = 0, 10
+    # Meshgrid
+    U0, V0 = waypoint(X, Y, 0, -10, s=-1)
+    U1, V1 = obstacle_point(X, Y, 0, 0, r=10)
+    U2, V2 = limite(X, Y, 0, -10, 0, 10, s=-1, r=5)
+    U3, V3 = ligne(X, Y, -10, 0, 10, 0)
+    U4, V4 = champ_carre_tournant(X, Y)
+    U5, V5 = waypoint(X, Y, 0, 10, s=-1)
+    plt.figure('total')
+    plt.ion()
+    plt.pause(5)
+    plt.cla()
+    plt.quiver(X, Y, U2, V2)
+    plt.draw()
+    for i, j in [[-5, 10], [5, 10], [20, 0]]:
+        plt.cla()
+        Uw, Vw = waypoint(X, Y, i, j, s=-1)
+        plt.quiver(X, Y, U2 + Uw, V2 + Vw)
+        plt.draw()
+        plt.pause(3)
+    plt.pause(5)
+    # plt.show()
+
 if __name__ == '__main__':
     # main()
     # main2()
@@ -763,4 +794,5 @@ if __name__ == '__main__':
     # main5()
     # test_objectifs()
     # test_points()
-    test_parameter()
+    # test_parameter()
+    test_champ_mission_wrsc_collision()
