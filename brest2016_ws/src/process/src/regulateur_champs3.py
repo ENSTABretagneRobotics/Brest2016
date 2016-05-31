@@ -72,6 +72,7 @@ vHigh = fetch_param('~vHigh', 8000)  # 8000 max
 vLow = fetch_param('~vLow', 7000)  # 6000 = vitesse nulle
 K = fetch_param('~K', 1500) * (2. / np.pi)
 reverse = fetch_param('~reverse', 1)
+Vsym = fetch_param('~Vsym', 12000)
 rate = rospy.Rate(5)
 
 # while not rospy.is_shutdown():
@@ -107,8 +108,8 @@ while not rospy.is_shutdown():
     else:
         print 'cos < 0'
         if vitesse_cible >= reverse:
-            cmd.linear.x = 12000-vLow
-            cmd.angular.z = speed_zero - K*np.arctan(np.tan((error / 2.)))
+            cmd.linear.x = Vsym-vLow
+            cmd.angular.z = speed_zero - K * np.arctan(np.tan((error / 2.)))
         else:
             cmd.linear.x = vLow
     if vitesse_cible <= 0.1:

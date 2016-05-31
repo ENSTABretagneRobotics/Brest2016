@@ -7,19 +7,21 @@ rospy.init_node('behavior_client')
 rospy.wait_for_service('behavior_manager')
 behavior_sender = rospy.ServiceProxy('behavior_manager', behavior)
 
-# Behavior a envoyer
-info0 = BehaviorInfo(behavior_id='000', type='limite',
-                     xa=128, ya=99, xb=170, yb=104, s=-3, r=4)
-info1 = BehaviorInfo(behavior_id='001', type='limite',
-                     xa=170, ya=104, xb=173, yb=71, s=-3, r=4)
-info2 = BehaviorInfo(behavior_id='002', type='limite',
-                     xa=173, ya=71, xb=132, yb=63, s=-3, r=4)
-info3 = BehaviorInfo(behavior_id='003', type='limite',
-                     xa=132, ya=63, xb=128, yb=99, s=-3, r=4)
+
+info0 = BehaviorInfo(f_type='waypoint', behavior_id='000', xa=60, ya=60,
+                          xb=0, yb=0, K=0.5, R=1, slowing_R=1, slowing_K=5,
+                          security='HIGH')
+info1 = BehaviorInfo(f_type='obst_point', behavior_id='001', xa=0, ya=0,
+                          xb=0, yb=0, K=2, R=15, slowing_R=1, slowing_K=5,
+                          security='LOW', effect_range=10)
+# info2 = BehaviorInfo(f_type='limite', behavior_id='002', xa=30, ya=2.5,
+#                           xb=30, yb=-57.5, K=2, R=10, slowing_R=1, slowing_K=5,
+#                           security='LOW', effect_range=10)
 
 # Confirmation de la reception du behavior
 rate = rospy.Rate(1)
-for info in reversed([info0, info1, info2, info3]):
+for info in reversed([info0, info1]):
     confirmation = behavior_sender(info)
     print confirmation
     rate.sleep()
+
