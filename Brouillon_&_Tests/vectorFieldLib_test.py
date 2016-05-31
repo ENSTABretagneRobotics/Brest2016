@@ -197,6 +197,7 @@ if __name__ == '__main__':
     # plot_test.test_ligne()
     # plot_test.test_waypoint_medium_limite()
     plot_test.test_patrouille_circulaire()
+    plot_test.test_dir_tournant()
 
     # run all ObjectivesTestPlot methods
     # print dir(plot_test)

@@ -1,0 +1,106 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module vectorFieldLib</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>vectorFieldLib</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Brouillon_&_Tests/vectorFieldLib.py">/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Brouillon_&_Tests/vectorFieldLib.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-champ_constant"><strong>champ_constant</strong></a>(x, y, a, b)</dt><dd><tt>Retourne&nbsp;un&nbsp;champ&nbsp;constant</tt></dd></dl>
+ <dl><dt><a name="-dir_point"><strong>dir_point</strong></a>(x, y, a, b)</dt><dd><tt>Retourne&nbsp;un&nbsp;(champ&nbsp;de)&nbsp;vecteur&nbsp;pointant&nbsp;vers&nbsp;le&nbsp;point&nbsp;(a,b)<br>
+Ce&nbsp;(champ&nbsp;de)&nbsp;vecteur&nbsp;est&nbsp;norme<br>
+Vecteur&nbsp;en&nbsp;(x,y)&nbsp;dirige&nbsp;vers&nbsp;(a,b)</tt></dd></dl>
+ <dl><dt><a name="-dir_segment"><strong>dir_segment</strong></a>(x, y, xa, ya, xb, yb, seg_type<font color="#909090">='normal'</font>)</dt><dd><tt>Retourne&nbsp;un&nbsp;champ&nbsp;dirige&nbsp;vers&nbsp;un&nbsp;segment:<br>
+EX_R&nbsp;:&nbsp;[0,&nbsp;0]<br>
+EX_L&nbsp;:&nbsp;[0,&nbsp;0]<br>
+IN_R&nbsp;:&nbsp;-N&nbsp;ou&nbsp;T<br>
+IN_L&nbsp;:&nbsp;N&nbsp;ou&nbsp;T</tt></dd></dl>
+ <dl><dt><a name="-dir_segment_extremity"><strong>dir_segment_extremity</strong></a>(x, y, xa, ya, xb, yb)</dt><dd><tt>Retourne&nbsp;un&nbsp;champ&nbsp;dirige&nbsp;vers&nbsp;les&nbsp;extremites&nbsp;d'un&nbsp;segment:<br>
+EX_R&nbsp;:&nbsp;dir_point&nbsp;xb,&nbsp;yb<br>
+EX_L&nbsp;:&nbsp;dir_point&nbsp;xa,&nbsp;ya<br>
+IN_R&nbsp;:&nbsp;[0,&nbsp;0]<br>
+IN_L&nbsp;:&nbsp;[0,&nbsp;0]</tt></dd></dl>
+ <dl><dt><a name="-dir_tournant"><strong>dir_tournant</strong></a>(x, y, a<font color="#909090">=0</font>, b<font color="#909090">=0</font>)</dt><dd><tt>Permet&nbsp;de&nbsp;generer&nbsp;un&nbsp;champ&nbsp;tournant&nbsp;vers&nbsp;la&nbsp;gauche<br>
+et&nbsp;centre&nbsp;en&nbsp;(a,b)</tt></dd></dl>
+ <dl><dt><a name="-dirac"><strong>dirac</strong></a>(x, L, D, K<font color="#909090">=1</font>)</dt><dd><tt>Fonction&nbsp;dirac&nbsp;centree&nbsp;en&nbsp;D&nbsp;et&nbsp;de&nbsp;largeur&nbsp;L</tt></dd></dl>
+ <dl><dt><a name="-dist_droite"><strong>dist_droite</strong></a>(x, y, xa, ya, xb, yb)</dt><dd><tt>Renvoie&nbsp;la&nbsp;distance&nbsp;d'un&nbsp;point&nbsp;(x,y)&nbsp;par&nbsp;rapport&nbsp;a&nbsp;la&nbsp;droite&nbsp;definie<br>
+&nbsp;par&nbsp;A(xa,ya)&nbsp;et&nbsp;B(xb,yb)</tt></dd></dl>
+ <dl><dt><a name="-dist_point"><strong>dist_point</strong></a>(x, y, a<font color="#909090">=0</font>, b<font color="#909090">=0</font>)</dt><dd><tt>Retourne&nbsp;la&nbsp;distance&nbsp;par&nbsp;rapport&nbsp;au&nbsp;point&nbsp;(a,b)</tt></dd></dl>
+ <dl><dt><a name="-dist_segment"><strong>dist_segment</strong></a>(x, y, xa, ya, xb, yb)</dt><dd><tt>Renvoie&nbsp;la&nbsp;distance&nbsp;d'un&nbsp;point&nbsp;(x,y)&nbsp;par&nbsp;rapport&nbsp;au&nbsp;segment&nbsp;definie<br>
+&nbsp;par&nbsp;A(xa,ya)&nbsp;et&nbsp;B(xb,yb).&nbsp;<br>
+Renvoie&nbsp;la&nbsp;distance&nbsp;par&nbsp;rapport&nbsp;aux&nbsp;extremites&nbsp;en&nbsp;dehors&nbsp;du&nbsp;segment.</tt></dd></dl>
+ <dl><dt><a name="-gaussienne"><strong>gaussienne</strong></a>(x, L, D)</dt><dd><tt>Fonction&nbsp;gaussienne&nbsp;centree&nbsp;en&nbsp;D&nbsp;et&nbsp;de&nbsp;largeur&nbsp;L</tt></dd></dl>
+ <dl><dt><a name="-ligne"><strong>ligne</strong></a>(x, y, xa, ya, xb, yb, K<font color="#909090">=1</font>, R<font color="#909090">=1</font>, effect_range<font color="#909090">=20</font>)</dt><dd><tt>Defini&nbsp;le&nbsp;champ&nbsp;d'une&nbsp;ligne&nbsp;attractive</tt></dd></dl>
+ <dl><dt><a name="-limite"><strong>limite</strong></a>(x, y, xa, ya, xb, yb, K<font color="#909090">=1</font>, R<font color="#909090">=1</font>, security<font color="#909090">='HIGH'</font>, slowing_R<font color="#909090">=0.5</font>, slowing_K<font color="#909090">=5</font>)</dt><dd><tt>Defini&nbsp;le&nbsp;champ&nbsp;repulsif&nbsp;autour&nbsp;d'un&nbsp;segment&nbsp;[A,&nbsp;B].<br>
+Utilise&nbsp;le&nbsp;@profil_security</tt></dd></dl>
+ <dl><dt><a name="-normalize"><strong>normalize</strong></a>(vect)</dt><dd><tt>Retourne&nbsp;le&nbsp;vecteur&nbsp;normalise</tt></dd></dl>
+ <dl><dt><a name="-obstacle_point"><strong>obstacle_point</strong></a>(x, y, a, b, K<font color="#909090">=1</font>, R<font color="#909090">=1</font>, security<font color="#909090">='HIGH'</font>, slowing_R<font color="#909090">=0.5</font>, slowing_K<font color="#909090">=5</font>)</dt><dd><tt>Defini&nbsp;le&nbsp;champ&nbsp;repulsif&nbsp;autour&nbsp;d'un&nbsp;point&nbsp;en&nbsp;a,&nbsp;b<br>
+Utilise&nbsp;le&nbsp;@profil_security</tt></dd></dl>
+ <dl><dt><a name="-patrouille_circulaire"><strong>patrouille_circulaire</strong></a>(x, y, a, b, K, R)</dt><dd><tt>Genere&nbsp;un&nbsp;cercle&nbsp;attractif&nbsp;tournant&nbsp;(a&nbsp;gauche)<br>
+autour&nbsp;du&nbsp;point(a,b)&nbsp;et&nbsp;de&nbsp;rayon&nbsp;R</tt></dd></dl>
+ <dl><dt><a name="-profil_security"><strong>profil_security</strong></a>(x, y, xa, ya, xb<font color="#909090">=0</font>, yb<font color="#909090">=0</font>, K<font color="#909090">=1</font>, R<font color="#909090">=1</font>, security<font color="#909090">='HIGH'</font>, slowing_R<font color="#909090">=0.5</font>, slowing_K<font color="#909090">=5</font>, p_type<font color="#909090">='point'</font>)</dt><dd><tt>Cree&nbsp;un&nbsp;profil&nbsp;d'evitement&nbsp;d'obstacle&nbsp;avec&nbsp;3&nbsp;niveaux&nbsp;de&nbsp;securites<br>
++&nbsp;SECURITY&nbsp;==&nbsp;HIGH:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Definit&nbsp;un&nbsp;profil&nbsp;en&nbsp;dirac&nbsp;autour&nbsp;du&nbsp;point/segment<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Rq:&nbsp;sur&nbsp;mais&nbsp;pas&nbsp;smooth<br>
+&nbsp;<br>
++&nbsp;SECURITY&nbsp;==&nbsp;MEDIUM:&nbsp;plus&nbsp;de&nbsp;calculs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;un&nbsp;'mur'&nbsp;de&nbsp;securite&nbsp;en&nbsp;dirac&nbsp;(pour&nbsp;freiner&nbsp;brusquement)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;une&nbsp;gaussienne&nbsp;a&nbsp;l'interieur&nbsp;(pour&nbsp;'smoother'&nbsp;la&nbsp;trajectoire)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Rq:&nbsp;sur&nbsp;mais&nbsp;plus&nbsp;de&nbsp;calculs<br>
+&nbsp;<br>
++&nbsp;SECURITY&nbsp;==&nbsp;LOW:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Definit&nbsp;une&nbsp;gaussienne&nbsp;autour&nbsp;du&nbsp;point/segment<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Rq:&nbsp;moins&nbsp;sur<br>
+&nbsp;<br>
+Parameters<br>
+-----------<br>
+security&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Permet&nbsp;de&nbsp;choisir&nbsp;le&nbsp;niveau&nbsp;de&nbsp;securite<br>
+p_type&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Permet&nbsp;de&nbsp;choisir&nbsp;la&nbsp;forme&nbsp;sur&nbsp;laquelle&nbsp;le&nbsp;profil&nbsp;s'appliquera:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;point<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;segment<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;ligne<br>
+slowing_R&nbsp;:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Rayon&nbsp;du&nbsp;cercle&nbsp;exterieur&nbsp;de&nbsp;freinage<br>
+slowing_K&nbsp;:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Force&nbsp;du&nbsp;cercle&nbsp;exterieur&nbsp;de&nbsp;freinage</tt></dd></dl>
+ <dl><dt><a name="-rotate"><strong>rotate</strong></a>(x, y, theta)</dt><dd><tt>Fait&nbsp;pivoter&nbsp;le&nbsp;point&nbsp;(x,y)&nbsp;autour&nbsp;du&nbsp;point&nbsp;d'origine&nbsp;du&nbsp;repere</tt></dd></dl>
+ <dl><dt><a name="-translate"><strong>translate</strong></a>(x, y, a, b)</dt><dd><tt>Deplace&nbsp;le&nbsp;point&nbsp;(x,y)&nbsp;dans&nbsp;le&nbsp;repere&nbsp;d'origine&nbsp;(a,b)</tt></dd></dl>
+ <dl><dt><a name="-waypoint"><strong>waypoint</strong></a>(x, y, a, b, K<font color="#909090">=1</font>)</dt><dd><tt>Defini&nbsp;un&nbsp;champ&nbsp;attire&nbsp;par&nbsp;un&nbsp;waypoint&nbsp;en&nbsp;a,&nbsp;b</tt></dd></dl>
+ <dl><dt><a name="-zone_segment"><strong>zone_segment</strong></a>(x, y, xa, ya, xb, yb)</dt><dd><tt>Permet&nbsp;de&nbsp;situer&nbsp;un&nbsp;point&nbsp;dans&nbsp;une&nbsp;zone&nbsp;adjacente&nbsp;au&nbsp;segment<br>
+Returns:<br>
+EX_R&nbsp;:&nbsp;EXTERIEUR&nbsp;aux&nbsp;limites&nbsp;du&nbsp;segment,&nbsp;sur&nbsp;la&nbsp;DROITE<br>
+EX_L&nbsp;:&nbsp;EXTERIEUR&nbsp;aux&nbsp;limites&nbsp;du&nbsp;segment,&nbsp;sur&nbsp;la&nbsp;GAUCHE<br>
+IN_R&nbsp;:&nbsp;INTERIEUR&nbsp;aux&nbsp;limites&nbsp;du&nbsp;segment,&nbsp;sur&nbsp;la&nbsp;DROITE<br>
+IN_L&nbsp;:&nbsp;INTERIEUR&nbsp;aux&nbsp;limites&nbsp;du&nbsp;segment,&nbsp;sur&nbsp;la&nbsp;GAUCHE</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>profil_security_M</strong> = &lt;numpy.lib.function_base.vectorize object&gt;<br>
+<strong>zone_segment_M</strong> = &lt;numpy.lib.function_base.vectorize object&gt;</td></tr></table>
+</body></html>

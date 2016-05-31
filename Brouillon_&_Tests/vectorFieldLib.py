@@ -1,8 +1,6 @@
-import matplotlib.pyplot as plt
 import numpy as np
 from numpy.linalg import det
 from numpy.linalg import norm
-from time import sleep
 
 #########################################################
 # FONCTIONS DE BASE
@@ -57,7 +55,8 @@ def dist_droite(x, y, xa, ya, xb, yb):
 def dist_segment(x, y, xa, ya, xb, yb):
     """
     Renvoie la distance d'un point (x,y) par rapport au segment definie
-     par A(xa,ya) et B(xb,yb)
+     par A(xa,ya) et B(xb,yb). 
+    Renvoie la distance par rapport aux extremites en dehors du segment.
     """
     # Zones
     zone = zone_segment(x, y, xa, ya, xb, yb)
@@ -83,7 +82,7 @@ def gaussienne(x, L, D):
 
 def dirac(x, L, D, K=1):
     """
-    Fonction dirac centree en D et de rayon L
+    Fonction dirac centree en D et de largeur L
     """
     if abs(x - D) > L:
         return 0
@@ -107,7 +106,7 @@ def dir_point(x, y, a, b):
 
 
 def dir_tournant(x, y, a=0, b=0):
-    """ Permet de generer un champ tournant vers la gauche (s=1)
+    """ Permet de generer un champ tournant vers la gauche
             et centre en (a,b)"""
     x, y = translate(x, y, a, b)
     # vect = np.array()
@@ -147,10 +146,10 @@ zone_segment_M = np.vectorize(zone_segment)
 def dir_segment(x, y, xa, ya, xb, yb, seg_type='normal'):
     """
     Retourne un champ dirige vers un segment:
-    EX_R : dir_point xb, yb
-    EX_L : dir_point xa, ya
-    IN_R : vecteur normal
-    IN_L : vecteur normal oppose
+    EX_R : [0, 0]
+    EX_L : [0, 0]
+    IN_R : -N ou T
+    IN_L : N ou T
     """
     # Zones
     zoneX = zone_segment_M(x, y, xa, ya, xb, yb)
@@ -179,8 +178,8 @@ def dir_segment_extremity(x, y, xa, ya, xb, yb):
     Retourne un champ dirige vers les extremites d'un segment:
     EX_R : dir_point xb, yb
     EX_L : dir_point xa, ya
-    IN_R : vecteur normal
-    IN_L : vecteur normal oppose
+    IN_R : [0, 0]
+    IN_L : [0, 0]
     """
     # Zones
     zoneX = zone_segment_M(x, y, xa, ya, xb, yb)
@@ -213,7 +212,7 @@ def profil_security(x, y, xa, ya, xb=0, yb=0, K=1, R=1,
                     security='HIGH', slowing_R=0.5, slowing_K=5,
                     p_type='point'):
     """
-    Cree un profil d'evitement d'obstacle ponctuel avec 3 niveaux de securites
+    Cree un profil d'evitement d'obstacle avec 3 niveaux de securites
     + SECURITY == HIGH:
         - Definit un profil en dirac autour du point/segment
         # Rq: sur mais pas smooth
@@ -226,6 +225,20 @@ def profil_security(x, y, xa, ya, xb=0, yb=0, K=1, R=1,
     + SECURITY == LOW:
         - Definit une gaussienne autour du point/segment
         # Rq: moins sur
+
+    Parameters
+    -----------
+    security : string
+        Permet de choisir le niveau de securite
+    p_type : string
+        Permet de choisir la forme sur laquelle le profil s'appliquera:
+        - point
+        - segment
+        - ligne
+    slowing_R : float
+        Rayon du cercle exterieur de freinage
+    slowing_K : float
+        Force du cercle exterieur de freinage
     """
     # x, y = translate(x, y, xa, ya)
     # fonction a utiliser pour une droite ou un segment
@@ -262,7 +275,7 @@ profil_security_M = np.vectorize(profil_security)
 
 def champ_constant(x, y, a, b):
     """
-    Retourne un champ nul
+    Retourne un champ constant
     """
     if type(x) in [float, int]:
         return [0, 0]
@@ -280,7 +293,8 @@ def waypoint(x, y, a, b, K=1):
 def obstacle_point(x, y, a, b, K=1, R=1,
                    security='HIGH', slowing_R=0.5, slowing_K=5):
     """
-    Defini un champ repulsif autour d'une zone en a, b
+    Defini le champ repulsif autour d'un point en a, b
+    Utilise le @profil_security
     """
     profil = profil_security_M(x, y, a, b, K=K, R=R, security=security,
                                slowing_R=slowing_R, slowing_K=slowing_K)
@@ -291,7 +305,8 @@ def obstacle_point(x, y, a, b, K=1, R=1,
 def limite(x, y, xa, ya, xb, yb, K=1, R=1,
            security='HIGH', slowing_R=0.5, slowing_K=5):
     """
-    Defini un champ repulsif autour d'un segment [A, B]
+    Defini le champ repulsif autour d'un segment [A, B].
+    Utilise le @profil_security
     """
     profil_seg = profil_security_M(x, y, xa, ya, xb=xb, yb=yb, K=K, R=R,
                                    security=security,
@@ -304,7 +319,7 @@ def limite(x, y, xa, ya, xb, yb, K=1, R=1,
 
 def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
     """
-    Defini un champ d'une ligne attractive
+    Defini le champ d'une ligne attractive
     """
     # profil tangentiel
     d = np.vectorize(dist_droite)(x, y, xa, ya, xb, yb)
@@ -323,7 +338,8 @@ def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
 
 def patrouille_circulaire(x, y, a, b, K, R):
     """
-    Genere un cercle attractif tournant autour de a,b et de rayon r
+    Genere un cercle attractif tournant (a gauche)
+    autour du point(a,b) et de rayon R
     """
     # profil 2
     # x, y = translate(x, y, a, b)
