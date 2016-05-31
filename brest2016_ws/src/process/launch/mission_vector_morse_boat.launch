@@ -11,7 +11,7 @@
 	<node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"
         name="broadcaster_fixed" />
 
-	<node name="regulateur_champs3" pkg="process" type="regulateur_champs3.py">
+	<node name="regulateur_champs2" pkg="process" type="regulateur_champs2.py">
 		<param name="speed_zero" value="0"/>
 		<param name="vHigh" value="4"/>
 		<param name="vLow" value="1"/>
