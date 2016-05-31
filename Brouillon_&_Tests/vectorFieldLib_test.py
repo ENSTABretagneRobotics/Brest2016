@@ -1,7 +1,7 @@
 #!usr/bin/env python
 import numpy as np
 import unittest
-import vectorFieldLib as vfl
+import vectorFieldLib_v0 as vfl
 import matplotlib.pyplot as plt
 
 
@@ -111,7 +111,7 @@ class ObjectivesTestPlot():
         plt.figure('LIGNE ATTRACTIVE')
         X, Y = np.mgrid[-100:100:40j, -100:100:40j]
         U, V = vfl.ligne(
-            X, Y, 0, 0, xb=50, yb=0, K=0.2, R=20)
+            X, Y, 0, 0, xb=50, yb=0, K=0.2, R=20, effect_range=40)
         plt.quiver(X, Y, U, V, scale=2)
         plt.show()
 
@@ -130,7 +130,7 @@ class ObjectivesTestPlot():
         plt.show()
 
     def test_patrouille_circulaire(self):
-        plt.figure('waypoint (0,5)')
+        plt.figure('patrouille circle 0,5')
         X, Y = np.mgrid[-20:20:40j, -20:20:40j]
         U, V = vfl.patrouille_circulaire(X, Y, 0, 5, K=2, R=5)
         plt.quiver(X, Y, U, V)
@@ -196,8 +196,9 @@ if __name__ == '__main__':
     # plot_test.test_limite()
     # plot_test.test_ligne()
     # plot_test.test_waypoint_medium_limite()
-    plot_test.test_patrouille_circulaire()
-    plot_test.test_dir_tournant()
+    # plot_test.test_patrouille_circulaire()
+    # plot_test.test_dir_tournant()
+    plot_test.test_ligne()
 
     # run all ObjectivesTestPlot methods
     # print dir(plot_test)

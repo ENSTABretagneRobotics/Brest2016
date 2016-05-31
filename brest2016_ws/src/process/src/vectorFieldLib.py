@@ -55,7 +55,7 @@ def dist_droite(x, y, xa, ya, xb, yb):
 def dist_segment(x, y, xa, ya, xb, yb):
     """
     Renvoie la distance d'un point (x,y) par rapport au segment definie
-     par A(xa,ya) et B(xb,yb). 
+    par A(xa,ya) et B(xb,yb).
     Renvoie la distance par rapport aux extremites en dehors du segment.
     """
     # Zones
@@ -324,11 +324,12 @@ def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
     # profil tangentiel
     d = np.vectorize(dist_droite)(x, y, xa, ya, xb, yb)
     f = gaussienne(d, R, 0)
+    f[abs(d) > effect_range] = 0
     profil_tang = K * f
     # profil normal
     f = 1 - f
-    if abs(d) > effect_range:
-        f = 0 * f
+    f[abs(d) > effect_range] = 0
+    # f = 0 * f
     profil_norm = K * f
     # Directions
     dir_tang = dir_segment(x, y, xa, ya, xb, yb, seg_type='tangent')
@@ -346,8 +347,8 @@ def patrouille_circulaire(x, y, a, b, K, R):
     d = np.vectorize(dist_point)(x, y, a, b)
     f = gaussienne(d, R, 0) - 0.5
     # profil 3
-    bosse = gaussienne(d, 2, R)
+    bosse = 100 * gaussienne(d, 2, R)
 
-    CA = -dir_point(x, y, a, b) * K * f
-    CT = dir_tournant(x, y, a, b) * K * bosse
-    return CA + CT
+    Ca = -dir_point(x, y, a, b) * K * f
+    Ct = dir_tournant(x, y, a, b) * K * bosse
+    return Ca + Ct
