@@ -57,6 +57,9 @@ class TestBasicFunctions(unittest.TestCase):
         vfl.profil_security_M(0, 0, 10, 10, 3, 5, security='LOW',
                               slowing_R=0.5, slowing_K=10)
 
+    def test_ligne(self):
+        vfl.ligne(0, 0, 0, 0, 1, 1, 20)
+
 
 class ObjectivesTestPlot():
     def test_dir_point(self):
@@ -198,7 +201,7 @@ if __name__ == '__main__':
     # plot_test.test_waypoint_medium_limite()
     # plot_test.test_patrouille_circulaire()
     # plot_test.test_dir_tournant()
-    plot_test.test_ligne()
+    # plot_test.test_ligne()
 
     # run all ObjectivesTestPlot methods
     # print dir(plot_test)

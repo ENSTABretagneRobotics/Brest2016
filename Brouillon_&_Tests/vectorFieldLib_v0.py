@@ -55,7 +55,7 @@ def dist_droite(x, y, xa, ya, xb, yb):
 def dist_segment(x, y, xa, ya, xb, yb):
     """
     Renvoie la distance d'un point (x,y) par rapport au segment definie
-     par A(xa,ya) et B(xb,yb). 
+    par A(xa,ya) et B(xb,yb).
     Renvoie la distance par rapport aux extremites en dehors du segment.
     """
     # Zones
@@ -194,8 +194,8 @@ def dir_segment_extremity(x, y, xa, ya, xb, yb):
                    'EX_L': dirA}
     for k, v in zone_cor_ex.items():
         z = zoneX == k
-        zoneX[z] = v[0][z]
-        zoneY[z] = v[1][z]
+        zoneX[z] = v[0][z] if type(x) is np.ndarray else v[0]
+        zoneY[z] = v[1][z] if type(x) is np.ndarray else v[1]
     for k, v in zone_cor_in.items():
         z = zoneX == k
         zoneX[z] = v[0]
@@ -324,7 +324,12 @@ def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
     # profil tangentiel
     d = np.vectorize(dist_droite)(x, y, xa, ya, xb, yb)
     f = gaussienne(d, R, 0)
-    f[abs(d) > effect_range] = 0
+    print 'slkdfjdklsfj', type(x)
+    if type(x) in [int, np.float64]:
+        if abs(d) > effect_range:
+            f = 0
+    elif type(x) is np.ndarray:
+        f[abs(d) > effect_range] = 0
     profil_tang = K * f
     # profil normal
     f = 1 - f

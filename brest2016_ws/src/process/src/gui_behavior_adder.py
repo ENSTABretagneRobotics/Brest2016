@@ -7,7 +7,7 @@ from process.srv import behavior
 
 # Redefinition of class Behavior Info
 def behavior2string(self):
-    return '{} ({})'.format(self.behavior_id, self.type)
+    return '{} ({})'.format(self.behavior_id, self.f_type)
 
 BehaviorInfo.toString = behavior2string
 
@@ -31,27 +31,42 @@ def configure_widgets(type_champ):
     ya_entry.configure(state='normal')
     validate_button.configure(state='normal')
     if type_champ in 'waypoint':
-        s_entry.configure(state='normal')
+        K_entry.configure(state='normal')
     elif type_champ == 'ligne':
         xb_entry.configure(state='normal')
         yb_entry.configure(state='normal')
-        r_entry.configure(state='normal')
-        s_entry.configure(state='normal')
-    elif type_champ in ['patrol_circle', 'obst_point']:
-        r_entry.configure(state='normal')
-        s_entry.configure(state='normal')
+        R_entry.configure(state='normal')
+        K_entry.configure(state='normal')
+        effect_range_entry.configure(state='normal')
+    elif type_champ == 'patrol_circle':
+        R_entry.configure(state='normal')
+        K_entry.configure(state='normal')
+    elif type_champ == 'obst_point':
+        R_entry.configure(state='normal')
+        K_entry.configure(state='normal')
+        security_entry.configure(state='normal')
+        slowing_R_entry.configure(state='normal')
+        slowing_K_entry.configure(state='normal')
     elif type_champ == 'limite':
         xb_entry.configure(state='normal')
         yb_entry.configure(state='normal')
-        r_entry.configure(state='normal')
-        s_entry.configure(state='normal')
+        R_entry.configure(state='normal')
+        K_entry.configure(state='normal')
+        security_entry.configure(state='normal')
+        slowing_R_entry.configure(state='normal')
+        slowing_K_entry.configure(state='normal')
 
 
 def getInfos():
-    return BehaviorInfo(behavior_id=id_value.get(), type=type_choice.get(),
+    sec = int(security_entry.get())
+    sec = ['LOW', 'MEDIUM', 'HIGH'][sec]
+    return BehaviorInfo(behavior_id=id_value.get(), f_type=type_choice.get(),
                         xa=float(xa_entry.get()), ya=float(ya_entry.get()),
                         xb=float(xb_entry.get()), yb=float(yb_entry.get()),
-                        s=float(s_entry.get()), r=float(r_entry.get()))
+                        K=float(K_entry.get()), R=float(R_entry.get()),
+                        security=sec, slowing_R=float(slowing_R_entry.get()),
+                        slowing_K=float(slowing_K_entry.get()),
+                        effect_range=float(effect_range_entry.get()))
 
 
 def send_field(event=None):
@@ -71,7 +86,7 @@ def send_field(event=None):
 def remove_all(event=None):
     for el in history_list.get(0, END):
         b = BehaviorInfo(behavior_id=el.split(
-            ' ')[0], type=el.split(' ')[1][1:-1])
+            ' ')[0], f_type=el.split(' ')[1][1:-1])
         confirmation = behavior_sender(b)
         print 'Removing', el
         print confirmation
@@ -84,7 +99,7 @@ def remove_selected(event=None):
     if len(history_list.curselection()) != 0:
         for el in [history_list.get(k) for k in history_list.curselection()]:
             b = BehaviorInfo(behavior_id=el.split(
-                ' ')[0], type=el.split(' ')[1][1:-1])
+                ' ')[0], f_type=el.split(' ')[1][1:-1])
             confirmation = behavior_sender(b)
             print 'Removing', el,
             print confirmation
@@ -127,29 +142,44 @@ id_entry = Entry(parameter_frame, textvariable=id_value, width=10)
 
 xa_label = Label(parameter_frame, text='xa')
 xa_entry = Spinbox(parameter_frame, from_=-999, to=999,
-                   increment=1, format='%.2f')
+                   increment=1)
 
 ya_label = Label(parameter_frame, text='ya')
 ya_entry = Spinbox(parameter_frame, from_=-999, to=999,
-                   increment=1, format='%.2f')
+                   increment=1)
 
 xb_label = Label(parameter_frame, text='xb')
 xb_entry = Spinbox(parameter_frame, from_=-999, to=999,
-                   increment=1, format='%.2f')
+                   increment=1)
 
 yb_label = Label(parameter_frame, text='yb')
 yb_entry = Spinbox(parameter_frame, from_=-999, to=999,
-                   increment=1, format='%.2f')
+                   increment=1)
 
-r_label = Label(parameter_frame, text='r')
-r_entry = Spinbox(parameter_frame, from_=1, to=50,
-                  increment=1, format='%.2f')
+R_label = Label(parameter_frame, text='R')
+R_entry = Spinbox(parameter_frame, from_=0, to=50,
+                  increment=1)
 
-s_label = Label(parameter_frame, text='s')
-s_entry = Spinbox(parameter_frame, from_=-1, to=1,
-                  increment=2)
-s_entry.delete(0, "end")
-s_entry.insert(0, -1)
+K_label = Label(parameter_frame, text='K')
+K_entry = Spinbox(parameter_frame, from_=0, to=20,
+                  increment=0.1, format='%.1f')
+
+slowing_R_label = Label(parameter_frame, text='slowing_R')
+slowing_R_entry = Spinbox(parameter_frame, from_=0, to=20,
+                          increment=0.1, format='%.1f')
+
+slowing_K_label = Label(parameter_frame, text='slowing_K')
+slowing_K_entry = Spinbox(parameter_frame, from_=0, to=50,
+                          increment=0.5)
+
+effect_range_label = Label(parameter_frame, text='effect_range')
+effect_range_entry = Spinbox(parameter_frame, from_=0, to=999,
+                             increment=1)
+
+security_label = Label(parameter_frame, text='security')
+security_entry = Spinbox(parameter_frame, from_=0, to=2,
+                         increment=1)
+
 
 # *******************************************
 # Section parametres du champ
@@ -187,16 +217,24 @@ id_label.grid(row=2, column=1)
 id_entry.grid(row=2, column=2)
 xa_label.grid(row=3, column=1)
 xa_entry.grid(row=3, column=2)
-ya_label.grid(row=4, column=1)
-ya_entry.grid(row=4, column=2)
 xb_label.grid(row=3, column=3)
 xb_entry.grid(row=3, column=4)
+ya_label.grid(row=4, column=1)
+ya_entry.grid(row=4, column=2)
 yb_label.grid(row=4, column=3)
 yb_entry.grid(row=4, column=4)
-r_label.grid(row=5, column=1)
-r_entry.grid(row=5, column=2)
-s_label.grid(row=5, column=3)
-s_entry.grid(row=5, column=4)
+R_label.grid(row=5, column=1)
+R_entry.grid(row=5, column=2)
+K_label.grid(row=5, column=3)
+K_entry.grid(row=5, column=4)
+slowing_R_label.grid(row=6, column=1)
+slowing_R_entry.grid(row=6, column=2)
+slowing_K_label.grid(row=6, column=3)
+slowing_K_entry.grid(row=6, column=4)
+effect_range_label.grid(row=7, column=1)
+effect_range_entry.grid(row=7, column=2)
+security_label.grid(row=7, column=3)
+security_entry.grid(row=7, column=4)
 
 validate_button.grid(row=3, column=1)
 
@@ -213,4 +251,11 @@ rospy.init_node('gui_behavior_adder')
 rospy.wait_for_service('behavior_manager')
 behavior_sender = rospy.ServiceProxy('behavior_manager', behavior)
 
+
+def check_ros():
+    if rospy.is_shutdown():
+        fen.destroy()
+    else:
+        fen.after(500, check_ros)
+fen.after(1, check_ros)
 fen.mainloop()

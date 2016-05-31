@@ -23,7 +23,7 @@ def draw_tank(x):
 
 def add_behavior(request):
     global listB
-    print request.info.type, request.info.behavior_id
+    print request.info.f_type, request.info.behavior_id
     behavior_manager.add_behavior(Behavior(request.info))
     print 'nombres de behavior recu:', len(behavior_manager.behavior_list)
     return behaviorResponse('oui')

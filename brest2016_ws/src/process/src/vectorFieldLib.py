@@ -194,8 +194,8 @@ def dir_segment_extremity(x, y, xa, ya, xb, yb):
                    'EX_L': dirA}
     for k, v in zone_cor_ex.items():
         z = zoneX == k
-        zoneX[z] = v[0][z]
-        zoneY[z] = v[1][z]
+        zoneX[z] = v[0][z] if type(x) is np.ndarray else v[0]
+        zoneY[z] = v[1][z] if type(x) is np.ndarray else v[1]
     for k, v in zone_cor_in.items():
         z = zoneX == k
         zoneX[z] = v[0]
@@ -321,16 +321,18 @@ def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
     """
     Defini le champ d'une ligne attractive
     """
-    # profil tangentiel
     d = np.vectorize(dist_droite)(x, y, xa, ya, xb, yb)
-    f = gaussienne(d, R, 0)
-    f[abs(d) > effect_range] = 0
-    profil_tang = K * f
-    # profil normal
-    f = 1 - f
-    f[abs(d) > effect_range] = 0
+    f1 = gaussienne(d, R, 0)
+    f2 = 1 - f1
+    if type(x) in [int, np.float64, float, np.int64]:
+        if abs(d) > effect_range:
+            f1, f2 = 0, 0
+    elif type(x) is np.ndarray:
+        f1[abs(d) > effect_range] = 0
+        f2[abs(d) > effect_range] = 0
     # f = 0 * f
-    profil_norm = K * f
+    profil_tang = K * f1
+    profil_norm = K * f2
     # Directions
     dir_tang = dir_segment(x, y, xa, ya, xb, yb, seg_type='tangent')
     dir_norm = dir_segment(x, y, xa, ya, xb, yb, seg_type='normal')
