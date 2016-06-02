@@ -109,9 +109,15 @@ def dir_tournant(x, y, a=0, b=0):
     """ Permet de generer un champ tournant vers la gauche
             et centre en (a,b)"""
     x, y = translate(x, y, a, b)
+    if type(x) in [int, float, np.float64]:
+        return normalize([-y, x])
     # vect = np.array()
-    vect = normalize([-y, x])
-    return vect
+    z = np.dstack((-y, x))
+    U, V = np.dsplit(np.apply_along_axis(normalize, axis=2, arr=z), 2)
+    U = np.apply_along_axis(lambda x: x[0], axis=2, arr=U)
+    V = np.apply_along_axis(lambda x: x[0], axis=2, arr=V)
+    # print vect, '-' * 100
+    return np.array([U, V])
 
 
 def zone_segment(x, y, xa, ya, xb, yb):
@@ -321,21 +327,18 @@ def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
     """
     Defini le champ d'une ligne attractive
     """
-    # profil tangentiel
     d = np.vectorize(dist_droite)(x, y, xa, ya, xb, yb)
-    f = gaussienne(d, R, 0)
-    print 'slkdfjdklsfj', type(x)
-    if type(x) in [int, np.float64]:
+    f1 = gaussienne(d, R, 0)
+    f2 = 1 - f1
+    if type(x) in [int, np.float64, float, np.int64]:
         if abs(d) > effect_range:
-            f = 0
+            f1, f2 = 0, 0
     elif type(x) is np.ndarray:
-        f[abs(d) > effect_range] = 0
-    profil_tang = K * f
-    # profil normal
-    f = 1 - f
-    f[abs(d) > effect_range] = 0
+        f1[abs(d) > effect_range] = 0
+        f2[abs(d) > effect_range] = 0
     # f = 0 * f
-    profil_norm = K * f
+    profil_tang = K * f1
+    profil_norm = K * f2
     # Directions
     dir_tang = dir_segment(x, y, xa, ya, xb, yb, seg_type='tangent')
     dir_norm = dir_segment(x, y, xa, ya, xb, yb, seg_type='normal')

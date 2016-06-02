@@ -109,9 +109,15 @@ def dir_tournant(x, y, a=0, b=0):
     """ Permet de generer un champ tournant vers la gauche
             et centre en (a,b)"""
     x, y = translate(x, y, a, b)
+    if type(x) in [int, float, np.float64]:
+        return normalize([-y, x])
     # vect = np.array()
-    vect = normalize([-y, x])
-    return vect
+    z = np.dstack((-y, x))
+    U, V = np.dsplit(np.apply_along_axis(normalize, axis=2, arr=z), 2)
+    U = np.apply_along_axis(lambda x: x[0], axis=2, arr=U)
+    V = np.apply_along_axis(lambda x: x[0], axis=2, arr=V)
+    # print vect, '-' * 100
+    return np.array([U, V])
 
 
 def zone_segment(x, y, xa, ya, xb, yb):

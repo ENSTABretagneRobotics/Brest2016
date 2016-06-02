@@ -60,11 +60,15 @@ class TestBasicFunctions(unittest.TestCase):
     def test_ligne(self):
         vfl.ligne(0, 0, 0, 0, 1, 1, 20)
 
+    def test_tournant(self):
+        np.testing.assert_array_equal(
+            vfl.dir_tournant(0, 1), np.array([-1, 0]))
+
 
 class ObjectivesTestPlot():
     def test_dir_point(self):
         plt.figure('dir_point (5,5)')
-        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+        X, Y = np.mgrid[-20:20:20j, -20:20:20j]
         U, V = vfl.dir_point(X, Y, 5, 5)
         plt.quiver(X, Y, U, V)
         plt.show()
@@ -72,8 +76,8 @@ class ObjectivesTestPlot():
 
     def test_dir_tournant(self):
         plt.figure('dir_tournant (-5,-5)')
-        X, Y = np.mgrid[-20:20:40j, -20:20:40j]
-        U, V = vfl.dir_tournant(X, Y, -5, -5)
+        X, Y = np.mgrid[-20:20:10j, -20:20:10j]
+        U, V = vfl.dir_tournant(X, Y, 0, 0)
         plt.quiver(X, Y, U, V)
         plt.show()
         # todo: le champ tournant n'est pas de norme constante
@@ -192,16 +196,12 @@ class ObjectivesTestPlot():
 
 if __name__ == '__main__':
     # plots
-    plot_test = ObjectivesTestPlot()
+    otp = ObjectivesTestPlot()
+    # otp.test_dir_point()
+    otp.test_dir_tournant()
+    # otp.test_dir_segment()
+    # otp.test_dir_segment_extrimity()
     # plot_test.test_parameter()
-    # plot_test.test_dir_segment()
-    # plot_test.test_dir_segment_extrimity()
-    # plot_test.test_limite()
-    # plot_test.test_ligne()
-    # plot_test.test_waypoint_medium_limite()
-    # plot_test.test_patrouille_circulaire()
-    # plot_test.test_dir_tournant()
-    # plot_test.test_ligne()
 
     # run all ObjectivesTestPlot methods
     # print dir(plot_test)
