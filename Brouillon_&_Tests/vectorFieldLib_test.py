@@ -96,6 +96,14 @@ class ObjectivesTestPlot():
         plt.quiver(X, Y, U, V)
         plt.show()
 
+    def test_dir_segment_complet(self):
+        plt.figure('test segment complet')
+        X, Y = np.mgrid[-20:20:20j, -20:20:20j]
+        U1, V1 = vfl.dir_segment(X, Y, -5, 0, 5, 0)
+        U2, V2 = vfl.dir_segment_extremity(X, Y, -5, 0, 5, 0)
+        plt.quiver(X, Y, U1 + U2, V1 + V2)
+        plt.show()
+
     def test_obstacle_point(self):
         plt.figure('obstacle (0,0), K=3, R=3, security=MEDIUM')
         X, Y = np.mgrid[-100:100:40j, -100:100:40j]
@@ -194,14 +202,75 @@ class ObjectivesTestPlot():
         plt.axis([-20, 20, -20, 20])
         plt.show()
 
+    def exemple_patrouille(self):
+        "Composition d'un champ de patrouille"
+        X, Y = np.mgrid[-20:20:20j, -20:20:20j]
+        t = np.linspace(-20, 20, 100)
+        d = np.vectorize(vfl.dist_point)(X, Y, 0, 0)
+        R = 7
+        L = 2
+
+        plt.figure(
+            """Champ direction oppose centre du cercle
+            (a noter qu'on met juste -1)""")
+        Uc, Vc = -vfl.dir_point(X, Y, 0, 0)
+        plt.hold(True)
+        plt.quiver(X, Y, Uc, Vc)
+        pc = vfl.gaussienne(t, R, 0) - 0.5
+        plt.axis('equal')
+        # plt.plot(t, pc)
+
+        plt.figure("Champ tournant")
+        Ut, Vt = vfl.dir_tournant(X, Y)
+        plt.hold(True)
+        plt.quiver(X, Y, Ut, Vt)
+        pt = vfl.gaussienne(t, L, R) + vfl.gaussienne(t, 2, -R)
+        plt.axis('equal')
+        # plt.plot(t, pt)
+
+        plt.figure("Profil champ tournant au cercle")
+        plt.plot(t, pt)
+        plt.plot([0, 0], [0, 1], 'k', linewidth=2)
+        plt.axis([-20, 20, 0, 1])
+        plt.grid(True)
+
+        plt.figure("Profil champ cercle attractif")
+        plt.plot(t, pc)
+        plt.plot(t, 0 * pc, 'k', linewidth=2)
+        plt.plot([0, 0], [-0.6, 0.6], 'k', linewidth=2)
+        plt.axis([-20, 20, -0.6, 0.6])
+        plt.grid(True)
+
+        # Composition 1
+        plt.figure("Compo 1")
+        f = vfl.gaussienne(d, R, 0) - 0.5
+        Uc, Vc = np.array([Uc, Vc]) * f
+        plt.quiver(X, Y, Uc, Vc)
+        plt.axis('equal')
+
+        # Composition 2
+        plt.figure("Compo 2")
+        bosse = vfl.gaussienne(d, L, R)
+        Ut, Vt = np.array([Ut, Vt]) * bosse
+        plt.quiver(X, Y, Ut, Vt)
+        plt.axis('equal')
+
+        # Composition Finale
+        plt.figure("Compo Finale")
+        plt.quiver(X, Y, Uc + Ut, Vc + Vt)
+        plt.axis('equal')
+
+        plt.show()
+
 if __name__ == '__main__':
     # plots
     otp = ObjectivesTestPlot()
     # otp.test_dir_point()
-    otp.test_dir_tournant()
-    # otp.test_dir_segment()
-    # otp.test_dir_segment_extrimity()
+    # otp.test_dir_tournant()
+    # otp.test_dir_segment_complet()
     # plot_test.test_parameter()
+    otp.exemple_patrouille()
+    # otp.test_patrouille_circulaire()
 
     # run all ObjectivesTestPlot methods
     # print dir(plot_test)
@@ -209,4 +278,4 @@ if __name__ == '__main__':
     #     if callable(method) and name not in ['onclick_calc', 'test_parameter']:
     #         method(None)
     # unittest
-    unittest.main()
+    # unittest.main()

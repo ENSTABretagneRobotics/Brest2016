@@ -355,7 +355,7 @@ def patrouille_circulaire(x, y, a, b, K, R):
     d = np.vectorize(dist_point)(x, y, a, b)
     f = gaussienne(d, R, 0) - 0.5
     # profil 3
-    bosse = 100 * gaussienne(d, 2, R)
+    bosse = gaussienne(d, 2, R)
 
     Ca = -dir_point(x, y, a, b) * K * f
     Ct = dir_tournant(x, y, a, b) * K * bosse
