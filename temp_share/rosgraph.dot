@@ -1,0 +1,211 @@
+digraph graphname {
+	graph [bb="0,0,686,339.64",
+		compound=True,
+		rank=same,
+		rankdir=LR,
+		ranksep=0.2
+	];
+	node [label="\N"];
+	subgraph cluster_boat {
+		graph [bb="348,11.642,478,248.64",
+			compound=True,
+			label=boat,
+			lheight=0.21,
+			lp="413,237.14",
+			lwidth=0.33,
+			rank=same,
+			rankdir=LR,
+			ranksep=0.2,
+			style=bold
+		];
+		t__boat_compas		 [URL=topic_3A_boat_compas,
+			height=0.5,
+			label="/boat/compas",
+			pos="413,91.642",
+			shape=box,
+			width=1.2361];
+		t__boat_actuator		 [URL=topic_3A_boat_actuator,
+			height=0.5,
+			label="/boat/actuator",
+			pos="413,199.64",
+			shape=box,
+			width=1.2639];
+		t__boat_gps_pose		 [URL=topic_3A_boat_gps_pose,
+			height=0.5,
+			label="/boat/gps/pose",
+			pos="413,145.64",
+			shape=box,
+			width=1.3194];
+		t__boat_gps_velocity		 [URL=topic_3A_boat_gps_velocity,
+			height=0.5,
+			label="/boat/gps/velocity",
+			pos="413,37.642",
+			shape=box,
+			width=1.5694];
+	}
+	subgraph cluster_robot {
+		graph [bb="342,256.64,484,331.64",
+			compound=True,
+			label=robot,
+			lheight=0.21,
+			lp="413,320.14",
+			lwidth=0.40,
+			rank=same,
+			rankdir=LR,
+			ranksep=0.2,
+			style=bold
+		];
+		t__robot_vecteur_cible		 [URL=topic_3A_robot_vecteur_cible,
+			height=0.5,
+			label="/robot/vecteur_cible",
+			pos="413,282.64",
+			shape=box,
+			width=1.7361];
+	}
+	subgraph cluster_broadcaster_fixed {
+		graph [bb="15,134.64,183,209.64",
+			compound=True,
+			label=broadcaster_fixed,
+			lheight=0.21,
+			lp="99,198.14",
+			lwidth=1.35,
+			rank=same,
+			rankdir=LR,
+			ranksep=0.2,
+			style=bold
+		];
+		n__broadcaster_fixed		 [URL=_broadcaster_fixed,
+			height=0.5,
+			label="/broadcaster_fixed",
+			pos="99,160.64",
+			shape=ellipse,
+			width=2.1123];
+	}
+	subgraph cluster_morse {
+		graph [bb="223,71.642,309,146.64",
+			compound=True,
+			label=morse,
+			lheight=0.21,
+			lp="266,135.14",
+			lwidth=0.47,
+			rank=same,
+			rankdir=LR,
+			ranksep=0.2,
+			style=bold
+		];
+		n__morse		 [URL=_morse,
+			height=0.5,
+			label="/morse",
+			pos="266,97.642",
+			shape=ellipse,
+			width=0.97491];
+	}
+	subgraph cluster_gui_behavior_adder {
+		graph [bb="8,236.64,190,311.64",
+			compound=True,
+			label=gui_behavior_adder,
+			lheight=0.21,
+			lp="99,300.14",
+			lwidth=1.51,
+			rank=same,
+			rankdir=LR,
+			ranksep=0.2,
+			style=bold
+		];
+		n__gui_behavior_adder		 [URL=_gui_behavior_adder,
+			height=0.5,
+			label="/gui_behavior_adder",
+			pos="99,262.64",
+			shape=ellipse,
+			width=2.3109];
+	}
+	subgraph cluster_regulateur_champs3 {
+		graph [bb="492,23.642,678,98.642",
+			compound=True,
+			label=regulateur_champs3,
+			lheight=0.21,
+			lp="585,87.142",
+			lwidth=1.54,
+			rank=same,
+			rankdir=LR,
+			ranksep=0.2,
+			style=bold
+		];
+		n__regulateur_champs3		 [URL=_regulateur_champs3,
+			height=0.5,
+			label="/regulateur_champs3",
+			pos="585,49.642",
+			shape=ellipse,
+			width=2.3651];
+	}
+	subgraph cluster_behavior_server {
+		graph [bb="507,119.64,663,194.64",
+			compound=True,
+			label=behavior_server,
+			lheight=0.21,
+			lp="585,183.14",
+			lwidth=1.22,
+			rank=same,
+			rankdir=LR,
+			ranksep=0.2,
+			style=bold
+		];
+		n__behavior_server		 [URL=_behavior_server,
+			height=0.5,
+			label="/behavior_server",
+			pos="585,145.64",
+			shape=ellipse,
+			width=1.9318];
+	}
+	subgraph cluster_cmd_ramped {
+		graph [bb="198,166.64,334,241.64",
+			compound=True,
+			label=cmd_ramped,
+			lheight=0.21,
+			lp="266,230.14",
+			lwidth=1.01,
+			rank=same,
+			rankdir=LR,
+			ranksep=0.2,
+			style=bold
+		];
+		n__cmd_ramped		 [URL=_cmd_ramped,
+			height=0.5,
+			label="/cmd_ramped",
+			pos="266,192.64",
+			shape=ellipse,
+			width=1.661];
+	}
+	t__boat_compas -> n__regulateur_champs3	 [penwidth=1,
+		pos="e,528.78,63.284 457.78,80.826 476.38,76.231 498.45,70.777 518.9,65.726"];
+	t__boat_compas -> n__behavior_server	 [penwidth=1,
+		pos="e,540.37,131.78 457.78,105.55 479.99,112.6 507.15,121.23 530.58,128.67"];
+	t__boat_actuator -> n__morse	 [penwidth=1,
+		pos="e,284.1,113.11 367.22,186.44 358.41,182.74 349.57,178.18 342,172.64 337.41,169.28 337.83,166.85 334,162.64 320.64,147.94 304.72,132.42 291.74,120.23"];
+	t__boat_gps_pose -> n__behavior_server	 [penwidth=1,
+		pos="e,515.29,145.64 460.9,145.64 474.56,145.64 489.87,145.64 504.93,145.64"];
+	t__boat_gps_velocity -> n__regulateur_champs3	 [penwidth=1,
+		pos="e,503.85,43.985 469.66,41.571 477.44,42.121 485.6,42.696 493.81,43.276"];
+	t__robot_vecteur_cible -> n__regulateur_champs3	 [penwidth=1,
+		pos="e,547.57,65.856 471.95,264.56 476.59,261.23 480.73,257.3 484,252.64 501.52,227.68 477.29,142.36 492,115.64 502.42,96.727 520.83,81.893 538.47,71.119"];
+	t__cmd_vel	 [URL=topic_3A_cmd_vel,
+		height=0.5,
+		label="/cmd_vel",
+		pos="99,68.642",
+		shape=box,
+		width=0.94444];
+	t__cmd_vel -> n__cmd_ramped	 [penwidth=1,
+		pos="e,232.21,177.59 133.19,85.16 151.99,95.925 174.72,111.52 190,130.64 195.98,138.12 191.86,143.29 198,150.64 205,159.03 214.12,166.26 223.37,172.24"];
+	n__morse -> t__boat_compas	 [penwidth=1,
+		pos="e,368.31,93.45 301,96.235 318.03,95.531 339.05,94.661 358.2,93.868"];
+	n__morse -> t__boat_gps_pose	 [penwidth=1,
+		pos="e,365.36,130.2 295.99,107.24 313.12,112.91 335.38,120.28 355.82,127.04"];
+	n__morse -> t__boat_gps_velocity	 [penwidth=1,
+		pos="e,364.44,55.646 292.91,85.89 307.3,79.451 325.56,71.424 342,64.642 346.18,62.919 350.51,61.167 354.87,59.426"];
+	n__regulateur_champs3 -> t__cmd_vel	 [penwidth=1,
+		pos="e,133.04,55.474 553.05,32.865 533.8,23.398 508.18,12.514 484,7.6422 360.76,-17.188 213.6,26.395 142.55,51.991"];
+	n__behavior_server -> t__robot_vecteur_cible	 [penwidth=1,
+		pos="e,463.58,264.47 571.24,163.32 553.78,186.46 520.42,227.08 484,252.64 480.37,255.19 476.49,257.58 472.49,259.82"];
+	n__cmd_ramped -> t__boat_actuator	 [penwidth=1,
+		pos="e,367.24,197.48 325.14,195.45 335.66,195.96 346.6,196.48 357.02,196.99"];
+}

@@ -39,7 +39,7 @@ def fetch_param(name, default):
         return rospy.get_param(name)
     else:
         print 'parameter [%s] not defined.' % name
-        print 'Defaulting to' , default
+        print 'Defaulting to', default
         return default
 
 rospy.init_node('regulateur')
@@ -72,7 +72,7 @@ vHigh = fetch_param('~vHigh', 8000)  # 8000 max
 vLow = fetch_param('~vLow', 7000)  # 6000 = vitesse nulle
 K = fetch_param('~K', 1500) * (2. / np.pi)
 reverse = fetch_param('~reverse', 1)
-Vsym = fetch_param('~Vsym', 12000)
+# Vsym = fetch_param('~Vsym', 12000)
 rate = rospy.Rate(5)
 
 # while not rospy.is_shutdown():
@@ -102,21 +102,40 @@ while not rospy.is_shutdown():
     error = cap_cible - cap
     cmd = Twist()
     cmd.angular.z = speed_zero + K * np.arctan(np.tan((error / 2.)))
+
+    vitesse_temp = vitesse_cible * 10
+    # bateau dans le sens du champ
     if cos(error) >= 0:
         print 'cos > 0'
-        cmd.linear.x = vHigh
+        if vLow > vitesse_temp:
+            cmd.linear.x = vLow
+        elif vitesse_temp > vHigh:
+            cmd.linear.x = vHigh
+        else:
+            cmd.linear.x = vitesse_temp
+
+    # bateau dans le sens oppose au champ
     else:
         print 'cos < 0'
         if vitesse_cible >= reverse:
-            cmd.linear.x = Vsym-vLow
+            cmd.linear.x = -vHigh
             cmd.angular.z = speed_zero - K * np.arctan(np.tan((error / 2.)))
         else:
             cmd.linear.x = vLow
-    if vitesse_cible <= 0.1:
+
+    # if cos(error) >= alpha:
+    #     print 'cos > alpha'
+    #     cmd.linear.x = V * cos(error)
+    # elif cos(error) <= beta:
+    #     print 'cos < beta'
+    #     cmd.linear.x = -V
+    # else:
+    #     cmd.linear.x = vLow
+
+    if vitesse_cible <= 0.05:
         cmd.linear.x = speed_zero
         cmd.angular.z = speed_zero
 
-        
     print cap, cap_cible, error, cos(error), "::", cmd.linear.x, cmd.angular.z
     if robot_type == 'thomas_boat':
         cmd.angular.z = -cmd.angular.z
