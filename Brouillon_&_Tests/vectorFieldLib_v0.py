@@ -345,7 +345,7 @@ def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
     return profil_tang * dir_tang + profil_norm * dir_norm
 
 
-def patrouille_circulaire(x, y, a, b, K, R):
+def patrouille_circulaire(x, y, a, b, K, R, turning_R=2):
     """
     Genere un cercle attractif tournant (a gauche)
     autour du point(a,b) et de rayon R
@@ -355,7 +355,7 @@ def patrouille_circulaire(x, y, a, b, K, R):
     d = np.vectorize(dist_point)(x, y, a, b)
     f = gaussienne(d, R, 0) - 0.5
     # profil 3
-    bosse = gaussienne(d, 2, R)
+    bosse = gaussienne(d, turning_R, R)
 
     Ca = -dir_point(x, y, a, b) * K * f
     Ct = dir_tournant(x, y, a, b) * K * bosse
