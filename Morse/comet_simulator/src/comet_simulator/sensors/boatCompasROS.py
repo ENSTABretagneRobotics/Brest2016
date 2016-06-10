@@ -1,6 +1,8 @@
-import roslib; roslib.load_manifest('std_msgs')
+import roslib
+roslib.load_manifest('std_msgs')
 from std_msgs.msg import *
 from morse.middleware.ros import ROSPublisher
+
 
 class BoatCompasROS(ROSPublisher):
     ros_class = Float32MultiArray

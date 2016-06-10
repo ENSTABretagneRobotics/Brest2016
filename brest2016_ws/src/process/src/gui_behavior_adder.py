@@ -20,7 +20,7 @@ def default_widget_state():
 
 
 def type_chosen(*args):
-    print type_choice.get()
+    rospy.loginfo(type_choice.get())
     configure_widgets(type_choice.get())
 
 
@@ -72,27 +72,35 @@ def getInfos():
 def send_field(event=None):
     # send behavior
     info = getInfos()
-    confirmation = behavior_sender(info)
+    mode = 'add'
+    for el in history_list.get(0, END):
+        if el.split(' ')[0] == info.behavior_id:
+            mode = 'update'
+            break
+    rospy.loginfo('Sending field with mode: ' + mode)
+    confirmation = behavior_sender(info, mode)
     # Increment the ID
     prev = int(id_value.get())
     nexT = '{:0>3}'.format(prev + 1)
     id_value.set(nexT)
+
     # Add the sent behavior to the history list
-    print info.toString()
     history_list.insert(END, info.toString())
-    print confirmation
+    # if confirmation == 'added':
+    #     history_list.insert(END, info.toString())
+    # elif confirmation == 'updateed':
+    #     pass
 
 
 def remove_all(event=None):
     for el in history_list.get(0, END):
         b = BehaviorInfo(behavior_id=el.split(
             ' ')[0], f_type=el.split(' ')[1][1:-1])
-        confirmation = behavior_sender(b)
-        print 'Removing', el
-        print confirmation
+        confirmation = behavior_sender(b, 'remove')
+        rospy.loginfo('Removing' + el + confirmation.confirm)
     history_list.delete(0, END)
-    print '-' * 10
-    print 'Removed all !'
+    rospy.loginfo('-' * 10)
+    rospy.loginfo('Removed all !')
 
 
 def remove_selected(event=None):
@@ -100,9 +108,8 @@ def remove_selected(event=None):
         for el in [history_list.get(k) for k in history_list.curselection()]:
             b = BehaviorInfo(behavior_id=el.split(
                 ' ')[0], f_type=el.split(' ')[1][1:-1])
-            confirmation = behavior_sender(b)
-            print 'Removing', el,
-            print confirmation
+            confirmation = behavior_sender(b, 'remove')
+            rospy.loginfo('Removing' + el + confirmation.confirm)
         history_list.delete(*history_list.curselection())
 
 

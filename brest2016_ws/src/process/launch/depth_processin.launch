@@ -1,0 +1,7 @@
+<launch>
+  <node pkg="nodelet" type="nodelet" name="convert_metric"  args="manager"/>
+
+  <node pkg="nodelet" type="nodelet" name="Plus"
+        args="load depth_image_proc/Plus convert_metric">
+  </node>
+</launch>

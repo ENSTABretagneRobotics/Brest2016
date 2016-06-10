@@ -4,8 +4,8 @@ from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 
 key_mapping = {
-    'z': [1, 0],  # avant
-    'q': [0, 1],  # gauche
+    'w': [1, 0],  # avant
+    'a': [0, 1],  # gauche
     's': [0, 0],    # stop
     'd': [0, -1],  # droite
     'x': [-1, 0]  # arriere

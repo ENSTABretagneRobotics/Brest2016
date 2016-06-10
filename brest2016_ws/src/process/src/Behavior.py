@@ -136,29 +136,50 @@ class BehaviorManager():
         self.behavior_list = []
         self.champ_total = Behavior()
 
-    def add_behavior(self, new_behavior):
-        if not self.behavior_in_list(new_behavior):
+    # def add_behavior(self, new_behavior):
+    #     # if not self.behavior_in_list(new_behavior):
+    #     if new_behavior not in self.behavior_list:
+    #         self.behavior_list.append(new_behavior)
+    #         self.champ_total += new_behavior
+    #     else:
+    #         self.behavior_list.remove(new_behavior)
+    #         self.recalc_champ_total()
+
+    def handle_behavior(self, new_behavior, mode):
+        """
+        Handles a new behavior received according to the mode:
+        :mode == add
+            add the behavior only if NOT on the list. else do nothing
+        :mode == update
+            add the behavior if not on the list
+            udpate the behavior if on the list
+        :mode == remove
+            remove the behavior from the list if in
+        """
+        if mode == 'add' and new_behavior not in self.behavior_list:
             self.behavior_list.append(new_behavior)
             self.champ_total += new_behavior
-        else:
+        elif mode == 'update':
+            if new_behavior not in self.behavior_list:
+                self.behavior_list.append(new_behavior)
+                self.champ_total += new_behavior
+            else:
+                i = self.behavior_list.index(new_behavior)
+                self.behavior_list[i] = new_behavior
+        elif mode == 'remove' and new_behavior in self.behavior_list:
             self.behavior_list.remove(new_behavior)
-            self.recalc_champ_total()
 
-    def behavior_in_list(self, behavior):
-        for b in self.behavior_list:
-            if behavior.behavior_id == b.behavior_id:
-                return True
-        return False
+        self.recalc_champ_total()
 
     def recalc_champ_total(self):
         self.champ_total = Behavior()
         for c in self.behavior_list:
             self.champ_total += c
 
-    def remove_behavior(self, new_behavior):
-        for b in self.behavior_list:
-            if new_behavior.behavior_id == b.behavior_id:
-                self.behavior_list.remove(b)
+    # def remove_behavior(self, new_behavior):
+    #     for b in self.behavior_list:
+    #         if new_behavior.behavior_id == b.behavior_id:
+    #             self.behavior_list.remove(b)
 
 
 ##########################################################################
@@ -223,15 +244,16 @@ def main_manager():
     manager = BehaviorManager()
 
     # Behavior 2 - limite
-    info2 = Behavior_info(f_type='limite', behavior_id='002', xa=-5, ya=0,
-                          xb=5, yb=0, K=3, R=5, slowing_R=1, slowing_K=5,
-                          security='MEDIUM', effect_range=10)
+    info2 = Behavior_info(f_type='limite', behavior_id='002', xa=-5, ya=5,
+                          xb=5, yb=5, K=3, R=5, slowing_R=1, slowing_K=5,
+                          security='HIGH', effect_range=10)
     b2 = Behavior(info2)
     # Behavior 3 - patrol_circle
     info3 = Behavior_info(f_type='patrol_circle', behavior_id='003',
-                          xa=0, ya=0, K=3, R=5)
+                          xa=0, ya=0, K=0.1, R=5)
     b3 = Behavior(info3)
 
+    manager.add_behavior(b2)
     manager.add_behavior(b3)
     manager.add_behavior(b2)
 

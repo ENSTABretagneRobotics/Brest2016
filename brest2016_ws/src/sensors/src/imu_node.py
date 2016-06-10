@@ -12,7 +12,7 @@ rospy.init_node("razor_node")
 pub = rospy.Publisher('imu', YPR, queue_size=1)
 imuMsg = YPR()
 
-default_port = '/dev/ttyUSB0'
+default_port = '/dev/ttyUSB1'
 # read  parameters
 port = rospy.get_param('~port', default_port)
 

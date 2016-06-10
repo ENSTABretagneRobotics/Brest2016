@@ -44,6 +44,11 @@ keyboard.properties(ControlType='Position')
 # of a custom sensor.
 pose = Pose()
 robot.append(pose)
+kinect = Kinect()
+kinect.translate(0, 0, 3)
+kinect.rotate(0, 0, 0)
+kinect.add_stream('ros')
+robot.append(kinect)
 
 # To ease development and debugging, we add a socket interface to our robot.
 #
@@ -53,7 +58,8 @@ robot.add_default_interface('socket')
 
 
 # set 'fastmode' to True to switch to wireframe mode
-env_path = '/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/environments/water-1o-3w.blend'
+env_path = '/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/environments/water-walls.blend'
+# env_path = 'indoors-1/indoor-1'
 env = Environment(env_path, fastmode=False)
 env.set_camera_location([-18.0, -6.7, 10.8])
 env.set_camera_rotation([1.09, 0, -1.14])

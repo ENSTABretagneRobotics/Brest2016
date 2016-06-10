@@ -21,12 +21,13 @@ def draw_tank(x):
     plt.plot(M[0], M[1])
 
 
-def add_behavior(request):
+def handle_received_behavior(request):
     global listB
     print request.info.f_type, request.info.behavior_id
-    behavior_manager.add_behavior(Behavior(request.info))
+    behavior_manager.handle_behavior(Behavior(request.info), request.action)
+    return behaviorResponse(request.action + 'ed')
+
     print 'nombres de behavior recu:', len(behavior_manager.behavior_list)
-    return behaviorResponse('oui')
 
 
 def update_pos(msg):
@@ -65,7 +66,7 @@ behavior_manager = BehaviorManager()
 # Initialisation du noeud
 rospy.init_node('service_server')
 # Initialisation du Serveur
-service = rospy.Service('behavior_manager', behavior, add_behavior)
+service = rospy.Service('behavior_manager', behavior, handle_received_behavior)
 # Recuperation du type de robot
 robot_type = fetch_param('~robot_type', 'normal')
 # Subscriber et publisher

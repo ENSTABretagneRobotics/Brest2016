@@ -83,8 +83,8 @@ class Boat(morse.core.robot.Robot):
 
         # Attach the camera to the movment of the boat
         # if self._first_run == True:
-            # blenderapi.scene().objects['CameraFP'].setParent(
-            #     self.bge_object, 60, 60)
-            # self._first_run = False
+        #     blenderapi.scene().objects['CameraFP'].setParent(
+        #         self.bge_object, 0, 0)
+        #     self._first_run = False
 
         pass

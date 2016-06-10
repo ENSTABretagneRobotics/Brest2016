@@ -20,29 +20,29 @@ print("Use WASD to control the robot")
 
 with Morse() as simu:
 
-  motion = simu.robot.motion
-  pose = simu.robot.pose
+    motion = simu.robot.motion
+    pose = simu.robot.pose
 
-  v = 0.0
-  w = 0.0
+    v = 0.0
+    w = 0.0
 
-  while True:
-      key = input("WASD?")
+    while True:
+        key = input("WASD?")
 
-      if key.lower() == "w":
-          v += 0.1
-      elif key.lower() == "s":
-          v -= 0.1
-      elif key.lower() == "a":
-          w += 0.1
-      elif key.lower() == "d":
-          w -= 0.1
-      else:
-          continue
+        if key.lower() == "w":
+            v += 0.1
+        elif key.lower() == "s":
+            v -= 0.1
+        elif key.lower() == "a":
+            w += 0.1
+        elif key.lower() == "d":
+            w -= 0.1
+        else:
+            continue
 
-      # here, we call 'get' on the pose sensor: this is a blocking
-      # call. Check pymorse documentation for alternatives, including
-      # asynchronous stream subscription.
-      print("The robot is currently at: %s" % pose.get())
+        # here, we call 'get' on the pose sensor: this is a blocking
+        # call. Check pymorse documentation for alternatives, including
+        # asynchronous stream subscription.
+        print("The robot is currently at: %s" % pose.get())
 
-      motion.publish({"v": v, "w": w})
+        motion.publish({"v": v, "w": w})
