@@ -12,7 +12,8 @@ from morse.builder import *
 # http://www.openrobots.org/morse/doc/stable/components_library.html
 #
 # 'morse add robot <name> brest_sim' can help you to build custom robots.
-robot = Morsy()
+# robot = Morsy()
+robot = ATRV()
 
 # The list of the main methods to manipulate your components
 # is here:
@@ -42,14 +43,29 @@ keyboard.properties(ControlType='Position')
 #
 # 'morse add sensor <name> brest_sim' can help you with the creation
 # of a custom sensor.
-pose = Pose()
-robot.append(pose)
+# pose = Pose()
+# robot.append(pose)
+
+
 kinect = Kinect()
 kinect.translate(0, 0, 3)
 kinect.rotate(0, 0, 0)
 kinect.add_stream('ros')
 robot.append(kinect)
 
+sick = SickLDMRS()
+sick.translate(0, 0, 2)
+sick.properties(Visible_arc=True)
+sick.properties(resolution=1.0)
+sick.properties(scan_window=1)
+sick.properties(laser_range=30.0)
+sick.properties(layers=1)
+sick.properties(layer_separation=0.8)
+sick.properties(layer_offset=0.25)
+sick.frequency(1.0)
+
+sick.add_stream('ros')
+robot.append(sick)
 # To ease development and debugging, we add a socket interface to our robot.
 #
 # Check here: http://www.openrobots.org/morse/doc/stable/user/integration.html
@@ -58,7 +74,8 @@ robot.add_default_interface('socket')
 
 
 # set 'fastmode' to True to switch to wireframe mode
-env_path = '/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/environments/water-walls.blend'
+env_path = 'outdoors'
+# env_path = '/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/environments/water-walls.blend'
 # env_path = 'indoors-1/indoor-1'
 env = Environment(env_path, fastmode=False)
 env.set_camera_location([-18.0, -6.7, 10.8])
