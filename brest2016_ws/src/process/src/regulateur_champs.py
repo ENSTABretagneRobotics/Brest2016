@@ -9,7 +9,7 @@ from std_msgs.msg import Float32MultiArray
 
 
 def update_cap(msg):
-    global cap, robot_type
+    global cap, robot_type, vitesse_boat
     # print msg.pose.orientation, type(msg.pose.orientation)
     if robot_type == 'normal':
         cap = tf.transformations.euler_from_quaternion(
@@ -17,6 +17,7 @@ def update_cap(msg):
              msg.pose.orientation.y,
              msg.pose.orientation.z,
              msg.pose.orientation.w])[2]
+        vitesse_boat = 1
     elif robot_type == 'thomas_boat':
         cap = msg.data[0]
 
@@ -39,7 +40,7 @@ def fetch_param(name, default):
         return rospy.get_param(name)
     else:
         print 'parameter [%s] not defined.' % name
-        print 'Defaulting to' , default
+        print 'Defaulting to', default
         return default
 
 rospy.init_node('regulateur')

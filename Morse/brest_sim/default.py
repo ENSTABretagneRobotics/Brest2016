@@ -34,7 +34,8 @@ obstacle.rotate(0.0, 0.0, 0)
 # a custom actuator.
 motion = MotionVW()
 robot.append(motion)
-obstacle.append(motion)
+motion.add_stream('ros')
+# obstacle.append(motion)
 
 
 # Add a keyboard controller to move the robot with arrow keys.
