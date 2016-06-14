@@ -110,6 +110,10 @@ class ObjectivesTestPlot():
         U, V = vfl.obstacle_point(
             X, Y, 0, 0, K=0.2, R=20, security='MEDIUM',
             slowing_R=1, slowing_K=3)
+        x, y = vfl.obstacle_point(
+            3, 4, 0, 0, K=0.2, R=20, security='MEDIUM',
+            slowing_R=1, slowing_K=3)
+        print x, y
         plt.quiver(X, Y, U, V, scale=2)
         plt.show()
 
@@ -269,7 +273,8 @@ if __name__ == '__main__':
     # otp.test_dir_tournant()
     # otp.test_dir_segment_complet()
     # plot_test.test_parameter()
-    otp.exemple_patrouille()
+    # otp.exemple_patrouille()
+    otp.test_obstacle_point()
     # otp.test_patrouille_circulaire()
 
     # run all ObjectivesTestPlot methods

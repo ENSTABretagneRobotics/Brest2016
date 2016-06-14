@@ -243,6 +243,10 @@ def main_manager():
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
     manager = BehaviorManager()
 
+    info1 = Behavior_info(f_type='obst_point', behavior_id='001', xa=0, ya=0,
+                          K=3, R=5, slowing_R=1, slowing_K=5,
+                          security='HIGH', effect_range=10)
+    b1 = Behavior(info1)
     # Behavior 2 - limite
     info2 = Behavior_info(f_type='limite', behavior_id='002', xa=-5, ya=5,
                           xb=5, yb=5, K=3, R=5, slowing_R=1, slowing_K=5,
@@ -253,9 +257,10 @@ def main_manager():
                           xa=0, ya=0, K=0.1, R=5)
     b3 = Behavior(info3)
 
-    manager.add_behavior(b2)
-    manager.add_behavior(b3)
-    manager.add_behavior(b2)
+    manager.handle_behavior(b1, 'update')
+    # manager.add_behavior(b2)
+    # manager.add_behavior(b3)
+    # manager.add_behavior(b2)
 
     res = manager.champ_total.cmd_point(X, Y)
     print manager.champ_total.cmd_point(0, 0)
