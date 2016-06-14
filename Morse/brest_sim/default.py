@@ -15,11 +15,16 @@ from morse.builder import *
 # robot = Morsy()
 robot = ATRV()
 
+obstacle = ATRV()
+
 # The list of the main methods to manipulate your components
 # is here:
 # http://www.openrobots.org/morse/doc/stable/user/builder_overview.html
 robot.translate(1.0, 0.0, 0.0)
 robot.rotate(0.0, 0.0, 3.5)
+
+obstacle.translate(-2.0, 0.0, 0.0)
+obstacle.rotate(0.0, 0.0, 0)
 
 # Add a motion controller
 # Check here the other available actuators:
@@ -29,11 +34,12 @@ robot.rotate(0.0, 0.0, 3.5)
 # a custom actuator.
 motion = MotionVW()
 robot.append(motion)
+obstacle.append(motion)
 
 
 # Add a keyboard controller to move the robot with arrow keys.
 keyboard = Keyboard()
-robot.append(keyboard)
+obstacle.append(keyboard)
 keyboard.properties(ControlType='Position')
 
 # Add a pose sensor that exports the current location and orientation
@@ -43,8 +49,12 @@ keyboard.properties(ControlType='Position')
 #
 # 'morse add sensor <name> brest_sim' can help you with the creation
 # of a custom sensor.
-# pose = Pose()
-# robot.append(pose)
+pose1 = Pose()
+pose2 = Pose()
+robot.append(pose1)
+obstacle.append(pose2)
+pose1.add_stream('ros')
+pose2.add_stream('ros')
 
 
 kinect = Kinect()
@@ -66,6 +76,7 @@ sick.frequency(1.0)
 
 sick.add_stream('ros')
 robot.append(sick)
+
 # To ease development and debugging, we add a socket interface to our robot.
 #
 # Check here: http://www.openrobots.org/morse/doc/stable/user/integration.html
