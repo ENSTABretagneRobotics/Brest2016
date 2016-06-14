@@ -50,7 +50,9 @@ keyboard.properties(ControlType='Position')
 # 'morse add sensor <name> brest_sim' can help you with the creation
 # of a custom sensor.
 pose1 = Pose()
+pose1.name = 'pose'
 pose2 = Pose()
+pose2.name = 'pose'
 robot.append(pose1)
 obstacle.append(pose2)
 pose1.add_stream('ros')
