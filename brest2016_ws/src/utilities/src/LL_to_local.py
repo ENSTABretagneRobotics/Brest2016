@@ -7,7 +7,7 @@ import tf
 from sensor_msgs.msg import NavSatFix
 from sensors.msg import YPR
 from geometry_msgs.msg import PoseStamped
-from math import pi, cos, atan2
+from math import pi, cos
 
 LAT0 = 48.417753
 LON0 = -4.474413
@@ -29,7 +29,7 @@ def update_pose(msg):
     y, x = ll2local(LAT0, LON0, msg.latitude, msg.longitude, R)
     print x, y
 
-    pos.header.frame_id = 'world'
+    pos.header.frame_id = 'boat_frame'
     pos.header.stamp = rospy.Time.now()
     pos.pose.position.x = x
     pos.pose.position.y = y
