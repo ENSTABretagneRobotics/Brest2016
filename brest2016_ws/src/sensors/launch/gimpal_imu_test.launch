@@ -5,11 +5,11 @@
   	</node>
 
   	<node name="imu_boat" pkg="sensors" type="imu_node.py">
-    	<param name="port" value="/dev/ttyUSB1"/>
+    	<param name="port" value="/dev/ttyUSB0"/>
   	</node>
 
 	<node name="imu_gimbal" pkg="sensors" type="imu_node.py">
-    	<param name="port" value="/dev/ttyUSB2"/>
+    	<param name="port" value="/dev/ttyUSB1"/>
   	</node>
 
 </launch>
