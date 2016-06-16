@@ -33,6 +33,7 @@ char frameid[] = "/ir_ranger";
 
 void setup()
 {
+  nh.getHardware()->setBaud(115200);
   nh.initNode();
   nh.advertise(pub_range);
   

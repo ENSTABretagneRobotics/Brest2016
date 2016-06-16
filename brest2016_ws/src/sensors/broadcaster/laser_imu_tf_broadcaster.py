@@ -9,12 +9,14 @@
 import rospy
 import tf
 from sensors.msg import YPR
+from math import radians
 
 
 def update_transform(msg):
     " Updates the transform data that are going to be published"
     global quaternion
-    quaternion = tf.transformations.quaternion_from_euler(msg.R, msg.P, msg.Y)
+    quaternion = tf.transformations.quaternion_from_euler(
+        radians(msg.R), radians(msg.P), radians(msg.Y))
 
 if __name__ == '__main__':
     rospy.init_node('laser2boat_tf_broadcaster')
@@ -28,9 +30,9 @@ if __name__ == '__main__':
     quaternion = [0, 0, 0, 1]
     # LOOP
     while not rospy.is_shutdown():
-        br.sendTransform((100, 0.0, 0.0),
+        br.sendTransform((0.0, 0.0, 0.0),
                          tuple(quaternion),
                          rospy.Time.now(),
                          "laser_frame",
-                         "boat_frame")
+                         "world")
         rate.sleep()

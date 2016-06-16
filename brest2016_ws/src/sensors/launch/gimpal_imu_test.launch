@@ -5,11 +5,21 @@
   	</node>
 
   	<node name="imu_boat" pkg="sensors" type="imu_node.py">
-    	<param name="port" value="/dev/ttyUSB0"/>
-  	</node>
+    	<param name="port" value="/dev/ttyUSB2"/>
+      <remap from="imu" to="imu_boat" />
+    </node>
 
-	<node name="imu_gimbal" pkg="sensors" type="imu_node.py">
-    	<param name="port" value="/dev/ttyUSB1"/>
-  	</node>
+  <node name="imu_gimbal" pkg="sensors" type="imu_node.py">
+      <param name="port" value="/dev/ttyUSB3"/>
+      <remap from="imu" to="imu_laser" />
+    </node>
+
+  <node name="laser_imu_tf" pkg="sensors" type="laser_imu_tf_broadcaster.py"/>
+  
+  <node name="boat_imu_tf" pkg="sensors" type="boat_tf_broadcaster.py"/>
+
+  <node name="laser_to_point" pkg="process" type="range_to_point.py"/>
+
+  <!-- <node name="range" pkg="rqt_plot" type="rqt_plot" args="/range_data/ "/> -->
 
 </launch>

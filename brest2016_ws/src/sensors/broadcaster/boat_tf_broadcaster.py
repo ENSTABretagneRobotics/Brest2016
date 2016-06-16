@@ -10,12 +10,14 @@ import rospy
 import tf
 from sensors.msg import YPR
 from geometry_msgs.msg import PoseStamped
+from math import radians
 
 
 def update_quaternion(msg):
     " Updates the transform data that are going to be published"
     global quaternion
-    quaternion = tf.transformations.quaternion_from_euler(msg.R, msg.P, msg.Y)
+    quaternion = tf.transformations.quaternion_from_euler(
+        radians(msg.R), radians(msg.P), radians(msg.Y))
 
 
 def update_pose(msg):
@@ -40,7 +42,8 @@ if __name__ == '__main__':
     x, y, z = 0, 0, 0
     # LOOP
     while not rospy.is_shutdown():
-        br.sendTransform((x, y, z),
+        # br.sendTransform((x, y, z),
+        br.sendTransform((0, 0, 0),
                          tuple(quaternion),
                          rospy.Time.now(),
                          "boat_frame",
