@@ -20,16 +20,21 @@ def publish_point(msg):
     ps.header.frame_id = 'laser_frame'
     ps.point.x = msg.range
 
-    listener.waitForTransform(
-        "laser_frame", "boat_frame", rospy.Time().now(), rospy.Duration(5))
-    ps2 = listener.transformPoint('boat_frame', ps)
-    listener.waitForTransform(
-        "laser_frame", "world", rospy.Time().now(), rospy.Duration(5))
-    ps3 = listener.transformPoint('world', ps)
+    log = 'Range: {} ... Point.x: {}'.format(msg.range, ps.point.x)
+    rospy.loginfo(log)
 
     pub.publish(ps)
-    pub2.publish(ps2)
-    pub3.publish(ps3)
+
+    # wait for transform takes too long
+    # listener.waitForTransform(
+    #     "laser_frame", "boat_frame", rospy.Time().now(), rospy.Duration(1))
+    # ps2 = listener.transformPoint('boat_frame', ps)
+    # listener.waitForTransform(
+    #     "laser_frame", "world", rospy.Time().now(), rospy.Duration(1))
+    # ps3 = listener.transformPoint('world', ps)
+
+    # pub2.publish(ps2)
+    # pub3.publish(ps3)
 
 
 if __name__ == '__main__':
@@ -42,9 +47,9 @@ if __name__ == '__main__':
     sub = rospy.Subscriber('range_data', Range, publish_point)
     # Publisher
     pub = rospy.Publisher('laser_point', PointStamped, queue_size=1)
-    pub2 = rospy.Publisher('laser_point_boat_frame',
-                           PointStamped, queue_size=1)
-    pub3 = rospy.Publisher('laser_point_world_frame',
-                           PointStamped, queue_size=1)
+    # pub2 = rospy.Publisher('laser_point_boat_frame',
+    #                        PointStamped, queue_size=1)
+    # pub3 = rospy.Publisher('laser_point_world_frame',
+    #                        PointStamped, queue_size=1)
 
     rospy.spin()

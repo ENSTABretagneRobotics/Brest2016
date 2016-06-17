@@ -35,6 +35,7 @@ void setup()
 {
   nh.getHardware()->setBaud(115200);
   nh.initNode();
+  nh.getHardware()->setBaud(115200);
   nh.advertise(pub_range);
   
   range_msg.radiation_type = sensor_msgs::Range::INFRARED;

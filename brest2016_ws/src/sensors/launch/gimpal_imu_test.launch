@@ -5,12 +5,12 @@
   	</node>
 
   	<node name="imu_boat" pkg="sensors" type="imu_node.py">
-    	<param name="port" value="/dev/ttyUSB2"/>
+    	<param name="port" value="/dev/ttyUSB1"/>
       <remap from="imu" to="imu_boat" />
     </node>
 
   <node name="imu_gimbal" pkg="sensors" type="imu_node.py">
-      <param name="port" value="/dev/ttyUSB3"/>
+      <param name="port" value="/dev/ttyUSB2"/>
       <remap from="imu" to="imu_laser" />
     </node>
 
