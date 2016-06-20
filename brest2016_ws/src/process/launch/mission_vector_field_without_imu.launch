@@ -5,8 +5,10 @@
 	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py"/>
 	<node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"
         name="broadcaster_fixed" />
-	<node name="regulateur_champs" pkg="process" type="regulateur_champs.py"/>
-	<node name="local_pose_convertor" pkg="utilities" type="LL_to_local.py"/>
+	<node name="regulateur_champs" pkg="process" type="regulateur_champs_char.py"/>
+	<node name="local_pose_convertor" pkg="utilities" type="LL_to_local.py">
+		<remap from="imu" to="imu_boat"/>
+	</node>
 	<node name="gps_driver" pkg="nmea_navsat_driver" type="nmea_serial_driver">
 		<param name="port" value="/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0"/>
     	<param name="baud" value="4800"/>

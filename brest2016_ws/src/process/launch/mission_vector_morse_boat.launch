@@ -12,7 +12,7 @@
 	<node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"
         name="broadcaster_fixed" />
 
-	<node name="regulateur_champs3" pkg="process" type="regulateur_champs3.py">
+	<node name="regulateur_champs" pkg="process" type="regulateur_champs_boat.py">
 		<param name="speed_zero" value="0"/>
 		<param name="vHigh" value="5"/>
 		<param name="vLow" value="1"/>
@@ -29,5 +29,5 @@
 		<remap from="gps/local_pose" to="boat/gps/pose"/>
 	</node>
 
-	<node name="gui_behavior_adder" pkg="process" type="gui_behavior_adder.py"/>
+	<node name="gui_behavior_adder" pkg="process" type="behavior_adder_gui.py"/>
 </launch>

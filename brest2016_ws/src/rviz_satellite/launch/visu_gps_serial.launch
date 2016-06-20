@@ -5,7 +5,9 @@
 
   <node pkg="rviz" type="rviz" name="RViz"/>
   <node pkg="rqt_gui" type="rqt_gui" name="RQT"/>
-  <node pkg="utilities" type="LL_to_local.py" name="LatLong_to_local"/>
+  <node pkg="utilities" type="LL_to_local.py" name="LatLong_to_local">
+		<remap from="imu" to="imu_boat"/>
+	</node>
 
   <node pkg="nmea_navsat_driver" type="nmea_serial_driver" name="GPS_reader">
   	<param name="baud" value="4800" />

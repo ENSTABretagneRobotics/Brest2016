@@ -130,10 +130,10 @@ class Behavior_info():
 
 
 class BehaviorManager():
-    """Cette classe contient les outils pour créer,
-     mettre à jour et publier les listes d'obstacles
+    """Cette classe contient les outils pour creer,
+     mettre a jour et publier les listes d'obstacles
      et d'objectifs, ainsi que les champs de vecteurs
-     associés """
+     associes """
 
     def __init__(self):
         self.behavior_list = []

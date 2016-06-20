@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#envoie les commandes a la polulu
+# envoie les commandes a la polulu
 
 
 import maestro
