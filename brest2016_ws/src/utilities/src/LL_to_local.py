@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+
+# conversion lat/long vers local
+# renvoie l orientation du robot
 # Lat Long - UTM, UTM - Lat Long conversions
 
 import rospy

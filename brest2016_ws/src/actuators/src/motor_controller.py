@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+
+#envoie les commandes a la polulu
+
+
 import maestro
 import rospy
 from geometry_msgs.msg import Twist

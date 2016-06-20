@@ -1,4 +1,8 @@
 #!/usr/bin/env  python
+
+# creer un obstacle suivant une position GPS mouvante
+
+
 import rospy
 from process.srv import behavior
 from process.msg import BehaviorInfo

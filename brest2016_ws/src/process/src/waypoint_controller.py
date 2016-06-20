@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+
+# publie le cap desire pour le suivi de waypoints
+
+
 import rospy
 from geometry_msgs.msg import PoseStamped, Pose
 from std_msgs.msg import Float64

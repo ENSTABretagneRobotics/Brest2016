@@ -1,4 +1,10 @@
 #!/usr/bin/env  python
+
+# recoit les behaviors,
+# s'abonne a la position GPS
+# afin de publier le vecteur a suivre
+
+
 import rospy
 from process.srv import behavior, behaviorResponse
 from geometry_msgs.msg import Vector3, PoseStamped, PointStamped

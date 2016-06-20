@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+
+# regulateur suivi de waypoints
+
+
 import rospy
 from math import sin, cos
 from std_msgs.msg import Float64

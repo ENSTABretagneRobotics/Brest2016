@@ -1,4 +1,5 @@
 <!-- Mission de suivi de waypoints -->
+<!-- Morse + char -->
 <launch>
 	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py">
 		<param name="linear_twist" value="0"/>

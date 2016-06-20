@@ -1,4 +1,9 @@
 #!/usr/bin/env  python
+
+
+# publie les donnees AIS
+
+
 import serial
 import rospy
 import ais.stream

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+
+#conversion lat/long vers UTM
 # Lat Long - UTM, UTM - Lat Long conversions
 
 import rospy
@@ -64,8 +66,8 @@ _ellipsoid = [
 #            double &UTMNorthing, double &UTMEasting, char* UTMZone)
 
 def LLtoUTM(ReferenceEllipsoid, Lat, Long):
-# converts lat/long to UTM coords.  Equations from USGS Bulletin 1532 
-# East Longitudes are positive, West longitudes are negative. 
+# converts lat/long to UTM coords.  Equations from USGS Bulletin 1532
+# East Longitudes are positive, West longitudes are negative.
 # North latitudes are positive, South latitudes are negative
 # Lat and Long are in decimal degrees
 # Written by Chuck Gantz- chuck.gantz@globalstar.com
@@ -81,7 +83,7 @@ def LLtoUTM(ReferenceEllipsoid, Lat, Long):
     LongRad = LongTemp*_deg2rad
 
     ZoneNumber = int((LongTemp + 180)/6) + 1
-  
+
     if Lat >= 56.0 and Lat < 64.0 and LongTemp >= 3.0 and LongTemp < 12.0:
         ZoneNumber = 32
 
@@ -107,11 +109,11 @@ def LLtoUTM(ReferenceEllipsoid, Lat, Long):
     M = a*((1
             - eccSquared/4
             - 3*eccSquared*eccSquared/64
-            - 5*eccSquared*eccSquared*eccSquared/256)*LatRad 
+            - 5*eccSquared*eccSquared*eccSquared/256)*LatRad
            - (3*eccSquared/8
               + 3*eccSquared*eccSquared/32
               + 45*eccSquared*eccSquared*eccSquared/1024)*sin(2*LatRad)
-           + (15*eccSquared*eccSquared/256 + 45*eccSquared*eccSquared*eccSquared/1024)*sin(4*LatRad) 
+           + (15*eccSquared*eccSquared/256 + 45*eccSquared*eccSquared*eccSquared/1024)*sin(4*LatRad)
            - (35*eccSquared*eccSquared*eccSquared/3072)*sin(6*LatRad))
 
     UTMEasting = (k0*N*(A+(1-T+C)*A*A*A/6
@@ -162,10 +164,10 @@ def _UTMLetterDesignator(Lat):
 
 def UTMtoLL(ReferenceEllipsoid, northing, easting, zone):
 
-#converts UTM coords to lat/long.  Equations from USGS Bulletin 1532 
-#East Longitudes are positive, West longitudes are negative. 
+#converts UTM coords to lat/long.  Equations from USGS Bulletin 1532
+#East Longitudes are positive, West longitudes are negative.
 #North latitudes are positive, South latitudes are negative
-#Lat and Long are in decimal degrees. 
+#Lat and Long are in decimal degrees.
 #Written by Chuck Gantz- chuck.gantz@globalstar.com
 #Converted to Python by Russ Nelson <nelson@crynwr.com>
 
@@ -193,7 +195,7 @@ def UTMtoLL(ReferenceEllipsoid, northing, easting, zone):
     M = y / k0
     mu = M/(a*(1-eccSquared/4-3*eccSquared*eccSquared/64-5*eccSquared*eccSquared*eccSquared/256))
 
-    phi1Rad = (mu + (3*e1/2-27*e1*e1*e1/32)*sin(2*mu) 
+    phi1Rad = (mu + (3*e1/2-27*e1*e1*e1/32)*sin(2*mu)
                + (21*e1*e1/16-55*e1*e1*e1*e1/32)*sin(4*mu)
                +(151*e1*e1*e1/96)*sin(6*mu))
     phi1 = phi1Rad*_rad2deg;

@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+
+# envoie le waypoint suivant
+
+
 import rospy
 from math import sqrt
 from geometry_msgs.msg import Pose, PoseStamped

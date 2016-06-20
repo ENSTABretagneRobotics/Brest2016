@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+
+# transforme la commande en un rampe pour l'envoyer aux moteurs
+
+
 import rospy
 import math
 from std_msgs.msg import String

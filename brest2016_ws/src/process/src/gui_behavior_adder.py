@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+
+
+# interface graphique permettant d ajouter des behaviors
+
+
 import rospy
 from Tkinter import *
 from process.msg import BehaviorInfo

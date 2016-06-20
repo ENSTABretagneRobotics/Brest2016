@@ -1,3 +1,5 @@
+# librairie des differents type de champs de vecteur
+
 import numpy as np
 from numpy.linalg import det
 from numpy.linalg import norm

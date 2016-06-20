@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+
+
+# cree un fichier csv avec les coordonnees GPS lat/long
+
+
 """
 ROS Node to log GPS data (NavSatFix format) to a CSV file
 """

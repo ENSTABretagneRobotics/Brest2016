@@ -1,3 +1,3 @@
-# Array of BehaviorInfo messages
+# Array of VectorField messages
 
 Float64MultiArray[] array

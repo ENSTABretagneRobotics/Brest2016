@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+
+
+# publie la transformee entre map et world
+
+
 import rospy
 import tf
 

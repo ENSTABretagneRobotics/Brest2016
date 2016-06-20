@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+
+
+# cree des markers sur la carte pour recuperer la trajectoire du robot
+
+
 """
 ROS Node to plot the trajectory of the robot on RViz using Markers
 """

@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+
+
+# simule un char
+
+
 import rospy
 from geometry_msgs.msg import Vector3, PoseStamped
 import tf

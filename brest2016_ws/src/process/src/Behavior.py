@@ -1,3 +1,6 @@
+# defini les differents types de behavior
+# et les informations qu il doivent contenir
+
 # -*- coding: utf-8 -*-
 # import champs_numpy as cn
 import vectorFieldLib as vfl

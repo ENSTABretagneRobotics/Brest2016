@@ -1,4 +1,8 @@
 #!/usr/bin/env  python
+
+# envoie un behavior au serveur
+
+
 import rospy
 from process.srv import behavior
 from process.msg import BehaviorInfo
