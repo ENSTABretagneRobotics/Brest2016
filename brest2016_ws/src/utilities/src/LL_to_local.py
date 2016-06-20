@@ -3,9 +3,8 @@
 # Lat Long - UTM, UTM - Lat Long conversions
 
 import rospy
-import tf
-from sensor_msgs.msg import NavSatFix
-from sensors.msg import YPR
+# import tf
+from sensor_msgs.msg import NavSatFix, Imu
 from geometry_msgs.msg import PoseStamped
 from math import pi, cos
 
@@ -38,18 +37,13 @@ def update_pose(msg):
 
 def update_orientation(msg):
     global pos
-    quaternion = tf.transformations.quaternion_from_euler(
-        -deg2rad(msg.R), -deg2rad(msg.P), -deg2rad(msg.Y))
-    pos.pose.orientation.x = quaternion[0]
-    pos.pose.orientation.y = quaternion[1]
-    pos.pose.orientation.z = quaternion[2]
-    pos.pose.orientation.w = quaternion[3]
+    pos.pose.orientation = msg.orientation
 
 
 rospy.init_node('Local_publisher')
 
 sub_gps = rospy.Subscriber('gps', NavSatFix, update_pose)
-sub_imu = rospy.Subscriber('imu', YPR, update_orientation)
+sub_imu = rospy.Subscriber('imu', Imu, update_orientation)
 pub = rospy.Publisher('gps/local_pose', PoseStamped, queue_size=1)
 
 pos = PoseStamped()

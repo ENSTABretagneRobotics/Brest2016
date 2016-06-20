@@ -20,8 +20,8 @@ def publish_point(msg):
     ps.header.frame_id = 'laser_frame'
     ps.point.x = msg.range
 
-    log = 'Range: {} ... Point.x: {}'.format(msg.range, ps.point.x)
-    rospy.loginfo(log)
+    # log = 'Range: {} ... Point.x: {}'.format(msg.range, ps.point.x)
+    # rospy.loginfo(log)
 
     pub.publish(ps)
 

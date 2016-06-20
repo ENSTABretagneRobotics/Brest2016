@@ -1,0 +1,106 @@
+.
+├── actuators
+│   └── src
+│       ├── cmd_to_ramp.py
+│       ├── maestro.py
+│       └── motor_controller.py
+├── nmea_navsat_driver-indigo-devel
+│   ├── scripts
+│   ├── setup.py
+│   └── src
+│       └── libnmea_navsat_driver
+│           ├── checksum_utils.py
+│           ├── driver.py
+│           ├── __init__.py
+│           └── parser.py
+├── process
+│   ├── launch
+│   │   ├── depth_processin.launch
+│   │   ├── mission_vector_field.launch
+│   │   ├── mission_vector_field_without_imu.launch
+│   │   ├── mission_vector_morse_boat.launch
+│   │   ├── mission_vector_morse.launch
+│   │   └── mission_waypoint.launch
+│   ├── msg
+│   │   ├── BehaviorInfoArray.msg
+│   │   ├── BehaviorInfo.msg
+│   │   └── VectorFieldArray.msg
+│   ├── src
+│   │   ├── behavior_client1.py
+│   │   ├── behavior_client2.py
+│   │   ├── behavior_client3.py
+│   │   ├── behavior_client4.py
+│   │   ├── behavior_client5.py
+│   │   ├── behavior_client_n.py
+│   │   ├── behavior_client.py
+│   │   ├── Behavior.py
+│   │   ├── behavior_server.py
+│   │   ├── champs_numpy.py
+│   │   ├── char_obstacle.py
+│   │   ├── gui_behavior_adder.py
+│   │   ├── heading_controller.py
+│   │   ├── range_to_point.py
+│   │   ├── regulateur_champs2.py
+│   │   ├── regulateur_champs3.py
+│   │   ├── regulateur_champs.py
+│   │   ├── regulateur.py
+│   │   ├── vectorFieldLib.py
+│   │   ├── waypoint_controller.py
+│   │   └── waypoint_manager.py
+│   └── srv
+│       └── behavior.srv
+├── rviz_satellite
+│   ├── launch
+│   │   ├── visu_gps_rosbag.launch
+│   │   └── visu_gps_serial.launch
+│   ├── mapscache
+│   │   ├── 15335485404152992233
+│   │   ├── 3729120696934546539
+│   │   ├── 3746199047775563636
+│   │   ├── 6142509188972423790
+│   │   ├── 6250669944838496732
+│   │   └── 9088652288143206686
+│   ├── my_maps
+│   └── src
+│       └── map2world_tf_broadcaster.py
+├── sensors
+│   ├── broadcaster
+│   │   ├── boat_tf_broadcaster.py
+│   │   └── laser_imu_tf_broadcaster.py
+│   ├── laserNode_arduino
+│   ├── launch
+│   │   ├── gimpal_imu_test.launch
+│   │   └── laser_simple.launch
+│   ├── msg
+│   │   ├── AISVDM.msg
+│   │   └── YPR.msg
+│   └── src
+│       ├── AISVDM_publisher.py
+│       ├── Camera_publisher.py
+│       ├── gimbal_imu.py
+│       └── imu_node.py
+├── simulation2d
+│   ├── launch
+│   │   ├── simulation3d_gazebo.launch
+│   │   ├── simulation_behavior_char_2d_gui.launch
+│   │   └── simulation_behavior_char_2d.launch
+│   └── src
+│       └── sim_char.py
+├── teleop
+│   ├── launch
+│   │   ├── teleop_morse.launch
+│   │   └── telop_rob.launch
+│   └── src
+│       ├── key_publisher.py
+│       ├── keys_to_twist_morse.py
+│       └── keys_to_twist.py
+└── utilities
+    └── src
+        ├── LL_to_csv.py
+        ├── LL_to_local.py
+        ├── LL_to_local_without_imu.py
+        ├── LL_to_UTM.py
+        ├── trajectory_markers.py
+        └── VectorField.py
+
+36 directories, 67 files

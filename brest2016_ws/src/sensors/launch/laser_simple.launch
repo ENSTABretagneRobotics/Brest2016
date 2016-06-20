@@ -4,6 +4,6 @@
     	<param name="baud" value="115200"/>
   	</node>
 
-	<node name="range" pkg="rqt_plot" type="rqt_plot" args="/range_data/ "/>
+	<!-- <node name="range" pkg="rqt_plot" type="rqt_plot" args="/range_data/ "/> -->
 
 </launch>
