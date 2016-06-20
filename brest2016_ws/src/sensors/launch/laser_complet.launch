@@ -1,7 +1,7 @@
 <!-- test pour le module gimbal complet-->
 
 <launch>
-	<node name="serial_node" pkg="rosserial_python" type="serial_node.py">
+<!-- 	<node name="serial_node" pkg="rosserial_python" type="serial_node.py">
     	<param name="port" value="/dev/ttyACM0"/>
     	<param name="baud" value="115200"/>
   	</node>
@@ -15,17 +15,17 @@
       <remap from="imu" to="imu_laser" />
       <rosparam file="$(find sensors)/config/imu_laser.yaml" command="load"/>
     </node>
-
+ -->
   <node name="laser_imu_tf" pkg="sensors" type="laser_imu_tf_broadcaster.py"/>
   
   <node name="boat_imu_tf" pkg="sensors" type="boat_tf_broadcaster.py"/>
 
   <node name="laser_to_point" pkg="sensors" type="range_to_point.py"/>
 
-  <node pkg="nmea_navsat_driver" type="nmea_serial_driver" name="GPS_reader">
+  <!-- <node pkg="nmea_navsat_driver" type="nmea_serial_driver" name="GPS_reader">
     <param name="baud" value="4800" />
     <param name="port" value="/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0" />
-  </node>
+  </node> -->
 
   <!-- <node name="range" pkg="rqt_plot" type="rqt_plot" args="/range_data/ "/> -->
   <!-- pololu dev/ttyACM0 && dev/ttyACM1-->

@@ -45,8 +45,8 @@ if __name__ == '__main__':
     x, y, z = 0, 0, 0
     # LOOP
     while not rospy.is_shutdown():
-        # br.sendTransform((x, y, z),
-        br.sendTransform((0, 0, 0),
+        br.sendTransform((x, y, z),
+        # br.sendTransform((0, 0, 0),
                          (quat.x, quat.y, quat.z, quat.w),
                          rospy.Time.now(),
                          "boat_frame",
