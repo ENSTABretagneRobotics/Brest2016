@@ -22,6 +22,8 @@
 
   <node name="laser_to_point" pkg="sensors" type="range_to_point.py"/>
 
+  <node name="servo_laser" pkg="actuators" type="servo_laser_controller.py"/>
+
   <!-- <node pkg="nmea_navsat_driver" type="nmea_serial_driver" name="GPS_reader">
     <param name="baud" value="4800" />
     <param name="port" value="/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0" />
