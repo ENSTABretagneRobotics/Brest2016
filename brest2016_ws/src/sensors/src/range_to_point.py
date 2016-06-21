@@ -4,6 +4,7 @@
 # ########################################################
 # This node transform the range read by the laser to a
 # 3D point in the frame of the laser
+# filter out infinity
 # ########################################################
 
 import rospy
@@ -23,7 +24,8 @@ def publish_point(msg):
     # log = 'Range: {} ... Point.x: {}'.format(msg.range, ps.point.x)
     # rospy.loginfo(log)
 
-    pub.publish(ps)
+    if msg.range > 0.01:
+        pub.publish(ps)
 
     # wait for transform takes too long
     # listener.waitForTransform(
