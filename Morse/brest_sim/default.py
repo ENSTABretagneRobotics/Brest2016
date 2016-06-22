@@ -40,8 +40,9 @@ motion.add_stream('ros')
 
 # Add a keyboard controller to move the robot with arrow keys.
 keyboard = Keyboard()
-obstacle.append(keyboard)
-keyboard.properties(Speed=5.0, ControlType='Position')
+robot.append(keyboard)
+# obstacle.append(keyboard)
+keyboard.properties(Speed=1.0, ControlType='Position')
 # keyboard.properties(ControlType='Velocity')
 
 # Add a pose sensor that exports the current location and orientation

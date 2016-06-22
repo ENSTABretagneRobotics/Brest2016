@@ -1,0 +1,717 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"beha",
+				"gui_behavior_adder"
+			],
+			[
+				"butt",
+				"validate_button"
+			],
+			[
+				"s",
+				"s_entry	statement"
+			],
+			[
+				"way",
+				"waypoint_radio_button	statement"
+			],
+			[
+				"ch",
+				"champ_total	statement"
+			],
+			[
+				"beh",
+				"behavior_list	statement"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "brest2016_ws/src/sensors/src/range_to_point.py",
+			"settings":
+			{
+				"buffer_size": 1806,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "#!/usr/bin/env python\n\n# @author Alaa El Jawad\n# ########################################################\n# This node transform the range read by the laser to a\n# 3D point in a PointCloud2 msg\n# ########################################################\n\nimport rospy\nfrom sensor_msgs.msg import Range, PointCloud2\nfrom geometry_msgs.msg import PointStamped\nfrom sensor_msgs import point_cloud2 as pc2\nimport tf\n\n\ndef convert_to_pcl2(msg):\n    global old_points, listener\n\n    # if msg.range < 0.01:    # to filter out infinity\n    #     return\n\n    pts = PointStamped()\n    pts.header.frame_id = 'laser_frame'\n    pts.point.x = msg.range\n    print pts.header.frame_id, pts.point.x, pts.point.y, pts.point.z,\n    print pts.header.stamp\n\n    listener.waitForTransform(\n        \"laser_frame\", \"world\", rospy.Time().now(), rospy.Duration(0.1))\n    pts2 = listener.transformPoint('world', pts)\n    # print pts2.header.frame_id, pts2.point.x, pts2.point.y, pts2.point.z\n\n    old_points.append([pts2.point.x, pts2.point.y, pts2.point.z])\n    if len(old_points) > 10:\n        old_points.pop(0)\n\n    pcl = pc2.create_cloud_xyz32(pts2.header, old_points)\n    pub.publish(pcl)\n\n\nif __name__ == '__main__':\n    rospy.init_node('range_to_pcl')\n    listener = tf.TransformListener()\n\n    # Subscriber to the laser's imu\n    sub = rospy.Subscriber('range_data', Range, convert_to_pcl2)\n    pub = rospy.Publisher('laser_pcl', PointCloud2, queue_size=1)\n\n    old_points = []\n\n    rospy.spin()\n",
+			"file": "brest2016_ws/src/sensors/src/range_to_pcl.py",
+			"file_size": 1447,
+			"file_write_time": 131110827189414835,
+			"settings":
+			{
+				"buffer_size": 1475,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "log/laser_no_servo_description.md",
+			"settings":
+			{
+				"buffer_size": 905,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/sensors/launch/laser_complet.launch",
+			"settings":
+			{
+				"buffer_size": 1363,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "# [sublime-markdown-extended](https://github.com/jonschlinkert/sublime-markdown-extended) [![package control total downloads](https://img.shields.io/packagecontrol/dt/Markdown%20Extended.svg?style=flat-square)](https://packagecontrol.io/packages/Markdown%20Extended/)\n\n> Extends Soda's Monokai and the default markdown styles with additional syntax highlighting for\n> [YAML Front Matter](http://assemble.io/docs/YAML-front-matter.html), GitHub Flavored Markdown\n> (GFM) and language-specific syntax highlighting inside [GFM \"fenced\" code blocks](https://help.github.com/articles/github-flavored-markdown#syntax-highlighting)\n\nAlthough substantial changes have been made, thank you [@aziz](https://github.com/aziz) and other contributors to [Knockdown](https://github.com/aziz/knockdown), for the code for the fenced code blocks.\n\nGet [Monokai Extended](https://github.com/jonschlinkert/sublime-monokai-extended) for better highlighting.\n\n#### [Jump to Examples ↓](#markdown-enhancements)\n\n\n## Getting Started\n\n### 1. Installation\n\n#### Package Control\nIf you already have [Package Control](http://wbond.net/sublime_packages/package_control/) installed in Sublime Text:\n\n* Select \"Install Package\" from the Command Palette: <kbd>Ctrl+Shift+P</kbd> on Windows and Linux or <kbd>⇧⌘P</kbd> on OS X)\n* Search for \"**Markdown Extended**\" and click <kbd>enter</kbd>.\n\n\n#### Manual Installation\nGo to `Preferences -> Browse Packages`, and then either download and unzip this plugin into that directory, or:\n\n``` bash\ngit clone https://github.com/jonschlinkert/sublime-markdown-extended.git \"sublime-markdown-extended\"\n```\n\n### 2. Activate this Language\n**After installing this package**, open a markdown file and switch the language to `Markdown Extended`, using one\nof the following methods:\n\n* Select from the list of supported languages in your status bar at the bottom right corner of your editor\n* `ctrl + shift + p` and search for \"Markdown Extended\"\n\n### 3. Make \"Markdown Extended\" the default\nTo make `Markdown Extended` the default highlighting for the current extension:\n\n1. Open a file with the extension you want to set a default for (i.e. `.md`)\n2. Navigate through the following menus in Sublime Text: `View -> Syntax -> Open all with current extension as... -> Markdown Extended`\n\n\n<!-- **Handlebars version**\n\nIncluded in this package is a file named `Markdown Extended.tmLanguage-handlebars`, which provides additional syntax highlighting for Handlebars syntax inside markdown files.\n\nIf you use [assemble](http://assemble.io) for generating documentation, sites or components, then activate the Handlebars version instead. To do so, first delete `Markdown Extended.tmLanguage`, then renamed the extension of `Markdown Extended.tmLanguage-handlebars` to just `.tmLanguage`. -->\n\n\n## Features:\n* Support for [YAML Front Matter](http://assemble.io/docs/YAML-front-matter.html)\n* Support for [GFM \"fenced\" code blocks](https://help.github.com/articles/github-flavored-markdown#syntax-highlighting)\n* Language-specific syntax highlighting support inside [GFM \"fenced\" code blocks](https://help.github.com/articles/github-flavored-markdown#syntax-highlighting) for most popular languages (see below for the list of supported languages)\n* Syntax highlighting for URLs in text which is auto-linked by GFM\n* Proper syntax highlighting for bullets and numbers in ordered/unordered lists\n* Proper syntax highlighting for bold and italics by ignoring multiple underscores in words\n\n\n## Markdown Enhancements\nThe following examples use the [Monokai Extended](https://github.com/jonschlinkert/sublime-monokai-extended) theme.\n\n\n## Whitespace\n\n### Significant whitespace\n\n**Whitespace is significant** _only directly before and directly after fenced code blocks_! Following these instructions will ensure that highlighting works properly and consistently._\n\nThis is very simple:\n\n* **Add a newline** before and after clode blocks\n* **No trailing spaces** after the last code block\n\nIf you don't, it won't break your code but it won't always look awesome.\n\n### Comparisons with and without proper whitespace\n\n#### Whitespace before the block\nYou will need to keep a space above and below fenced code blocks for predictable results with syntax highlighting. For example, this is what it looks like when there is no space before a fenced code block:\n\n![image](https://f.cloud.github.com/assets/383994/782115/470ca012-ea35-11e2-940c-5919386f26bf.png)\n\nThis is what it looks like with proper spacing:\n\n![image](https://f.cloud.github.com/assets/383994/782119/5b27105a-ea35-11e2-9ea8-7a195f381d7c.png)\n\n#### Whitespace after the block\n\nAlso add a new line after code blocks, but make sure that there is no trailing whitespace next to the bottom fence.\n\n**With a trailing whitespace**\n\n![image](https://f.cloud.github.com/assets/383994/782152/0217cb20-ea36-11e2-8cfd-2ea47136fb0c.png)\n\n**Without a trailing whitespace**\n\n![image](https://f.cloud.github.com/assets/383994/782145/f534f1da-ea35-11e2-8689-d606494f7830.png)\n\n### Supported languages\n\nThe following languages are highlighted inside fenced code blocks:\n\nNote that in order for a language to be highlighted properly, you must have the language installed in Sublime Text.\n\n* `coffee|coffeescript`\n* `coffee front matter`\n* `cpp`\n* `csharp`\n* `css`\n* `c`\n* `c++`\n* `diff`\n* `ejs`\n* `erlang`\n* `underscore`\n* `go`\n* `lodash`\n* `handlebars|hbs`: requires the Sublime Text [Handlebars](https://github.com/daaain/Handlebars) package\n* `html|html5`\n* `ini`\n* `jade`\n* `java`\n* `javascript|js`\n* `json`\n* `json front matter`\n* `julia`\n* `less`\n* `ls|livescript|LiveScript`\n* `lua`\n* `md|markdown`\n* `nginx`\n* `objective-c`\n* `objective-c++`\n* `perl`\n* `r`\n* `ruby`\n* `sass`\n* `scala`\n* `scss`\n* `shell`\n* `bash`\n* `sql|ddl|dml`\n* `postgresql|postgres|pgsql`\n* `styl`\n* `swift`\n* `swig`\n* `liquid`\n* `xml`\n* `yaml`\n* `yaml front matter`\n\n\n### CSS\n#### Before\n![image](https://f.cloud.github.com/assets/383994/1525715/7ece6886-4bd9-11e3-831b-e956c5feddba.png)\n\n#### After\n![image](https://f.cloud.github.com/assets/383994/1525717/872193d2-4bd9-11e3-8b44-7dfb08b3aac2.png)\n\n\n### LESS\n#### Before\n![image](https://f.cloud.github.com/assets/383994/1525757/0e74a69e-4bda-11e3-8218-e7adc619b5ae.png)\n\n#### After\n![image](https://f.cloud.github.com/assets/383994/1525760/16ba0376-4bda-11e3-9f54-8cf039c8a6f9.png)\n\n\n### HTML\n#### Before\n![image](https://f.cloud.github.com/assets/383994/1525726/b049629e-4bd9-11e3-853f-04e2e704bbea.png)\n\n#### After\n![image](https://f.cloud.github.com/assets/383994/1525730/b6b4f652-4bd9-11e3-9bab-ab26bf8fc761.png)\n\n\n### JavaScript\n#### Before\n![image](https://f.cloud.github.com/assets/383994/1525736/d94cf5f2-4bd9-11e3-98ff-578062c33853.png)\n\n#### After\n![image](https://f.cloud.github.com/assets/383994/1525739/e09b5006-4bd9-11e3-81a3-17d18527dafa.png)\n\n\n### Coffee\n#### Before\n![image](https://f.cloud.github.com/assets/383994/1525694/1d80acb0-4bd9-11e3-9527-b20bde8ceb0f.png)\n\n#### After\n![image](https://f.cloud.github.com/assets/383994/1525696/2c83774c-4bd9-11e3-83ac-fe70d00e8088.png)\n\n\n### LiveScript\n#### Before\n![image](https://f.cloud.github.com/assets/922234/2147750/62c04f60-93d7-11e3-95bd-bdf287e09751.png)\n#### After\n![image](https://f.cloud.github.com/assets/922234/2147749/62c01cd4-93d7-11e3-956b-058cafade685.png)\n\n\n### Shell\n#### Before\n![image](https://f.cloud.github.com/assets/383994/851162/38fc84ae-f496-11e2-9014-81b91da16232.png)\n\n#### After\n![image](https://f.cloud.github.com/assets/383994/851165/468b3282-f496-11e2-8a2d-ebf6f9c925f6.png)\n\n### YAML Front Matter\nSee [gray-matter](https://github.com/assemble/gray-matter)\n\n#### Before\n![image](https://f.cloud.github.com/assets/383994/726861/2f03fb2a-e13c-11e2-9df0-cb9514b301fe.png)\n\n#### After\n![image](https://f.cloud.github.com/assets/383994/726865/aa2cdb6e-e13c-11e2-89b0-c06923447ec9.png)\n\n### Coffee Front Matter\nSee [gray-matter](https://github.com/assemble/gray-matter)\n\n#### Before\n![image](https://f.cloud.github.com/assets/383994/2179180/fe679602-9694-11e3-938b-1e74196d4341.png)\n\n#### After\n![image](https://f.cloud.github.com/assets/383994/2179172/82a6dc1c-9694-11e3-89f1-772bedf02384.png)\n\n\n## Authors\n\n**Jon Schlinkert**\n\n+ [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)\n+ [http://github.com/jonschlinkert](http://github.com/jonschlinkert)\n\n**Alexander Krivoshhekov**\n\n+ [http://twitter.com/FlatDev](http://twitter.com/FlatDev)\n+ [http://github.com/SuperPaintman](http://github.com/SuperPaintman)\n\n## Copyright and license\nCopyright 2013-2015 Jon Schlinkert\n\n[MIT License](LICENSE-MIT)\n\n",
+			"file": "/home/ejalaa12/.cache/.fr-gzxD0r/README.md",
+			"file_size": 8573,
+			"file_write_time": 131110801120000000,
+			"settings":
+			{
+				"buffer_size": 8567,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "diff --git a/Morse/brest_sim/default.py b/Morse/brest_sim/default.py\nindex 3323dc5..3a6d7ac 100644\n--- a/Morse/brest_sim/default.py\n+++ b/Morse/brest_sim/default.py\n@@ -40,8 +40,9 @@ motion.add_stream('ros')\n \n # Add a keyboard controller to move the robot with arrow keys.\n keyboard = Keyboard()\n-obstacle.append(keyboard)\n-keyboard.properties(Speed=5.0, ControlType='Position')\n+robot.append(keyboard)\n+# obstacle.append(keyboard)\n+keyboard.properties(Speed=1.0, ControlType='Position')\n # keyboard.properties(ControlType='Velocity')\n \n # Add a pose sensor that exports the current location and orientation\n",
+			"settings":
+			{
+				"buffer_size": 609,
+				"line_ending": "Unix",
+				"name": "Git Diff",
+				"read_only": true,
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Anaconda Python Builder",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Anaconda Python Builder",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 138.0,
+		"last_filter": "preview",
+		"selected_items":
+		[
+			[
+				"preview",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"makrd",
+				"Set Syntax: Markdown Extended"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"git diff",
+				"Git: Diff All Files"
+			],
+			[
+				"git pull",
+				"Git: Pull"
+			],
+			[
+				"list pa",
+				"Package Control: List Packages"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git co",
+				"Git: Commit"
+			],
+			[
+				"git add",
+				"Git: Add All"
+			],
+			[
+				"git ommi",
+				"Git: Commit"
+			],
+			[
+				"git qui",
+				"Git: Quick Commit"
+			],
+			[
+				"git quic",
+				"Git: Quick Commit"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"git pus",
+				"Git: Push"
+			],
+			[
+				"gitstat",
+				"Git: Status"
+			],
+			[
+				"git qiu",
+				"Git: Quick Commit"
+			],
+			[
+				"git ad",
+				"Git: Add All"
+			],
+			[
+				"git aa",
+				"Git: Add All"
+			],
+			[
+				"pull",
+				"Git: Pull"
+			],
+			[
+				"xml",
+				"Set Syntax: XML"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"isnta",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/ejalaa12/Desktop/Brest2016",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/src"
+	],
+	"file_history":
+	[
+		"/home/ejalaa12/.config/sublime-text-3/Packages/User/Python.sublime-settings",
+		"/home/ejalaa12/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/ejalaa12/.config/sublime-text-3/Packages/User/JSON.sublime-settings",
+		"/home/ejalaa12/Desktop/ros_ws/ros_ws",
+		"/home/ejalaa12/Desktop/ros_ws/src/useful_nodes/src/tf_fixed.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/char_obstacle.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/Behavior.py",
+		"/home/ejalaa12/Desktop/Brest2016/README.md",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_server.py",
+		"/opt/ros/indigo/setup.bash",
+		"/home/ejalaa12/.bashrc",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/rviz_satellite/src/map2world_tf_broadcaster.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client_n.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_morse.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/vectorFieldLib.py",
+		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/vectorFieldLib_test.py",
+		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/vectorFieldLib_v0.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/gui_behavior_adder.py",
+		"/home/ejalaa12/Desktop/Brest2016/Morse/brest_sim/default.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_morse_boat.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs3.py",
+		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/default.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client1.py",
+		"/home/ejalaa12/Desktop/Jetson_TK1/_installer/logs/install_gameworks_compilers.log",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch/simulation_behavior_char_2d_gui.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src/sim_char.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client2.py",
+		"/home/ejalaa12/Downloads/Python-3.4.2/README",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch/simulation_behavior_char_2d.launch",
+		"/home/ejalaa12/Desktop/Brest2016/.gitignore",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/msg/BehaviorInfo.msg",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_waypoint.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/CMakeLists.txt",
+		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/behavior_manager.py",
+		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/Behavior.py"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"```",
+			"get_param",
+			"profil",
+			"vitesse_boat",
+			"int",
+			"enable",
+			"yb",
+			"Xa",
+			"xa",
+			"Xa",
+			"xa",
+			"Xa",
+			"xa",
+			"Xa",
+			"xa",
+			"xa_label = Label(parameter_frame, text='Xa')\nxa_entry = Spinbox(parameter_frame, from_=-999, to=999, increment=0.1, format='%.2f')",
+			"pack()",
+			"fen",
+			"gedit"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"sublime_text"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "brest2016_ws/src/sensors/src/range_to_point.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1806,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1806,
+								1806
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 135.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "brest2016_ws/src/sensors/src/range_to_pcl.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1475,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								733,
+								733
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 240.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "log/laser_no_servo_description.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 905,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								357,
+								357
+							]
+						],
+						"settings":
+						{
+							"parser": "github",
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"target": "disk"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "brest2016_ws/src/sensors/launch/laser_complet.launch",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1363,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								388,
+								388
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/ejalaa12/.cache/.fr-gzxD0r/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8567,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1845.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 609,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								609,
+								609
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/home/ejalaa12/Desktop/Brest2016",
+							"git_root_dir": "/home/ejalaa12/Desktop/Brest2016",
+							"syntax": "Packages/Diff/Diff.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 112.0
+	},
+	"pinned_build_system": "",
+	"project": "brest2016.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"desc",
+				"log/laser_no_servo_description.md"
+			],
+			[
+				"rangeto",
+				"brest2016_ws/src/sensors/src/range_to_point.py"
+			],
+			[
+				"reg",
+				"brest2016_ws/src/process/src/regulateur_champs_boat.py"
+			],
+			[
+				"defau",
+				"Morse/brest_sim/default.py"
+			],
+			[
+				"tfbo",
+				"brest2016_ws/src/rviz_satellite/src/map2world_tf_broadcaster.py"
+			],
+			[
+				"beha",
+				"brest2016_ws/src/process/src/Behavior.py"
+			],
+			[
+				"vfl",
+				"Brouillon_&_Tests/vectorFieldLib_v0.py"
+			],
+			[
+				"gui",
+				"brest2016_ws/src/process/src/gui_behavior_adder.py"
+			],
+			[
+				"charob",
+				"brest2016_ws/src/process/src/char_obstacle.py"
+			],
+			[
+				"regula",
+				"brest2016_ws/src/process/src/regulateur_champs.py"
+			],
+			[
+				"dfe",
+				"Morse/brest_sim/default.py"
+			],
+			[
+				"default",
+				"Morse/comet_simulator/default.py"
+			],
+			[
+				"defaul",
+				"Morse/brest_sim/default.py"
+			],
+			[
+				"regu",
+				"brest2016_ws/src/process/src/regulateur_champs.py"
+			],
+			[
+				"behcli1",
+				"brest2016_ws/src/process/src/behavior_client1.py"
+			],
+			[
+				"morsedefau",
+				"Morse/comet_simulator/default.py"
+			],
+			[
+				"behams",
+				"brest2016_ws/src/process/msg/BehaviorInfo.msg"
+			],
+			[
+				"behav",
+				"brest2016_ws/src/process/src/Behavior.py"
+			],
+			[
+				"launch",
+				"brest2016_ws/src/process/launch/mission_waypoint.launch"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Desktop/ros_ws/ros_ws.sublime-project"
+			],
+			[
+				"ros",
+				"~/Desktop/ros_ws/ros_ws.sublime-project"
+			],
+			[
+				"bres",
+				"~/Desktop/Brest2016/brest2016.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 348.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

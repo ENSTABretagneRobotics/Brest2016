@@ -4,7 +4,9 @@
 
 On a du filtrer les rosbag:
 ```bash
-rosbag filter laser_no_servo_2016-06-20-17-34-38.bag laser_no_servo_test4_maxDist_both_ins_range.bag 'topic == "/gps" or topic == "/imu_boat" or topic == "/range_data" or topic == "/imu_laser"'
+rosbag filter laser_no_servo_2016-06-20-17-34-38.bag laser_no_servo_test4_maxDist_both_ins_range.bag '  
+topic == "/gps" or topic == "/imu_boat" or topic == "/range_data" or topic == "/imu_laser"'
+... sdf
 ```
 
 Pour simuler les test lancer le roslaunc laser_complet en commentant les noeuds **arduino**, **gps** et **imu**
