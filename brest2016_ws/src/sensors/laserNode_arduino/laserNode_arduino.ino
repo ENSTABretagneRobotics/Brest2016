@@ -45,19 +45,20 @@ void setup()
   range_msg.max_range = 0.4;
 
 
-//  Serial.begin(57600);
+  Serial.begin(115200);
   myLidarLite.begin();
 }
 
 void loop()
 {
-  // publish the range value every 50 milliseconds
+  // publish the range value every 100 milliseconds
   //   since it takes that long for the sensor to stabilize
-  if ( (millis()-range_timer) > 50){
+  if ( (long(millis())-long(range_timer)) > 0){
+    Serial.println("000000000000000000");
     range_msg.range = getRange(analog_pin);
     range_msg.header.stamp = nh.now();
     pub_range.publish(&range_msg);
-    range_timer =  millis() + 50;
+    range_timer =  millis() + 100;
   }
   nh.spinOnce();
 }

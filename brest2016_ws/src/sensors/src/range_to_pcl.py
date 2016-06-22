@@ -30,7 +30,7 @@ def convert_to_pcl2(msg):
 
     start = time.time()
     listener.waitForTransform(
-        "laser_frame", "world", rospy.Time(0), rospy.Duration(0.05))
+        "laser_frame", "world", rospy.Time().now(), rospy.Duration(0.5))
     pts2 = listener.transformPoint('world', pts)
     diff = time.time() - start
     tot += diff
@@ -38,7 +38,7 @@ def convert_to_pcl2(msg):
     # print pts2.header.frame_id, pts2.point.x, pts2.point.y, pts2.point.z
 
     old_points.append([pts2.point.x, pts2.point.y, pts2.point.z])
-    if len(old_points) > 10:
+    if len(old_points) > 200:
         old_points.pop(0)
 
     pcl = pc2.create_cloud_xyz32(pts2.header, old_points)
