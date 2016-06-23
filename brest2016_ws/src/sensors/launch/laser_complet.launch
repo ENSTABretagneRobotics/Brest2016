@@ -21,6 +21,8 @@
   <node name="boat_imu_tf" pkg="sensors" type="boat_tf_broadcaster.py"/>
 
   <node name="laser_to_point" pkg="sensors" type="range_to_point.py"/>
+  
+  <node name="laser_to_pcl" pkg="sensors" type="range_to_pcl.py"/>
 
   <node name="servo_laser" pkg="actuators" type="servo_laser_controller.py"/>
 
