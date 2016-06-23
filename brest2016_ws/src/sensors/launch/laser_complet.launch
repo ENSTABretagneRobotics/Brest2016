@@ -22,7 +22,7 @@
 
   <node name="laser_to_point" pkg="sensors" type="range_to_point.py"/>
   
-  <node name="laser_to_pcl" pkg="sensors" type="range_to_pcl.py"/>
+  <node name="range_to_pcl" pkg="sensors" type="range_to_pcl.py"/>
 
   <node name="servo_laser" pkg="actuators" type="servo_laser_controller.py"/>
 
@@ -30,6 +30,8 @@
     <param name="baud" value="4800" />
     <param name="port" value="/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0" />
   </node> 
+
+  <node name="local_convertor" pkg="utilities" type="LL_to_local.py" />
 
   <!-- <node name="range" pkg="rqt_plot" type="rqt_plot" args="/range_data/ "/> -->
   <!-- pololu dev/ttyACM0 && dev/ttyACM1-->

@@ -49,7 +49,9 @@ def convert_to_pcl2(msg):
 
 rospy.init_node('range_to_pcl')
 # rosbag
-bag = rosbag.Bag('pcl.bag' + time.strftime("%Y-%m-%d-%H-%M-%S"), 'w')
+filename = 'pcl-' + str(time.strftime("%Y-%m-%d-%H-%M-%S")) + '.bag'
+print filename
+bag = rosbag.Bag(filename, 'w')
 listener = tf.TransformListener()
 
 # Subscriber to the laser's imu

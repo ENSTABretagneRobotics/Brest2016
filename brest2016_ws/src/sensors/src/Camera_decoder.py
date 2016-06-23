@@ -21,7 +21,7 @@ def update_image(msg):
 rospy.init_node('video_decoding')
 
 # Node rate
-rate = rospy.Rate(10)
+# rate = rospy.Rate(10)
 
 # Bridge object
 bridge = CvBridge()
@@ -29,7 +29,7 @@ bridge = CvBridge()
 # Subscriber to compressed image
 sub = rospy.Subscriber('camera/image_compressed', Image, update_image)
 # Publisher
-pub = rospy.Publisher('camera/image_uncompressed', Image, queue_size=1)
+# pub = rospy.Publisher('camera/image_uncompressed', Image, queue_size=1)
 
 frame = np.ndarray(0)
 flag = False
@@ -37,9 +37,12 @@ flag = False
 while not rospy.is_shutdown():
     if flag:
         frame2 = cv2.imdecode(frame, 1)
+        cv2.imshow('Image decompresse', frame2)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
         # print type(frame2)
-        try:
-            pub.publish(bridge.cv2_to_imgmsg(frame2, "bgr8"))
-        except CvBridgeError as e:
-            print e
-    rate.sleep()
+        # try:
+        #     pub.publish(bridge.cv2_to_imgmsg(frame2, "bgr8"))
+        # except CvBridgeError as e:
+        #     print e
+    # rate.sleep()
