@@ -12,7 +12,7 @@ from geometry_msgs.msg import PointStamped
 from sensor_msgs import point_cloud2 as pc2
 from std_msgs.msg import Header
 import tf
-# import time
+import time
 import rosbag
 
 
@@ -49,7 +49,7 @@ def convert_to_pcl2(msg):
 
 rospy.init_node('range_to_pcl')
 # rosbag
-bag = rosbag.Bag('pcl.bag', 'w')
+bag = rosbag.Bag('pcl.bag' + time.strftime("%Y-%m-%d-%H-%M-%S"), 'w')
 listener = tf.TransformListener()
 
 # Subscriber to the laser's imu
