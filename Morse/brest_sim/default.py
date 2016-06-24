@@ -91,7 +91,7 @@ robot.add_default_interface('socket')
 
 # set 'fastmode' to True to switch to wireframe mode
 env_path = 'outdoors'
-# env_path = '/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/environments/water-walls.blend'
+# env_path = '/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/environments/water-1o-3w.blend'
 # env_path = 'indoors-1/indoor-1'
 env = Environment(env_path, fastmode=False)
 env.set_camera_location([-18.0, -6.7, 10.8])

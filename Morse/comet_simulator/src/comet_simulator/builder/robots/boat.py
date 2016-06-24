@@ -34,7 +34,7 @@ class Boat(GroundRobot):
         self.boatCompas = Boatcompas()
         self.boatCompas.frequency(7.0)
         self.boatCompas.add_stream('ros', 'comet_simulator.sensors.boatCompasROS.BoatCompasROS', topic='/'+ self.name +'/compas')
-        
+
         self.append(self.boatGPS)
         self.append(self.boatCompas)
 
