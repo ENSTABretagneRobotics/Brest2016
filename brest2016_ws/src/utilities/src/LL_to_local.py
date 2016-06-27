@@ -11,8 +11,12 @@ from sensor_msgs.msg import NavSatFix, Imu
 from geometry_msgs.msg import PoseStamped
 from math import pi, cos
 
-LAT0 = 48.417753
-LON0 = -4.474413
+# Point Reperable
+
+# LAT0 = 48.417753    # ENSTA - bas gauche du terrain de foot
+# LON0 = -4.474413
+LAT0 = 48.486964    # BOURG-BLANC - banc a l'entree
+LON0 = -4.505771
 R = 6371000
 
 
