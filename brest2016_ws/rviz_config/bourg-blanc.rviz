@@ -6,6 +6,12 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
+        - /AerialMapDisplay1
+        - /AerialMapDisplay1/Status1
+        - /AerialMapDisplay1/Origin1
+        - /AerialMapDisplay1/Top Right1
+        - /Pose1
+        - /Pose1/Status1
       Splitter Ratio: 0.5
     Tree Height: 463
   - Class: rviz/Selection
@@ -53,23 +59,33 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        boat_frame:
+          Value: true
+        map:
+          Value: true
+        world:
+          Value: true
       Marker Scale: 40
       Name: TF
       Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        boat_frame:
+          {}
+        world:
+          map:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 0.7
       Blocks: 0
       Bottom Left:
-        X: 48.48
+        X: 48.4799
         Y: -4.51563
         Z: 0
       Bottom Right:
-        X: 48.4812
+        X: 48.481
         Y: -4.4971
         Z: 0
       Class: rviz_plugins/AerialMapDisplay
@@ -78,15 +94,15 @@ Visualization Manager:
       Enabled: true
       Frame Convention: XYZ -> ENU
       Name: AerialMapDisplay
-      Object URI: /home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/rviz_satellite/my_maps/map-bourg_blanc-sat.jpg
+      Object URI: /home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/rviz_satellite/my_maps/map-bourg_blanc-sat.jpg
       Origin:
-        X: 48.487
-        Y: -4.50577
+        X: 48.4869
+        Y: -4.5049
         Z: 0
       Robot frame: world
       Top Left:
         X: 48.4923
-        Y: 4.5174
+        Y: -4.5174
         Z: 0
       Top Right:
         X: 48.4935
@@ -97,16 +113,16 @@ Visualization Manager:
       Zoom: 18
     - Alpha: 1
       Axes Length: 10
-      Axes Radius: 0.5
+      Axes Radius: 2
       Class: rviz/Pose
       Color: 85; 0; 255
       Enabled: true
       Head Length: 10
-      Head Radius: 100
+      Head Radius: 5
       Name: Pose
-      Shaft Length: 10
-      Shaft Radius: 20
-      Shape: Axes
+      Shaft Length: 20
+      Shaft Radius: 2
+      Shape: Arrow
       Topic: /gps/local_pose
       Unreliable: false
       Value: true
@@ -142,11 +158,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 3.07871
+      Scale: 1.82829
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 25.5786
-      Y: 61.1941
+      X: 13.267
+      Y: -1.26111
     Saved: ~
 Window Geometry:
   Displays:
