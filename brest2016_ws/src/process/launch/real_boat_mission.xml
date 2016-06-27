@@ -1,0 +1,59 @@
+<!-- Mission de suivi de waypoints -->
+<!-- Les waypoints sont envoyes par RVIZ -->
+<launch>
+	<!-- -------------------- ACTUATORS -------------------- -->
+	<node name="motors" pkg="actuators" type="motor_controller.py" output="screen"/>
+
+	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py">
+		<param name="linear_twist" value="6000"/>
+		<param name="angular_twist" value="6000"/>
+		<param name="angular_accel" value="5000"/> 
+		<param name="linear_accel" value="5000"/>
+	</node>
+
+
+
+	<!-- -------------------- SENSORS -------------------- -->
+	<!-- IMU -->
+	<node name="imu_boat" pkg="razor_imu_9dof" type="imu_node.py">
+      <remap from="imu" to="imu_boat" />
+      <rosparam file="$(find sensors)/config/imu_boat.yaml" command="load"/>
+    </node>
+
+    <!-- GPS -->
+    <node name="gps_driver" pkg="nmea_navsat_driver" type="nmea_serial_driver">
+		<param name="port" value="/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0"/>
+    	<param name="baud" value="4800"/>
+	</node>
+
+
+
+
+	<!-- -------------------- PROCESS -------------------- -->
+
+	<node name="regulateur_champs" pkg="process" type="regulateur_champs_boat.py">
+		<param name="speed_zero" value="0"/>
+		<param name="vHigh" value="5"/>
+		<param name="vLow" value="1"/>
+		<param name="K" value="-20"/>
+		<param name="robot_type" value="thomas_boat"/>
+		<param name="reverse" value="1.5"/>
+	</node>
+
+	<node name="behavior_server" pkg="process" type="behavior_server.py">
+		<param name="robot_type" value="thomas_boat"/>
+		<remap from="gps/local_pose" to="boat/gps/pose"/>
+	</node>
+
+	<node name="point_clicker" pkg="utilities" type="clicked_to_waypoint.py"/>
+
+	<node name="local_pose_convertor" pkg="utilities" type="LL_to_local.py">
+		<remap from="imu" to="imu_boat"/>
+	</node>
+
+
+
+	<!-- -------------------- AFFICHAGE -------------------- -->
+	<node pkg="rviz_satellite" type="map2world_tf_broadcaster.py"
+        name="broadcaster_fixed" />
+</launch>

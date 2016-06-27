@@ -67,7 +67,7 @@ cap_cible = 0
 vitesse_cible = fetch_param('~speed_zero', 6000)
 vitesse_boat = 0
 speed_zero = fetch_param('~speed_zero', 6000)
-prout = fetch_param('~prout', 1)
+reverse = fetch_param('~reverse', 1)
 cap = 0
 vHigh = fetch_param('~vHigh', 8000)  # 8000 max
 vLow = fetch_param('~vLow', 7000)  # 6000 = vitesse nulle
@@ -83,7 +83,7 @@ while not rospy.is_shutdown():
         cmd.linear.x = vHigh
     else:
         print 'cos < 0'
-        if vitesse_cible > prout and vitesse_boat > 2:
+        if vitesse_cible > reverse and vitesse_boat > 2:
             cmd.linear.x = -vHigh
         else:
             cmd.linear.x = vLow

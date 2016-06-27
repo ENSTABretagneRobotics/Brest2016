@@ -66,44 +66,19 @@ cap_cible = 0
 vitesse_cible = fetch_param('~speed_zero', 6000)
 vitesse_boat = 0
 speed_zero = fetch_param('~speed_zero', 6000)
-prout = fetch_param('~prout', 1)
+reverse = fetch_param('~reverse', 1)
 cap = 0
 vHigh = fetch_param('~vHigh', 8000)  # 8000 max
 vLow = fetch_param('~vLow', 7000)  # 6000 = vitesse nulle
 K = fetch_param('~K', 1500) * (2. / np.pi)
-reverse = fetch_param('~reverse', 1)
-# Vsym = fetch_param('~Vsym', 12000)
 rate = rospy.Rate(5)
-
-# while not rospy.is_shutdown():
-#     error = cap_cible - cap
-#     cmd = Twist()
-#     cmd.angular.z = speed_zero + K * np.arctan(np.tan((error / 2.)))
-#     if cos(error) >= 0:
-#         print 'cos > 0'
-#         cmd.linear.x = vHigh
-#     else:
-#         print 'cos < 0'
-#         if vitesse_cible > prout and vitesse_boat > 2:
-#             cmd.linear.x = -vHigh
-#         else:
-#             cmd.linear.x = vLow
-#     if vitesse_cible <= 0.1:
-#         cmd.linear.x = speed_zero
-#         cmd.angular.z = speed_zero
-
-#     print cap, cap_cible, error, cos(error), "::", cmd.linear.x, cmd.angular.z
-#     if robot_type == 'thomas_boat':
-#         cmd.angular.z = -cmd.angular.z
-#     cmd_pub.publish(cmd)
-#     rate.sleep()
 
 while not rospy.is_shutdown():
     error = cap_cible - cap
     cmd = Twist()
     cmd.angular.z = speed_zero + K * np.arctan(np.tan((error / 2.)))
 
-    vitesse_temp = vitesse_cible * 10
+    vitesse_temp = speed_zero + vitesse_cible * (vHigh - speed_zero)
     # bateau dans le sens du champ
     if cos(error) >= 0:
         print 'cos > 0'
@@ -122,15 +97,6 @@ while not rospy.is_shutdown():
             cmd.angular.z = speed_zero - K * np.arctan(np.tan((error / 2.)))
         else:
             cmd.linear.x = vLow
-
-    # if cos(error) >= alpha:
-    #     print 'cos > alpha'
-    #     cmd.linear.x = V * cos(error)
-    # elif cos(error) <= beta:
-    #     print 'cos < beta'
-    #     cmd.linear.x = -V
-    # else:
-    #     cmd.linear.x = vLow
 
     if vitesse_cible <= 0.05:
         cmd.linear.x = speed_zero
