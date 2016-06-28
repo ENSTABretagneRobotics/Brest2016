@@ -52,10 +52,28 @@
 			}
 		},
 		{
+<<<<<<< Updated upstream
 			"file": "brest2016_ws/src/process/src/regulateur_champs_char.py",
 			"settings":
 			{
 				"buffer_size": 2929,
+=======
+			"contents": "# ~/.bashrc: executed by bash(1) for non-login shells.\n# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)\n# for examples\n\n# If not running interactively, don't do anything\ncase $- in\n    *i*) ;;\n      *) return;;\nesac\n\n# don't put duplicate lines or lines starting with space in the history.\n# See bash(1) for more options\nHISTCONTROL=ignoreboth\n\n# append to the history file, don't overwrite it\nshopt -s histappend\n\n# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)\nHISTSIZE=1000\nHISTFILESIZE=2000\n\n# check the window size after each command and, if necessary,\n# update the values of LINES and COLUMNS.\nshopt -s checkwinsize\n\n# If set, the pattern \"**\" used in a pathname expansion context will\n# match all files and zero or more directories and subdirectories.\n#shopt -s globstar\n\n# make less more friendly for non-text input files, see lesspipe(1)\n[ -x /usr/bin/lesspipe ] && eval \"$(SHELL=/bin/sh lesspipe)\"\n\n# set variable identifying the chroot you work in (used in the prompt below)\nif [ -z \"${debian_chroot:-}\" ] && [ -r /etc/debian_chroot ]; then\n    debian_chroot=$(cat /etc/debian_chroot)\nfi\n\n# set a fancy prompt (non-color, unless we know we \"want\" color)\ncase \"$TERM\" in\n    xterm-color) color_prompt=yes;;\nesac\n\n# uncomment for a colored prompt, if the terminal has the capability; turned\n# off by default to not distract the user: the focus in a terminal window\n# should be on the output of commands, not on the prompt\n#force_color_prompt=yes\n\nif [ -n \"$force_color_prompt\" ]; then\n    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then\n	# We have color support; assume it's compliant with Ecma-48\n	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such\n	# a case would tend to support setf rather than setaf.)\n	color_prompt=yes\n    else\n	color_prompt=\n    fi\nfi\n\nif [ \"$color_prompt\" = yes ]; then\n    PS1='${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '\nelse\n    PS1='${debian_chroot:+($debian_chroot)}\\u@\\h:\\w\\$ '\nfi\nunset color_prompt force_color_prompt\n\n# If this is an xterm set the title to user@host:dir\ncase \"$TERM\" in\nxterm*|rxvt*)\n    PS1=\"\\[\\e]0;${debian_chroot:+($debian_chroot)}\\u@\\h: \\w\\a\\]$PS1\"\n    ;;\n*)\n    ;;\nesac\n\n# enable color support of ls and also add handy aliases\nif [ -x /usr/bin/dircolors ]; then\n    test -r ~/.dircolors && eval \"$(dircolors -b ~/.dircolors)\" || eval \"$(dircolors -b)\"\n    alias ls='ls --color=auto'\n    #alias dir='dir --color=auto'\n    #alias vdir='vdir --color=auto'\n\n    alias grep='grep --color=auto'\n    alias fgrep='fgrep --color=auto'\n    alias egrep='egrep --color=auto'\nfi\n\n# some more ls aliases\nalias ll='ls -alF'\nalias la='ls -A'\nalias l='ls -CF'\n\n# some alias to go to brest 2016\nalias cdbrest='cd ~/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/ && source devel/setup.bash'\n\n# Add an \"alert\" alias for long running commands.  Use like so:\n#   sleep 10; alert\nalias alert='notify-send --urgency=low -i \"$([ $? = 0 ] && echo terminal || echo error)\" \"$(history|tail -n1|sed -e '\\''s/^\\s*[0-9]\\+\\s*//;s/[;&|]\\s*alert$//'\\'')\"'\n\n# Alias definitions.\n# You may want to put all your additions into a separate file like\n# ~/.bash_aliases, instead of adding them here directly.\n# See /usr/share/doc/bash-doc/examples in the bash-doc package.\n\nif [ -f ~/.bash_aliases ]; then\n    . ~/.bash_aliases\nfi\n\n# enable programmable completion features (you don't need to enable\n# this, if it's already enabled in /etc/bash.bashrc and /etc/profile\n# sources /etc/bash.bashrc).\nif ! shopt -oq posix; then\n  if [ -f /usr/share/bash-completion/bash_completion ]; then\n    . /usr/share/bash-completion/bash_completion\n  elif [ -f /etc/bash_completion ]; then\n    . /etc/bash_completion\n  fi\nfi\nsource /opt/ros/indigo/setup.bash\nexport PS1='\\u@\\h \\W: '\nexport MORSE_BLENDER=~/Applications/blender-2.76b-linux-glibc211-x86_64/blender\nexport LD_LIBRARY_PATH=/usr/local/cuda-6.5/lib64:$LD_LIBRARY_PATH\nexport PATH=/usr/local/cuda-6.5/bin:$PATH\n\nalias lsport='python /home/brest2016/Desktop/serial_list.py'\n\n\n# export ROS_MASTER_URI=http://192.168.1.21:11311\n# export ROS_IP=192.168.1.21\nexport ROS_MASTER_URI=http://192.168.0.100:11311\nexport ROS_IP=192.168.0.100\n\n",
+			"file": "/home/brest2016/.bashrc",
+			"file_size": 4239,
+			"file_write_time": 131114961400096544,
+			"settings":
+			{
+				"buffer_size": 4239,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/sensors/src/Camera_publisher.py",
+			"settings":
+			{
+				"buffer_size": 939,
+>>>>>>> Stashed changes
 				"line_ending": "Unix"
 			}
 		},
@@ -103,6 +121,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
+<<<<<<< Updated upstream
 		"height": 117.0,
 		"last_filter": "install",
 		"selected_items":
@@ -110,6 +129,39 @@
 			[
 				"install",
 				"Package Control: Install Package"
+=======
+		"height": 96.0,
+		"last_filter": "instla",
+		"selected_items":
+		[
+			[
+				"instla",
+				"Package Control: Install Package"
+			],
+			[
+				"git puh",
+				"Git: Push"
+			],
+			[
+				"git com",
+				"Git: Commit"
+			],
+			[
+				"git add",
+				"Git: Add All"
+			],
+			[
+				"git sta",
+				"Git: Status"
+			],
+			[
+				"git diff",
+				"Git: Diff All Files"
+			],
+			[
+				"git pull",
+				"Git: Pull"
+>>>>>>> Stashed changes
 			],
 			[
 				"git push",
@@ -120,6 +172,7 @@
 				"Git: Commit"
 			],
 			[
+<<<<<<< Updated upstream
 				"git add",
 				"Git: Add Current File"
 			],
@@ -138,6 +191,10 @@
 			[
 				"git pull",
 				"Git: Pull"
+=======
+				"git ",
+				"Git: Commit"
+>>>>>>> Stashed changes
 			],
 			[
 				"git diff",
@@ -249,6 +306,7 @@
 	},
 	"expanded_folders":
 	[
+<<<<<<< Updated upstream
 		"/home/ejalaa12/Desktop/Brest2016",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/rosgraphs",
@@ -258,6 +316,19 @@
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src"
+=======
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/brest_sim",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/comet_simulator",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/comet_simulator/src",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/comet_simulator/src/comet_simulator",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/comet_simulator/src/comet_simulator/actuators",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/comet_simulator/src/comet_simulator/builder",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/comet_simulator/src/comet_simulator/builder/robots",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/environments",
+		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws"
+>>>>>>> Stashed changes
 	],
 	"file_history":
 	[
@@ -422,7 +493,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< Updated upstream
 					"stack_index": 1,
+=======
+					"stack_index": 5,
+>>>>>>> Stashed changes
 					"type": "text"
 				},
 				{
@@ -431,15 +506,61 @@
 					"semi_transient": false,
 					"settings":
 					{
+<<<<<<< Updated upstream
 						"buffer_size": 2929,
+=======
+						"buffer_size": 4239,
+>>>>>>> Stashed changes
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< Updated upstream
 								0,
 								0
+=======
+								4237,
+								4237
+>>>>>>> Stashed changes
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+<<<<<<< Updated upstream
+						"translation.y": 0.0,
+=======
+						"translation.y": 981.0,
+>>>>>>> Stashed changes
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+<<<<<<< Updated upstream
+					"file": "brest2016_ws/src/process/src/regulateur_champs_boat.py",
+=======
+					"file": "brest2016_ws/src/sensors/src/Camera_publisher.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 939,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								456,
+								456
 							]
 						],
 						"settings":
@@ -452,12 +573,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "brest2016_ws/src/process/src/regulateur_champs_boat.py",
+					"buffer": 4,
+					"file": "brest2016_ws/src/sensors/launch/laser_complet.launch",
+>>>>>>> Stashed changes
 					"semi_transient": false,
 					"settings":
 					{
@@ -482,12 +604,21 @@
 						"translation.y": 1305.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< Updated upstream
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
 					"file": "brest2016_ws/src/process/launch/mission_vector_field.launch",
+=======
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "README.md",
+>>>>>>> Stashed changes
 					"semi_transient": false,
 					"settings":
 					{
@@ -510,7 +641,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< Updated upstream
 					"stack_index": 3,
+=======
+					"stack_index": 2,
+>>>>>>> Stashed changes
 					"type": "text"
 				}
 			]
