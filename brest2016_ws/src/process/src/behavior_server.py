@@ -70,7 +70,7 @@ x, y, cap = 0, 0, 0
 behavior_manager = BehaviorManager()
 
 # Initialisation du noeud
-rospy.init_node('service_server')
+rospy.init_node('behavior_server')
 # Initialisation du Serveur
 service = rospy.Service('behavior_manager', behavior, handle_received_behavior)
 # Recuperation du type de robot

@@ -13,10 +13,10 @@ from math import pi, cos
 
 # Point Reperable
 
-# LAT0 = 48.417753    # ENSTA - bas gauche du terrain de foot
-# LON0 = -4.474413
-LAT0 = 48.486964    # BOURG-BLANC - banc a l'entree
-LON0 = -4.505771
+LAT0 = 48.417753    # ENSTA - bas gauche du terrain de foot
+LON0 = -4.474413
+# LAT0 = 48.486964    # BOURG-BLANC - banc a l'entree
+# LON0 = -4.505771
 R = 6371000
 
 

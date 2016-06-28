@@ -12,9 +12,9 @@ if __name__ == '__main__':
     br = tf.TransformBroadcaster()
     rate = rospy.Rate(20.0)
     while not rospy.is_shutdown():
-        br.sendTransform((100, 0.0, 0.0),
+        br.sendTransform((0.0, 0.0, 0.0),
                          (0.0, 0.0, 0.0, 1.0),
                          rospy.Time.now(),
-                         "map",
+                         "boat_frame",
                          "world")
         rate.sleep()

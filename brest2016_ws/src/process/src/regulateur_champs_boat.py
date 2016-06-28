@@ -78,16 +78,16 @@ while not rospy.is_shutdown():
     cmd = Twist()
     cmd.angular.z = speed_zero + K * np.arctan(np.tan((error / 2.)))
 
-    vitesse_temp = speed_zero + vitesse_cible * (vHigh - speed_zero)
+    vitesse_reel = speed_zero + vitesse_cible * (vHigh - speed_zero)
     # bateau dans le sens du champ
     if cos(error) >= 0:
         print 'cos > 0'
-        if vLow > vitesse_temp:
+        if vLow > vitesse_reel:
             cmd.linear.x = vLow
-        elif vitesse_temp > vHigh:
+        elif vitesse_reel > vHigh:
             cmd.linear.x = vHigh
         else:
-            cmd.linear.x = vitesse_temp
+            cmd.linear.x = vitesse_reel
 
     # bateau dans le sens oppose au champ
     else:
@@ -102,7 +102,10 @@ while not rospy.is_shutdown():
         cmd.linear.x = speed_zero
         cmd.angular.z = speed_zero
 
+    print 'cap, cap_cible, error, cos(error), cmd.linear.x, cmd.angular.z'
     print cap, cap_cible, error, cos(error), "::", cmd.linear.x, cmd.angular.z
+    print 'vitesse_cible', vitesse_cible
+    print '\n\n'
     if robot_type == 'thomas_boat':
         cmd.angular.z = -cmd.angular.z
     cmd_pub.publish(cmd)
