@@ -78,7 +78,7 @@ while not rospy.is_shutdown():
     cmd = Twist()
 
     # ---------------- ICI CHANGER PEUT ETRE LE MOINS
-    cmd.angular.z = speed_zero - K * np.arctan(np.tan((error / 2.)))
+    cmd.angular.z = speed_zero + K * np.arctan(np.tan((error / 2.)))
 
     vitesse_reel = speed_zero + vitesse_cible * (vHigh - speed_zero)
     # bateau dans le sens du champ

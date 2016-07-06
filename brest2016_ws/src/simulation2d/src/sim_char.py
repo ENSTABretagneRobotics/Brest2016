@@ -46,6 +46,13 @@ def update_cmd(msg):
     # print u
 
 
+def update_cmd2(msg):
+    global u
+    print 'Received:', msg.linear.x, msg.angular.z
+    u[1] = msg.linear.x / 6000. - 1.0
+    u[0] = msg.angular.z / 6000. - 1.0
+
+
 def publish_pose(x):
     pos = PoseStamped()
     pos.header.frame_id = 'world'
@@ -62,15 +69,30 @@ def publish_pose(x):
 
     pos_pub.publish(pos)
 
+
+def fetch_param(name, default):
+    if rospy.has_param(name):
+        return rospy.get_param(name)
+    else:
+        print 'parameter [%s] not defined.' % name
+        print 'Defaulting to', default
+        return default
+
 # Initialisation du noeud
 rospy.init_node('sim_char')
+rate = rospy.Rate(10)
+
+# Parametres
+outside_regulator = fetch_param('~outside_regulator', False)
+
 # Subscriber et publisher
-# cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
-cmd_sub = rospy.Subscriber('cmd_vel', Twist, update_cmd)
+if outside_regulator:
+    cmd_sub = rospy.Subscriber('cmd_vel', Twist, update_cmd2)
+else:
+    cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
 pos_pub = rospy.Publisher('gps/local_pose', PoseStamped, queue_size=1)
 
-rate = rospy.Rate(10)
-plt.ion()
+# plt.ion()
 x = np.array([40, 40, 4])
 dt = 0.1
 u = [0, 0]

@@ -71,10 +71,13 @@ behavior_manager = BehaviorManager()
 
 # Initialisation du noeud
 rospy.init_node('behavior_server')
+
 # Initialisation du Serveur
 service = rospy.Service('behavior_manager', behavior, handle_received_behavior)
+
 # Recuperation du type de robot
 robot_type = fetch_param('~robot_type', 'normal')
+
 # Subscriber et publisher
 if robot_type == 'normal':
     pos_sub = rospy.Subscriber('gps/local_pose', PoseStamped, update_pos)
@@ -86,7 +89,9 @@ pub = rospy.Publisher('robot/vecteur_cible', Vector3, queue_size=1)
 rate = rospy.Rate(10)
 
 # Affichage du champ de vecteur
-plt.ion()
+show_plot = fetch_param('~show_plot', False)
+if show_plot:
+    plt.ion()
 cx, cy = 0, 0
 
 while not rospy.is_shutdown():
@@ -98,11 +103,12 @@ while not rospy.is_shutdown():
     v = Vector3()
     v.x, v.y = behavior_manager.champ_total.cmd_point(x, y)
     U, V = behavior_manager.champ_total.cmd_point(X, Y)
-    plt.cla()
-    plt.quiver(X, Y, U, V)
-    plt.quiver(x, y, v.x, v.y, color='red')
-    draw_tank([x, y, cap])
-    plt.draw()
+    if show_plot:
+        plt.cla()
+        plt.quiver(X, Y, U, V)
+        plt.quiver(x, y, v.x, v.y, color='red')
+        draw_tank([x, y, cap])
+        plt.draw()
     pub.publish(v)
     print v.x, v.y
     rate.sleep()

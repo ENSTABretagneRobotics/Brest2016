@@ -4,12 +4,8 @@
 		"selected_items":
 		[
 			[
-				"vite",
-				"vitesse_cible"
-			],
-			[
-				"st",
-				"strftime	function"
+				"lon0",
+				"LON0"
 			],
 			[
 				"beha",
@@ -40,34 +36,37 @@
 	"buffers":
 	[
 		{
-			"file": "brest2016_ws/src/teleop/src/joy_to_twist",
+			"file": "brest2016_ws/src/process/launch/real_boat_mission.launch",
 			"settings":
 			{
-				"buffer_size": 632,
+				"buffer_size": 1816,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "brest2016_ws/src/sensors/src/battery_maestro.py",
+			"contents": "Package Control Messages\n========================\n\nAnaconda\n--------\n\n  Changes in 1.4.27\n  =================\n  \n  ## Fixes\n  	- Fixed problem with signatures feture being corrupted by tooltips, resolves #499\n  \n  \n  For detailed information run git log v1.4.26..v1.4.27 in the git repository\n",
 			"settings":
 			{
-				"buffer_size": 966,
-				"line_ending": "Windows"
+				"buffer_size": 293,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"read_only": true,
+				"scratch": true
 			}
 		},
 		{
-			"file": "brest2016_ws/src/sensors/src/battery_state.py",
+			"file": "brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py",
 			"settings":
 			{
-				"buffer_size": 1912,
+				"buffer_size": 1618,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/brest2016/.bashrc",
+			"file": "brest2016_ws/src/process/src/regulateur_champs_boat.py",
 			"settings":
 			{
-				"buffer_size": 4385,
+				"buffer_size": 3448,
 				"line_ending": "Unix"
 			}
 		}
@@ -108,52 +107,40 @@
 				"Git: Pull"
 			],
 			[
-				"git push",
-				"Git: Push"
-			],
-			[
-				"git qui",
-				"Git: Quick Commit"
-			],
-			[
-				"git add ",
-				"Git: Add All"
-			],
-			[
-				"instla",
+				"install",
 				"Package Control: Install Package"
 			],
 			[
-				"git puh",
+				"git push",
 				"Git: Push"
-			],
-			[
-				"git com",
-				"Git: Commit"
-			],
-			[
-				"git add",
-				"Git: Add All"
-			],
-			[
-				"git sta",
-				"Git: Status"
-			],
-			[
-				"git diff",
-				"Git: Diff All Files"
 			],
 			[
 				"git comm",
 				"Git: Commit"
 			],
 			[
-				"git ",
-				"Git: Commit"
+				"git add",
+				"Git: Add Current File"
 			],
 			[
-				"isntall",
-				"Package Control: Install Package"
+				"git pul",
+				"Git: Pull"
+			],
+			[
+				"git quic",
+				"Git: Quick Commit"
+			],
+			[
+				"git ad",
+				"Git: Add All"
+			],
+			[
+				"git diff",
+				"Git: Diff Current File"
+			],
+			[
+				"git statu	",
+				"Git: Status"
 			],
 			[
 				"preview",
@@ -161,10 +148,6 @@
 			],
 			[
 				"instal",
-				"Package Control: Install Package"
-			],
-			[
-				"install",
 				"Package Control: Install Package"
 			],
 			[
@@ -188,7 +171,7 @@
 				"Git: Commit"
 			],
 			[
-				"git quic",
+				"git qui",
 				"Git: Quick Commit"
 			],
 			[
@@ -206,10 +189,6 @@
 			[
 				"git qiu",
 				"Git: Quick Commit"
-			],
-			[
-				"git ad",
-				"Git: Add All"
 			],
 			[
 				"git aa",
@@ -238,6 +217,10 @@
 			[
 				"ins",
 				"Package Control: Install Package"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
 			]
 		],
 		"width": 566.0
@@ -261,55 +244,39 @@
 	},
 	"expanded_folders":
 	[
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/actuators",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/actuators/src",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/launch",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/launch",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/src",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/teleop",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/teleop/launch"
+		"/home/ejalaa12/Desktop/Brest2016",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/rosgraphs",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src"
 	],
 	"file_history":
 	[
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/src/battery_state.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/src/battery_maestro.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/src/battery_state_publisher.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/actuators/src/motor_controller.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/src/behavior_client_exemple.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/CMakeLists.txt",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/CMakeLists.txt",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/CMakeLists.txt~",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/launch/real_boat_mission.launch",
-		"/home/brest2016/Desktop/cmds",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/teleop/launch/telop_rob.launch",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/src/waypoint_regulateur.py",
-		"/home/brest2016/.bashrc",
-		"/tmp/mozilla_brest20160/B.txt",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/src/waypoint_heading.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016.sublime-project",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/src/behavior_server.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/utilities/src/LL_to_local.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/actuators/src/cmd_to_ramp.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/rviz_satellite/src/map2world_tf_broadcaster.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/launch/mission_waypoint.launch",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/launch/real_boat_mission.xml",
-		"/opt/ros/indigo/share/razor_imu_9dof/config/my_razor.yaml",
-		"/opt/ros/indigo/share/razor_imu_9dof/nodes/display_3D_visualization.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/src/Camera_publisher.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/README.md",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/launch/laser_complet.launch",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/src/Camera_decoder.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/src/range_to_pcl.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/brest_sim/default.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/comet_simulator/src/comet_simulator/builder/robots/boat.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/sensors/src/range_to_point.py",
-		"/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/log/laser_no_servo_description.md",
+		"/home/ejalaa12/.bashrc",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_waypoint.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_field.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_morse_boat.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/launch/telop_rob.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_char.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/launch/teleop_morse.launch",
+		"/home/ejalaa12/Desktop/Brest2016/README.md",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src/LL_to_local.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/motor_controller.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/launch/laser_complet.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/src/range_to_point.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/src/range_to_pcl.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/laserNode_arduino/laserNode_arduino.ino",
+		"/home/ejalaa12/Desktop/serial_list.py",
+		"/home/ejalaa12/Desktop/Brest2016/log/laser_no_servo_description.md",
 		"/home/ejalaa12/.cache/.fr-gzxD0r/README.md",
 		"/home/ejalaa12/.config/sublime-text-3/Packages/User/Python.sublime-settings",
 		"/home/ejalaa12/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
@@ -318,10 +285,8 @@
 		"/home/ejalaa12/Desktop/ros_ws/src/useful_nodes/src/tf_fixed.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/char_obstacle.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/Behavior.py",
-		"/home/ejalaa12/Desktop/Brest2016/README.md",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_server.py",
 		"/opt/ros/indigo/setup.bash",
-		"/home/ejalaa12/.bashrc",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/rviz_satellite/src/map2world_tf_broadcaster.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client_n.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_morse.launch",
@@ -331,7 +296,6 @@
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/gui_behavior_adder.py",
 		"/home/ejalaa12/Desktop/Brest2016/Morse/brest_sim/default.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_morse_boat.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs3.py",
 		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/default.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client1.py",
@@ -343,7 +307,6 @@
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch/simulation_behavior_char_2d.launch",
 		"/home/ejalaa12/Desktop/Brest2016/.gitignore",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/msg/BehaviorInfo.msg",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_waypoint.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/CMakeLists.txt",
 		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/behavior_manager.py",
@@ -366,10 +329,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"192.168.0.107",
-			"vitesse_temp",
-			"linear",
-			"old_points",
+			"-",
+			"0\"",
+			"prout",
+			"stamp",
 			"```",
 			"get_param",
 			"profil",
@@ -407,46 +370,76 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "brest2016_ws/src/teleop/src/joy_to_twist",
+					"file": "brest2016_ws/src/process/launch/real_boat_mission.launch",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 632,
+						"buffer_size": 1816,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								344,
-								344
+								1099,
+								1099
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/XML/XML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 123.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 293,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								293,
+								293
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"default_dir": "/home/ejalaa12/Desktop/Brest2016",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_width": 2,
+							"word_wrap": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "brest2016_ws/src/sensors/src/battery_maestro.py",
+					"buffer": 2,
+					"file": "brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 966,
+						"buffer_size": 1618,
 						"regions":
 						{
 						},
@@ -471,20 +464,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "brest2016_ws/src/sensors/src/battery_state.py",
+					"buffer": 3,
+					"file": "brest2016_ws/src/process/src/regulateur_champs_boat.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1912,
+						"buffer_size": 3448,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								392,
-								392
+								0,
+								0
 							]
 						],
 						"settings":
@@ -494,40 +487,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1440.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/home/brest2016/.bashrc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4385,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4241,
-								4241
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1575.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -590,56 +553,36 @@
 		"selected_items":
 		[
 			[
-				"battsta",
-				"brest2016_ws/src/sensors/src/battery_state.py"
+				"broad",
+				"brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py"
 			],
 			[
-				"batt",
-				"brest2016_ws/src/sensors/src/battery_maestro.py"
+				"regulacham",
+				"brest2016_ws/src/process/src/regulateur_champs_boat.py"
 			],
 			[
-				"joy",
-				"brest2016_ws/src/teleop/src/joy_to_twist"
+				"teleop",
+				"brest2016_ws/src/teleop/launch/teleop_morse.launch"
 			],
 			[
-				"behavex",
-				"brest2016_ws/src/process/src/behavior_client_exemple.py"
+				"telop",
+				"brest2016_ws/src/teleop/launch/telop_rob.launch"
 			],
 			[
-				"waypoin",
-				"brest2016_ws/src/process/src/waypoint_regulateur.py"
+				"regul",
+				"brest2016_ws/src/process/src/regulateur_champs_boat.py"
 			],
 			[
 				"ll",
 				"brest2016_ws/src/utilities/src/LL_to_local.py"
 			],
 			[
-				"server",
-				"brest2016_ws/src/process/src/behavior_server.py"
-			],
-			[
-				"regula",
-				"brest2016_ws/src/process/src/regulateur_champs_boat.py"
-			],
-			[
-				"cmdto",
-				"brest2016_ws/src/actuators/src/cmd_to_ramp.py"
-			],
-			[
-				"map2",
-				"brest2016_ws/src/rviz_satellite/src/map2world_tf_broadcaster.py"
-			],
-			[
 				"motor",
 				"brest2016_ws/src/actuators/src/motor_controller.py"
 			],
 			[
-				"camera",
-				"brest2016_ws/src/sensors/src/Camera_publisher.py"
-			],
-			[
-				"camer",
-				"brest2016_ws/src/sensors/src/Camera_publisher.py"
+				"ino",
+				"brest2016_ws/src/sensors/laserNode_arduino/laserNode_arduino.ino"
 			],
 			[
 				"desc",
@@ -676,6 +619,10 @@
 			[
 				"charob",
 				"brest2016_ws/src/process/src/char_obstacle.py"
+			],
+			[
+				"regula",
+				"brest2016_ws/src/process/src/regulateur_champs.py"
 			],
 			[
 				"dfe",
@@ -719,12 +666,16 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
+		"last_filter": "row",
 		"selected_items":
 		[
 			[
+				"row",
+				"~/Desktop/ros_ws/ros_ws.sublime-project"
+			],
+			[
 				"",
-				"~/test_ws/test_ros.sublime-project"
+				"~/Desktop/ros_ws/ros_ws.sublime-project"
 			],
 			[
 				"ros",
@@ -754,7 +705,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 348.0,
+	"side_bar_width": 305.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
