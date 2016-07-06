@@ -5,7 +5,7 @@
 
 
 import rospy
-from geometry_msgs.msg import Vector3, PoseStamped
+from geometry_msgs.msg import Vector3, PoseStamped, Twist
 import tf
 import matplotlib.pyplot as plt
 import numpy as np
@@ -65,7 +65,8 @@ def publish_pose(x):
 # Initialisation du noeud
 rospy.init_node('sim_char')
 # Subscriber et publisher
-cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
+# cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
+cmd_sub = rospy.Subscriber('cmd_vel', Twist, update_cmd)
 pos_pub = rospy.Publisher('gps/local_pose', PoseStamped, queue_size=1)
 
 rate = rospy.Rate(10)

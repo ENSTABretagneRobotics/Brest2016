@@ -2,16 +2,17 @@
 import rospy
 from sensor_msgs.msg import Joy
 from geometry_msgs.msg import Twist
-#rosrun joy joy_node pour lancer
+# rosrun joy joy_node pour lancer
 # Middle speed and rotations
 speed = 6000
 rot = 6000
-max=2000
+max = 2000
+
 
 def joy_cb(data, twist_pub):
-    max=abs(data.axes[2]-1)*1000
-    speed= data.axes[1]*max +6000
-    rot= data.axes[0]*max +6000
+    max = abs(data.axes[2] - 1) * 1000
+    speed = data.axes[1] * max + 6000
+    rot = data.axes[0] * max + 6000
 
     t = Twist()
     t.linear.x = speed
