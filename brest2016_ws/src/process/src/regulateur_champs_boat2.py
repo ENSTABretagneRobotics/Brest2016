@@ -95,20 +95,26 @@ while not rospy.is_shutdown():
             cmd.linear.x = vHigh
         else:
             cmd.linear.x = V_reel
+        print 'dans le sens du champ a', V_reel, ', ',
 
     # bateau dans le sens oppose au champ
     else:
+        print 'contre le champ,  ',
         if V_vect >= V_lim_reverse:
             cmd.linear.x = -vHigh
+            print 'marche arriere a -Vhigh, ',
         else:
             cmd.linear.x = vLow
+            print 'marche avant a Vlow, ',
 
     # Pour des champs tres faibles
     # (le champ n'est jamais nul lorsqu'un profil est une gaussienne)
     if V_vect <= 0.05:
+        print 'mais trop faible, ',
         cmd.linear.x = V0
         cmd.angular.z = thetadot0
 
+    print
     # Publication de la commande
     cmd_pub.publish(cmd)
     rate.sleep()

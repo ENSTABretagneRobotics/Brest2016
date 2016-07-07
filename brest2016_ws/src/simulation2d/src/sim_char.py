@@ -50,12 +50,12 @@ def update_cmd(msg):
 def update_cmd2(msg):
     """ Met a jour la commande en utilisant le vecteur cible """
     global u
-    u[1] = msg.linear.x
-    thetabar = msg.angular.z
-    # print 'thetabar', thetabar, 'u0', u[0]
-    # print x[2], vect, thetabar
-    print 'command:', thetabar, x[2], u
-    # print u
+    print 'Received:', msg.linear.x, msg.angular.z
+    u[1] = abs(msg.linear.x / 6000.) - 1.0
+    u[0] = msg.angular.z / 6000. - 1.0
+    # augmenter la commande
+    u[1] *= 3
+    u[0] *= 3
 
 
 def publish_pose(x):
