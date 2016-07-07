@@ -6,10 +6,10 @@
     	<param name="baud" value="115200"/>
   	</node>
 
-    <node pkg="razor_imu_9dof" type="imu_node.py" name="imu_boat">
+    <!--<node pkg="razor_imu_9dof" type="imu_node.py" name="imu_boat">
       <remap from="imu" to="imu_boat" />
       <rosparam file="$(find sensors)/config/imu_boat.yaml" command="load"/>
-    </node>
+    </node>-->
 
     <node pkg="razor_imu_9dof" type="imu_node.py" name="imu_laser">
       <remap from="imu" to="imu_laser" />
@@ -18,13 +18,13 @@
 
   <node name="laser_imu_tf" pkg="sensors" type="laser_imu_tf_broadcaster.py"/>
   
-  <node name="boat_imu_tf" pkg="sensors" type="boat_tf_broadcaster.py"/>
+  <!-- <node name="boat_imu_tf" pkg="sensors" type="boat_tf_broadcaster.py"/> -->
 
   <node name="laser_to_point" pkg="sensors" type="range_to_point.py"/>
   
-  <node name="range_to_pcl" pkg="sensors" type="range_to_pcl.py"/>
-
-  <node name="servo_laser" pkg="actuators" type="servo_laser_controller.py"/>
+<!--   <node name="range_to_pcl" pkg="sensors" type="range_to_pcl.py"/>
+ -->
+<!--   <node name="servo_laser" pkg="actuators" type="servo_laser_controller.py"/>
 
   <node pkg="nmea_navsat_driver" type="nmea_serial_driver" name="GPS_reader">
     <param name="baud" value="4800" />
@@ -32,7 +32,7 @@
   </node> 
 
   <node name="local_convertor" pkg="utilities" type="LL_to_local.py" />
-
+ -->
   <!-- <node name="range" pkg="rqt_plot" type="rqt_plot" args="/range_data/ "/> -->
   <!-- pololu dev/ttyACM0 && dev/ttyACM1-->
   <!-- GPS USB2 -->
