@@ -32,6 +32,7 @@ def fdot(x, u):
 
 
 def update_cmd(msg):
+    """ Met a jour la commande en utilisant le vecteur cible """
     global u, x
     vect = np.array([msg.x, msg.y])
     u[1] = norm(vect)
@@ -47,10 +48,14 @@ def update_cmd(msg):
 
 
 def update_cmd2(msg):
+    """ Met a jour la commande en utilisant le vecteur cible """
     global u
-    print 'Received:', msg.linear.x, msg.angular.z
-    u[1] = msg.linear.x / 6000. - 1.0
-    u[0] = msg.angular.z / 6000. - 1.0
+    u[1] = msg.linear.x
+    thetabar = msg.angular.z
+    # print 'thetabar', thetabar, 'u0', u[0]
+    # print x[2], vect, thetabar
+    print 'command:', thetabar, x[2], u
+    # print u
 
 
 def publish_pose(x):
@@ -69,30 +74,15 @@ def publish_pose(x):
 
     pos_pub.publish(pos)
 
-
-def fetch_param(name, default):
-    if rospy.has_param(name):
-        return rospy.get_param(name)
-    else:
-        print 'parameter [%s] not defined.' % name
-        print 'Defaulting to', default
-        return default
-
 # Initialisation du noeud
 rospy.init_node('sim_char')
-rate = rospy.Rate(10)
-
-# Parametres
-outside_regulator = fetch_param('~outside_regulator', False)
-
 # Subscriber et publisher
-if outside_regulator:
-    cmd_sub = rospy.Subscriber('cmd_vel', Twist, update_cmd2)
-else:
-    cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
+# cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
+cmd_sub = rospy.Subscriber('cmd_vel', Twist, update_cmd)
 pos_pub = rospy.Publisher('gps/local_pose', PoseStamped, queue_size=1)
 
-# plt.ion()
+rate = rospy.Rate(10)
+plt.ion()
 x = np.array([40, 40, 4])
 dt = 0.1
 u = [0, 0]
