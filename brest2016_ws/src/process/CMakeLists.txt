@@ -8,8 +8,14 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  sensor_msgs
   message_generation
+  pcl_conversions
+  pcl_ros
 )
+
+find_package(PCL 1.7.2 REQUIRED)
+include_directories(/usr/local/include/pcl-1.7)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -187,3 +193,6 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+add_executable(example src/example.cpp)
+target_link_libraries(example ${catkin_LIBRARIES})
