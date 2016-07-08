@@ -25,12 +25,19 @@ behavior_sender = rospy.ServiceProxy('behavior_manager', behavior)
 
 x = fetch_param('~x', 20)
 y = fetch_param('~y', 20)
+x2 = fetch_param('~xb', 20)
+y2 = fetch_param('~yb', 20)
+behav_type = fetch_param('~behav_type', 'waypoint')
+force = fetch_param('~force', 1)
+radius = fetch_param('~radius', 3)
+b_id = fetch_param('~b_id', '000')
+e_range = fetch_param('~e_range', 5)
 # Behavior a envoyer
-info = BehaviorInfo(behavior_id='002', f_type='waypoint',
+info = BehaviorInfo(behavior_id=b_id, f_type=behav_type,
                     xa=x, ya=y,
-                    xb=0, yb=0,
-                    K=1, R=3,
-                    security='LOW', slowing_R=1,
+                    xb=x2, yb=y2,
+                    K=force, R=radius,
+                    security='LOW', slowing_R=radius,
                     slowing_K=1,
-                    effect_range=4)
+                    effect_range=e_range)
 confirmation = behavior_sender(info, 'update')

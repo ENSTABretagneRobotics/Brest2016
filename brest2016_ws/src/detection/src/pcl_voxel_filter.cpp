@@ -9,6 +9,9 @@
 #include <pcl/filters/radius_outlier_removal.h>
 
 ros::Publisher pub;
+float leafSizeX;
+float leafSizeY;
+float leafSizeZ;
 
 void 
 cloud_cb (const sensor_msgs::PointCloud2ConstPtr& cloud_msg)
@@ -25,8 +28,8 @@ cloud_cb (const sensor_msgs::PointCloud2ConstPtr& cloud_msg)
   // Perform the actual filtering using VOXEL GRID
   pcl::VoxelGrid<pcl::PCLPointCloud2> sor;
   sor.setInputCloud (cloudPtr);
-  sor.setLeafSize (0.5f, 0.5f, 0.5f);
-  sor.setMinimumPointsNumberPerVoxel(3);
+  sor.setLeafSize (leafSizeX, leafSizeY, leafSizeZ);
+  // sor.setMinimumPointsNumberPerVoxel(3);
   sor.filter (cloud_filtered);
 
 
@@ -51,6 +54,11 @@ main (int argc, char** argv)
   // Initialize ROS
   ros::init (argc, argv, "voxel_filter");
   ros::NodeHandle nh;
+
+  // Get parameter
+  ros::param::get("~leafSizeX", leafSizeX);
+  ros::param::get("~leafSizeY", leafSizeY);
+  ros::param::get("~leafSizeZ", leafSizeZ);
 
   // Create a ROS subscriber for the input point cloud
   ros::Subscriber sub = nh.subscribe ("input", 1, cloud_cb);

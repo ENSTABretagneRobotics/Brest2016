@@ -46,7 +46,7 @@ def configure_widgets(type_champ):
     elif type_champ == 'patrol_circle':
         R_entry.configure(state='normal')
         K_entry.configure(state='normal')
-    elif type_champ == 'obst_point':
+    elif type_champ == 'obst_point2':
         R_entry.configure(state='normal')
         K_entry.configure(state='normal')
         security_entry.configure(state='normal')
@@ -141,7 +141,7 @@ limite_radio_button = Radiobutton(
     type_frame, text='Limite', variable=type_choice, value='limite')
 obstacle_point_radio_button = Radiobutton(
     type_frame, text='Obstacle point',
-    variable=type_choice, value='obst_point')
+    variable=type_choice, value='obst_point2')
 
 # *******************************************
 # Section parametres du champ

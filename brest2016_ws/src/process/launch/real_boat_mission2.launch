@@ -35,11 +35,11 @@
 
 	
 	<!-- PROCESS -->
-	<node name="regulateur_champs" pkg="process" type="regulateur_champs_boat.py">
+	<node name="regulateur_champs" pkg="process" type="regulateur_champs_boat2.py">
 		<param name="V0" value="6000"/>
 		<param name="vHigh" value="7500"/>
 		<param name="vLow" value="6500"/>
-		<param name="K" value="500"/>
+		<param name="K" value="100"/>
 		<param name="V_lim_reverse" value="1.5"/>
 		<param name="reverse_motor" value="1"/> 	<!-- (-1) to reverse -->
 	</node>

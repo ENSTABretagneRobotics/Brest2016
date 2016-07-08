@@ -81,7 +81,7 @@ if __name__ == '__main__':
     g_vel_ramps[0] = fetch_param('~angular_accel', 750.0)
     g_vel_ramps[1] = fetch_param('~linear_accel', 750.0)
 
-    rate = rospy.Rate(20)
+    rate = rospy.Rate(1)
     while not rospy.is_shutdown():
         send_twist()
         rate.sleep()

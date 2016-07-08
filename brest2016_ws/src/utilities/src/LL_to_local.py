@@ -17,8 +17,8 @@ from math import pi, cos
 # LON0 = -4.474413
 # LAT0 = 48.486964    # BOURG-BLANC - banc entree
 # LON0 = -4.505771
-LAT0 = 48.49233    # BOURG-BLANC - quai
-LON0 = -4.50254
+LAT0 = 48.492305    # BOURG-BLANC - quai
+LON0 = -4.503808
 R = 6371000
 
 

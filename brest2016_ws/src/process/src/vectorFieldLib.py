@@ -310,6 +310,26 @@ def obstacle_point(x, y, a, b, K=1, R=1,
     return profil * direction
 
 
+def obstacle_point_type2(x, y, a, b, K=1, R=1,
+                         security='HIGH', slowing_R=0.5, slowing_K=5):
+    """
+    Defini le champ repulsif autour d'un point en a, b
+    Utilise le @profil_security
+    """
+    d = np.vectorize(dist_point)(x, y, a, b)
+    f = gaussienne(d, R, 0)
+    # profil 3
+    bosse = gaussienne(d, slowing_R, R)
+
+    Ca = -dir_point(x, y, a, b) * K * f
+    Ct = dir_tournant(x, y, a, b) * K * bosse
+    return Ca + Ct
+    # profil = profil_security_M(x, y, a, b, K=K, R=R, security=security,
+    #                            slowing_R=slowing_R, slowing_K=slowing_K)
+    # direction = -dir_point(x, y, a, b)
+    # return profil * direction
+
+
 def limite(x, y, xa, ya, xb, yb, K=1, R=1,
            security='HIGH', slowing_R=0.5, slowing_K=5):
     """

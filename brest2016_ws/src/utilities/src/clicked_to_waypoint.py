@@ -16,7 +16,7 @@ def clicked_callback(msg):
     info = BehaviorInfo(behavior_id='001', f_type='waypoint',
                         xa=poseWayX, ya=poseWayY,
                         xb=0, yb=0,
-                        K=4, R=3,
+                        K=1, R=3,
                         security='LOW', slowing_R=1,
                         slowing_K=1,
                         effect_range=4)

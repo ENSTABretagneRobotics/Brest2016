@@ -54,8 +54,8 @@ def update_cmd2(msg):
     u[1] = abs(msg.linear.x / 6000.) - 1.0
     u[0] = msg.angular.z / 6000. - 1.0
     # augmenter la commande
-    u[1] *= 3
-    u[0] *= 3
+    u[1] *= 10
+    u[0] *= 5
 
 
 def publish_pose(x):
@@ -78,10 +78,10 @@ def publish_pose(x):
 rospy.init_node('sim_char')
 # Subscriber et publisher
 # cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
-cmd_sub = rospy.Subscriber('cmd_vel', Twist, update_cmd)
+cmd_sub = rospy.Subscriber('cmd_vel_ramped', Twist, update_cmd2)
 pos_pub = rospy.Publisher('gps/local_pose', PoseStamped, queue_size=1)
 
-rate = rospy.Rate(10)
+rate = rospy.Rate(20)
 plt.ion()
 x = np.array([40, 40, 4])
 dt = 0.1

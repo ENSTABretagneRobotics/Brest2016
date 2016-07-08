@@ -20,7 +20,8 @@ class Behavior(object):
             'limite': vfl.limite,
             'waypoint': vfl.waypoint,
             'constant': vfl.champ_constant,
-            'obst_point': vfl.obstacle_point}
+            'obst_point': vfl.obstacle_point,
+            'obst_point2': vfl.obstacle_point_type2}
     # corr = {'patrol_circle': cn.patrouille_circulaire,
     #         'ligne': cn.ligne,
     #         'limite': cn.limite,
@@ -61,6 +62,8 @@ class Behavior(object):
             'waypoint': (self.xa, self.ya, self.K),
             'constant': (self.xa, self.ya),
             'obst_point': (self.xa, self.ya, self.K, self.R,
+                           self.security, self.slowing_R, self.slowing_K),
+            'obst_point2': (self.xa, self.ya, self.K, self.R,
                            self.security, self.slowing_R, self.slowing_K)
         }
         self.params = self.param_dict[self.f_type]
@@ -243,26 +246,26 @@ def main_behavior():
 
 
 def main_manager():
-    X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+    X, Y = np.mgrid[-100:100:40j, -100:100:40j]
     manager = BehaviorManager()
 
-    info1 = Behavior_info(f_type='obst_point', behavior_id='001', xa=0, ya=0,
-                          K=3, R=5, slowing_R=1, slowing_K=5,
+    info1 = Behavior_info(f_type='waypoint', behavior_id='001', xa=60, ya=60,
+                          K=1, R=5, slowing_R=1, slowing_K=5,
                           security='HIGH', effect_range=10)
     b1 = Behavior(info1)
     # Behavior 2 - limite
-    info2 = Behavior_info(f_type='limite', behavior_id='002', xa=-5, ya=5,
-                          xb=5, yb=5, K=3, R=5, slowing_R=1, slowing_K=5,
+    info2 = Behavior_info(f_type='obst_point2', behavior_id='002', xa=0, ya=0,
+                          xb=5, yb=5, K=3, R=6, slowing_R=6, slowing_K=5,
                           security='HIGH', effect_range=10)
     b2 = Behavior(info2)
     # Behavior 3 - patrol_circle
     info3 = Behavior_info(f_type='patrol_circle', behavior_id='003',
-                          xa=0, ya=0, K=0.1, R=5)
+                          xa=0, ya=0, K=100, R=5)
     b3 = Behavior(info3)
 
     manager.handle_behavior(b1, 'update')
     # manager.add_behavior(b2)
-    # manager.add_behavior(b3)
+    manager.handle_behavior(b2, 'update')
     # manager.add_behavior(b2)
 
     res = manager.champ_total.cmd_point(X, Y)

@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-import tf
 import rospy
 import numpy as np
 from math import cos
-from geometry_msgs.msg import PoseStamped, Twist, Vector3
+from geometry_msgs.msg import Twist, Vector3, TwistStamped
+from std_msgs.msg import Float32MultiArray
 
 
 def update_cap(msg):
@@ -15,11 +15,12 @@ def update_cap(msg):
     global cap
 
     # print msg.pose.orientation, type(msg.pose.orientation)
-    cap = tf.transformations.euler_from_quaternion(
-        [msg.pose.orientation.x,
-         msg.pose.orientation.y,
-         msg.pose.orientation.z,
-         msg.pose.orientation.w])[2]
+    cap = msg.data[0]
+
+
+def update_speed(msg):
+    global vitesse_boat
+    vitesse_boat = msg.twist.linear.x
 
 
 def update_cible(msg):
@@ -52,7 +53,8 @@ rate = rospy.Rate(5)
 
 # Subscribes to gps position to calculate the heading
 # S'abonne aux positions GPS pour pour recupere le cap
-sub_cap = rospy.Subscriber("gps/local_pose", PoseStamped, update_cap)
+sub_cap = rospy.Subscriber("boat/compas", Float32MultiArray, update_cap)
+sub_speed = rospy.Subscriber("boat/gps/velocity", TwistStamped, update_speed)
 
 # Subscribes to the publisher to get the desired heading
 # Recupe le cap desire
@@ -76,8 +78,8 @@ thetadot0 = fetch_param('~V0', 6000)
 V_lim_reverse = fetch_param('~V_lim_reverse', 1.5)
 vHigh = fetch_param('~vHigh', 8000)  # 8000 max
 vLow = fetch_param('~vLow', 7000)  # 6000 = vitesse nulle
-K = fetch_param('~K', 1500) * (2. / np.pi)
-Kd = fetch_param('~K', 0) * (2. / np.pi)
+Kp = fetch_param('~Kp', 1500) * (2. / np.pi)
+Kd = fetch_param('~Kd', 300) * (2. / np.pi)
 reverse_motor = fetch_param('~reverse_motor', 1)
 
 while not rospy.is_shutdown():
@@ -86,9 +88,9 @@ while not rospy.is_shutdown():
     # Regulation
     error_prev = error
     error = cap_cible - cap
-    diff_error = error - error_prev
-    cmd.angular.z = thetadot0 - K * \
-        np.arctan(np.tan((error / 2.))) - Kd * \
+    diff_error = (error - error_prev) / 0.2
+    cmd.angular.z = thetadot0 + Kp * \
+        np.arctan(np.tan((error / 2.))) + Kd * \
         np.arctan(np.tan((diff_error / 2.)))
     cmd.angular.z = reverse_motor * cmd.angular.z
 
@@ -110,7 +112,7 @@ while not rospy.is_shutdown():
             cmd.linear.x = -vHigh
             print 'marche arriere a -Vhigh, ',
         else:
-            cmd.linear.x = vLow
+            cmd.linear.x = vLow * 5
             print 'marche avant a Vlow, ',
 
     # Pour des champs tres faibles
