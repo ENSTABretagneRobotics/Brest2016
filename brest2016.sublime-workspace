@@ -44,26 +44,10 @@
 	"buffers":
 	[
 		{
-			"file": "brest2016_ws/src/process/launch/real_boat_mission2.launch",
+			"file": "brest2016_ws/src/ball_detection/src/detect_ball.py",
 			"settings":
 			{
-				"buffer_size": 1925,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "brest2016_ws/src/actuators/src/cmd_to_ramp.py",
-			"settings":
-			{
-				"buffer_size": 2511,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "brest2016_ws/src/process/src/behavior_client_exemple.py",
-			"settings":
-			{
-				"buffer_size": 1174,
+				"buffer_size": 36,
 				"line_ending": "Unix"
 			}
 		}
@@ -258,29 +242,29 @@
 	"expanded_folders":
 	[
 		"/home/ejalaa12/Desktop/Brest2016",
-		"/home/ejalaa12/Desktop/Brest2016/Morse",
-		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator",
 		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/src",
 		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/src/comet_simulator",
 		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/src/comet_simulator/robots",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/rosgraphs",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection/src",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src"
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src"
 	],
 	"file_history":
 	[
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/CMakeLists.txt",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/package.xml",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection/src/pcl_voxel_filter.cpp",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection/CMakeLists.txt",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection/package.xml",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/real_boat_mission2.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/cmd_to_ramp.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client_exemple.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_adder_gui.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_server.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/launch/teleop_morse.launch",
@@ -289,14 +273,10 @@
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/Behavior.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat2_morse.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat2.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client_exemple.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src/clicked_to_waypoint.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/real_boat_mission2.launch",
 		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/default.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch/simulation_behavior_char_2d.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/cmd_to_ramp.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src/sim_char.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/CMakeLists.txt",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src/LL_to_local.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/pcl_stat_filter.cpp",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/pcl_outrem_filter.cpp",
@@ -449,98 +429,43 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "brest2016_ws/src/process/launch/real_boat_mission2.launch",
+					"file": "brest2016_ws/src/ball_detection/src/detect_ball.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1925,
+						"buffer_size": 36,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1225,
-								1225
+								36,
+								36
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/XML/XML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 303.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "brest2016_ws/src/actuators/src/cmd_to_ramp.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2511,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"open_with_edit": true,
+							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "brest2016_ws/src/process/src/behavior_client_exemple.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1174,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1050,
-								1050
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 0,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -561,11 +486,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
