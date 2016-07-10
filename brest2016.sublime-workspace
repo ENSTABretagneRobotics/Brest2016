@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"get_ball_pos"
+			],
+			[
+				"fra",
+				"frame"
+			],
+			[
 				"draw",
 				"draw_tank	function"
 			],
@@ -44,10 +52,26 @@
 	"buffers":
 	[
 		{
-			"file": "brest2016_ws/src/ball_detection/src/detect_ball.py",
+			"file": "brest2016_ws/src/ball_detection/src/calibrate_ball_color.py",
 			"settings":
 			{
-				"buffer_size": 36,
+				"buffer_size": 2803,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/ball_detection/src/find_ball_position_in_img.py",
+			"settings":
+			{
+				"buffer_size": 2057,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/ball_detection/src/calcul_ball_position_real.py",
+			"settings":
+			{
+				"buffer_size": 940,
 				"line_ending": "Unix"
 			}
 		}
@@ -80,9 +104,25 @@
 	"command_palette":
 	{
 		"height": 392.0,
-		"last_filter": "",
+		"last_filter": "can",
 		"selected_items":
 		[
+			[
+				"can",
+				"Build: Cancel"
+			],
+			[
+				"ca",
+				"Build: Cancel"
+			],
+			[
+				"canc",
+				"Build: Cancel"
+			],
+			[
+				"git pull",
+				"Git: Pull"
+			],
 			[
 				"makrd",
 				"Set Syntax: Markdown Extended"
@@ -110,10 +150,6 @@
 			[
 				"if",
 				"Snippet: If Condition"
-			],
-			[
-				"git pull",
-				"Git: Pull"
 			],
 			[
 				"install",
@@ -242,21 +278,19 @@
 	"expanded_folders":
 	[
 		"/home/ejalaa12/Desktop/Brest2016",
-		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/src",
-		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/src/comet_simulator",
-		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/src/comet_simulator/robots",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/data",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection/src",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src"
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src"
 	],
 	"file_history":
 	[
+		"/home/ejalaa12/.cache/.fr-hZKauu/apt-1.0.1ubuntu2.12/README.make",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/CMakeLists.txt",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/package.xml",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection/src/pcl_voxel_filter.cpp",
@@ -347,6 +381,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"0",
+			"close",
+			"29",
+			"h",
+			")\n",
+			", 0",
+			"createTrackbar",
+			"h",
+			"hsv",
+			"green",
 			"x",
 			"force",
 			"behav_type",
@@ -429,24 +473,86 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "brest2016_ws/src/ball_detection/src/detect_ball.py",
+					"file": "brest2016_ws/src/ball_detection/src/calibrate_ball_color.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 36,
+						"buffer_size": 2803,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								36,
-								36
+								241,
+								241
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "brest2016_ws/src/ball_detection/src/find_ball_position_in_img.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2057,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1464,
+								1464
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 180.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "brest2016_ws/src/ball_detection/src/calcul_ball_position_real.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 940,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								314,
+								314
 							]
 						],
 						"settings":
@@ -461,11 +567,6 @@
 					"stack_index": 0,
 					"type": "text"
 				}
-			]
-		},
-		{
-			"sheets":
-			[
 			]
 		}
 	],
@@ -486,18 +587,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":

@@ -8,6 +8,7 @@ camera = cv2.VideoCapture(0)
 ball_close_img = cv2.imread('../data/ball_close.jpg')
 ball_mid_img = cv2.imread('../data/ball_mid.jpg')
 ball_far_img = cv2.imread('../data/ball_far.jpg')
+real_ball_img = cv2.imread('../data/left0000.jpg')
 
 
 def nothing(x):
@@ -43,14 +44,14 @@ while True:
     # if we are viewing a video and we did not grab a frame,
     # then we have reached the end of the video
     # if not grabbed:
-    #     break
+        # break
 
-    # resize the frame
+    # resize the frame to process faster !
     # frame = cv2.resize(frame, (600, 600))
 
-    frame = ball_far_img
+    frame = real_ball_img
     #  Blur it
-    blurred = cv2.GaussianBlur(frame, (11, 11), 0)
+    frame = cv2.GaussianBlur(frame, (11, 11), 0)
     # convert it to the HSV
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # split channels
@@ -62,13 +63,15 @@ while True:
     # blobs left in the mask
 
     hmin, hmax, smin, smax, vmin, vmax = get_trackbars_values()
-    h_mask = cv2.inRange(h, hmin, hmax)
-    s_mask = cv2.inRange(s, smin, smax)
-    v_mask = cv2.inRange(v, vmin, vmax)
+    #                                    # Best values found:
+    h_mask = cv2.inRange(h, hmin, hmax)  # 0 2
+    s_mask = cv2.inRange(s, smin, smax)  # 0 22
+    v_mask = cv2.inRange(v, vmin, vmax)  # 75 255
 
     # Final
-    orangeLower = (hmin, smin, vmin)
-    orangeUpper = (hmax, smax, vmax)
+    #                                   # Best values found:
+    orangeLower = (hmin, smin, vmin)    # 0, 219, 99
+    orangeUpper = (hmax, smax, vmax)    # 18, 255, 255
     mask = cv2.inRange(hsv, orangeLower, orangeUpper)
     mask = cv2.erode(mask, None, iterations=2)
     mask = cv2.dilate(mask, None, iterations=2)
