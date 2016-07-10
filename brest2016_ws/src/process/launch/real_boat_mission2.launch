@@ -3,8 +3,8 @@
 <launch>
 	<!-- ACTUATORS -->
 	<node name="motors" pkg="actuators" type="motor_controller.py">
-		<param name="max_speed" value="8000"/>
-		<param name="min_speed" value="5000"/>
+		<param name="max_speed" value="6200"/>
+		<param name="min_speed" value="5800"/>
 		<param name="max_rot" value="6400"/>
 		<param name="min_rot" value="5600"/>
 	</node>
@@ -37,9 +37,10 @@
 	<!-- PROCESS -->
 	<node name="regulateur_champs" pkg="process" type="regulateur_champs_boat2.py">
 		<param name="V0" value="6000"/>
-		<param name="vHigh" value="7500"/>
-		<param name="vLow" value="6500"/>
-		<param name="K" value="100"/>
+		<param name="vHigh" value="6200"/>
+		<param name="vLow" value="6150"/>
+		<param name="Kp" value="100"/>
+		<param name="Kd" value="0"/>
 		<param name="V_lim_reverse" value="1.5"/>
 		<param name="reverse_motor" value="1"/> 	<!-- (-1) to reverse -->
 	</node>

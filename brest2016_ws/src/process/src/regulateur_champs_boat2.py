@@ -76,8 +76,8 @@ thetadot0 = fetch_param('~V0', 6000)
 V_lim_reverse = fetch_param('~V_lim_reverse', 1.5)
 vHigh = fetch_param('~vHigh', 8000)  # 8000 max
 vLow = fetch_param('~vLow', 7000)  # 6000 = vitesse nulle
-K = fetch_param('~K', 1500) * (2. / np.pi)
-Kd = fetch_param('~K', 0) * (2. / np.pi)
+Kp = fetch_param('~Kp', 1500) * (2. / np.pi)
+Kd = fetch_param('~Kd', 0) * (2. / np.pi)
 reverse_motor = fetch_param('~reverse_motor', 1)
 
 while not rospy.is_shutdown():
@@ -87,7 +87,7 @@ while not rospy.is_shutdown():
     error_prev = error
     error = cap_cible - cap
     diff_error = error - error_prev
-    cmd.angular.z = thetadot0 - K * \
+    cmd.angular.z = thetadot0 - Kp * \
         np.arctan(np.tan((error / 2.))) - Kd * \
         np.arctan(np.tan((diff_error / 2.)))
     cmd.angular.z = reverse_motor * cmd.angular.z
@@ -95,8 +95,8 @@ while not rospy.is_shutdown():
     # bateau dans le sens du champ
     if cos(error) >= 0:
         # on bride
-        if vLow > V_reel:
-            cmd.linear.x = vLow
+        if 6000 > V_reel:
+            cmd.linear.x = 6000
         elif V_reel > vHigh:
             cmd.linear.x = vHigh
         else:

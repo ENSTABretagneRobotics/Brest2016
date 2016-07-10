@@ -5,10 +5,10 @@
 	<node name="keys_to_twist" pkg="teleop" type="keys_to_twist.py" output="screen"/>
 
 	<node name="motors" pkg="actuators" type="motor_controller.py" output="screen">
-		<param name="max_speed" value="7500"/>
-		<param name="min_speed" value="4500"/>
-		<param name="max_rot" value="7500"/>
-		<param name="min_rot" value="4500"/>
+		<param name="max_speed" value="6200"/>
+		<param name="min_speed" value="5800"/>
+		<param name="max_rot" value="6400"/>
+		<param name="min_rot" value="5600"/>
 	</node>
 
 	<!-- comment one of the param to use default -->
