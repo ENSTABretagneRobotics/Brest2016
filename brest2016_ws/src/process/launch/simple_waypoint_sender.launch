@@ -1,0 +1,15 @@
+<!-- Mission de suivi de waypoints -->
+<launch>
+	<arg name = "patx" default = "0">
+	<arg name = "paty" default = "0">
+
+	<node name="waypoint" pkg="process" type="behavior_client_exemple.py">
+		<param name="x" value="$(arg patx)"/>
+		<param name="y" value="$(arg paty)"/>
+		<param name="behav_type" value="waypoint"/>
+		<param name="force" value="1"/>
+		<param name="b_id" value="100"/>
+
+	</node>
+	
+</launch>
