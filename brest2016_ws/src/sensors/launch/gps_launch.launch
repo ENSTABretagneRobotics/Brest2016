@@ -1,0 +1,11 @@
+<!-- Mission de suivi de waypoints -->
+<launch>
+	<node name="local_pose_convertor" pkg="utilities" type="LL_to_local.py" output="screen">
+		<remap from="imu" to="imu_boat"/>
+	</node>
+	
+	<node name="gps_driver" pkg="nmea_navsat_driver" type="nmea_serial_driver">
+		<param name="port" value="/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0"/>
+    	<param name="baud" value="4800"/>
+	</node>
+</launch>

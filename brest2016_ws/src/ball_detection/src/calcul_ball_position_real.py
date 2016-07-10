@@ -10,15 +10,18 @@ from math import atan, degrees
 def get_ball_pos(msg):
     global x, y, img
     img = bridge.imgmsg_to_cv2(msg)
-    x, y = get_pos(img)
-    print '{} et {}'.format(x, y)
+    # print img.shape
+    res = cv2.resize(img, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    x, y = get_pos(res)
+    # print '{} et {}'.format(x, y)
 
 
 def get_ball_depth(msg):
     global x, y, z
     img = bridge.imgmsg_to_cv2(msg)
     z = img[y, x]
-    print z, img.shape[0] - y, x, degrees(atan((img.shape[0] - y) / (x - 640 / 2)))
+    # print z, img.shape[0] - y, x, degrees(atan((img.shape[0] - y) / (x - 640 / 2)))
+    print z
 
 rospy.init_node('distance_ball')
 
@@ -28,7 +31,7 @@ depth_sub = rospy.Subscriber(
     '/camera/depth/image_rect_color', Image, get_ball_depth)
 
 bridge = cv_bridge.CvBridge()
-img = cv2.imread('../data/left0000.jpg')
+img = cv2.imread('../data/left0004.jpg')
 
 x, y, z = -1, -1, -1
 rate = rospy.Rate(10)

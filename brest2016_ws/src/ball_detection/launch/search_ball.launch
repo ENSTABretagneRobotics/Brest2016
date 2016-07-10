@@ -1,0 +1,21 @@
+<!-- Mission de suivi de waypoints -->
+<launch>
+	<arg name = "patx">
+	<arg name = "paty">
+	<arg name = "patxb">
+	<arg name = "patyb">
+	<arg name = "patrad">
+
+	<node name="search_ball_patrol" pkg="process" type="behavior_client_exemple.py">
+		<param name="x" value="$(arg patx)"/>
+		<param name="y" value="$(arg paty)"/>
+		<param name="xb" value="$(arg patxb)"/>
+		<param name="yb" value="$(arg patyb)"/>
+		<param name="behav_type" value="patrol_circle"/>
+		<param name="force" value="3"/>
+		<param name="radius" value="$(arg patrad)"/>
+		<param name="b_id" value="300"/>
+		<param name="e_range" value="3"/>
+	</node>
+	
+</launch>
