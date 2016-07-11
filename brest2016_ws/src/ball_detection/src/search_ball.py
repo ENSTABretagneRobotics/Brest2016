@@ -11,8 +11,8 @@ from geometry_msgs.msg import PoseStamped
 
 
 def pose_boat(msg):
-    poseBoatX = msg.local_pose.position.x
-    poseBoatY = msg.local_pose.position.y
+    poseBoatX = msg.pose.position.x
+    poseBoatY = msg.pose.position.y
     # Behavior a envoyer
     info = BehaviorInfo(behavior_id='001', f_type='patrol_circle',
                         xa=poseBoatX, ya=poseBoatY,
