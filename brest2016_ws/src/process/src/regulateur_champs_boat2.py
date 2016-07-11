@@ -72,7 +72,7 @@ error = 0
 
 # Parametres
 V0 = fetch_param('~V0', 6000)
-thetadot0 = fetch_param('~V0', 6000)
+thetadot0 = fetch_param('~thetadot0', 6000)
 V_lim_reverse = fetch_param('~V_lim_reverse', 1.5)
 vHigh = fetch_param('~vHigh', 8000)  # 8000 max
 vLow = fetch_param('~vLow', 7000)  # 6000 = vitesse nulle
@@ -87,10 +87,12 @@ while not rospy.is_shutdown():
     error_prev = error
     error = cap_cible - cap
     diff_error = error - error_prev
-    cmd.angular.z = thetadot0 - Kp * \
-        np.arctan(np.tan((error / 2.))) - Kd * \
+    rm = reverse_motor
+    cmd.angular.z = thetadot0 - rm * Kp * \
+        np.arctan(np.tan((error / 2.))) - rm * Kd * \
         np.arctan(np.tan((diff_error / 2.)))
-    cmd.angular.z = reverse_motor * cmd.angular.z
+    # cmd.angular.z = reverse_motor * cmd.angular.z
+    print 'veut tourner a ', cmd.angular.z,
 
     # bateau dans le sens du champ
     if cos(error) >= 0:

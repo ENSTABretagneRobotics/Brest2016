@@ -3,10 +3,10 @@
 <launch>
 	<!-- ACTUATORS -->
 	<node name="motors" pkg="actuators" type="motor_controller.py">
-		<param name="max_speed" value="6200"/>
+		<param name="max_speed" value="6800"/>
 		<param name="min_speed" value="5800"/>
-		<param name="max_rot" value="6400"/>
-		<param name="min_rot" value="5600"/>
+		<param name="max_rot" value="7500"/>
+		<param name="min_rot" value="4500"/>
 	</node>
 
 	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py">
@@ -35,14 +35,15 @@
 
 	
 	<!-- PROCESS -->
-	<node name="regulateur_champs" pkg="process" type="regulateur_champs_boat2.py">
+	<node name="regulateur_champs" pkg="process" type="regulateur_champs_boat2.py" output="screen">
 		<param name="V0" value="6000"/>
-		<param name="vHigh" value="6200"/>
-		<param name="vLow" value="6150"/>
-		<param name="Kp" value="100"/>
+		<param name="thetadot0" value="6000"/>
+		<param name="vHigh" value="6700"/>
+		<param name="vLow" value="6400"/>
+		<param name="Kp" value="2000"/>
 		<param name="Kd" value="0"/>
 		<param name="V_lim_reverse" value="1.5"/>
-		<param name="reverse_motor" value="1"/> 	<!-- (-1) to reverse -->
+		<param name="reverse_motor" value="-1"/> 	<!-- (-1) to reverse -->
 	</node>
 
 	<node name="behavior_server" pkg="process" type="behavior_server.py">
