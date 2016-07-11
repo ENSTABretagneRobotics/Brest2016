@@ -46,7 +46,7 @@ if __name__ == '__main__':
     # Read image
     frame = cv2.imread('../data/left0003.jpg')
     depth = cv2.imread('../data/depth.jpg')
-    print 'frame {}, depth {}'.format(frame.shape, depth.shape)
+    # print 'frame {}, depth {}'.format(frame.shape, depth.shape)
     while True:
         cv2.imshow('depth', depth)
         if cv2.waitKey(1) & 0xFF == ord('q'):

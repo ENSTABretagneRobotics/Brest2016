@@ -14,7 +14,7 @@ def pose_boat(msg):
     poseBoatX = msg.pose.position.x
     poseBoatY = msg.pose.position.y
     # Behavior a envoyer
-    info = BehaviorInfo(behavior_id='001', f_type='patrol_circle',
+    info = BehaviorInfo(behavior_id='1001', f_type='patrol_circle',
                         xa=poseBoatX, ya=poseBoatY,
                         xb=0, yb=0,
                         K=3, R=10)

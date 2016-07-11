@@ -1,14 +1,14 @@
 #!/usr/bin/env  python
 import cv2
+import cv_bridge
+import rospy
+from sensor_msgs.msg import Image
+import numpy as np
 
-# WEBCAM
-camera = cv2.VideoCapture(0)
 
-# DATA IMAGES
-ball_close_img = cv2.imread('../data/ball_close.jpg')
-ball_mid_img = cv2.imread('../data/ball_mid.jpg')
-ball_far_img = cv2.imread('../data/ball_far.jpg')
-real_ball_img = cv2.imread('../data/left0000.jpg')
+def update_img(msg):
+    global frame
+    frame = bridge.imgmsg_to_cv2(msg)
 
 
 def nothing(x):
@@ -35,24 +35,27 @@ def get_trackbars_values():
     return [hmin, hmax, smin, smax, vmin, vmax]
 
 
+rospy.init_node('ball_color_calibration')
 create_trackbars()
+
+# IMAGES subscriber
+img_sub = rospy.Subscriber(
+    '/camera/left/image_rect_color', Image, update_img)
+
+# Cv bridge
+bridge = cv_bridge.CvBridge()
+
+frame = np.zeros((376, 672, 3), np.uint8)
+
 # keep looping
 while True:
-    # grab the current frame
-    (grabbed, frame) = camera.read()
 
-    # if we are viewing a video and we did not grab a frame,
-    # then we have reached the end of the video
-    if not grabbed:
-        print 'no camera'
-        break
-
-    # resize the frame to process faster !
-    frame = cv2.resize(frame, (600, 600))
+    # # resize the frame to process faster !
+    # frame = cv2.resize(frame, (600, 600))
 
     # frame = real_ball_img
     #  Blur it
-    frame = cv2.GaussianBlur(frame, (11, 11), 0)
+    # frame = cv2.GaussianBlur(frame, (11, 11), 0)
     # convert it to the HSV
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # split channels
@@ -71,8 +74,8 @@ while True:
 
     # Final
     #                                   # Best values found:
-    orangeLower = (hmin, smin, vmin)    # 0, 219, 99
-    orangeUpper = (hmax, smax, vmax)    # 18, 255, 255
+    orangeLower = (hmin, smin, vmin)    # 0, 176, 72
+    orangeUpper = (hmax, smax, vmax)    # 16, 255, 255
     mask = cv2.inRange(hsv, orangeLower, orangeUpper)
     mask = cv2.erode(mask, None, iterations=2)
     mask = cv2.dilate(mask, None, iterations=2)

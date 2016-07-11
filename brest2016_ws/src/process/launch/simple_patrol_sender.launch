@@ -1,0 +1,19 @@
+<!-- Mission de suivi de waypoints -->
+<launch>
+	<arg name = "patx" default = "-18"/>
+	<arg name = "paty" default = "-7"/>
+	<arg name = "patrad" default = "5"/>
+	<arg name = "patr" default = "10"/>
+
+	<node name="search_ball_patrol" pkg="process" type="behavior_client_exemple.py">
+		<param name="x" value="$(arg patx)"/>
+		<param name="y" value="$(arg paty)"/>
+		<param name="behav_type" value="patrol_circle"/>
+		<param name="force" value="3"/>
+		<param name="radius" value="$(arg patrad)"/>
+		<param name="slowr" value="$(arg patr)"/>
+		<param name="b_id" value="300"/>
+		<param name="e_range" value="3"/>
+	</node>
+	
+</launch>

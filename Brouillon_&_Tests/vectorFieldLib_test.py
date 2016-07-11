@@ -130,7 +130,7 @@ class ObjectivesTestPlot():
         plt.figure('LIGNE ATTRACTIVE')
         X, Y = np.mgrid[-100:100:40j, -100:100:40j]
         U, V = vfl.ligne(
-            X, Y, 0, 0, xb=50, yb=0, K=0.2, R=20, effect_range=40)
+            X, Y, 0, 0, xb=50, yb=0, K=0.2, R=5, effect_range=20)
         plt.quiver(X, Y, U, V, scale=2)
         plt.show()
 
@@ -274,7 +274,8 @@ if __name__ == '__main__':
     # otp.test_dir_segment_complet()
     # plot_test.test_parameter()
     # otp.exemple_patrouille()
-    otp.test_obstacle_point()
+    # otp.test_obstacle_point()
+    otp.test_ligne()
     # otp.test_patrouille_circulaire()
 
     # run all ObjectivesTestPlot methods
