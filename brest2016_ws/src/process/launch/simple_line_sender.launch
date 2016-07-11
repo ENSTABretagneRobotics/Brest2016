@@ -1,0 +1,22 @@
+<!-- Mission de suivi de waypoints -->
+<launch>
+	<arg name = "patx" default = "0">
+	<arg name = "paty" default = "0">
+	<arg name = "patxb" default = "0">
+	<arg name = "patyb" default = "0">
+	<arg name = "id" default = "400">
+	<arg name = "range" default = "10">
+
+	<node name="line_sender" pkg="process" type="behavior_client_exemple.py">
+		<param name="x" value="$(arg patx)"/>
+		<param name="y" value="$(arg paty)"/>
+		<param name="xb" value="$(arg patxb)"/>
+		<param name="yb" value="$(arg patyb)"/>
+		<param name="behav_type" value="obst_point2"/>
+		<param name="force" value="4"/>
+		<param name="b_id" value="$(arg id)"/>
+		<param name="radius" value="$(arg patrad)"/>
+		<param name="e_range" value="$(arg range)"/>
+	</node>
+	
+</launch>

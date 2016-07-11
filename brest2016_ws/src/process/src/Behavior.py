@@ -54,7 +54,7 @@ class Behavior(object):
         self.security = info.security
         self.effect_range = info.effect_range
         self.param_dict = {
-            'patrol_circle': (self.xa, self.ya, self.K, self.R),
+            'patrol_circle': (self.xa, self.ya, self.K, self.R, self.slowing_R),
             'ligne': (self.xa, self.ya, self.xb, self.yb,
                       self.K, self.R, self.effect_range),
             'limite': (self.xa, self.ya, self.xb, self.yb, self.K, self.R,
@@ -64,7 +64,7 @@ class Behavior(object):
             'obst_point': (self.xa, self.ya, self.K, self.R,
                            self.security, self.slowing_R, self.slowing_K),
             'obst_point2': (self.xa, self.ya, self.K, self.R,
-                           self.security, self.slowing_R, self.slowing_K)
+                            self.security, self.slowing_R, self.slowing_K)
         }
         self.params = self.param_dict[self.f_type]
 
@@ -249,24 +249,24 @@ def main_manager():
     X, Y = np.mgrid[-100:100:40j, -100:100:40j]
     manager = BehaviorManager()
 
-    info1 = Behavior_info(f_type='waypoint', behavior_id='001', xa=60, ya=60,
-                          K=1, R=5, slowing_R=1, slowing_K=5,
-                          security='HIGH', effect_range=10)
-    b1 = Behavior(info1)
+    # info1 = Behavior_info(f_type='waypoint', behavior_id='001', xa=60, ya=60,
+    #                       K=1, R=5, slowing_R=1, slowing_K=5,
+    #                       security='HIGH', effect_range=10)
+    # b1 = Behavior(info1)
     # Behavior 2 - limite
-    info2 = Behavior_info(f_type='obst_point2', behavior_id='002', xa=0, ya=0,
-                          xb=5, yb=5, K=3, R=6, slowing_R=6, slowing_K=5,
-                          security='HIGH', effect_range=10)
-    b2 = Behavior(info2)
+    # info2 = Behavior_info(f_type='obst_point2', behavior_id='002', xa=20, ya=20,
+    #                       xb=5, yb=5, K=3, R=10, slowing_R=10, slowing_K=5,
+    #                       security='LOW', effect_range=10)
+    # b2 = Behavior(info2)
     # Behavior 3 - patrol_circle
     info3 = Behavior_info(f_type='patrol_circle', behavior_id='003',
-                          xa=0, ya=0, K=100, R=5)
+                          xa=0, ya=0, K=3, R=10, slowing_R=30)
     b3 = Behavior(info3)
 
-    manager.handle_behavior(b1, 'update')
+    # manager.handle_behavior(b1, 'update')
     # manager.add_behavior(b2)
-    manager.handle_behavior(b2, 'update')
-    # manager.add_behavior(b2)
+    # manager.handle_behavior(b2, 'update')
+    manager.handle_behavior(b3, 'update')
 
     res = manager.champ_total.cmd_point(X, Y)
     print manager.champ_total.cmd_point(0, 0)

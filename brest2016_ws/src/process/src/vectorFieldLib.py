@@ -367,7 +367,7 @@ def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
     return profil_tang * dir_tang + profil_norm * dir_norm
 
 
-def patrouille_circulaire(x, y, a, b, K, R, turning_R=2):
+def patrouille_circulaire(x, y, a, b, K, R, turning_R=5):
     """
     Genere un cercle attractif tournant (a gauche)
     autour du point(a,b) et de rayon R
