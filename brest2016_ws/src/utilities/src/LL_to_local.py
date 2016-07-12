@@ -17,8 +17,10 @@ from math import pi, cos
 # LON0 = -4.474413
 # LAT0 = 48.486964    # BOURG-BLANC - banc entree
 # LON0 = -4.505771
-LAT0 = 48.492305    # BOURG-BLANC - quai
-LON0 = -4.503808
+# LAT0 = 48.492305    # BOURG-BLANC - quai
+# LON0 = -4.503808
+LAT0 = 48.3829633    # QUAI DES SCIENCES
+LON0 = -4.48648166
 R = 6371000
 
 
