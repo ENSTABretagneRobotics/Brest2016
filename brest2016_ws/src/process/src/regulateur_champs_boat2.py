@@ -108,12 +108,15 @@ while not rospy.is_shutdown():
     # bateau dans le sens oppose au champ
     else:
         print 'contre le champ,  ',
-        if V_vect >= V_lim_reverse:
-            cmd.linear.x = -vHigh
-            print 'marche arriere a -Vhigh, ',
-        else:
-            cmd.linear.x = vLow
-            print 'marche avant a Vlow, ',
+        # if V_vect >= V_lim_reverse:
+        #     cmd.linear.x = -vHigh
+        #     print 'marche arriere a -Vhigh, ',
+        # else:
+        cmd.linear.x = vLow
+        cmd.angular.z = thetadot0 - rm * 100000 * \
+            np.arctan(np.tan((error / 2.))) - rm * Kd * \
+            np.arctan(np.tan((diff_error / 2.)))
+        print 'marche avant a Vlow, on braque beaucoup',
 
     # Pour des champs tres faibles
     # (le champ n'est jamais nul lorsqu'un profil est une gaussienne)
