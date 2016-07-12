@@ -251,7 +251,7 @@ def main_manager():
 
     info1 = Behavior_info(f_type='ligne', behavior_id='001', xa=0, ya=-100,
                           xb=100, yb=0,
-                          K=1, R=20, slowing_R=1, slowing_K=5,
+                          K=1, R=30, slowing_R=1, slowing_K=5,
                           security='LOW', effect_range=40)
     b1 = Behavior(info1)
     # Behavior 2 - limite
@@ -264,10 +264,10 @@ def main_manager():
                           xa=0, ya=0, K=3, R=10, slowing_R=30)
     b3 = Behavior(info3)
 
-    manager.handle_behavior(b1, 'update')
+    # manager.handle_behavior(b1, 'update')
     # manager.add_behavior(b2)
-    manager.handle_behavior(b2, 'update')
-    # manager.handle_behavior(b3, 'update')
+    # manager.handle_behavior(b2, 'update')
+    manager.handle_behavior(b3, 'update')
 
     res = manager.champ_total.cmd_point(X, Y)
     print manager.champ_total.cmd_point(0, 0)

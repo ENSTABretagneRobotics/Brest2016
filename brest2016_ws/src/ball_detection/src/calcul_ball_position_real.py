@@ -39,24 +39,30 @@ def get_ball_depth(msg):
 
 rospy.init_node('pose_ball_publisher')
 
+# Subscribers
 img_sub = rospy.Subscriber(
     '/camera/left/image_rect_color', Image, get_ball_pos)
+
 depth_sub = rospy.Subscriber(
     '/camera/depth/image_rect_color', Image, get_ball_depth)
 
+pub = rospy.Publisher('ball/pose', PoseStamped, queue_size=1)
+
+# Bridges
 bridge = cv_bridge.CvBridge()
 # img = cv2.imread('../data/left0004.jpg')
 img = np.zeros((376, 672, 3), np.uint8)
 res = np.zeros((376, 672, 3), np.uint8)
 
-
-pub = rospy.Publisher('ball/pose', PoseStamped, queue_size=1)
-
+# Variables
 x, y, z = -1, -1, -1
 xr, yr = -1, -1
+
+# Parameter
 rate = rospy.Rate(10)
+show_img = rospy.get_param("~show_img", True)
+
 while True:
-    rate.sleep()
     # pub.
     # print xr, yr
     po = PoseStamped()
@@ -65,6 +71,8 @@ while True:
     po.pose.position.x = xr
     po.pose.position.y = yr
     pub.publish(po)
-    cv2.imshow('frame', res)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    if show_img:
+        cv2.imshow('frame', res)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    rate.sleep()

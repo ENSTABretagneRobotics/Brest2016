@@ -57,7 +57,8 @@ def define_behavior(msg):
 rospy.init_node('go_to_ball')
 
 rospy.wait_for_service('behavior_manager')
-behavior_sender = rospy.ServiceProxy('behavior_manager', behavior)
+behavior_sender = rospy.ServiceProxy(
+    'behavior_manager', behavior)
 
 # S'abonne aux positions GPS pour pour recuperer la position du bateau et
 # de la balle

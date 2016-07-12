@@ -50,7 +50,10 @@
 		<param name="show_plot" value="False"/>
 	</node>
 
-	<node name="find_ball_position_in_img" pkg="ball_detection" type="calcul_ball_position_real.py"/>
+	<node name="find_ball_position_in_img" pkg="ball_detection" type="calcul_ball_position_real.py">
+		<param name="show_img" value="False"/> 	<!-- (-1) to reverse -->
+	</node>
+
 
 	<node name="patrol_or_fetch_ball" pkg="ball_detection" type="go_to_ball.py"/>
 
