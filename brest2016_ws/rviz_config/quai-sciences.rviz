@@ -6,9 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /TF1
         - /TF1/Frames1
-        - /AerialMapDisplay1
         - /AerialMapDisplay1/Status1
         - /AerialMapDisplay1/Origin1
         - /AerialMapDisplay1/Bottom Left1
@@ -68,13 +66,19 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        boat_frame:
+          Value: true
+        world:
+          Value: true
       Marker Scale: 40
       Name: TF
       Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        world:
+          boat_frame:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 0.7
@@ -96,7 +100,7 @@ Visualization Manager:
       Object URI: /home/brest2016/Desktop/Brest2016/brest-git/Brest2016/brest2016_ws/src/rviz_satellite/my_maps/outr.jpg
       Origin:
         X: 48.383
-        Y: -4.48648
+        Y: -4.4865
         Z: 0
       Robot frame: world
       Top Left:
@@ -115,7 +119,7 @@ Visualization Manager:
       Axes Radius: 2
       Class: rviz/Pose
       Color: 85; 0; 255
-      Enabled: true
+      Enabled: false
       Head Length: 10
       Head Radius: 5
       Name: Pose
@@ -124,7 +128,7 @@ Visualization Manager:
       Shape: Arrow
       Topic: /gps/local_pose
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz/PointStamped
       Color: 204; 41; 204
@@ -181,7 +185,7 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 1.19964
+      Scale: 5.80973
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
       X: 0
