@@ -82,9 +82,9 @@ while True:
 
     # cv2.imshow('hsv', hsv)
     cv2.imshow('original', frame)
-    cv2.imshow('h_mask', h_mask)
-    cv2.imshow('s_mask', s_mask)
-    cv2.imshow('v_mask', v_mask)
+    # cv2.imshow('h_mask', h_mask)
+    # cv2.imshow('s_mask', s_mask)
+    # cv2.imshow('v_mask', v_mask)
     cv2.imshow('final', mask)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

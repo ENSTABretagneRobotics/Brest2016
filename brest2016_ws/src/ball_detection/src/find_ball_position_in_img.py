@@ -5,8 +5,10 @@ import cv2
 def get_pos(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # Lower and upper Orange color for the ball
-    orangeLower = (0, 219, 99)
-    orangeUpper = (18, 255, 255)
+    # orangeLower = (0, 219, 99)
+    orangeLower = (0, 199, 105)
+    # orangeUpper = (18, 255, 255)
+    orangeUpper = (48, 255, 251)
 
     mask = cv2.inRange(hsv, orangeLower, orangeUpper)
     mask = cv2.erode(mask, None, iterations=2)

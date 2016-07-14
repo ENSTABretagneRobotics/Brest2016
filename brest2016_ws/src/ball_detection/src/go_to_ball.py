@@ -7,6 +7,7 @@ import rospy
 from process.srv import behavior
 from process.msg import BehaviorInfo
 from geometry_msgs.msg import PoseStamped
+import numpy as np
 # from math import atan
 
 
@@ -16,11 +17,11 @@ def update_ball_pos(msg):
         if not ball_lost:
             ball_lost = True
             ball_lost_time = rospy.Time.now()
-            print 'ball just lost'
+            rospy.loginfo('ball just lost')
 
     else:
         if ball_lost:
-            print 'ball just found'
+            rospy.loginfo('ball just found')
         ball_lost = False
         ballX = msg.pose.position.x
         ballY = msg.pose.position.y
@@ -39,19 +40,24 @@ def define_behavior(msg):
     # if((ballX - 3 <= poseBoatX <= ballX + 3) and (ballY - 3 <= poseBoatY <=
     # ballY + 3)):
     if ball_lost and (rospy.Time.now() - ball_lost_time).to_sec() > 30:
+        # peut etre pas besoin de l'envoyer tout le temps
         info = BehaviorInfo(behavior_id='1001', f_type='patrol_circle',
                             xa=poseBoatX, ya=poseBoatY,
                             xb=0, yb=0,
                             K=3, R=10)
-        print 'ball lost a long time ago, going back to patrol mode'
+        rospy.loginfo('ball lost a long time ago, going back to patrol mode')
+        confirmation = behavior_sender(info, 'update')
+    elif ballY in [np.inf, np.NaN] or ballX in [np.inf, np.NaN] or np.isnan(ballX) or np.isnan(ballY):
+        print 'nan or inf detected'
     else:
         info = BehaviorInfo(behavior_id='1001', f_type='waypoint',
                             xa=poseBoatX + ballX, ya=poseBoatY + ballY,
                             K=1,
                             security='HIGH', effect_range=10)
-        print 'ball found, going there'
-    confirmation = behavior_sender(info, 'update')
-    print confirmation
+        rospy.loginfo('ball found at {}, {}, going there'.format(
+            poseBoatX + ballX, poseBoatY + ballY))
+        confirmation = behavior_sender(info, 'update')
+    # rospy.loginfo(confirmation)
 
 
 rospy.init_node('go_to_ball')

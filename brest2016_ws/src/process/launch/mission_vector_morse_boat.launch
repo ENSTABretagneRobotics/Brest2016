@@ -1,6 +1,7 @@
 <!-- Mission de suivi de waypoints -->
 <!-- Morse + bateau -->
 <launch>
+	<arg name="show_plot" default="False"/>
 	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py">
 		<param name="linear_twist" value="0"/>
 		<param name="angular_twist" value="0"/>
@@ -27,6 +28,7 @@
 	<node name="behavior_server" pkg="process" type="behavior_server.py">
 		<param name="robot_type" value="thomas_boat"/>
 		<remap from="gps/local_pose" to="boat/gps/pose"/>
+		<param name="show_plot" value="$(arg show_plot)"/>
 	</node>
 
 	<node name="gui_behavior_adder" pkg="process" type="behavior_adder_gui.py"/>

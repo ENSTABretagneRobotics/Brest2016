@@ -9,7 +9,7 @@
 		<param name="x" value="$(arg patx)"/>
 		<param name="y" value="$(arg paty)"/>
 		<param name="behav_type" value="obst_point2"/>
-		<param name="force" value="2"/>
+		<param name="force" value="5"/>
 		<param name="b_id" value="$(arg id)"/>
 		<param name="radius" value="$(arg patrad)"/>
 

@@ -32,6 +32,6 @@ keyboard.properties(ControlType='Position')
 env = Environment(
     # '/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/Morse/comet_simulator/data/comet_simulator/environments/costal_env.blend', fastmode=False)
     '/home/ejalaa12/Desktop/Brest2016/Morse/environments/water-1o-3w.blend', fastmode=False)
-env.set_camera_location([0.0, 0.0, 300.0])
+env.set_camera_location([0.0, 0.0, 200.0])
 env.set_camera_rotation([0, 0.0, 0.0])
 env.set_camera_clip(clip_end=2000)

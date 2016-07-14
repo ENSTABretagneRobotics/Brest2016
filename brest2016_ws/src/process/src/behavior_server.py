@@ -33,7 +33,8 @@ def handle_received_behavior(request):
     behavior_manager.handle_behavior(Behavior(request.info), request.action)
     return behaviorResponse(request.action + 'ed')
 
-    print 'nombres de behavior recu:', len(behavior_manager.behavior_list)
+    rospy.loginfo('nombres de behavior recu:' +
+                  str(len(behavior_manager.behavior_list)))
 
 
 def update_pos(msg):

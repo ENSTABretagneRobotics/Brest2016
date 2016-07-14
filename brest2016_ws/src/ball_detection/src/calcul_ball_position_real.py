@@ -13,7 +13,7 @@ import numpy as np
 def get_ball_pos(msg):
     global x, y, img, res
     img = bridge.imgmsg_to_cv2(msg)
-    res = cv2.resize(img, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    res = cv2.resize(img, None, fx=1, fy=1, interpolation=cv2.INTER_AREA)
     # print img.shape
     x, y = get_pos(res)
     # print img.shape
@@ -27,7 +27,7 @@ def get_ball_depth(msg):
         yr = -1
     else:
         img = bridge.imgmsg_to_cv2(msg)
-        tmp = cv2.resize(img, None, fx=0.5, fy=0.5,
+        tmp = cv2.resize(img, None, fx=1, fy=1,
                          interpolation=cv2.INTER_AREA)
         z = tmp[y, x]
         # print img.shape

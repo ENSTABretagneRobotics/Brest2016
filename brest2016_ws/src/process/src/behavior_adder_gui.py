@@ -46,6 +46,7 @@ def configure_widgets(type_champ):
     elif type_champ == 'patrol_circle':
         R_entry.configure(state='normal')
         K_entry.configure(state='normal')
+        slowing_R_entry.configure(state='normal')
     elif type_champ == 'obst_point2':
         R_entry.configure(state='normal')
         K_entry.configure(state='normal')

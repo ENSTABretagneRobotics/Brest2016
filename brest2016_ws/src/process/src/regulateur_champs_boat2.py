@@ -113,7 +113,7 @@ while not rospy.is_shutdown():
         #     print 'marche arriere a -Vhigh, ',
         # else:
         cmd.linear.x = vLow
-        cmd.angular.z = thetadot0 - rm * 100000 * \
+        cmd.angular.z = thetadot0 - rm * 4000 * \
             np.arctan(np.tan((error / 2.))) - rm * Kd * \
             np.arctan(np.tan((diff_error / 2.)))
         print 'marche avant a Vlow, on braque beaucoup',

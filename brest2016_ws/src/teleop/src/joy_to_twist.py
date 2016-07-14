@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import rospy
-from sensor_msgs.msg import Joy
+# from sensor_msgs.msg import Joy
 from geometry_msgs.msg import Twist
+from std_msgs.msg import String
 # rosrun joy joy_node pour lancer
 # Middle speed and rotations
 speed = 6000
