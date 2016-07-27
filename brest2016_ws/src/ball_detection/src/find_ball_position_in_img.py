@@ -2,13 +2,18 @@
 import cv2
 
 
-def get_pos(frame):
+def get_pos(frame, hmin=0, smin=199, vmin=105, hmax=48, smax=255, vmax=251):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # Lower and upper Orange color for the ball
+    # Essai 1
     # orangeLower = (0, 219, 99)
-    orangeLower = (0, 199, 105)
     # orangeUpper = (18, 255, 255)
-    orangeUpper = (48, 255, 251)
+    # Essai 2 - a l'air de marcher pour les courtes distances
+    orangeLower = (hmin, smin, vmin)
+    orangeUpper = (hmax, smax, vmax)
+    # Essai 3 - a l'air de marcher pour les moyenne distances
+    # orangeLower = (0, 133, 106)
+    # orangeUpper = (18, 197, 232)
 
     mask = cv2.inRange(hsv, orangeLower, orangeUpper)
     mask = cv2.erode(mask, None, iterations=2)
@@ -38,8 +43,8 @@ def get_pos(frame):
             # print '{}({}), {}({})'.format(x, int(x), y, int(y))
             # print depth[y, x]
             cv2.circle(frame, center, 5, (0, 0, 255), -1)
-            return x, y
-    return -1, -1
+            return x, y, radius
+    return -1, -1, -1
 
 if __name__ == '__main__':
     # WEBCAM
@@ -58,8 +63,11 @@ if __name__ == '__main__':
     frame = cv2.GaussianBlur(frame, (11, 11), 0)
     # convert it to the HSV
 
+    frame_copy = frame.copy()
     get_pos(frame)
+    get_pos(frame_copy, hmin=100, smin=133, vmin=106, hmax=18, smax=197, vmax=232)
     while True:
         cv2.imshow('frame', frame)
+        cv2.imshow('frame2', frame_copy)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

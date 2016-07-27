@@ -1,0 +1,60 @@
+# En vrac
+[-] fenetre de debug graphique
+[-] ecrire un regulateur ultra simple
+[-] rejouer les rosbag pour comprendre pourquoi les waypoints generait des vitesses pas constantes
+[-] pourquoi il recoit des commandes non nuls parfois au demarrage
+[x] debug du behavior manager et voir quand il recoit les behaviors
+[x] retirer la commande rampe
+[-] dynamic reconfigure de la vitesse max des motors
+[-] dynamic reconfigure des vHigh et vLow
+[x] verifier la norme du champ pour un suivi de ligne (**pas constant**)
+[x] waypoint manager gui
+[x] ligne manager gui
+
+
+# Remarques
+## sur la regulation
+- la cmd angulaire etait super forte lorsqu'on etait contre champ du coup a la cmd suivante, la rampe
+tentait de descendre doucement vers la bonne commande, mais pas bon 
+>> retirage de la rampe
+
+- parfois losqu'on a **pas de commande** et que le *cap* est different du dernier *cap_cible*,
+  le regulateur cherche a suivre l'ancien cap_cible
+  >> c'est inutile alors pour des commandes nulles j'ai change
+
+# ToDo
+## Razor
+Lancer le noeud IMU (et GPS) et verifier dans RViz que le tf est correct.
+   1. si oui passe
+   2. sinon si il est tourne de 180 degres, essayer de le tourner physiquement
+   3. ET `rosrun rqt_reconfigure rqt_reconfigure` pour obtenir l'offset
+   4. au pire modifier la reconfiguration dynamique du noeud razor pour avoir plus d'offset
+
+## Direction gauche droite en sens oppose au champ
+1. Lancer la teleop
+2. verifier si 4000 = droite  
+
+## Test PID
+1. Envoyer un waypoint du stand
+2. lire la commande envoyee dans le terminal
+3. si coherent ok
+4. sinon regler PID
+
+## Test suivi de ligne
+1. Envoyer une ligne par le gui
+2. lire la commande dans le terminal
+3. si coherent ok
+4. sinon regler les parametres de la ligne et du pid
+
+## Recalibration GPS
+1. Aller au quai
+2. recuperer la position gps
+3. recentrer la carte
+4. rajouter des offsets pour corriger
+5. verifier que les coins correspondent
+
+## OU juste recuperer les coordonnees gps en teleop
+
+
+
+# Liste des choses a faire pour lancer la demo

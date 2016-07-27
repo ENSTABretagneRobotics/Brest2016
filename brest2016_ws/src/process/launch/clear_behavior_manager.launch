@@ -1,0 +1,9 @@
+<!-- Mission de suivi de waypoints -->
+<launch>
+
+	<node name="obstacle" pkg="process" type="behavior_client_exemple.py" output="screen">
+		<param name="mode" value="clear_all"/>
+
+	</node>
+	
+</launch>

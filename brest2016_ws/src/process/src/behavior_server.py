@@ -29,12 +29,14 @@ def draw_tank(x):
 
 def handle_received_behavior(request):
     global listB
-    print request.info.f_type, request.info.behavior_id
+    # Handle Behavior
     behavior_manager.handle_behavior(Behavior(request.info), request.action)
+    # Log info
+    log = 'MODE: {:<15}, ID: {:<4}, TYPE: {:<15}, TOTAL: {:<4}'
+    log = log.format(request.action, request.info.behavior_id,
+                     request.info.f_type, len(behavior_manager.behavior_list))
+    rospy.loginfo(log)
     return behaviorResponse(request.action + 'ed')
-
-    rospy.loginfo('nombres de behavior recu:' +
-                  str(len(behavior_manager.behavior_list)))
 
 
 def update_pos(msg):
@@ -96,20 +98,24 @@ if show_plot:
 cx, cy = 0, 0
 
 while not rospy.is_shutdown():
-    if abs(cx - x) > 10:
-        cx = x
-    if abs(cy - y) > 10:
-        cy = y
-    X, Y = np.mgrid[cx - 50:cx + 50:40j, cy - 50:cy + 50:40j]
+    # Publish command
     v = Vector3()
     v.x, v.y = behavior_manager.champ_total.cmd_point(x, y)
-    U, V = behavior_manager.champ_total.cmd_point(X, Y)
+    pub.publish(v)
+
+    # And plot if asked
     if show_plot:
+        if abs(cx - x) > 10:
+            cx = x
+        if abs(cy - y) > 10:
+            cy = y
+        X, Y = np.mgrid[cx - 50:cx + 50:40j, cy - 50:cy + 50:40j]
+        U, V = behavior_manager.champ_total.cmd_point(X, Y)
         plt.cla()
         plt.quiver(X, Y, U, V)
         plt.quiver(x, y, v.x, v.y, color='red')
         draw_tank([x, y, cap])
         plt.draw()
-    pub.publish(v)
-    print v.x, v.y
+
+    rospy.loginfo('Published total cmd: {}, {}'.format(v.x, v.y))
     rate.sleep()

@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   sensor_msgs
   message_generation
+  dynamic_reconfigure
 )
 
 # find_package(PCL 1.7.2 REQUIRED)
@@ -89,10 +90,11 @@ generate_messages(
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
+generate_dynamic_reconfigure_options(
 #   cfg/DynReconf1.cfg
 #   cfg/DynReconf2.cfg
-# )
+  cfg/dyn_pid.cfg
+)
 
 ###################################
 ## catkin specific configuration ##

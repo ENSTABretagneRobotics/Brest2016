@@ -1,21 +1,16 @@
 <!-- Mission de suivi de waypoints -->
 <!-- Les waypoints sont envoyes par RVIZ -->
 <launch>
-	<arg name="show_plot" default="False"/>
 	<!-- ACTUATORS -->
 	<node name="motors" pkg="actuators" type="motor_controller.py">
 		<param name="max_speed" value="6800"/>
 		<param name="min_speed" value="5800"/>
 		<param name="max_rot" value="7500"/>
 		<param name="min_rot" value="4500"/>
+		<!-- The motor takes without ramp  -->
+		<remap from="cmd_vel_ramped" to="cmd_vel"/>
 	</node>
 
-	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py">
-		<param name="linear_twist" value="6000"/>
-		<param name="angular_twist" value="6000"/>
-		<param name="angular_accel" value="5000"/> 
-		<param name="linear_accel" value="5000"/>
-	</node>
 
 
 	<!-- SENSORS -->

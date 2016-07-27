@@ -35,10 +35,13 @@ if __name__ == '__main__':
 
     # Subscriber to the boat's imu
     sub_imu = rospy.Subscriber('imu_boat', Imu, update_quaternion)
+    # Subscriber to the boat's position
+    #       (the local_pose also contains the orientation but
+    #       is updated less frequently)
     sub_gps = rospy.Subscriber('gps/local_pose', PoseStamped, update_pose)
 
     br = tf.TransformBroadcaster()
-    rate = rospy.Rate(20.0)
+    rate = rospy.Rate(50.0)
 
     quat = Quaternion()
     quat.w = 1.0
@@ -46,7 +49,6 @@ if __name__ == '__main__':
     # LOOP
     while not rospy.is_shutdown():
         br.sendTransform((x, y, z),
-        # br.sendTransform((0, 0, 0),
                          (quat.x, quat.y, quat.z, quat.w),
                          rospy.Time.now(),
                          "boat_frame",

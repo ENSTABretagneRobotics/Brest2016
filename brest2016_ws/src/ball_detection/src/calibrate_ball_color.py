@@ -2,13 +2,14 @@
 import cv2
 
 # WEBCAM
-camera = cv2.VideoCapture(0)
+# camera = cv2.VideoCapture(0)
 
 # DATA IMAGES
 ball_close_img = cv2.imread('../data/ball_close.jpg')
 ball_mid_img = cv2.imread('../data/ball_mid.jpg')
 ball_far_img = cv2.imread('../data/ball_far.jpg')
 real_ball_img = cv2.imread('../data/left0000.jpg')
+real_ball_far_img = cv2.imread('../data/real_far.jpg')
 
 
 def nothing(x):
@@ -39,18 +40,18 @@ create_trackbars()
 # keep looping
 while True:
     # grab the current frame
-    (grabbed, frame) = camera.read()
+    # (grabbed, frame) = camera.read()
 
     # if we are viewing a video and we did not grab a frame,
     # then we have reached the end of the video
-    if not grabbed:
-        print 'no camera'
-        break
+    # if not grabbed:
+    #     print 'no camera'
+    #     break
 
     # resize the frame to process faster !
-    frame = cv2.resize(frame, (600, 600))
+    # frame = cv2.resize(frame, (600, 600))
 
-    # frame = real_ball_img
+    frame = real_ball_far_img
     #  Blur it
     frame = cv2.GaussianBlur(frame, (11, 11), 0)
     # convert it to the HSV

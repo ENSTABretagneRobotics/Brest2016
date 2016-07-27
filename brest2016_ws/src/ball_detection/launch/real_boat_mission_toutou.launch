@@ -3,10 +3,12 @@
 <launch>
 	<!-- ACTUATORS -->
 	<node name="motors" pkg="actuators" type="motor_controller.py">
-		<param name="max_speed" value="6800"/>
+		<param name="max_speed" value="7000"/>
 		<param name="min_speed" value="5800"/>
 		<param name="max_rot" value="7500"/>
 		<param name="min_rot" value="4500"/>
+		<!-- The motor takes without ramp  -->
+		<remap from="cmd_vel_ramped" to="cmd_vel"/>
 	</node>
 
 	<node name="cmd_ramped" pkg="actuators" type="cmd_to_ramp.py">

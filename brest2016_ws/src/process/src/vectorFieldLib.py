@@ -350,8 +350,9 @@ def ligne(x, y, xa, ya, xb, yb, K=1, R=1, effect_range=20):
     Defini le champ d'une ligne attractive
     """
     d = np.vectorize(dist_droite)(x, y, xa, ya, xb, yb)
-    f1 = gaussienne(d, R, 0)
-    f2 = 1 - f1
+    f1 = gaussienne(d, 4 * R, 0)
+    f2 = 1 - gaussienne(d, R, 0)
+    # f2 = 1 - f1
     if type(x) in [int, np.float64, float, np.int64]:
         if abs(d) > effect_range:
             f1, f2 = 0, 0

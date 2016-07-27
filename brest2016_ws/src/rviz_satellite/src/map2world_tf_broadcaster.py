@@ -15,6 +15,6 @@ if __name__ == '__main__':
         br.sendTransform((0.0, 0.0, 0.0),
                          (0.0, 0.0, 0.0, 1.0),
                          rospy.Time.now(),
-                         "boat_frame",
+                         "map",
                          "world")
         rate.sleep()

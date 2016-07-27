@@ -8,6 +8,8 @@ from process.srv import behavior
 from process.msg import BehaviorInfo
 from geometry_msgs.msg import PoseStamped
 import numpy as np
+import tf
+from math import sin, cos, pi
 # from math import atan
 
 
@@ -50,8 +52,13 @@ def define_behavior(msg):
     elif ballY in [np.inf, np.NaN] or ballX in [np.inf, np.NaN] or np.isnan(ballX) or np.isnan(ballY):
         print 'nan or inf detected'
     else:
+        quat = [msg.pose.orientation.x, msg.pose.orientation.y,
+                msg.pose.orientation.z, msg.pose.orientation.w]
+        cap = tf.transformations.euler_from_quaternion(quat)[2]
+        xb = ballX * cos(cap - pi / 2) + balY * sin(cap - pi / 2)
+        yb = ballX * sin(cap - pi / 2) - balY * cos(cap - pi / 2)
         info = BehaviorInfo(behavior_id='1001', f_type='waypoint',
-                            xa=poseBoatX + ballX, ya=poseBoatY + ballY,
+                            xa=poseBoatX + xb, ya=poseBoatY + yb,
                             K=1,
                             security='HIGH', effect_range=10)
         rospy.loginfo('ball found at {}, {}, going there'.format(

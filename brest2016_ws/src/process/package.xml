@@ -51,6 +51,10 @@
   
   <build_depend>sensor_msgs</build_depend>
   <run_depend>sensor_msgs</run_depend>
+  
+
+  <build_depend>dynamic_reconfigure</build_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

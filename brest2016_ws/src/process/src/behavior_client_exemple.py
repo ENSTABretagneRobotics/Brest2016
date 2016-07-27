@@ -33,6 +33,8 @@ radius = fetch_param('~radius', 3)
 slowr = fetch_param('~slowr', 3)
 b_id = str(fetch_param('~b_id', '000'))
 e_range = fetch_param('~e_range', 5)
+
+mode = fetch_param('~mode', 'update')
 # Behavior a envoyer
 info = BehaviorInfo(behavior_id=b_id, f_type=behav_type,
                     xa=x, ya=y,
@@ -41,4 +43,5 @@ info = BehaviorInfo(behavior_id=b_id, f_type=behav_type,
                     security='LOW', slowing_R=slowr,
                     slowing_K=1,
                     effect_range=e_range)
-confirmation = behavior_sender(info, 'update')
+confirmation = behavior_sender(info, mode)
+rospy.loginfo(confirmation)

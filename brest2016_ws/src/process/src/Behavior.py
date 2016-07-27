@@ -142,15 +142,6 @@ class BehaviorManager():
         self.behavior_list = []
         self.champ_total = Behavior()
 
-    # def add_behavior(self, new_behavior):
-    #     # if not self.behavior_in_list(new_behavior):
-    #     if new_behavior not in self.behavior_list:
-    #         self.behavior_list.append(new_behavior)
-    #         self.champ_total += new_behavior
-    #     else:
-    #         self.behavior_list.remove(new_behavior)
-    #         self.recalc_champ_total()
-
     def handle_behavior(self, new_behavior, mode):
         """
         Handles a new behavior received according to the mode:
@@ -174,6 +165,8 @@ class BehaviorManager():
                 self.behavior_list[i] = new_behavior
         elif mode == 'remove' and new_behavior in self.behavior_list:
             self.behavior_list.remove(new_behavior)
+        elif mode == 'clear_all':
+            self.behavior_list = []
 
         self.recalc_champ_total()
 
@@ -182,10 +175,8 @@ class BehaviorManager():
         for c in self.behavior_list:
             self.champ_total += c
 
-    # def remove_behavior(self, new_behavior):
-    #     for b in self.behavior_list:
-    #         if new_behavior.behavior_id == b.behavior_id:
-    #             self.behavior_list.remove(b)
+    def getState(self):
+        pass
 
 
 ##########################################################################
@@ -251,8 +242,8 @@ def main_manager():
 
     info1 = Behavior_info(f_type='ligne', behavior_id='001', xa=0, ya=-100,
                           xb=100, yb=0,
-                          K=1, R=30, slowing_R=1, slowing_K=5,
-                          security='LOW', effect_range=40)
+                          K=1, R=20, slowing_R=50, slowing_K=5,
+                          security='LOW', effect_range=100)
     b1 = Behavior(info1)
     # Behavior 2 - limite
     info2 = Behavior_info(f_type='obst_point2', behavior_id='002', xa=20, ya=20,

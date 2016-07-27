@@ -38,7 +38,7 @@ wp_pub = rospy.Publisher('waypoint/local_pose', Pose, queue_size=1)
 waypoints = [genPose(40, 40, 0), genPose(34, 118, 0), genPose(61, 85, 0)]
 distance = 10000
 current_index = 0
-capture_radius = 2.5
+capture_radius = 5
 current_waypoint = waypoints[0]
 
 rospy.spin()

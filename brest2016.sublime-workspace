@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"typ",
+				"type_choice	statement"
+			],
+			[
+				"button",
+				"add_waypoint_button"
+			],
+			[
+				"the",
+				"thetadot0	statement"
+			],
+			[
+				"dy",
+				"dyn_pidConfig"
+			],
+			[
+				"sensor",
+				"sensor_msgs	module"
+			],
+			[
+				"dyn",
+				"dyn_pidConfig	import"
+			],
+			[
 				"updat",
 				"update_ball_pos"
 			],
@@ -60,18 +84,34 @@
 	"buffers":
 	[
 		{
-			"file": "brest2016_ws/src/ball_detection/src/calcul_ball_position_real.py",
+			"file": "todo.mdown",
 			"settings":
 			{
-				"buffer_size": 2008,
+				"buffer_size": 2018,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "brest2016_ws/src/ball_detection/src/find_ball_position_in_img.py",
+			"file": "brest2016_ws/src/process/script/gui_manager.py",
 			"settings":
 			{
-				"buffer_size": 2128,
+				"buffer_size": 7714,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/ball_detection/launch/real_boat_mission_toutou.launch",
+			"settings":
+			{
+				"buffer_size": 2283,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/process/launch/real_boat_mission_no_ramp.launch",
+			"settings":
+			{
+				"buffer_size": 1851,
 				"line_ending": "Unix"
 			}
 		}
@@ -103,10 +143,22 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 96.0,
-		"last_filter": "git statu",
+		"height": 392.0,
+		"last_filter": "canc",
 		"selected_items":
 		[
+			[
+				"canc",
+				"Build: Cancel"
+			],
+			[
+				"markdo",
+				"Set Syntax: Markdown Extended"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
 			[
 				"git statu",
 				"Git: Reset (unstage) Current File"
@@ -165,10 +217,6 @@
 			],
 			[
 				"ca",
-				"Build: Cancel"
-			],
-			[
-				"canc",
 				"Build: Cancel"
 			],
 			[
@@ -313,65 +361,102 @@
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/cfg",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/src",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/cfg",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/src",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src"
 	],
 	"file_history":
 	[
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/live_color_calibration.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_server.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/Behavior.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_morse_boat.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/vectorFieldLib.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_adder_gui.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/real_boat_mission2.launch",
-		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/vectorFieldLib_v0.py",
-		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/default.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/go_to_ball.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_patrol_sender.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_waypoint_sender.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_obstacle_sender.launch",
+		"/run/user/1000/gvfs/sftp:host=192.168.10.21,user=brest2016/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/script/gui_manager.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat2.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/config/imu_boat.yaml",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/launch/gps_launch.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/nmea_navsat_driver-indigo-devel/scripts/nmea_serial_driver",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/calcul_ball_position_real.py",
+		"/run/user/1000/gvfs/sftp:host=192.168.10.21,user=brest2016/home/brest2016/Desktop/Brest_2016/brest-git/Brest2016/brest2016_ws/src/process/launch/real_boat_mission_no_ramp.launch",
 		"/home/ejalaa12/.bashrc",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/find_ball_position_in_img.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/src/joy_to_twist.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src/LL_to_local.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/launch/real_boat_mission_toutou.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_adder_gui.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/config/imu_boat.yaml",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/src/imu_to_radians.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/rviz_satellite/src/map2world_tf_broadcaster.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/vectorFieldLib.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/Behavior.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_server.py",
+		"/home/ejalaa12/Desktop/Brest2016/todo.mdown",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/script/gui_manager.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/gui_behavior_waypoint_manager.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/real_boat_mission2.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src/vector_cible_pose.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client_exemple.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch/mission_vector_morse_boat.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src/regulateur_champs_boat2_morse.py",
 		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/vectorFieldLib_test.py",
+		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/vectorFieldLib_v0.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/clear_behavior_manager.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/cfg/dyn_pid_morse.cfg",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/CMakeLists.txt",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/package.xml",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch/mission_vector_morse.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat_simple.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/real_boat_mission_no_ramp.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/real_boat_mission.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/calcul_ball_position_real.py",
+		"/home/ejalaa12/useful_cmd.mdown",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/motor_controller.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/cmd_to_ramp.py",
+		"/home/ejalaa12/.ros/log/regulateur.log",
+		"/home/ejalaa12/.ros/log/behavior_server.log",
+		"/opt/ros/indigo/share/razor_imu_9dof/nodes/imu_node.py",
+		"/home/ejalaa12/.Xresources",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/launch/imu_simple.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/cfg/dyn_pid.cfg",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/package.xml",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/CMakeLists.txt",
+		"/opt/ros/indigo/share/razor_imu_9dof/config/razor_diags.yaml",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/cfg",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_waypoint_manager.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/find_ball_position_in_img.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/live_color_calibration.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/script/mask_boat.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/go_to_ball.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/launch/real_boat_mission_toutou.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/calibrate_ball_color.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_morse_boat.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat2_morse.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/launch/gps_launch.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/waypoint_manager.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/nmea_navsat_driver-indigo-devel/scripts/nmea_serial_driver",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_waypoint_sender.launch",
+		"/home/ejalaa12/Desktop/Brest2016/Morse/comet_simulator/default.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_patrol_sender.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_obstacle_sender.launch",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/src/joy_to_twist.py",
 		"/home/ejalaa12/Desktop/Brest2016/.gitignore",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016.sublime-project",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/launch/search_ball.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client_exemple.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_line_sender.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/launch/telop_rob.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/cmd_to_ramp.py",
 		"/home/ejalaa12/.bash_history",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_waypoint.launch",
 		"/home/ejalaa12/NVIDIA_CUDA-7.5_Samples/2_Graphics/bindlessTexture/readme.txt",
 		"/home/ejalaa12/NVIDIA_CUDA-7.5_Samples/Makefile",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/calibrate_ball_color.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/search_ball.py",
 		"/usr/local/zed/tools/qt.conf",
 		"/home/ejalaa12/.cache/.fr-hZKauu/apt-1.0.1ubuntu2.12/README.make",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/CMakeLists.txt",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/package.xml",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection/src/pcl_voxel_filter.cpp",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection/CMakeLists.txt",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/detection/package.xml",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/teleop/launch/teleop_morse.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat2_morse.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/utilities/src/clicked_to_waypoint.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch/simulation_behavior_char_2d.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src/sim_char.py",
@@ -381,14 +466,11 @@
 		"/home/ejalaa12/.ipython/ipythonrc",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/pcl_voxel_filter.cpp",
 		"/home/ejalaa12/Desktop/Brest2016/README.md",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/real_boat_mission.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/deleteme.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/waypoint_heading.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_char.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_field.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/motor_controller.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/launch/laser_complet.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/src/range_to_point.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/src/range_to_pcl.py",
@@ -403,7 +485,6 @@
 		"/home/ejalaa12/Desktop/ros_ws/src/useful_nodes/src/tf_fixed.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/char_obstacle.py",
 		"/opt/ros/indigo/setup.bash",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/rviz_satellite/src/map2world_tf_broadcaster.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client_n.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_morse.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/gui_behavior_adder.py",
@@ -438,6 +519,37 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"msg.orientation",
+			"euler_from",
+			"capture_radius",
+			"current_waypoint",
+			"current_index",
+			")\n",
+			"history_list",
+			"history",
+			"history_frame",
+			"3",
+			"regulateur_morse",
+			"regulateur_champs",
+			"vLow",
+			"2000",
+			"mturn",
+			"log_rot",
+			"mspeed",
+			"msens",
+			"6000",
+			".format",
+			"format",
+			"__",
+			"-",
+			"}",
+			"{",
+			"deg2rad",
+			"cfg",
+			"dyn",
+			"min",
+			"res",
+			"genPose",
 			"0.5",
 			"logingo",
 			"print",
@@ -533,54 +645,52 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "brest2016_ws/src/ball_detection/src/calcul_ball_position_real.py",
+					"file": "todo.mdown",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2008,
+						"buffer_size": 2018,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								438,
-								438
+								736,
+								736
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
 						},
-						"translation.x": -0.0,
-						"translation.y": 90.0,
+						"translation.x": 0.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "brest2016_ws/src/ball_detection/src/find_ball_position_in_img.py",
+					"file": "brest2016_ws/src/process/script/gui_manager.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2128,
+						"buffer_size": 7714,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								285,
-								285
+								1947,
+								1947
 							]
 						],
 						"settings":
@@ -590,10 +700,68 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+						"translation.y": 519.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "brest2016_ws/src/ball_detection/launch/real_boat_mission_toutou.launch",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2283,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								337,
+								337
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "brest2016_ws/src/process/launch/real_boat_mission_no_ramp.launch",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1851,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								424,
+								337
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -656,16 +824,176 @@
 		"selected_items":
 		[
 			[
-				"live",
-				"brest2016_ws/src/ball_detection/src/live_color_calibration.py"
+				"regula",
+				"brest2016_ws/src/process/src/regulateur_champs_boat2.py"
+			],
+			[
+				"manager",
+				"brest2016_ws/src/process/script/gui_manager.py"
+			],
+			[
+				"llto",
+				"brest2016_ws/src/utilities/src/LL_to_local.py"
+			],
+			[
+				"regu",
+				"brest2016_ws/src/process/src/regulateur_champs_boat2.py"
+			],
+			[
+				"adder",
+				"brest2016_ws/src/process/src/behavior_adder_gui.py"
+			],
+			[
+				"imuba",
+				"brest2016_ws/src/sensors/config/imu_boat.yaml"
+			],
+			[
+				"boattf",
+				"brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py"
+			],
+			[
+				"boat",
+				"brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py"
+			],
+			[
+				"imuto",
+				"brest2016_ws/src/sensors/src/imu_to_radians.py"
+			],
+			[
+				"map2",
+				"brest2016_ws/src/rviz_satellite/src/map2world_tf_broadcaster.py"
+			],
+			[
+				"imura",
+				"brest2016_ws/src/sensors/src/imu_to_radians.py"
+			],
+			[
+				"todo",
+				"todo.mdown"
 			],
 			[
 				"server",
 				"brest2016_ws/src/process/src/behavior_server.py"
 			],
 			[
+				"behav",
+				"brest2016_ws/src/process/src/Behavior.py"
+			],
+			[
+				"add",
+				"brest2016_ws/src/process/src/behavior_adder_gui.py"
+			],
+			[
+				"broa",
+				"brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py"
+			],
+			[
+				"beha",
+				"brest2016_ws/src/process/src/Behavior.py"
+			],
+			[
+				"v0",
+				"Brouillon_&_Tests/vectorFieldLib_v0.py"
+			],
+			[
+				"test",
+				"Brouillon_&_Tests/vectorFieldLib_test.py"
+			],
+			[
+				"vectoli",
+				"brest2016_ws/src/process/src/vectorFieldLib.py"
+			],
+			[
 				"gui",
 				"brest2016_ws/src/process/src/behavior_adder_gui.py"
+			],
+			[
+				"vetli",
+				"brest2016_ws/src/process/src/vectorFieldLib.py"
+			],
+			[
+				"beh",
+				"brest2016_ws/src/process/src/Behavior.py"
+			],
+			[
+				"behaserve",
+				"brest2016_ws/src/process/src/behavior_server.py"
+			],
+			[
+				"motor",
+				"brest2016_ws/src/actuators/src/motor_controller.py"
+			],
+			[
+				"cmdto",
+				"brest2016_ws/src/actuators/src/cmd_to_ramp.py"
+			],
+			[
+				"lltolo",
+				"brest2016_ws/src/utilities/src/LL_to_local.py"
+			],
+			[
+				"ll",
+				"brest2016_ws/src/utilities/src/LL_to_local.py"
+			],
+			[
+				"imu",
+				"brest2016_ws/src/sensors/launch/imu_simple.launch"
+			],
+			[
+				"imubo",
+				"brest2016_ws/src/sensors/config/imu_boat.yaml"
+			],
+			[
+				"broad",
+				"brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py"
+			],
+			[
+				"calc",
+				"brest2016_ws/src/ball_detection/src/calcul_ball_position_real.py"
+			],
+			[
+				"go",
+				"brest2016_ws/src/ball_detection/src/go_to_ball.py"
+			],
+			[
+				"behawa",
+				"brest2016_ws/src/process/src/behavior_waypoint_manager.py"
+			],
+			[
+				"toutou",
+				"brest2016_ws/src/ball_detection/launch/real_boat_mission_toutou.launch"
+			],
+			[
+				"nme",
+				"brest2016_ws/src/nmea_navsat_driver-indigo-devel/scripts/nmea_serial_driver"
+			],
+			[
+				"loca",
+				"brest2016_ws/src/utilities/src/LL_to_local.py"
+			],
+			[
+				"gps",
+				"brest2016_ws/src/sensors/launch/gps_launch.launch"
+			],
+			[
+				"exemp",
+				"brest2016_ws/src/process/src/behavior_client_exemple.py"
+			],
+			[
+				"simplewa",
+				"brest2016_ws/src/process/launch/simple_waypoint_sender.launch"
+			],
+			[
+				"behavior_client_exemple",
+				"brest2016_ws/src/process/src/behavior_client_exemple.py"
+			],
+			[
+				"simpl",
+				"brest2016_ws/src/process/launch/simple_waypoint_sender.launch"
+			],
+			[
+				"live",
+				"brest2016_ws/src/ball_detection/src/live_color_calibration.py"
 			],
 			[
 				"behser",
@@ -678,10 +1006,6 @@
 			[
 				"veclib0",
 				"Brouillon_&_Tests/vectorFieldLib_v0.py"
-			],
-			[
-				"behav",
-				"brest2016_ws/src/process/src/Behavior.py"
 			],
 			[
 				"morse",
@@ -700,10 +1024,6 @@
 				"brest2016_ws/src/process/launch/simple_patrol_sender.launch"
 			],
 			[
-				"regula",
-				"brest2016_ws/src/process/src/regulateur_champs_boat2.py"
-			],
-			[
 				"simplob",
 				"brest2016_ws/src/process/launch/simple_obstacle_sender.launch"
 			],
@@ -716,10 +1036,6 @@
 				"brest2016_ws/src/sensors/launch/gps_launch.launch"
 			],
 			[
-				"imuba",
-				"brest2016_ws/src/sensors/config/imu_boat.yaml"
-			],
-			[
 				"simplew",
 				"brest2016_ws/src/process/launch/simple_waypoint_sender.launch"
 			],
@@ -728,28 +1044,8 @@
 				"brest2016_ws/src/process/src/regulateur_champs_boat2.py"
 			],
 			[
-				"toutou",
-				"brest2016_ws/src/ball_detection/launch/real_boat_mission_toutou.launch"
-			],
-			[
-				"ll",
-				"brest2016_ws/src/utilities/src/LL_to_local.py"
-			],
-			[
-				"test",
-				"Brouillon_&_Tests/vectorFieldLib_test.py"
-			],
-			[
-				"beh",
-				"brest2016_ws/src/process/src/Behavior.py"
-			],
-			[
 				"vect",
 				"brest2016_ws/src/process/src/vectorFieldLib.py"
-			],
-			[
-				"llto",
-				"brest2016_ws/src/utilities/src/LL_to_local.py"
 			],
 			[
 				"brest",
@@ -758,14 +1054,6 @@
 			[
 				"reg",
 				"brest2016_ws/src/process/src/regulateur_champs_boat2.py"
-			],
-			[
-				"beha",
-				"brest2016_ws/src/process/src/Behavior.py"
-			],
-			[
-				"exemp",
-				"brest2016_ws/src/process/src/behavior_client_exemple.py"
 			],
 			[
 				"vector",
@@ -778,10 +1066,6 @@
 			[
 				"simpleway",
 				"brest2016_ws/src/process/launch/simple_waypoint_sender.launch"
-			],
-			[
-				"cmdto",
-				"brest2016_ws/src/actuators/src/cmd_to_ramp.py"
 			],
 			[
 				"telop",
@@ -820,10 +1104,6 @@
 				"brest2016_ws/src/process/src/behavior_client_exemple.py"
 			],
 			[
-				"regu",
-				"brest2016_ws/src/process/src/regulateur_champs_boat2.py"
-			],
-			[
 				"click",
 				"brest2016_ws/src/utilities/src/clicked_to_waypoint.py"
 			],
@@ -856,20 +1136,12 @@
 				"brest2016_ws/src/process/src/pcl_voxel_filter.cpp"
 			],
 			[
-				"broad",
-				"brest2016_ws/src/sensors/broadcaster/boat_tf_broadcaster.py"
-			],
-			[
 				"regulacham",
 				"brest2016_ws/src/process/src/regulateur_champs_boat.py"
 			],
 			[
 				"teleop",
 				"brest2016_ws/src/teleop/launch/teleop_morse.launch"
-			],
-			[
-				"motor",
-				"brest2016_ws/src/actuators/src/motor_controller.py"
 			],
 			[
 				"ino",
@@ -972,7 +1244,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 305.0,
+	"side_bar_width": 319.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

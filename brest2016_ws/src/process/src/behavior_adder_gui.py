@@ -92,7 +92,8 @@ def send_field(event=None):
     id_value.set(nexT)
 
     # Add the sent behavior to the history list
-    history_list.insert(END, info.toString())
+    if mode != 'update':
+        history_list.insert(END, info.toString())
     # if confirmation == 'added':
     #     history_list.insert(END, info.toString())
     # elif confirmation == 'updateed':

@@ -269,12 +269,12 @@ class ObjectivesTestPlot():
 if __name__ == '__main__':
     # plots
     otp = ObjectivesTestPlot()
-    otp.test_dir_point()
-    otp.test_dir_tournant()
-    otp.test_dir_segment_complet()
+    # otp.test_dir_point()
+    # otp.test_dir_tournant()
+    # otp.test_dir_segment_complet()
     # plot_test.test_parameter()
-    otp.exemple_patrouille()
-    otp.test_obstacle_point()
+    # otp.exemple_patrouille()
+    # otp.test_obstacle_point()
     otp.test_ligne()
     # otp.test_patrouille_circulaire()
 

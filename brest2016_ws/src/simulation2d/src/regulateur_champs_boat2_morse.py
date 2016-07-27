@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-import tf
 import rospy
 import numpy as np
 from math import cos, sin, degrees
-from geometry_msgs.msg import PoseStamped, Twist, Vector3
+from geometry_msgs.msg import Twist, Vector3, TwistStamped
+from std_msgs.msg import Float32MultiArray
 from dynamic_reconfigure.server import Server
-from process.cfg import dyn_pidConfig
+from simulation2d.cfg import dyn_pid_morseConfig
 
 
 def update_cap(msg):
@@ -17,11 +17,12 @@ def update_cap(msg):
     global cap
 
     # print msg.pose.orientation, type(msg.pose.orientation)
-    cap = tf.transformations.euler_from_quaternion(
-        [msg.pose.orientation.x,
-         msg.pose.orientation.y,
-         msg.pose.orientation.z,
-         msg.pose.orientation.w])[2]
+    cap = msg.data[0]
+
+
+def update_speed(msg):
+    global vitesse_boat
+    vitesse_boat = msg.twist.linear.x
 
 
 def update_cible(msg):
@@ -58,11 +59,12 @@ rospy.init_node('regulateur')
 rate = rospy.Rate(5)
 
 # Server for dynamic reconfigure
-srv = Server(dyn_pidConfig, callback)
+srv = Server(dyn_pid_morseConfig, callback)
 
 # Subscribes to gps position to calculate the heading
 # S'abonne aux positions GPS pour pour recupere le cap
-sub_cap = rospy.Subscriber("gps/local_pose", PoseStamped, update_cap)
+sub_cap = rospy.Subscriber("boat/compas", Float32MultiArray, update_cap)
+sub_speed = rospy.Subscriber("boat/gps/velocity", TwistStamped, update_speed)
 
 # Subscribes to the publisher to get the desired heading
 # Recupe le cap desire
@@ -82,12 +84,12 @@ error = 0
 
 # Parametres
 V0 = fetch_param('~V0', 6000)
-thetadot0 = fetch_param('~thetadot0', 6000)
+thetadot0 = fetch_param('~V0', 6000)
 V_lim_reverse = fetch_param('~V_lim_reverse', 1.5)
 vHigh = fetch_param('~vHigh', 8000)  # 8000 max
 vLow = fetch_param('~vLow', 7000)  # 6000 = vitesse nulle
 Kp = fetch_param('~Kp', 1500) * (2. / np.pi)
-Kd = fetch_param('~Kd', 0) * (2. / np.pi)
+Kd = fetch_param('~Kd', 300) * (2. / np.pi)
 reverse_motor = fetch_param('~reverse_motor', 1)
 
 # ###################################################################
@@ -139,7 +141,7 @@ while not rospy.is_shutdown():
         # -----------------------------------------------------------
         if cos(error) >= 0:
             log_sens = 'face'
-            log_turn = 'gauche' if sin(error) > 0 else 'droite'
+            log_turn = 'gauche' if rm * sin(error) > 0 else 'droite'
 
             # on bride
             if vLow > V_reel:
@@ -157,19 +159,19 @@ while not rospy.is_shutdown():
 
             cmd.linear.x = vLow
             # il faut tourner a gauche
-            if sin(error) > 0:
-                cmd.angular.z = 8000
+            if rm * sin(error) > 0:
+                cmd.angular.z = -vHigh
                 log_turn = 'gauche'
             # il faut tourner a droite
             else:
-                cmd.angular.z = 4000
+                cmd.angular.z = vHigh
                 log_turn = 'droite'
 
-        log_speed = (V_reel - V0) / 2000. * 100
-        log_speedR = (cmd.linear.x - V0) / 2000. * 100
-        log_rot = abs(cmd.angular.z - thetadot0) / 2000. * 100
+        log_speed = (V_reel - V0) / (vHigh - V0) * 100
+        log_speedR = (cmd.linear.x - V0) / (vHigh - V0) * 100
+        log_rot = abs(cmd.angular.z - thetadot0) / (vHigh - V0) * 100
         # logs
-        logform = '{:<5.2f} {:<5}| tourne {:.2f}%  a {}| vitesse: {}% --> {}%'
+        logform = '{:<5.2f} {:<5}| tourne {:>6.2f}%  a {}| vitesse: {:>5}% --> {}%'
         logmsg = logform.format(degrees(error), log_sens, log_rot,
                                 log_turn, log_speed, log_speedR)
 
