@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-# interface graphique permettant d ajouter des behaviors
+# interface graphique permettant d ajouter des waypoints
 
 
 import rospy

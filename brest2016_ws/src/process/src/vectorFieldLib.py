@@ -383,3 +383,15 @@ def patrouille_circulaire(x, y, a, b, K, R, turning_R=5):
     Ca = -dir_point(x, y, a, b) * K * f
     Ct = dir_tournant(x, y, a, b) * K * bosse
     return Ca + Ct
+
+
+def projection(x, y, wind, theta):
+    """"
+    Projete le champ de vecteur sur des directions possibles
+    pour un voilier, et un vent d'angle theta
+    """
+    U, V = x, y
+    T = np.rad2deg(np.arctan(V / U))
+    U[np.logical_and(wind - theta / 2 < T, T < wind + theta / 2)] = 0
+    V[np.logical_and(wind - theta / 2 < T, T < wind + theta / 2)] = 0
+    return U, V
