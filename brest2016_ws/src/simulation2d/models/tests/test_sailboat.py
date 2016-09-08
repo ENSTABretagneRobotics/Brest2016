@@ -16,7 +16,7 @@ if __name__ == '__main__':
     trajy = []
     trajT = []
     for i in range(500):
-        u[0] = 0 + np.random.random() / 10.
+        u[0] = (np.random.random() - 0.5) / 10.
         sb.simulate(u)
         trajx.append(sb.x)
         trajy.append(sb.y)
@@ -28,6 +28,7 @@ if __name__ == '__main__':
             plt.axis('equal')
             plt.axis([-50, 50, -50, 50])
             sb.draw()
+            sb.drawWind()
             plt.draw()
             sleep(0.01)
     plt.figure(1)

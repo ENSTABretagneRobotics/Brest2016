@@ -71,6 +71,16 @@ def dist_segment(x, y, xa, ya, xb, yb):
     else:
         print 'WRONG ZONE'
 
+
+def angpipi(ang):
+    """
+    Retourne un angle compris entre [-pi, pi]
+    """
+    while ang <= -180:
+        ang += 360
+    while ang > 180:
+        ang -= 360
+    return ang
 #########################################################
 # FONCTIONS DE PROFIL: BAS NIVEAU
 #########################################################
@@ -385,13 +395,40 @@ def patrouille_circulaire(x, y, a, b, K, R, turning_R=5):
     return Ca + Ct
 
 
-def projection(x, y, wind, theta):
+def projection(x, y, wind=np.pi / 4, theta=100):
     """"
     Projete le champ de vecteur sur des directions possibles
     pour un voilier, et un vent d'angle theta
     """
     U, V = x, y
-    T = np.rad2deg(np.arctan(V / U))
-    U[np.logical_and(wind - theta / 2 < T, T < wind + theta / 2)] = 0
-    V[np.logical_and(wind - theta / 2 < T, T < wind + theta / 2)] = 0
-    return U, V
+    wind = angpipi(wind)
+    T = np.rad2deg(np.arctan2(V, U))
+    # --------------------------------------------------------------------------
+    # borne inf et sup
+    low = wind - theta / 2
+    if low < -180:
+        low += 360
+        left = np.logical_and(-180 <= T, T < wind)
+        left = np.logical_or(left, low < T)
+    else:
+        left = np.logical_and(low < T, T <= wind)
+    upp = wind + theta / 2
+    if upp > 180:
+        upp -= 360
+        right = np.logical_and(wind <= T, T <= 180)
+        right = np.logical_or(right, T < upp)
+    else:
+        right = np.logical_and(wind <= T, T < upp)
+    # --------------------------------------------------------------------------
+    Ucop = U.copy()
+    Vcop = V.copy()
+    # --------------------------------------------------------------------------
+    Ucop[left] = np.cos(np.deg2rad(wind - theta / 2))
+    Vcop[left] = np.sin(np.deg2rad(wind - theta / 2))
+    Ucop[right] = np.cos(np.deg2rad(wind + theta / 2))
+    Vcop[right] = np.sin(np.deg2rad(wind + theta / 2))
+    # --------------------------------------------------------------------------
+    Ucop[U==0] = 0
+    Vcop[V==0] = 0
+
+    return Ucop, Vcop

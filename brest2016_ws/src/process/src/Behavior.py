@@ -31,6 +31,7 @@ class Behavior(object):
 
     def __init__(self, behavior_info=None):
         self.info = behavior_info
+        self.projection = False
         if self.info is not None:
             self.generate_behavior_from_info(self.info)
             self.is_simple = True
@@ -92,6 +93,18 @@ class Behavior(object):
     def cmd_point(self, x, y):
         return self.behavior_function(x, y, *self.params)
 
+    def get_field(self, x, y):
+        U, V = self.cmd_point(x, y)
+        print 'H' * 30, self.f_type
+        if self.projection:
+            print self.projection
+            a, b = vfl.projection(U, V)
+            print 'projection'
+            return vfl.projection(U, V)
+        else:
+            print 'not projection'
+            return np.array([U, V])
+
     def __add__(self, other):
         summed_behavior = Behavior()
         summed_behavior.f_type = ','.join([self.f_type, other.f_type])
@@ -138,9 +151,10 @@ class BehaviorManager():
      et d'objectifs, ainsi que les champs de vecteurs
      associes """
 
-    def __init__(self):
+    def __init__(self, sailboat=False):
         self.behavior_list = []
         self.champ_total = Behavior()
+        self.sailboat = sailboat
 
     def handle_behavior(self, new_behavior, mode):
         """
@@ -174,6 +188,8 @@ class BehaviorManager():
         self.champ_total = Behavior()
         for c in self.behavior_list:
             self.champ_total += c
+        if self.sailboat:
+            self.champ_total.projection = True
 
     def getState(self):
         pass
@@ -182,54 +198,74 @@ class BehaviorManager():
 ##########################################################################
 # TESTs
 ##########################################################################
+def behaviorSimple():
+    X, Y = np.mgrid[-20:20:40j, -20:20:40j]
+    # Behavior 3 - patrol_circle
+    info3 = Behavior_info(f_type='patrol_circle', behavior_id='003',
+                          xa=0, ya=5, K=2, R=5, slowing_R=2)
+    b3 = Behavior(info3)
+    b3.projection = True
+    U3, V3 = b3.get_field(X, Y)
+    plt.figure('patrol_circle')
+    plt.quiver(X, Y, U3, V3)
+    plt.show()
+
+
 def main_behavior():
     X, Y = np.mgrid[-20:20:40j, -20:20:40j]
 
+    # ##########################################
     # Behavior 0
     info0 = Behavior_info(f_type='constant', behavior_id='000', xa=0, ya=1)
-    # info0 = Behavior_info('constant', '000', 0, 0, 0, 0, 0, -1)
     b0 = Behavior(info0)
-    U0, V0 = b0.cmd_point(X, Y)
-    plt.figure(0)
-    plt.quiver(X, Y, U0, V0)
+    # U0, V0 = b0.get_field(X, Y)
+    # plt.figure(0)
+    # plt.quiver(X, Y, U0, V0)
 
+    # ##########################################
     # Behavior 1 - waypoint
     info1 = Behavior_info(f_type='waypoint', behavior_id='001', xa=5, ya=10,
                           xb=0, yb=0, K=1, R=0, slowing_R=0, slowing_K=0,
                           security='HIGH', effect_range=10)
     b1 = Behavior(info1)
-    U1, V1 = b1.cmd_point(X, Y)
-    plt.figure(1)
-    plt.quiver(X, Y, U1, V1)
+    # U1, V1 = b1.get_field(X, Y)
+    # plt.figure(1)
+    # plt.quiver(X, Y, U1, V1)
 
+    # ##########################################
     # Behavior 2 - limite
     info2 = Behavior_info(f_type='limite', behavior_id='002', xa=-5, ya=0,
                           xb=5, yb=0, K=3, R=5, slowing_R=1, slowing_K=5,
                           security='MEDIUM', effect_range=10)
     b2 = Behavior(info2)
-    U2, V2 = b2.cmd_point(X, Y)
-    plt.figure(2)
-    plt.quiver(X, Y, U2, V2)
+    # U2, V2 = b2.get_field(X, Y)
+    # plt.figure(2)
+    # plt.quiver(X, Y, U2, V2)
 
+    # ##########################################
     # Behavior 3 - patrol_circle
     info3 = Behavior_info(f_type='patrol_circle', behavior_id='003',
                           xa=0, ya=0, K=3, R=5)
     b3 = Behavior(info3)
-    U3, V3 = b3.cmd_point(X, Y)
-    plt.figure(3)
-    plt.quiver(X, Y, U3, V3)
+    # b3.projection = True
+    # U3, V3 = b3.get_field(X, Y)
+    # plt.figure('patrol_circle')
+    # plt.quiver(X, Y, U3, V3)
 
+    # ##########################################
     # Behavior 4 - ligne
     info4 = Behavior_info(f_type='ligne', behavior_id='004',
                           xa=0, ya=0, xb=10, yb=0, K=4, R=5, effect_range=50)
     b4 = Behavior(info4)
-    U4, V4 = b4.cmd_point(X, Y)
-    plt.figure(4)
-    plt.quiver(X, Y, U4, V4)
+    # U4, V4 = b4.get_field(X, Y)
+    # plt.figure(4)
+    # plt.quiver(X, Y, U4, V4)
 
+    # ##########################################
     # Behavior Total
     b = b1 + b2
-    U, V = b.cmd_point(X, Y)
+    b.projection = True
+    U, V = b.get_field(X, Y)
     plt.figure('Total')
     plt.quiver(X, Y, U, V)
 
@@ -268,5 +304,6 @@ def main_manager():
     plt.show()
 
 if __name__ == '__main__':
-    # main_behavior()
-    main_manager()
+    # behaviorSimple()
+    main_behavior()
+    # main_manager()

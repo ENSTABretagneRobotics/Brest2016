@@ -26,6 +26,11 @@ def draw_tank(x):
     M = np.dot(R, M)
     plt.plot(M[0], M[1])
 
+import sys
+sys.path.insert(
+    0, '/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/models')
+from sailboat import Sailboat
+
 
 def handle_received_behavior(request):
     global listB
@@ -70,7 +75,7 @@ def fetch_param(name, default):
 # Variables
 listB = []
 x, y, cap = 0, 0, 0
-behavior_manager = BehaviorManager()
+behavior_manager = BehaviorManager(sailboat=True)
 
 # Initialisation du noeud
 rospy.init_node('behavior_server')
@@ -96,6 +101,7 @@ show_plot = fetch_param('~show_plot', False)
 if show_plot:
     plt.ion()
 cx, cy = 0, 0
+sb = Sailboat()
 
 while not rospy.is_shutdown():
     # Publish command
@@ -110,11 +116,14 @@ while not rospy.is_shutdown():
         if abs(cy - y) > 10:
             cy = y
         X, Y = np.mgrid[cx - 50:cx + 50:40j, cy - 50:cy + 50:40j]
-        U, V = behavior_manager.champ_total.cmd_point(X, Y)
+        U, V = behavior_manager.champ_total.get_field(X, Y)
         plt.cla()
         plt.quiver(X, Y, U, V)
         plt.quiver(x, y, v.x, v.y, color='red')
-        draw_tank([x, y, cap])
+        sb.x, sb.y, sb.theta, sb.X[2] = x, y, cap, cap
+        sb.draw()
+        sb.drawWind()
+        # draw_tank([x, y, cap])
         plt.draw()
 
     rospy.loginfo('Published total cmd: {}, {}'.format(v.x, v.y))

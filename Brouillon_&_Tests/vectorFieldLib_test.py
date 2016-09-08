@@ -276,7 +276,7 @@ if __name__ == '__main__':
     # otp.exemple_patrouille()
     # otp.test_obstacle_point()
     otp.test_ligne()
-    # otp.test_patrouille_circulaire()
+    otp.test_patrouille_circulaire()
 
     # run all ObjectivesTestPlot methods
     # print dir(plot_test)
