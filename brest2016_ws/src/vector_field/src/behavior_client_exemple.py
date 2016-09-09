@@ -35,6 +35,7 @@ b_id = str(fetch_param('~b_id', '000'))
 e_range = fetch_param('~e_range', 5)
 
 mode = fetch_param('~mode', 'update')
+rospy.loginfo(mode)
 # Behavior a envoyer
 info = BehaviorInfo(behavior_id=b_id, f_type=behav_type,
                     xa=x, ya=y,

@@ -85,7 +85,7 @@ def send_field(event=None):
             break
     rospy.loginfo('Sending field with mode: ' + mode)
     confirmation = behavior_sender(info, mode)
-    rospy.loginfo('Confirmation' + confirmation.confirm)
+    rospy.loginfo('Confirmation ' + confirmation.confirm)
     # Increment the ID
     prev = int(id_value.get())
     nexT = '{:0>3}'.format(prev + 1)

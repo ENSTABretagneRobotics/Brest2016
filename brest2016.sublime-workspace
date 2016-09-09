@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"Be",
+				"Behavior	class"
+			],
+			[
+				"z",
+				"zone_segment_M	statement"
+			],
+			[
+				"sa",
+				"Sailboat	class"
+			],
+			[
+				"cha",
+				"champ_total	statement"
+			],
+			[
+				"sid",
+				"sideNoGoZone	function"
+			],
+			[
+				"logica",
+				"logical_not	instance"
+			],
+			[
+				"arcta",
+				"arctan	instance"
+			],
+			[
+				"tet",
+				"theta	statement"
+			],
+			[
 				"de",
 				"deltasmax	statement"
 			],
@@ -14,10 +46,6 @@
 			[
 				"detr",
 				"deltar"
-			],
-			[
-				"arcta",
-				"arctan2	instance"
 			],
 			[
 				"sim",
@@ -128,34 +156,50 @@
 	"buffers":
 	[
 		{
+			"file": "brest2016_ws/src/vector_field/src/behavior_server.py",
+			"settings":
+			{
+				"buffer_size": 4074,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/vector_field/src/utils/behavior.py",
+			"settings":
+			{
+				"buffer_size": 3773,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/simulation2d/models/sailboat.py",
+			"settings":
+			{
+				"buffer_size": 4452,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/vector_field/src/utils/fields.py",
+			"settings":
+			{
+				"buffer_size": 5280,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "brest2016_ws/src/vector_field/config/environment.yaml",
+			"settings":
+			{
+				"buffer_size": 424,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "brest2016_ws/src/simulation2d/src/sim_sailboat.py",
 			"settings":
 			{
-				"buffer_size": 2292,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "brest2016_ws/src/process/src/vfl02.py",
-			"settings":
-			{
-				"buffer_size": 2100,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "brest2016_ws/src/simulation2d/src/sim_char2.py",
-			"settings":
-			{
-				"buffer_size": 2247,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "brest2016_ws/src/simulation2d/models/char.py",
-			"settings":
-			{
-				"buffer_size": 1188,
+				"buffer_size": 1698,
 				"line_ending": "Unix"
 			}
 		}
@@ -192,6 +236,22 @@
 		"selected_items":
 		[
 			[
+				"cance",
+				"Build: Cancel"
+			],
+			[
+				"can",
+				"Build: Cancel"
+			],
+			[
+				"canc",
+				"Build: Cancel"
+			],
+			[
+				"if",
+				"Snippet: If Condition"
+			],
+			[
 				"git bra",
 				"Git: Change Branch"
 			],
@@ -209,14 +269,6 @@
 			],
 			[
 				"ca",
-				"Build: Cancel"
-			],
-			[
-				"canc",
-				"Build: Cancel"
-			],
-			[
-				"cance",
 				"Build: Cancel"
 			],
 			[
@@ -300,10 +352,6 @@
 				"Git: Push"
 			],
 			[
-				"can",
-				"Build: Cancel"
-			],
-			[
 				"makrd",
 				"Set Syntax: Markdown Extended"
 			],
@@ -318,10 +366,6 @@
 			[
 				"snippet",
 				"Snippet: #!/usr/bin/env"
-			],
-			[
-				"if",
-				"Snippet: If Condition"
 			],
 			[
 				"git comm",
@@ -408,7 +452,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 481.0
+		"width": 566.0
 	},
 	"console":
 	{
@@ -434,42 +478,59 @@
 		"/home/ejalaa12/Desktop/Brest2016",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/cfg",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/models",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src"
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/vector_field",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/vector_field/cfg",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/vector_field/config"
 	],
 	"file_history":
 	[
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/models/sailboat.py",
-		"/home/ejalaa12/Desktop/Brest2016/todo.mdown",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/vfl02.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/models/tests/test_sailboat.py",
-		"/media/ejalaa12/MYLINUXLIVE/ex_sailboat.m",
+		"/opt/ros/indigo/share/razor_imu_9dof/nodes/imu_node.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/vector_field/src/utils/behavior_test.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/vector_field/src/utils/behavior.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/cmd_to_ramp.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/vector_field/src/utils/behaviorManager.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/vector_field/src/utils/field_profil.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/vector_field/src/utils/fields.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/package.xml",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/CMakeLists.txt",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_rotation2_sender.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_server.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/utils/behavior_test.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/utils/__init__.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/utils/behaviorManager.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/utils/field_direction.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/utils/field_dist.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/utils/field_profil.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/utils/field_utils.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/utils/field_basic.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src/sim_sailboat.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/models/sailboat.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/script/test.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/vectorFieldLib.py",
+		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/vectorFieldLib_test.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/Behavior.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_adder_gui.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src/sim_char2.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/models/char.py",
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/vfl02.py",
+		"/home/ejalaa12/Desktop/Brest2016/todo.mdown",
+		"/media/ejalaa12/MYLINUXLIVE/ex_sailboat.m",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/models/tests/__init__.py",
 		"/home/ejalaa12/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/wrsc_mission_1.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/projection_ipython_hist.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/vectorFieldLib.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/models/__init__.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src/__init__.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/__init__.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/models/model.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/script/gui_manager.py",
-		"/home/ejalaa12/Desktop/Brest2016/Brouillon_&_Tests/vectorFieldLib_test.py",
 		"/home/ejalaa12/Documents/projection.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_rotation2_sender.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch/mission_vector_morse.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_waypoint_manager.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/char_obstacle.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_adder_gui.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/gui_behavior_waypoint_manager.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/launch/simulation_behavior_char_2d.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/Behavior.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/simple_patrol_sender.launch",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src/sim_char.py",
 		"/home/ejalaa12/Desktop/Brest2016/Morse/brest_sim/default.py",
@@ -505,14 +566,10 @@
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/real_boat_mission.launch",
 		"/home/ejalaa12/useful_cmd.mdown",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/motor_controller.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/actuators/src/cmd_to_ramp.py",
 		"/home/ejalaa12/.ros/log/regulateur.log",
 		"/home/ejalaa12/.ros/log/behavior_server.log",
-		"/opt/ros/indigo/share/razor_imu_9dof/nodes/imu_node.py",
 		"/home/ejalaa12/.Xresources",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/cfg/dyn_pid.cfg",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/package.xml",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/CMakeLists.txt",
 		"/opt/ros/indigo/share/razor_imu_9dof/config/razor_diags.yaml",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/cfg",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/ball_detection/src/find_ball_position_in_img.py",
@@ -554,24 +611,7 @@
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_boat.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/waypoint_heading.py",
 		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs_char.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_field.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/launch/laser_complet.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/src/range_to_point.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/src/range_to_pcl.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/sensors/laserNode_arduino/laserNode_arduino.ino",
-		"/home/ejalaa12/Desktop/serial_list.py",
-		"/home/ejalaa12/Desktop/Brest2016/log/laser_no_servo_description.md",
-		"/home/ejalaa12/.cache/.fr-gzxD0r/README.md",
-		"/home/ejalaa12/.config/sublime-text-3/Packages/User/Python.sublime-settings",
-		"/home/ejalaa12/.config/sublime-text-3/Packages/User/JSON.sublime-settings",
-		"/home/ejalaa12/Desktop/ros_ws/ros_ws",
-		"/home/ejalaa12/Desktop/ros_ws/src/useful_nodes/src/tf_fixed.py",
-		"/opt/ros/indigo/setup.bash",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/behavior_client_n.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_morse.launch",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/gui_behavior_adder.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs.py",
-		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/src/regulateur_champs3.py"
+		"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/process/launch/mission_vector_field.launch"
 	],
 	"find":
 	{
@@ -582,6 +622,7 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"",
 			"/home/ejalaa12/Desktop/Brest2016/brest2016_ws/src/simulation2d/src",
 			""
 		]
@@ -591,6 +632,61 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"psi",
+			"awind",
+			"fetch_param",
+			"Ucop[0, 0]",
+			"process",
+			"rotation2",
+			"listB",
+			"deltas",
+			"fs",
+			"self.X",
+			"self.x",
+			"self.X",
+			"cmd_point",
+			"10j",
+			"3j",
+			"40j",
+			"5j",
+			"40j",
+			"40",
+			"30",
+			"char",
+			"right",
+			"<",
+			"np.logical_not(\n        sideNoGoZone(wind, T))",
+			"sideNoGoZone(wind, T)",
+			"sideNoGoZone(\n        wind, T)",
+			"sideNoGoZone",
+			"sideNoGoZone(\n        wind, T)",
+			"inNoGoZone(wind, theta, T)",
+			"3j",
+			"30j",
+			"3j",
+			"cos",
+			"20j",
+			"theta",
+			"wind",
+			"40j",
+			"4j",
+			"40j",
+			"T < wind + theta / 2",
+			"wind <= T",
+			"T < wind",
+			"wind - theta / 2 < T,",
+			"np.deg2rad",
+			"radians",
+			"wind + theta / 2 - T",
+			"wind - T",
+			"wind - t",
+			"wind - T",
+			"wind - theta / 2 - T",
+			"low",
+			"tan",
+			"Tlow",
+			")\n",
+			"wind",
 			"10",
 			"char",
 			"0",
@@ -663,62 +759,7 @@
 			"40j",
 			"4j",
 			"40j",
-			"alpha",
-			"ya",
-			"xa",
-			"pi/2-alpha",
-			"cap",
-			"msg",
-			"msg.orientation",
-			"euler_from",
-			"capture_radius",
-			"current_waypoint",
-			"current_index",
-			")\n",
-			"history_list",
-			"history",
-			"history_frame",
-			"3",
-			"regulateur_morse",
-			"regulateur_champs",
-			"vLow",
-			"2000",
-			"mturn",
-			"log_rot",
-			"mspeed",
-			"msens",
-			"6000",
-			".format",
-			"format",
-			"__",
-			"-",
-			"}",
-			"{",
-			"deg2rad",
-			"cfg",
-			"dyn",
-			"min",
-			"res",
-			"genPose",
-			"0.5",
-			"logingo",
-			"print",
-			"0",
-			"close",
-			"29",
-			"h",
-			")\n",
-			", 0",
-			"createTrackbar",
-			"h",
-			"hsv",
-			"green",
-			"x",
-			"force",
-			"behav_type",
-			"obst_point22",
-			"obst_point",
-			"obst_point2"
+			"alpha"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -737,24 +778,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "brest2016_ws/src/simulation2d/src/sim_sailboat.py",
+					"file": "brest2016_ws/src/vector_field/src/behavior_server.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2292,
+						"buffer_size": 4074,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1891,
-								1891
+								3936,
+								3936
 							]
 						],
 						"settings":
@@ -766,8 +807,8 @@
 								{
 									"1":
 									[
-										1890,
-										1891
+										3936,
+										3937
 									]
 								},
 								"icon":
@@ -782,8 +823,8 @@
 								{
 									"1":
 									[
-										1889,
-										1890
+										3933,
+										3934
 									]
 								},
 								"unmatched":
@@ -792,11 +833,21 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -807,74 +858,63 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
-							"open_with_edit": true,
 							"syntax": "Packages/Python/Python.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 645.0,
+						"translation.y": 391.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "brest2016_ws/src/process/src/vfl02.py",
+					"file": "brest2016_ws/src/vector_field/src/utils/behavior.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2100,
+						"buffer_size": 3773,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1008,
-								1008
+								3262,
+								3262
 							]
 						],
 						"settings":
@@ -886,8 +926,8 @@
 								{
 									"1":
 									[
-										1007,
-										1008
+										3262,
+										3263
 									]
 								},
 								"icon":
@@ -902,8 +942,8 @@
 								{
 									"1":
 									[
-										990,
-										991
+										3257,
+										3258
 									]
 								},
 								"unmatched":
@@ -912,11 +952,21 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -927,79 +977,182 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
 							"syntax": "Packages/Python/Python.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 170.0,
+						"translation.y": 1377.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 2,
-					"file": "brest2016_ws/src/simulation2d/src/sim_char2.py",
+					"file": "brest2016_ws/src/simulation2d/models/sailboat.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2247,
+						"buffer_size": 4452,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1049,
-								1049
+								4173,
+								4173
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										4175,
+										4176
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										4148,
+										4149
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1552.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "brest2016_ws/src/vector_field/src/utils/fields.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5280,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3633,
+								3633
 							]
 						],
 						"settings":
@@ -1022,11 +1175,21 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1037,74 +1200,63 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
-							"open_with_edit": true,
 							"syntax": "Packages/Python/Python.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 103.0,
+						"translation.y": 1688.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "brest2016_ws/src/simulation2d/models/char.py",
+					"buffer": 4,
+					"file": "brest2016_ws/src/vector_field/config/environment.yaml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1188,
+						"buffer_size": 424,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1188,
-								1188
+								422,
+								422
 							]
 						],
 						"settings":
@@ -1127,11 +1279,21 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1142,55 +1304,149 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
 							"open_with_edit": true,
-							"syntax": "Packages/Python/Python.sublime-syntax"
+							"syntax": "Packages/YAML/YAML.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "brest2016_ws/src/simulation2d/src/sim_sailboat.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1698,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1344,
+								1344
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 510.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1213,18 +1469,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.536745406824,
 			1.0
 		],
 		"rows":
@@ -1236,7 +1485,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 123.0
+		"height": 129.0
 	},
 	"output.find_results":
 	{
@@ -1260,6 +1509,38 @@
 		"selected_items":
 		[
 			[
+				"sailb",
+				"brest2016_ws/src/simulation2d/models/tests/test_sailboat.py"
+			],
+			[
+				"manager",
+				"brest2016_ws/src/vector_field/src/utils/behaviorManager.py"
+			],
+			[
+				"sailbo",
+				"brest2016_ws/src/simulation2d/models/sailboat.py"
+			],
+			[
+				"simsail",
+				"brest2016_ws/src/simulation2d/src/sim_sailboat.py"
+			],
+			[
+				"server",
+				"brest2016_ws/src/vector_field/src/behavior_server.py"
+			],
+			[
+				"vecto",
+				"Brouillon_&_Tests/vectorFieldLib_test.py"
+			],
+			[
+				"behaser",
+				"brest2016_ws/src/process/src/behavior_server.py"
+			],
+			[
+				"testsail",
+				"brest2016_ws/src/simulation2d/models/tests/test_sailboat.py"
+			],
+			[
 				"vl2",
 				"brest2016_ws/src/process/src/vfl02.py"
 			],
@@ -1282,14 +1563,6 @@
 			[
 				"simpr",
 				"brest2016_ws/src/process/launch/simple_rotation2_sender.launch"
-			],
-			[
-				"behaser",
-				"brest2016_ws/src/process/src/behavior_server.py"
-			],
-			[
-				"server",
-				"brest2016_ws/src/process/src/behavior_server.py"
 			],
 			[
 				"beha",
@@ -1334,10 +1607,6 @@
 			[
 				"imu",
 				"brest2016_ws/src/sensors/launch/imu_simple.launch"
-			],
-			[
-				"manager",
-				"brest2016_ws/src/process/script/gui_manager.py"
 			],
 			[
 				"llto",
@@ -1528,10 +1797,6 @@
 				"Brouillon_&_Tests/vectorFieldLib_v0.py"
 			],
 			[
-				"vecto",
-				"Brouillon_&_Tests/vectorFieldLib_test.py"
-			],
-			[
 				"simpleway",
 				"brest2016_ws/src/process/launch/simple_waypoint_sender.launch"
 			],
@@ -1678,7 +1943,7 @@
 		[
 			[
 				"",
-				"~/Projects/AI_avoidance/avoidance.sublime-project"
+				"~/Desktop/ros_ws/ros_ws.sublime-project"
 			],
 			[
 				"ros",
@@ -1712,7 +1977,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 223.0,
+	"side_bar_width": 322.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

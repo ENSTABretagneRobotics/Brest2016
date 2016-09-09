@@ -1,0 +1,16 @@
+# ################################################################################################
+# 
+# This configuration file will have all the parameters about the environments
+# 
+# ################################################################################################
+
+# Model type (sailboat, boat, char)
+model: 'sailboat'
+
+# Environment for the sailboat
+awind: 2
+psi: rad(pi/2)
+
+# No go zone angle
+no_go_zone_angle: 100
+

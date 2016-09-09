@@ -1,4 +1,4 @@
-from vectorFieldLib import *
+from fields import *
 import matplotlib.pyplot as plt
 import numpy as np
 from time import sleep
@@ -41,7 +41,8 @@ def sideNoGoZone(wind, angle):
 
 def projectiontest(wind):
     X, Y = np.mgrid[-100:100:30j, -100:100:30j]
-    U, V = patrouille_circulaire(X, Y, 0, 0, 1, 30, 20)
+    # U, V = patrouille_circulaire(X, Y, 0, 0, 1, 30, 20)
+    U, V = champ_constant(X, Y, 0, 0)
     # U, V = waypoint(X, Y, 0, 0)
     # U, V = limite(X, Y, -40, 0, 40, 0, K=1, R=3, security='LOW')
 
@@ -130,11 +131,19 @@ def test0():
 
 if __name__ == '__main__':
     plt.ion()
-    for i in xrange(-180, 180):
+    # for i in xrange(-180, 180):
+    for i in xrange(44, 46):
         print i
+        X, Y = np.mgrid[-100:100:10j, -100:100:3j]
+        # U, V = patrouille_circulaire(X, Y, 0, 0, 1, 30, 20)
+        U, V = waypoint(X, Y, 40, 0)
+        Ucop, Vcop = projection(U, V, i, 100)
         plt.figure('after')
         plt.cla()
-        projectiontest(i)
+        plt.quiver(X, Y, Ucop, Vcop)
+        plt.axis('equal')
+        plt.axis([-120, 120, -120, 120])
+        # projectiontest(i)
         plt.draw()
         # sleep(1)
     # projectiontest(180)

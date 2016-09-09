@@ -9,7 +9,8 @@ import rospy
 from process.srv import behavior, behaviorResponse
 from geometry_msgs.msg import Vector3, PoseStamped, PointStamped
 from std_msgs.msg import Float32MultiArray
-from Behavior import Behavior, BehaviorManager
+from utils.behavior import Behavior
+from utils.behaviorManager import BehaviorManager
 import matplotlib.pyplot as plt
 import numpy as np
 import tf
@@ -32,16 +33,25 @@ sys.path.insert(
 from sailboat import Sailboat
 
 
+# ##############################################################################
+
+# ##############################################################################
 def handle_received_behavior(request):
-    global listB
     # Handle Behavior
-    behavior_manager.handle_behavior(Behavior(request.info), request.action)
+    wwd = behavior_manager.handle_behavior(
+        Behavior(request.info), request.action)
+
+    tmp = BehaviorManager(sailboat=True)
+    tmp.handle_behavior(Behavior(request.info), request.action)
+    print '>>' * 30,
+    print tmp.champ_total.get_field(0, 10, 45, 100)
     # Log info
-    log = 'MODE: {:<15}, ID: {:<4}, TYPE: {:<15}, TOTAL: {:<4}'
+    log = 'RECEIVED::: MODE: {:<15}, ID: {:<4}, TYPE: {:<15}, TOTAL: {:<4}, X: {}, Y, {}'
     log = log.format(request.action, request.info.behavior_id,
-                     request.info.f_type, len(behavior_manager.behavior_list))
+                     request.info.f_type, len(behavior_manager.behavior_list),
+                     request.info.xa, request.info.ya)
     rospy.loginfo(log)
-    return behaviorResponse(request.action + 'ed')
+    return behaviorResponse(wwd)
 
 
 def update_pos(msg):
@@ -69,13 +79,19 @@ def fetch_param(name, default):
         return rospy.get_param(name)
     else:
         print 'parameter [%s] not defined.' % name
-        print 'Defaulting to', default
+        print 'Defaulting to %.3f' % default
         return default
+# ##############################################################################
 
 # Variables
-listB = []
 x, y, cap = 0, 0, 0
 behavior_manager = BehaviorManager(sailboat=True)
+
+# Environment parameters
+awind = rospy.get_param('awind', 2)
+psi = rospy.get_param('psi', np.pi / 2)
+theta = rospy.get_param('no_go_zone_angle', 100)
+wind = np.degrees(psi)
 
 # Initialisation du noeud
 rospy.init_node('behavior_server')
@@ -84,7 +100,7 @@ rospy.init_node('behavior_server')
 service = rospy.Service('behavior_manager', behavior, handle_received_behavior)
 
 # Recuperation du type de robot
-robot_type = fetch_param('~robot_type', 'normal')
+robot_type = rospy.get_param('~robot_type', 'normal')
 
 # Subscriber et publisher
 if robot_type == 'normal':
@@ -98,6 +114,7 @@ rate = rospy.Rate(10)
 
 # Affichage du champ de vecteur
 show_plot = fetch_param('~show_plot', False)
+print show_plot
 if show_plot:
     plt.ion()
 cx, cy = 0, 0
@@ -106,7 +123,7 @@ sb = Sailboat()
 while not rospy.is_shutdown():
     # Publish command
     v = Vector3()
-    v.x, v.y = behavior_manager.champ_total.cmd_point(x, y)
+    v.x, v.y = behavior_manager.champ_total.get_field(x, y, wind, theta)
     pub.publish(v)
 
     # And plot if asked
@@ -116,15 +133,18 @@ while not rospy.is_shutdown():
         if abs(cy - y) > 10:
             cy = y
         X, Y = np.mgrid[cx - 50:cx + 50:40j, cy - 50:cy + 50:40j]
-        U, V = behavior_manager.champ_total.get_field(X, Y)
+        U, V = behavior_manager.champ_total.get_field(X, Y, wind, theta)
         plt.cla()
         plt.quiver(X, Y, U, V)
         plt.quiver(x, y, v.x, v.y, color='red')
         sb.x, sb.y, sb.theta, sb.X[2] = x, y, cap, cap
         sb.draw()
-        sb.drawWind()
+        sb.drawWind(awind, psi, coeff=10)
         # draw_tank([x, y, cap])
         plt.draw()
 
+    rospy.loginfo('-----------------------------------------------')
+
     rospy.loginfo('Published total cmd: {}, {}'.format(v.x, v.y))
+    rospy.loginfo('Theta: {}, Wind: {}, Psi: {}'.format(theta, wind, psi))
     rate.sleep()

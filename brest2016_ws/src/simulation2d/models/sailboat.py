@@ -1,7 +1,7 @@
 from model import SimulationModel
 import numpy as np
 import matplotlib.pyplot as plt
-from numpy.linalg import norm, det
+from numpy.linalg import norm
 
 # Parameters
 p1 = 0.1
@@ -14,13 +14,6 @@ p7 = 1.
 p8 = 2.
 p9 = 300.
 p10 = 10000.
-
-# Environments variables
-awind = 2   # force du vent
-psi = np.pi / 4     # angle du vent
-deltas = 0.
-fs = 0.
-fr = 0.
 
 
 class Sailboat(SimulationModel):
@@ -39,6 +32,10 @@ class Sailboat(SimulationModel):
         self.w = w
         self.X = np.array([x, y, theta, v, w])
 
+        # Intermediate state
+        self.fs = 0
+        self.fr = 0
+        self.deltas = 0
         # command
         self.u = np.array([0, 0])
         # Drawing
@@ -49,7 +46,6 @@ class Sailboat(SimulationModel):
         self.rudder = np.array([[-1, 1], [0, 0], [1, 1]])
 
     def draw(self):
-        global fs, fr
         R = np.array([[np.cos(self.X[2]), -np.sin(self.X[2]), self.x],
                       [np.sin(self.X[2]), np.cos(self.X[2]), self.y],
                       [0, 0, 1]])
@@ -57,8 +53,8 @@ class Sailboat(SimulationModel):
         # print R
         hull = np.dot(R, self.hull)
 
-        Rdeltas = np.array([[np.cos(deltas), -np.sin(deltas), 3],
-                            [np.sin(deltas), np.cos(deltas), 0],
+        Rdeltas = np.array([[np.cos(self.deltas), -np.sin(self.deltas), 3],
+                            [np.sin(self.deltas), np.cos(self.deltas), 0],
                             [0, 0, 1]])
         Rdeltar = np.array([[np.cos(self.u[0]), -np.sin(self.u[0]), -1],
                             [np.sin(self.u[0]), np.cos(self.u[0]), 0],
@@ -67,8 +63,8 @@ class Sailboat(SimulationModel):
         sail = np.dot(np.dot(R, Rdeltas), self.sail)
         rudder = np.dot(np.dot(R, Rdeltar), self.rudder)
 
-        Mfs = np.array([[-1., -1.], [0, -fs / 1000.], [1., 1.]])
-        Mfr = np.array([[0., 0.], [0., fr / 100.], [1., 1.]])
+        Mfs = np.array([[-1., -1.], [0, -self.fs / 1000.], [1., 1.]])
+        Mfr = np.array([[0., 0.], [0., self.fr / 100.], [1., 1.]])
         Mfs = np.dot(np.dot(R, Rdeltas), Mfs)
         Mfr = np.dot(np.dot(R, Rdeltar), Mfr)
 
@@ -78,7 +74,7 @@ class Sailboat(SimulationModel):
         plt.plot(Mfs[0], Mfs[1], 'g', linewidth=2)
         plt.plot(Mfr[0], Mfr[1], 'y', linewidth=2)
 
-    def drawWind(self, coeff=1):
+    def drawWind(self, awind, psi, coeff=1):
         windx = awind * np.cos(psi)
         windy = awind * np.sin(psi)
         windx *= coeff
@@ -86,8 +82,7 @@ class Sailboat(SimulationModel):
         plt.plot(10, 10, marker='o', markersize=5)
         plt.plot([10, 10 + windx], [10, 10 + windy])
 
-    def fdot(self, u):
-        global fs, fr, deltas
+    def fdot(self, u, awind, psi):
         self.u = u
         deltar = u[0]
         deltasmax = u[1]
@@ -97,23 +92,23 @@ class Sailboat(SimulationModel):
         a_ap = norm(w_ap)
         sigma = np.cos(psi_ap) + np.cos(deltasmax)
         if sigma < 0:
-            deltas = np.pi + psi_ap
+            self.deltas = np.pi + psi_ap
         else:
-            deltas = -np.sign(np.sin(psi_ap)) * deltasmax
-        fr = p5 * self.v * np.sin(deltar)
-        fs = p4 * a_ap * np.sin(deltas - psi_ap)
+            self.deltas = -np.sign(np.sin(psi_ap)) * deltasmax
+        self.fr = p5 * self.v * np.sin(deltar)
+        self.fs = p4 * a_ap * np.sin(self.deltas - psi_ap)
         dx = self.v * np.cos(self.theta) + p1 * awind * np.cos(psi)
         dy = self.v * np.sin(self.theta) + p1 * awind * np.sin(psi)
         dtheta = self.w
-        dv = (1. / p9) * (np.sin(deltas) * fs -
-                          np.sin(deltar) * fr - p2 * self.v**2)
-        dw = (1. / p10) * ((p6 - p7 * np.cos(deltas)) * fs -
-                           p8 * np.cos(deltar) * fr -
+        dv = (1. / p9) * (np.sin(self.deltas) * self.fs -
+                          np.sin(deltar) * self.fr - p2 * self.v**2)
+        dw = (1. / p10) * ((p6 - p7 * np.cos(self.deltas)) * self.fs -
+                           p8 * np.cos(deltar) * self.fr -
                            p3 * self.w * self.v)
         Xdot = np.array([dx, dy, dtheta, dv, dw])
         return Xdot
 
-    def control(self, vect):
+    def control(self, vect, awind, psi):
         """
         Controleur pour suivre une commande en vecteur
         """
@@ -127,9 +122,9 @@ class Sailboat(SimulationModel):
         u = np.array([deltar, deltasmax])
         return u
 
-    def simulate(self, u):
+    def simulate(self, u, awind, psi):
         # sim
-        xdot = self.fdot(u)
+        xdot = self.fdot(u, awind, psi)
         # print xdot
         self.X = self.X + xdot * self.dt
         self.x, self.y, self.theta, self.v, self.w = self.X

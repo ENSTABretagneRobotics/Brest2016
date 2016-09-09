@@ -13,19 +13,14 @@ from numpy.linalg import norm
 
 def update_cmd(msg):
     """ On recoit le vecteur cible et on deduit la commande """
-    global u, sailboat
+    global u, sailboat, awind, psi
     vect = np.array([msg.x, msg.y])
-    u = sailboat.control(vect)
-    # u[1] = norm(vect)
-    # thetabar = np.arctan2(msg.y, msg.x)
-    # print thetabar
-    # if u[1] == 0:
-    #     u[0] = 0
-    # else:
-    #     u[0] = -2 * np.arctan(np.tan(0.5 * (thetabar - sailboat.theta)))
-    # print 'thetabar', thetabar, 'u0', u[0]
-    # print x[2], vect, thetabar
-    # print u
+    u = sailboat.control(vect, awind, psi)
+
+
+def manual_cmd(msg):
+    global u
+    u = np.array([msg.x, msg.y])
 
 
 def publish_pose():
@@ -49,24 +44,27 @@ def publish_pose():
 rospy.init_node('sim_sailboat')
 
 # Subscriber et publisher
-cmd_sub_v = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
+cmd_sub = rospy.Subscriber('robot/vecteur_cible', Vector3, update_cmd)
+cmd_manual = rospy.Subscriber('sailboat/manual', Vector3, manual_cmd)
 pos_pub = rospy.Publisher('gps/local_pose', PoseStamped, queue_size=1)
 
 rate = rospy.Rate(20)
 plt.ion()
 
 sailboat = Sailboat(0., 0., 0.1, 0., 0.)
+awind = rospy.get_param('awind', 2)
+psi = rospy.get_param('psi', np.pi / 2)
 # x = np.array([40, 40, 4])
 dt = 0.1
 u = [0, 0]
 
 while not rospy.is_shutdown():
-    # plt.cla()
-    sailboat.simulate(u)
-    # sailboat.draw()
-    # sailboat.drawWind(5)
-    # plt.axis([-100, 100, -100, 100])
-    # plt.draw()
+    plt.cla()
+    sailboat.simulate(u, awind, psi)
+    sailboat.draw()
+    sailboat.drawWind(awind, psi, coeff=5)
+    plt.axis([-100, 100, -100, 100])
+    plt.draw()
     publish_pose()
     print '-' * 10
     print 'u:', u

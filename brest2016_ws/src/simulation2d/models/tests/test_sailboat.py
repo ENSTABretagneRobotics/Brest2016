@@ -7,6 +7,8 @@ sys.path.insert(
 import sailboat
 
 if __name__ == '__main__':
+    awind = 2
+    psi = np.pi / 2
     draw = True
     if draw:
         plt.ion()
@@ -16,8 +18,9 @@ if __name__ == '__main__':
     trajy = []
     trajT = []
     for i in range(500):
-        u[0] = (np.random.random() - 0.5) / 10.
-        sb.simulate(u)
+        # u[0] = (np.random.random() - 0.5) / 10.
+        u[0] = 0.5
+        sb.simulate(u, awind, psi)
         trajx.append(sb.x)
         trajy.append(sb.y)
         trajT.append(sb.theta)
@@ -28,7 +31,7 @@ if __name__ == '__main__':
             plt.axis('equal')
             plt.axis([-50, 50, -50, 50])
             sb.draw()
-            sb.drawWind()
+            sb.drawWind(awind, psi)
             plt.draw()
             sleep(0.01)
     plt.figure(1)

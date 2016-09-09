@@ -1,9 +1,9 @@
 <!-- Mission de suivi de waypoints -->
 <launch>
-	<arg name = "patx" default = "-43"/>
-	<arg name = "paty" default = "-13"/>
+	<arg name = "patx" default = "40"/>
+	<arg name = "paty" default = "0"/>
 
-	<node name="waypoint" pkg="process" type="behavior_client_exemple.py">
+	<node name="waypoint" pkg="vector_field" type="behavior_client_exemple.py" output='screen'>
 		<param name="x" value="$(arg patx)"/>
 		<param name="y" value="$(arg paty)"/>
 		<param name="behav_type" value="waypoint"/>
