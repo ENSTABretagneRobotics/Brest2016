@@ -63,7 +63,9 @@ while not rospy.is_shutdown():
     sailboat.simulate(u, awind, psi)
     sailboat.draw()
     sailboat.drawWind(awind, psi, coeff=5)
-    plt.axis([-100, 100, -100, 100])
+    plt.axis([sailboat.x - 10, sailboat.x + 10,
+              sailboat.y - 10, sailboat.y + 10])
+    # plt.axis([-100, 100, -100, 100])
     plt.draw()
     publish_pose()
     print '-' * 10

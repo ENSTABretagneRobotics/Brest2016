@@ -122,7 +122,7 @@ def projection(x, y, wind=90, theta=100):
     wind et theta sont en degres
     """
     U, V = x, y
-    wind = angpipi(wind)
+    wind = angpipi(wind + 180)  # parce que le vent bloque l'oppose
     T = np.rad2deg(np.arctan2(V, U))
     # --------------------------------------------------------------------------
     if type(x) in [int, np.float64, float, np.int64]:

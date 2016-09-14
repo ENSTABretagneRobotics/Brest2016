@@ -131,10 +131,10 @@ def test0():
 
 if __name__ == '__main__':
     plt.ion()
-    # for i in xrange(-180, 180):
-    for i in xrange(44, 46):
+    for i in xrange(-180, 180):
+    # for i in xrange(80, 100):
         print i
-        X, Y = np.mgrid[-100:100:10j, -100:100:3j]
+        X, Y = np.mgrid[-100:100:40j, -100:100:40j]
         # U, V = patrouille_circulaire(X, Y, 0, 0, 1, 30, 20)
         U, V = waypoint(X, Y, 40, 0)
         Ucop, Vcop = projection(U, V, i, 100)
@@ -145,6 +145,6 @@ if __name__ == '__main__':
         plt.axis([-120, 120, -120, 120])
         # projectiontest(i)
         plt.draw()
-        # sleep(1)
+        # sleep(0.1)
     # projectiontest(180)
     # plt.show()

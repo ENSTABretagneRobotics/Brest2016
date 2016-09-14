@@ -117,13 +117,16 @@ show_plot = fetch_param('~show_plot', False)
 print show_plot
 if show_plot:
     plt.ion()
+    trajx = []
+    trajy = []
+    ctr = 0
 cx, cy = 0, 0
 sb = Sailboat()
 
 while not rospy.is_shutdown():
     # Publish command
     v = Vector3()
-    v.x, v.y = behavior_manager.champ_total.get_field(x, y, wind, theta)
+    v.x, v.y = behavior_manager.champ_total.get_field(x, y, wind, theta, normalize=False)
     pub.publish(v)
 
     # And plot if asked
@@ -132,14 +135,22 @@ while not rospy.is_shutdown():
             cx = x
         if abs(cy - y) > 10:
             cy = y
-        X, Y = np.mgrid[cx - 50:cx + 50:40j, cy - 50:cy + 50:40j]
-        U, V = behavior_manager.champ_total.get_field(X, Y, wind, theta)
+        # X, Y = np.mgrid[cx - 50:cx + 50:40j, cy - 50:cy + 50:40j]
+        X, Y = np.mgrid[-120:120:40j, -120:120:40j]
+        U, V = behavior_manager.champ_total.get_field(
+            X, Y, wind, theta, normalize=False)
         plt.cla()
-        plt.quiver(X, Y, U, V)
+        plt.quiver(X, Y, U, V, scale=100)
         plt.quiver(x, y, v.x, v.y, color='red')
         sb.x, sb.y, sb.theta, sb.X[2] = x, y, cap, cap
         sb.draw()
         sb.drawWind(awind, psi, coeff=10)
+        ctr += 1
+        plt.plot(trajx, trajy, 'r')
+        if ctr % 5 == 0:
+            trajx.append(sb.x)
+            trajy.append(sb.y)
+        plt.axis('equal')
         # draw_tank([x, y, cap])
         plt.draw()
 

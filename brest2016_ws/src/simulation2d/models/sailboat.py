@@ -23,7 +23,7 @@ class Sailboat(SimulationModel):
 
     def __init__(self, x=0, y=0, theta=0, v=0, w=0):
         super(Sailboat, self).__init__()
-        self.dt = 0.05
+        self.dt = 0.1
         # State
         self.x = x
         self.y = y
@@ -79,8 +79,9 @@ class Sailboat(SimulationModel):
         windy = awind * np.sin(psi)
         windx *= coeff
         windy *= coeff
-        plt.plot(10, 10, marker='o', markersize=5)
-        plt.plot([10, 10 + windx], [10, 10 + windy])
+        plt.plot(self.x + 5, self.y + 5, marker='o', markersize=5)
+        plt.plot([self.x + 5, self.x + 5 + windx],
+                 [self.y + 5, self.y + 5 + windy], linewidth=3)
 
     def fdot(self, u, awind, psi):
         self.u = u
